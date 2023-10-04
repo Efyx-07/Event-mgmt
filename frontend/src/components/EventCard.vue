@@ -74,13 +74,13 @@
                     align-items: center;
                     gap: .5rem;
                     .icon {
-                        font-size: 4rem;
+                        font-size: 3rem;
                         color: $accentColor1;
                     }
 
                     p {
                         margin: 0;
-                        font-size: 1.25rem;
+                        font-size: 1.1rem;
                     }
                 }
                 .eventCard-button {

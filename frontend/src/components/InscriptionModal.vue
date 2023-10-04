@@ -5,22 +5,22 @@
                 icon="carbon:close" 
                 width="40" 
                 class="closeIcon" 
-                @click="closeInscriptionModal"
+                @click="closeinscriptionModalAndOverlay"
             />
         </div>  
     </div>
 
-    <!-- <Overlay 
-        :showOverlay="isUserAccountVisible" 
+    <Overlay 
+        :showOverlay="isInscriptionModalVisible" 
         class="pageOverlay" 
-        v-show="isUserAccountVisible" 
+        v-show="isInscriptionModalVisible" 
     >
-    </Overlay> -->
+    </Overlay>
 </template>
 <script setup>
 
     import { Icon } from '@iconify/vue';
-    //import Overlay from '@/components/Overlay.vue';
+    import Overlay from '@/components/Overlay.vue';
     import { ref, onMounted } from 'vue';
     
 
@@ -32,20 +32,20 @@
         isInscriptionModalVisible.value = false;
     };
 
-    // déclenche evenement personnalisé 'hide-overlay4' et ferme fenetre userLogin
-   /* const closeinscriptionModalAndOverlay = () => {
-        window.dispatchEvent(new Event('hide-overlay4'));
-        closeinscriptionModal();
-    };*/
+    // déclenche evenement personnalisé 'hide-overlay' et ferme fenetre userLogin
+    const closeinscriptionModalAndOverlay = () => {
+        window.dispatchEvent(new Event('hide-overlay'));
+        closeInscriptionModal();
+    }
 
-    // ecoute l'événement personnalisé (créé sur 'UserIconLogged') pour réafficher la fenetre
+    // ecoute l'événement personnalisé (créé sur 'ParticipateButton') pour réafficher la fenetre
     onMounted(() => {
         window.addEventListener('show-inscriptionModal', () => {
             isInscriptionModalVisible.value = true;
         });
-        // window.addEventListener('hide-overlay4', () => {
-        //     isInscriptionModalVisible.value = true; 
-        // });
+        window.addEventListener('hide-overlay', () => {
+            isInscriptionModalVisible.value = true; 
+        });
     });
 
 </script>
@@ -54,8 +54,8 @@
 
     @import '@/assets/sass/variables.scss';
 
-    .hiddenInscriptionModal { // nommage unique pour eviter conflit avec classe des composants similaires
-        transform: translateX(100%);
+    .hiddenInscriptionModal { 
+        transform: translateY(-110%);
     }
     .inscriptionModal_container {
         position: fixed;
@@ -63,7 +63,7 @@
         top: 0;
         right: 0;
         box-shadow: -3px 0px 5px #33333341;
-        transition: transform .3s ease-in-out;
+        transition: transform .5s ease-in-out;
         display: flex;
         justify-content: end;
         .inscriptionModal {

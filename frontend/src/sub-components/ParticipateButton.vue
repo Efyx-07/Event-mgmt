@@ -12,9 +12,9 @@
         const showInscriptionModalEvent = new Event('show-inscriptionModal');
         // déclenche l'événement 'show-inscriptionModal' sur l'objet window
         window.dispatchEvent(showInscriptionModalEvent);
-        //const showOverlayEvent = new Event('show-overlay');
+        const showOverlayEvent = new Event('show-overlay');
         // déclenche l'événement 'show-overlay' sur l'objet window
-        //window.dispatchEvent(showOverlayEvent);
+        window.dispatchEvent(showOverlayEvent);
     }
 
 </script>
