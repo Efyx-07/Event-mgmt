@@ -25,7 +25,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        height: 200vh;
+        height: 300vh;
 
         &_content {
             width: 100%;
