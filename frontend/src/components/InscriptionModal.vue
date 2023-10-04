@@ -2,11 +2,19 @@
     <div class="inscriptionModal_container" :class="{ hiddenInscriptionModal: !isInscriptionModalVisible }">
         <div class="inscriptionModal">
             <Icon 
-                icon="carbon:close" 
-                width="40" 
+                icon="ei:close" 
+                width="30" 
                 class="closeIcon" 
                 @click="closeinscriptionModalAndOverlay"
             />
+            <EventTitle class="eventTitle"/>
+            <InscriptionForm />
+            <footer>
+                <div class="legalLinks_container">
+                    <p>Conditions d'utilisation</p>
+                    <p>Contact</p>
+                </div>
+            </footer>
         </div>  
     </div>
 
@@ -21,6 +29,8 @@
 
     import { Icon } from '@iconify/vue';
     import Overlay from '@/components/Overlay.vue';
+    import EventTitle from '@/sub-components/EventTitle.vue';
+    import InscriptionForm from '@/sub-components/InscriptionForm.vue';
     import { ref, onMounted } from 'vue';
     
 
@@ -55,7 +65,7 @@
     @import '@/assets/sass/variables.scss';
 
     .hiddenInscriptionModal { 
-        transform: translateY(-110%);
+        transform: translateX(100%);
     }
     .inscriptionModal_container {
         position: fixed;
@@ -63,9 +73,7 @@
         top: 0;
         right: 0;
         box-shadow: -3px 0px 5px #33333341;
-        transition: transform .5s ease-in-out;
-        display: flex;
-        justify-content: end;
+        transition: transform .3s ease-in-out;
         .inscriptionModal {
             position: relative;
             width: 100vw;
@@ -73,22 +81,46 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 5rem;
+            justify-content: center;
             background: $lightColor;
+            padding: 0 3rem;
 
             @media screen and (min-width: $breakpointTablet) {
-                width: 31rem;
+                width: 36rem;
             }
             .closeIcon {
                 position: absolute;
+                z-index: 1000;
                 top: 1rem;
                 right: 1rem;
                 cursor: pointer;
-                transition: transform .2s ease-in-out;
+                transition: transform .15s ease-in-out;
 
                 &:hover {
                     transform: rotate(90deg);
                 }
+            }
+
+            .eventTitle {
+                position: absolute;
+                top: 0;
+                padding: 4rem 3rem;
+                text-align: center;
+                font-size: 1.6rem;
+            }
+
+            footer {
+                width: 100%;
+                position: absolute;
+                bottom: 0;
+                .legalLinks_container {
+                    display: flex;
+                    gap: 2rem;
+                    justify-content: end;
+                    padding: 0 3rem 1rem 0;
+                    font-size: .8rem;
+                }
+
             }
         }
     }
