@@ -5,8 +5,8 @@
         <div class="eventPage_content">
             <EventCard ref="eventCard"/>
         </div>
-        <StickyBar class="sticky-bar"/>
     </div>
+    <InscriptionModal />
     
 </template>
 
@@ -14,7 +14,7 @@
 
     import Header from '@/components/Header.vue';
     import EventCard from '@/components/EventCard.vue';
-    import StickyBar from '@/components/StickyBar.vue';
+    import InscriptionModal from '@/components/InscriptionModal.vue';
 
 </script>
 
@@ -25,7 +25,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        height: 300vh;
+        height: 200vh;
 
         &_content {
             width: 100%;
