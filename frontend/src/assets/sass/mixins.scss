@@ -18,3 +18,10 @@
         color: $lightColor;
     }
 }
+
+@mixin errorMessage {
+    margin: 0;
+    font-size: .7rem;
+    color: $errorColor;
+    align-self: flex-end;
+}

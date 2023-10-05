@@ -194,10 +194,7 @@
                 }
             }
             .error-message {
-                margin: 0;
-                align-self: flex-end;
-                font-size: .7rem;
-                color: red;
+                @include errorMessage;
                 position: absolute;
                 right: .5rem;
                 bottom: .5rem;

@@ -1,0 +1,3 @@
+BUG TO FIX 05/10/23
+
+- A la soumission du formulaire d'inscription, il y un rafraichissement automatique de la page non désiré. PreventDefault ne règle pas le bug.
