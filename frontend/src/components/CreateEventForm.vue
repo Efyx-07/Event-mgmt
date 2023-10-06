@@ -63,6 +63,52 @@
 
 <script setup>
 
+    import { ref } from 'vue';
+
+    // propriétés du formulaire
+    const eventTitle = ref('');
+    const eventDate = ref('');
+    const eventLocation = ref('');
+    const eventCoverImageFile = ref(null);
+
+    // gère le changement de fichier image (eventCoverImage)
+    const handleCoverImageFileChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            eventCoverImageFile.value = file;
+        };
+    };
+
+    // soumet le formulaire
+    const createEvent = async () => {
+
+        try {
+            //prépare les données à envoyer au backend
+            const formData = new FormData();
+            formData.append('eventTitle', eventTitle.value);
+            formData.append('eventDate', eventDate.value);
+            formData.append('eventLocation', eventLocation.value);
+            formData.append('eventCoverImage', eventCoverImageFile.value);
+
+            // envoie les données au backend via fetch
+            const response = await fetch('URL_DU_BACKEND', {
+                method: 'POST',
+                body: formData,
+            }); 
+
+            if (response.ok) {
+                // réponse en cas de requête réussie
+                const data = await response.json();
+                console.log('Reponse du backend: ', data);
+            } else {
+                // erreur en cas d'echec de la requête
+                console.error('Erreur lors de la requête vers le backend');
+            }        
+        } catch(error) {
+            console.error('Une erreur s\est produite', error);
+        }
+    };
+
 </script>
 
 <style lang="scss" scoped>
