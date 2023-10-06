@@ -3,9 +3,9 @@
     <div class="adminHomePage">
         <header class="adminHomePageHeader">
             <h1>Vos évènements</h1>
-            <button type="submit" class="toNewEvent_button">
+            <router-link to="/admin/new-event" type="submit" class="toNewEvent_button">
                 <p>Nouvel évènement</p>
-            </button>
+            </router-link>
         </header>
     </div>
     
@@ -33,13 +33,14 @@
                 color: $lightColor;
             }
             .toNewEvent_button {
+                text-decoration: none;
                 justify-self: center;
                 background: $darkColorBackOf;
                 border: 2px solid $lightColor;
                 cursor: pointer;
 
                 &:hover {
-                    background: #394084;
+                    background: $accentColorBackof;
                 }
                 
                 p {

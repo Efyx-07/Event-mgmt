@@ -75,7 +75,7 @@
             cursor: pointer;
 
             &:hover {
-                background: rgba($darkColorBackOf, .8);
+                background: $accentColorBackof;
             }
 
             p {

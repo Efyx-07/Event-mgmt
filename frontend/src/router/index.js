@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 import EventPage from '@/views/EventPage.vue';
 import BackOfficeLoginPage from '@/views/BackOfficeLoginPage.vue';
 import BackOfficeHomePage from '@/views/BackOfficeHomePage.vue';
+import BackOfficeNewEvent from '@/views/BackOfficeNewEvent.vue';
+
 
 
 const router = createRouter({
@@ -21,6 +23,11 @@ const router = createRouter({
         path: '/admin/homepage',
         name: 'BackOfficeHomePage',
         component: BackOfficeHomePage
+      },
+      {
+        path: '/admin/new-event',
+        name: 'BackOfficeNewEvent',
+        component: BackOfficeNewEvent
       },
     ]
 });
