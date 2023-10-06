@@ -1,17 +1,17 @@
 <template>
 
     <div class="eventCard">
-        <div class="eventImage-container">
+        <div class="eventImage_container">
             <img src="src/assets/images/Event1-banner.jpg" alt="" class="eventImage">
         </div>
         <div class="eventCard-infos">
             <EventTitle />
             <div class="eventCard-details">
-                <div class="eventDate-container">
+                <div class="eventDate_container">
                     <Icon icon="healthicons:calendar" class="icon"/>
                     <p class="eventDate">Mercredi 22 Novembre 2023</p>
                 </div>
-                <div class="eventPlace-container">
+                <div class="eventPlace_container">
                     <Icon icon="mdi:place-outline" class="icon"/>
                     <p class="eventPlace">Lille Grand Palais</p>
                 </div>
@@ -39,7 +39,7 @@
         border-radius: $containerRadius;
         box-shadow: $shadow;
         width: 100%;
-        .eventImage-container {
+        .eventImage_container {
             width: 100%;
             height: 25rem;
             display: inline-block;
@@ -63,13 +63,13 @@
             .eventCard-details {
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr;
-                .eventDate-container {
+                .eventDate_container {
                     grid-column: 1 / -3;
                 }
-                .eventPlace-container {
+                .eventPlace_container {
                     grid-column: 2 / -2;
                 }
-                .eventDate-container, .eventPlace-container {
+                .eventDate_container, .eventPlace_container {
                     display: flex;
                     align-items: center;
                     gap: .5rem;

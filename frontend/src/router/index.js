@@ -20,12 +20,12 @@ const router = createRouter({
         component: BackOfficeLoginPage
       },
       {
-        path: '/admin/homepage',
+        path: '/admin_homepage',
         name: 'BackOfficeHomePage',
         component: BackOfficeHomePage
       },
       {
-        path: '/admin/new-event',
+        path: '/admin_new-event',
         name: 'BackOfficeNewEvent',
         component: BackOfficeNewEvent
       },

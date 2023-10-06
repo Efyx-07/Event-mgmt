@@ -3,7 +3,7 @@
     <div class="eventPage">
         <Header />
         <div class="eventPage_content">
-            <EventCard ref="eventCard"/>
+            <EventCard />
         </div>
     </div>
     <InscriptionModal />
