@@ -3,11 +3,11 @@
     <form class="adminLogin-form" @submit.prevent="handleAdminLogin">
         <div class="inputs_wrapper">
             <div class="input_container">
-                <label>Identifiant</label>
+                <label for="identifiant">Identifiant</label>
                 <input type="text" name="adminId" id="adminLogin_id" v-model="adminId">
             </div>
             <div class="input_container">
-                <label>Mot de passe</label>
+                <label for="mot_de_passe">Mot de passe</label>
                 <input type="password" name="adminPassword" id="adminLogin_password" v-model="adminPassword">
             </div>
         </div>
@@ -75,7 +75,7 @@
             cursor: pointer;
 
             &:hover {
-                background: $accentColorBackof;
+                background: $accentColorBackof2;
             }
 
             p {

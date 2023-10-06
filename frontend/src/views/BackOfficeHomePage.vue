@@ -56,7 +56,7 @@
                 align-items: center;
                 grid-template-columns: 1fr 1fr 1fr 1fr;
                 width: 100%;
-                max-width: 102rem;
+                max-width: $contentMaxWidth;
 
                 h1 {
                 grid-column: 1 / -2;
@@ -72,7 +72,7 @@
                     cursor: pointer;
 
                     &:hover {
-                        background: $accentColorBackof;
+                        background: $accentColorBackof2;
                     }
                     
                     p {

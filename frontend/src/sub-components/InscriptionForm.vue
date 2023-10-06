@@ -3,7 +3,7 @@
     <form class="inscriptionForm" ref="registrationForm" @submit.prevent="validate">
 
         <div class="input-container">
-            <label>Entreprise / Organisation <span>{{requiredFieldMention}}</span></label>
+            <label for="entreprise">Entreprise / Organisation <span>{{requiredFieldMention}}</span></label>
             <input type="text" 
                    name="entreprise_organisation"
                    required 
@@ -15,7 +15,7 @@
         </div>
 
         <div class="input-container">
-            <label>Nom <span>{{requiredFieldMention}}</span></label>
+            <label for="nom">Nom <span>{{requiredFieldMention}}</span></label>
             <input type="text" 
                    name="nom" 
                    required 
@@ -27,7 +27,7 @@
         </div>
 
         <div class="input-container">
-            <label>Prénom <span>{{requiredFieldMention}}</span></label>
+            <label for="prenom">Prénom <span>{{requiredFieldMention}}</span></label>
             <input type="text" 
                    name="prenom" 
                    required 
@@ -39,7 +39,7 @@
         </div>
 
         <div class="input-container">
-            <label>Téléphone</label>
+            <label for="telephone">Téléphone</label>
             <input type="tel" 
                    name="telephone"
                    id="inscription_telephone" 
@@ -50,7 +50,7 @@
         </div>
 
         <div class="input-container">
-            <label>Email <span>{{requiredFieldMention}}</span></label>
+            <label for="email">Email <span>{{requiredFieldMention}}</span></label>
             <input type="email" 
                    name="email" 
                    required 
