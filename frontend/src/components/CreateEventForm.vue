@@ -25,7 +25,7 @@
                 >
             </div>
 
-            <!-- <div class="input-container">
+            <div class="input-container">
                 <label for="event-date">Date de l'évènement</label>
                 <input 
                     type="date"
@@ -34,7 +34,7 @@
                     id="create_eventDate"
                     v-model="eventDate"
                 >
-            </div> -->
+            </div>
 
             <!-- <div class="input-container">
                 <label for="event-coverImage">Photo de couverture</label>
@@ -67,12 +67,14 @@
     // propriétés du formulaire
     const eventTitle = ref('');
     const eventLocation = ref('');
+    const eventDate = ref('');
 
     // soumet le formulaire
     const validateEventCreation = async () => {
 
         const eventTitleValue = eventTitle.value;
         const eventLocationValue = eventLocation.value;
+        const eventDateValue = eventDate.value;
 
         try {
 
@@ -84,6 +86,7 @@
                 body: JSON.stringify({
                     eventTitle: eventTitleValue,
                     eventLocation: eventLocationValue,
+                    eventDate: eventDateValue,
                 }),
             });
 
