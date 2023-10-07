@@ -2,7 +2,7 @@ CREATE DATABASE myevents;
 
 
 CREATE TABLE evenements (
-    id INT AUTO_INCREMENT PRIMARY KEY, /* génère un id complexe */
+    id INT AUTO_INCREMENT PRIMARY KEY, 
     titre VARCHAR(255) NOT NULL,
     date DATE NOT NULL,
     lieu VARCHAR(255) NOT NULL,
@@ -12,4 +12,4 @@ CREATE TABLE evenements (
 );
 
 ALTER TABLE evenements
-ADD COLUMN uuid VARCHAR(36);
+ADD COLUMN uuid VARCHAR(36); /* génère un id complexe */

@@ -1,6 +1,7 @@
 const express = require('express'); // appelle l'instance express
 const cors = require('cors'); // importe cors
-const eventsRouter = require('./routes/events'); // importe la route events
+const eventsRouter = require('./routes/events')
+
 
 const app = express(); // demarre le serveur express
 const PORT = process.env.PORT || 3000; // définit le port
@@ -8,7 +9,7 @@ const PORT = process.env.PORT || 3000; // définit le port
 app.use(cors()); // utilise cors en tant que middleware, permet au server Express d'accepter des requetes de n'importe quelle origine
 
 app.use(express.json()); // middleware - analyse le corps des requetes JSON
-app.use('/events', eventsRouter); // utilise la route events
+app.use('/events', eventsRouter); // utilise la route users
 
 // execute le serveur backend sur le port déterminé
 app.listen(PORT, () => {

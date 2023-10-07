@@ -20,4 +20,4 @@ myEventsConnection.connect((err) => {
     } console.log("connexion reussie avec la BDD myevents")
 });
 
-module.exports = myEventsConnection;
+module.exports = {myEventsConnection};
