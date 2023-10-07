@@ -4,7 +4,7 @@ const { myEventsConnection } = require('../db'); // importe la connexion à la b
 async function createEvent(req, res) {
 
     try {
-
+        
         // récupère les données du formulaire CreateEventForm depuis req.body
         const { 
             eventTitle, 

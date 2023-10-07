@@ -1,5 +1,5 @@
 <template>
-    <form class="createEventForm" @submit.prevent="createEvent">
+    <form class="createEventForm" @submit.prevent="validateEventCreation">
 
         <div class="inputs_wrapper">
             <div class="input-container">
@@ -20,7 +20,7 @@
                     type="file"
                     name="eventCoverImage"
                     accept="image/*"
-                    required
+                    
                     class="coverImage-input"
                     id="create_coverImage"
                 
@@ -80,7 +80,7 @@
     };
 
     // soumet le formulaire
-    const createEvent = async () => {
+    const validateEventCreation = async () => {
 
         try {
             //prépare les données à envoyer au backend
@@ -88,11 +88,14 @@
             formData.append('eventTitle', eventTitle.value);
             formData.append('eventDate', eventDate.value);
             formData.append('eventLocation', eventLocation.value);
-            formData.append('eventCoverImage', eventCoverImageFile.value);
+            //formData.append('eventCoverImage', eventCoverImageFile.value);
 
             // envoie les données au backend via fetch
-            const response = await fetch('URL_DU_BACKEND', {
+            const response = await fetch('http://localhost:3000/events/create', {
                 method: 'POST',
+                headers: {
+                        'Content-Type': 'application/json',
+                    },
                 body: formData,
             }); 
 
