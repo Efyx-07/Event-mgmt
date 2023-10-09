@@ -1,5 +1,5 @@
 <template>
-    <form class="createEventForm" @submit.prevent="validateEventCreation">
+    <form class="createEventForm" @submit.prevent="validateEventCreation" enctype="multipart/form-data">
 
         <div class="inputs_wrapper">
 
