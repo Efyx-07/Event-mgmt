@@ -36,19 +36,17 @@
                 >
             </div>
 
-            <!-- <div class="input-container">
+            <div class="input-container">
                 <label for="event-coverImage">Photo de couverture</label>
                 <input 
                     type="file"
                     name="eventCoverImage"
                     accept="image/*"
-                    
                     class="coverImage-input"
                     id="create_coverImage"
-                
                     @change="handleCoverImageFileChange"
                 >
-            </div> -->
+            </div> 
 
         </div>
         
@@ -68,26 +66,38 @@
     const eventTitle = ref('');
     const eventLocation = ref('');
     const eventDate = ref('');
+    const eventCoverImage = ref('');
+
+    // gère le telechargement du fichier image et stocke le fichier selectionné
+    const handleCoverImageFileChange = (event) => {
+        eventCoverImage.value = event.target.files[0];
+    };
+
 
     // soumet le formulaire
     const validateEventCreation = async () => {
 
-        const eventTitleValue = eventTitle.value;
-        const eventLocationValue = eventLocation.value;
-        const eventDateValue = eventDate.value;
+
+        // const eventTitleValue = eventTitle.value;
+        // const eventLocationValue = eventLocation.value;
+        // const eventDateValue = eventDate.value;
+        const formData = new FormData();
+        formData.append('eventTitle', eventTitle.value);
+        formData.append('eventLocation', eventLocation.value);
+        formData.append('eventDate', eventDate.value);
+        formData.append('eventCoverImage', eventCoverImage.value);
+
+        // affiche les valeurs dans la console
+        for (const pair of formData.entries()) {
+            console.log(pair[0], pair[1]);
+        }
+
 
         try {
 
             const response = await fetch ('http://localhost:3000/events/create', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    eventTitle: eventTitleValue,
-                    eventLocation: eventLocationValue,
-                    eventDate: eventDateValue,
-                }),
+                method: 'POST', 
+                body: formData,           
             });
 
             if (response.ok) {
