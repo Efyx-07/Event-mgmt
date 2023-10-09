@@ -73,14 +73,9 @@
         eventCoverImage.value = event.target.files[0];
     };
 
-
     // soumet le formulaire
     const validateEventCreation = async () => {
-
-
-        // const eventTitleValue = eventTitle.value;
-        // const eventLocationValue = eventLocation.value;
-        // const eventDateValue = eventDate.value;
+        
         const formData = new FormData();
         formData.append('eventTitle', eventTitle.value);
         formData.append('eventLocation', eventLocation.value);
@@ -91,7 +86,6 @@
         for (const pair of formData.entries()) {
             console.log(pair[0], pair[1]);
         }
-
 
         try {
 
