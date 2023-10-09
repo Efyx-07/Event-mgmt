@@ -41,7 +41,7 @@
                 <input 
                     type="file"
                     name="eventCoverImage"
-                    accept="image/*"
+                    accept="image/jpg, image/jpeg, image/png"
                     class="coverImage-input"
                     id="create_coverImage"
                     @change="handleCoverImageFileChange"
