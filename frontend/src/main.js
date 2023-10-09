@@ -1,9 +1,37 @@
 import { createApp } from 'vue';
+import { createPinia } from 'pinia';
+import { useEventStore } from './stores/eventStore';
 import App from './App.vue';
 import router from './router';
 
-const app = createApp(App);
-app.use(router);
-app.mount('#app');
+
+// initialise l'appli à la fin du chargement des données
+const initApp = async () => {
+
+    const app = createApp(App);
+    
+    app.use(createPinia());
+    
+
+    // crée une instance de store
+    const eventStore = useEventStore();
+
+    try {
+        await eventStore.loadEventsData();
+        // initialise Pinia
+        
+    } catch (error) {
+        console.error('Erreur lors du chargement des données: ', error);
+    };
+
+    app.use(router);
+    app.mount('#app');
+}; 
+
+initApp();
+
+
+
+
 
 

@@ -46,8 +46,8 @@
     import EventTitle from '@/sub-components/EventTitle.vue';
     import { ref } from 'vue';
     
+    // insert un text au survol des icones
     const cursorText = ref('');
-    
     const changeCursorText = (text) => {
         cursorText.value = text;
     };

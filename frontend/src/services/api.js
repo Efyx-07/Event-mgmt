@@ -10,7 +10,7 @@ export async function fetchEventsData() {
             throw new Error ('Erreur lors de la récupération des données de l\'évènement');
         }
         const eventsData = await response.json();
-        console.log(eventsData)
+        console.log('Données récupérées depuis l\'API :', eventsData);
 
     } catch (error) {
         console.error('Erreur lors de la récupération des données de l\'évènement: ', error);
