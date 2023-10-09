@@ -11,16 +11,21 @@ async function createEvent(req, res) {
 
   console.log('les données recupérées sont: ', eventTitle, eventDate, eventLocation, eventCoverImage)
 
+  // crée et formate la legende alt pour l'image de couverture
+  const eventCoverImageAlt = eventTitle.toLowerCase();
+  console.log(eventCoverImageAlt)
+
   try {
 
     // insert les données dans la bdd myevents
-    const insertQuery = 'INSERT INTO evenements (titre, date, lieu, image_source) VALUES(?, ?, ?, ?)';
+    const insertQuery = 'INSERT INTO evenements (titre, date, lieu, image_source, image_alt) VALUES(?, ?, ?, ?, ?)';
 
     const values = [
       eventTitle,
       eventDate,
       eventLocation,
       eventCoverImage.path,
+      eventCoverImageAlt,
     ];
 
     myEventsConnection.query(insertQuery, values, (err, results) => {
