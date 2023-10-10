@@ -10,15 +10,14 @@ const initApp = async () => {
 
     const app = createApp(App);
     
+    // initialise Pinia
     app.use(createPinia());
     
-
     // crée une instance de store
     const eventStore = useEventStore();
 
     try {
         await eventStore.loadEventsData();
-        // initialise Pinia
         
     } catch (error) {
         console.error('Erreur lors du chargement des données: ', error);
@@ -29,6 +28,8 @@ const initApp = async () => {
 }; 
 
 initApp();
+
+
 
 
 
