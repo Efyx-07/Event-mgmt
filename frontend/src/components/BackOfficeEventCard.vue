@@ -3,7 +3,7 @@
     <div class="backOfficeEventCard" v-for="event in events" :key="event.title">
 
       <div class="eventImage_container">
-        <img :src="event.image.source" :alt="event.image.alt" class="eventImage">
+        <img :src="hostName + event.image.source" :alt="event.image.alt" class="eventImage">
       </div>
 
       <div class="eventCard-titleAndActions_container">
@@ -12,24 +12,20 @@
 
         <div class="actionIcons_container">
 
-          <div class="icon_container" @mouseover="changeCursorText('Voir')" @mouseout="changeCursorText('')">
+          <div class="icon_container">
             <Icon icon="mdi:eye" class="icon" />
-            <div v-if="cursorText === 'Voir'" class="cursor-text">{{ cursorText }}</div>
           </div>
   
-          <div class="icon_container" @mouseover="changeCursorText('Editer')" @mouseout="changeCursorText('')">
+          <div class="icon_container">
             <Icon icon="ic:baseline-edit" class="icon" />
-            <div v-if="cursorText === 'Editer'" class="cursor-text">{{ cursorText }}</div>
           </div>
   
-          <div class="icon_container" @mouseover="changeCursorText('Suivi')" @mouseout="changeCursorText('')">
+          <div class="icon_container">
             <Icon icon="akar-icons:statistic-up" class="icon" />
-            <div v-if="cursorText === 'Suivi'" class="cursor-text">{{ cursorText }}</div>
           </div>
   
-          <div class="icon_container" @mouseover="changeCursorText('Supprimer')" @mouseout="changeCursorText('')">
+          <div class="icon_container">
             <Icon icon="mdi:trash" class="icon" />
-            <div v-if="cursorText === 'Supprimer'" class="cursor-text">{{ cursorText }}</div>
           </div>
 
         </div>
@@ -43,17 +39,13 @@
   <script setup>
 
     import { Icon } from '@iconify/vue';
-    import { ref } from 'vue';
     import { useEventStore } from '@/stores/EventStore';
-    
-    // insert un text au survol des icones
-    /*const cursorText = ref('');
-    const changeCursorText = (text) => {
-        cursorText.value = text;
-    };*/
+    import { useGlobalDataStore } from '@/stores/GlobalDataStore';
 
     const eventStore = useEventStore();
     const events = eventStore.events;
+
+    const { hostName } = useGlobalDataStore()
 
   </script>
 
@@ -85,7 +77,8 @@
             flex-direction: column;
             padding: 1rem;
             .eventTitle {
-                font-size: 1.25rem;
+              margin: 0;
+              font-size: 1.25rem;
             }
             .actionIcons_container {
                 display: flex;

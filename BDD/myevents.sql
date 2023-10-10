@@ -8,7 +8,7 @@ CREATE TABLE evenements (
     lieu VARCHAR(255) NOT NULL,
     image_source VARCHAR(255) NOT NULL,
     image_alt VARCHAR(255) NOT NULL,
-    date_creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP /* génère automatiquement la date de création de l'event */
+    date_creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
 );
 
 ALTER TABLE evenements

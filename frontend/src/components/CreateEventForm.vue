@@ -61,6 +61,7 @@
 <script setup>
 
     import { ref } from 'vue';
+    import { useGlobalDataStore } from '@/stores/GlobalDataStore';
 
     // propriétés du formulaire
     const eventTitle = ref('');
@@ -89,7 +90,9 @@
 
         try {
 
-            const response = await fetch ('http://localhost:3000/events/create', {
+            const { hostName } = useGlobalDataStore();
+            
+            const response = await fetch (`${hostName}/events/create`, {
                 method: 'POST', 
                 body: formData,           
             });
