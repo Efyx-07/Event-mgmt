@@ -1,5 +1,5 @@
 <template>
-    <h1 class="eventTitle">{{ event.title }}</h1>
+    <h1 class="eventTitle" v-for="event in events" :key="event.title">{{ event.title }}</h1>
 </template>
 
 <script setup>
