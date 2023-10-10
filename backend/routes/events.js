@@ -5,7 +5,7 @@ const multer = require('multer'); // importe multer
 const path = require('path');
 
 // définit le chemin du dossier de destination des fichiers
-const destinationPath = path.join(__dirname, '..', '..', 'assets', 'events-covers');
+const destinationPath = path.join(__dirname, '..', 'assets', 'events-covers');
 
 // configure le dossier de destination et le nom de fichier
 const storage = multer.diskStorage({

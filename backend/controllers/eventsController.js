@@ -15,7 +15,8 @@ async function createEvent(req, res) {
   // crée et formate la legende alt pour l'image de couverture
   const eventCoverImageAlt = eventTitle.toLowerCase();
 
-  const eventCoverImageRelativePath = path.relative(__dirname, eventCoverImage.path);
+  const eventCoverImageRelativePath = eventCoverImage.path.replace(/\\/g, '/');
+  console.log('le chemin est: ', eventCoverImageRelativePath)
 
   try {
 
@@ -81,7 +82,7 @@ function formatData(events) {
     date: evenement.date,
     location: evenement.lieu,
     image: {
-      source: evenement.image_source.replace(/\\/g, '/'), // modifie le chemin des images, les '\' deviennent '/'
+      source: '/assets/events-covers/' + path.basename(evenement.image_source), // modifie le chemin des images, les '\' deviennent '/'
       alt: evenement.image_alt
     },
   }));

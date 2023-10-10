@@ -47,10 +47,10 @@
     import { useEventStore } from '@/stores/EventStore';
     
     // insert un text au survol des icones
-    const cursorText = ref('');
+    /*const cursorText = ref('');
     const changeCursorText = (text) => {
         cursorText.value = text;
-    };
+    };*/
 
     const eventStore = useEventStore();
     const events = eventStore.events;
