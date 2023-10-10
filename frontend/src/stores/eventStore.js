@@ -11,8 +11,8 @@ export const useEventStore = defineStore('events', {
         async loadEventsData() {
             try {
                 const eventsData = await api.fetchEventsData();
-                console.log('Données reçues dans le store :', eventsData);
-                    this.events = eventsData.events;
+                this.events = eventsData.events;
+
             } catch (error) {
                 console.error('Erreur lors du chargement des données des évènements: ', error);
             }
