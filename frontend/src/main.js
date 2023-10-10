@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
-import { useEventStore } from './stores/eventStore';
+import { useEventStore } from './stores/EventStore';
 import App from './App.vue';
 import router from './router';
 

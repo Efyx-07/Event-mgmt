@@ -1,6 +1,7 @@
 const { myEventsConnection } = require('../db'); // importe la connexion à la base de donnée
+const path = require('path');
 
-// controller pour inscription utilisateur
+// controller pour création d'un évènement
 async function createEvent(req, res) {
 
   // récupère les données du formulaire 
@@ -13,7 +14,8 @@ async function createEvent(req, res) {
 
   // crée et formate la legende alt pour l'image de couverture
   const eventCoverImageAlt = eventTitle.toLowerCase();
-  console.log(eventCoverImageAlt)
+
+  const eventCoverImageRelativePath = path.relative(__dirname, eventCoverImage.path);
 
   try {
 
@@ -24,7 +26,7 @@ async function createEvent(req, res) {
       eventTitle,
       eventDate,
       eventLocation,
-      eventCoverImage.path,
+      eventCoverImageRelativePath,
       eventCoverImageAlt,
     ];
 
@@ -79,7 +81,7 @@ function formatData(events) {
     date: evenement.date,
     location: evenement.lieu,
     image: {
-      source: evenement.image_source,
+      source: evenement.image_source.replace(/\\/g, '/'), // modifie le chemin des images, les '\' deviennent '/'
       alt: evenement.image_alt
     },
   }));

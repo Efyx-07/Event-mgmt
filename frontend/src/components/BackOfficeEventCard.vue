@@ -1,14 +1,14 @@
 <template>
 
-    <div class="backOfficeEventCard">
+    <div class="backOfficeEventCard" v-for="event in events" :key="event.title">
 
       <div class="eventImage_container">
-        <img src="src/assets/images/Event1-banner.jpg" alt="" class="eventImage">
+        <img :src="event.image.source" :alt="event.image.alt" class="eventImage">
       </div>
 
       <div class="eventCard-titleAndActions_container">
 
-        <EventTitle class="eventTitle" />
+        <h1 class="eventTitle">{{ event.title }}</h1>
 
         <div class="actionIcons_container">
 
@@ -43,14 +43,17 @@
   <script setup>
 
     import { Icon } from '@iconify/vue';
-    import EventTitle from '@/sub-components/EventTitle.vue';
     import { ref } from 'vue';
+    import { useEventStore } from '@/stores/EventStore';
     
     // insert un text au survol des icones
     const cursorText = ref('');
     const changeCursorText = (text) => {
         cursorText.value = text;
     };
+
+    const eventStore = useEventStore();
+    const events = eventStore.events;
 
   </script>
 

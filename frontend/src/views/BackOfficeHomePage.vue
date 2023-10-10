@@ -12,21 +12,6 @@
 
         <div class="eventCards_container">
             <BackOfficeEventCard />
-            <BackOfficeEventCard />
-            <BackOfficeEventCard />
-            <BackOfficeEventCard />
-            <BackOfficeEventCard />
-            <BackOfficeEventCard />
-            <BackOfficeEventCard />
-            <BackOfficeEventCard />
-            <BackOfficeEventCard />
-            <BackOfficeEventCard />
-            <BackOfficeEventCard />
-            <BackOfficeEventCard />
-            <BackOfficeEventCard />
-            <BackOfficeEventCard />
-            <BackOfficeEventCard />
-            <BackOfficeEventCard />
         </div>
     </div>
     

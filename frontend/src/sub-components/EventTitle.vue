@@ -1,8 +1,12 @@
 <template>
-    <h1 class="eventTitle">Réchauffement climatique: Quels effets sur notre santé ?</h1>
+    <h1 class="eventTitle">{{ event.title }}</h1>
 </template>
 
-<script setup></script>
+<script setup>
+    import { useEventStore } from '@/stores/EventStore';
+    const eventStore = useEventStore();
+    const events = eventStore.events;
+</script>
 
 <style lang="scss" scoped>
     .eventTitle {
