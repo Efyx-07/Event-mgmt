@@ -32,6 +32,8 @@
 
       </div>
 
+      <p class="creationDate">créé le {{ event.creationDate }}</p>
+
     </div>
 
   </template>
@@ -97,17 +99,18 @@
                             color: $accentColorBackof2;
                         }
                     }
-                    .cursor-text {
-                        position: absolute;
-                        background:rgba($darkColorBackOf, .5);
-                        color: $lightColor;
-                        padding: .2rem .4rem;
-                        border-radius: 5px;
-                        font-size: .8rem;
-                        pointer-events: none;
-                    }
+
                 }
             }
+        }
+        .creationDate {
+          position: absolute;
+          top: .25rem;
+          left: .25rem;
+          font-size: .7rem;
+          margin: 0;
+          background: $lightColor;
+          padding: .25rem;
         }
     }
     

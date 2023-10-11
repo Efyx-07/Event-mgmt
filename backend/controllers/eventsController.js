@@ -84,6 +84,7 @@ function formatData(events) {
       source: `/assets/events-covers/${path.basename(evenement.image_source)}`, 
       alt: evenement.image_alt
     },
+    creationDate: evenement.date_creation,
   }));
 
   return formattedEvents;

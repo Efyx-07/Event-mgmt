@@ -10,6 +10,14 @@
             </div>
         </header>
 
+        <div class="eventsCountMention_container">
+            <div class="eventsCountMention">
+                <p v-if="eventsCount >= 1"> {{ eventsCount }}</p> 
+                <p v-if="eventsCount === 1">évènement créé</p>
+                <p v-if="eventsCount >= 2">évènements créés</p>
+            </div>
+        </div>
+
         <div v-if="eventsCount === 0" class="adminHomePage_empty">
             <p>Il n'y a aucun évènement pour l'instant</p>
             <router-link to="/admin_new-event" type="submit" class="toNewEvent_button">
@@ -17,7 +25,7 @@
             </router-link>
         </div>
 
-        <div class="eventCards_container">
+        <div class="eventCards_container" v-if="eventsCount >= 1">
             <BackOfficeEventCard />
         </div>
     </div>
@@ -124,8 +132,21 @@
                 }
 
         }
+        .eventsCountMention_container {
+            display: flex;
+            width: 100%;
+            padding: 1rem 10rem;
+            .eventsCountMention {
+                display: flex;
+                gap: .3rem;
+
+                p {
+                    margin: 0;
+                }
+            }
+        }
         .eventCards_container {
-            padding: 3rem;
+            padding: 2rem 3rem;
             display: flex;
             gap: 2rem;
             justify-content: center;
