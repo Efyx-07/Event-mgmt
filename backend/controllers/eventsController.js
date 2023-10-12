@@ -77,6 +77,7 @@ async function getAllEvents(req, res) {
 // fonction de formatage pour transformer les données brutes en un objet JSON 
 function formatData(events) {
   const formattedEvents = events.map(evenement => ({
+    id: evenement.id,
     title: evenement.titre,
     date: evenement.date,
     location: evenement.lieu,

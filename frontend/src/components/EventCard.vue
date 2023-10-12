@@ -2,18 +2,18 @@
 
     <div class="eventCard">
         <div class="eventImage_container">
-            <img src="src/assets/images/Event1-banner.jpg" alt="" class="eventImage">
+            <img :src="hostName + selectedEvent.image.source" alt="" class="eventImage">
         </div>
         <div class="eventCard-infos">
-            <EventTitle />
+            <h1 class="eventTitle">{{ selectedEvent.title }}</h1>
             <div class="eventCard-details">
                 <div class="eventDate_container">
                     <Icon icon="healthicons:calendar" class="icon"/>
-                    <p class="eventDate">Mercredi 22 Novembre 2023</p>
+                    <p class="eventDate">{{ selectedEvent.date}}</p>
                 </div>
                 <div class="eventPlace_container">
                     <Icon icon="mdi:place-outline" class="icon"/>
-                    <p class="eventPlace">Lille Grand Palais</p>
+                    <p class="eventPlace">{{ selectedEvent.location }}</p>
                 </div>
                 <ParticipateButton class="eventCard-button"/>
             </div>
@@ -25,8 +25,13 @@
 <script setup>
 
     import { Icon } from '@iconify/vue';
-    import EventTitle from '@/sub-components/EventTitle.vue';
     import ParticipateButton from '@/sub-components/ParticipateButton.vue';
+    import { useGlobalDataStore } from '@/stores/GlobalDataStore';
+
+    const { hostName } = useGlobalDataStore();
+
+    // recupère la props de selectedEvents en provenance de EventPage
+    const { selectedEvent } = defineProps(['selectedEvent']);
 
 </script>
 

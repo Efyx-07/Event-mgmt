@@ -10,8 +10,13 @@ const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
       {
-        path: '/',
+        path: '/event-page',
         name: 'EventPage',
+        component: EventPage
+      },
+      {
+        path: '/event-page/:eventId', // création d'une route dynamique pour afficher la page de l'evenement
+        name: 'EventDetail',
         component: EventPage
       },
       {

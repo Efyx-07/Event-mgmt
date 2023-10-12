@@ -1,55 +1,66 @@
 <template>
 
-    <div class="backOfficeEventCard" v-for="event in events" :key="event.title">
+  <div class="backOfficeEventCard" v-for="event in events" :key="event.title">
 
-      <div class="eventImage_container">
-        <img :src="hostName + event.image.source" :alt="event.image.alt" class="eventImage">
-      </div>
+    <div class="eventImage_container">
+      <img :src="hostName + event.image.source" :alt="event.image.alt" class="eventImage">
+    </div>
 
-      <div class="eventCard-titleAndActions_container">
+    <div class="eventCard-titleAndActions_container">
 
-        <h1 class="eventTitle">{{ event.title }}</h1>
+      <h1 class="eventTitle">{{ event.title }}</h1>
 
-        <div class="actionIcons_container">
+      <div class="actionIcons_container">
 
-          <div class="icon_container">
-            <Icon icon="mdi:eye" class="icon" />
-          </div>
-  
-          <div class="icon_container">
-            <Icon icon="ic:baseline-edit" class="icon" />
-          </div>
-  
-          <div class="icon_container">
-            <Icon icon="akar-icons:statistic-up" class="icon" />
-          </div>
-  
-          <div class="icon_container">
-            <Icon icon="mdi:trash" class="icon" />
-          </div>
+        <div class="icon_container">
+          <Icon icon="mdi:eye" class="icon" @click="navigateToEvent(event.id)"/>
+        </div>
 
+        <div class="icon_container">
+          <Icon icon="ic:baseline-edit" class="icon" />
+        </div>
+
+        <div class="icon_container">
+          <Icon icon="akar-icons:statistic-up" class="icon" />
+        </div>
+
+        <div class="icon_container">
+          <Icon icon="mdi:trash" class="icon" />
         </div>
 
       </div>
 
-      <p class="creationDate">créé le {{ event.creationDate }}</p>
-
     </div>
 
-  </template>
-  
-  <script setup>
+    <p class="creationDate">créé le {{ event.creationDate }}</p>
 
-    import { Icon } from '@iconify/vue';
-    import { useEventStore } from '@/stores/EventStore';
-    import { useGlobalDataStore } from '@/stores/GlobalDataStore';
+  </div>
 
-    const eventStore = useEventStore();
-    const events = eventStore.events;
+</template>
 
-    const { hostName } = useGlobalDataStore()
+<script setup>
 
-  </script>
+  import { Icon } from '@iconify/vue';
+  import { useEventStore } from '@/stores/EventStore';
+  import { useGlobalDataStore } from '@/stores/GlobalDataStore';
+  import { useRouter } from 'vue-router';
+
+  const eventStore = useEventStore();
+  const events = eventStore.events;
+
+  const { hostName } = useGlobalDataStore();
+
+  const router = useRouter();
+
+  // permet de naviguer vers la page de l'evenement selectionné
+  const navigateToEvent = (eventId) => {
+    router.push({
+      name: 'EventDetail',
+      params: { eventId }
+    });
+  };
+
+</script>
 
 <style lang="scss" scoped>
 

@@ -3,7 +3,7 @@
     <div class="eventPage">
         <Header />
         <div class="eventPage_content">
-            <EventCard />
+            <EventCard :selectedEvent="selectedEvent"/>
         </div>
     </div>
     <InscriptionModal />
@@ -15,6 +15,23 @@
     import Header from '@/components/Header.vue';
     import EventCard from '@/components/EventCard.vue';
     import InscriptionModal from '@/components/InscriptionModal.vue';
+
+    import { useEventStore } from '@/stores/EventStore';
+    import { useRoute } from 'vue-router';
+
+    const eventStore = useEventStore();
+    const allEvents = eventStore.events;
+
+    const route = useRoute();
+
+    const eventId = Number(route.params.eventId); // convertit l'id en number pour la comparaison
+
+    // compare pour faire correspondre les id
+    const selectedEvent = allEvents.find((event) => {
+        return event.id === eventId;
+    });
+
+    
 
 </script>
 
