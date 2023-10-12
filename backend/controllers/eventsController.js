@@ -1,11 +1,13 @@
 const { myEventsConnection } = require('../db'); // importe la connexion à la base de donnée
 const path = require('path');
+const { v4: uuidv4 } = require('uuid'); // importe uuid pour générer un id unique
 
 // fonction pour générer un slug (chaque évènement aura une URL constitué de son nom reformaté et d'un id unique)
-function generateSlug(title) {
+function generateUniqueSlug(title) {
   const lowercaseTitle = title.toLowerCase();
   const slug = lowercaseTitle.replace(/\s+/g, '_');
-  return slug
+  const uniqueId = uuidv4(); // génère un identifiant unique au format uuid
+  return `${slug}_${uniqueId}`;
 };
 
 // controller pour création d'un évènement
@@ -18,7 +20,7 @@ async function createEvent(req, res) {
   const eventCoverImage = req.file; 
 
   // génère le slug pour l'évènement
-  const eventSlug = generateSlug(eventTitle);
+  const eventSlug = generateUniqueSlug(eventTitle);
 
   // crée et formate la legende alt pour l'image de couverture
   const eventCoverImageAlt = eventTitle.toLowerCase();

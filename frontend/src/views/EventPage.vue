@@ -25,7 +25,6 @@
     const route = useRoute();
 
     const eventSlug = route.params.eventSlug; // récupère le slug de la route
-    console.log(eventSlug)
 
     // compare pour faire correspondre les id
     const selectedEvent = allEvents.find((event) => {
