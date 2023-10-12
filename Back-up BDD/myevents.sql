@@ -8,8 +8,6 @@ CREATE TABLE evenements (
     lieu VARCHAR(255) NOT NULL,
     image_source VARCHAR(255) NOT NULL,
     image_alt VARCHAR(255) NOT NULL,
-    date_creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
+    date_creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+    slug VARCHAR(255) NOT NULL
 );
-
-ALTER TABLE evenements
-ADD COLUMN uuid VARCHAR(36); /* génère un id complexe */

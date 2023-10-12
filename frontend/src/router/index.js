@@ -15,7 +15,7 @@ const router = createRouter({
         component: EventPage
       },
       {
-        path: '/event-page/:eventId', // création d'une route dynamique pour afficher la page de l'evenement
+        path: '/event-page/:eventSlug', // création d'une route dynamique pour afficher la page de l'evenement
         name: 'EventDetail',
         component: EventPage
       },

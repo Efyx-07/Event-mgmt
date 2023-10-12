@@ -1,6 +1,13 @@
 const { myEventsConnection } = require('../db'); // importe la connexion à la base de donnée
 const path = require('path');
 
+// fonction pour générer un slug (chaque évènement aura une URL constitué de son nom reformaté et d'un id unique)
+function generateSlug(title) {
+  const lowercaseTitle = title.toLowerCase();
+  const slug = lowercaseTitle.replace(/\s+/g, '_');
+  return slug
+};
+
 // controller pour création d'un évènement
 async function createEvent(req, res) {
 
@@ -10,7 +17,8 @@ async function createEvent(req, res) {
   const eventLocation = req.body.eventLocation;
   const eventCoverImage = req.file; 
 
-  console.log('les données recupérées sont: ', eventTitle, eventDate, eventLocation, eventCoverImage)
+  // génère le slug pour l'évènement
+  const eventSlug = generateSlug(eventTitle);
 
   // crée et formate la legende alt pour l'image de couverture
   const eventCoverImageAlt = eventTitle.toLowerCase();
@@ -20,7 +28,7 @@ async function createEvent(req, res) {
   try {
 
     // insert les données dans la bdd myevents
-    const insertQuery = 'INSERT INTO evenements (titre, date, lieu, image_source, image_alt) VALUES(?, ?, ?, ?, ?)';
+    const insertQuery = 'INSERT INTO evenements (titre, date, lieu, image_source, image_alt, slug) VALUES(?, ?, ?, ?, ?, ?)';
 
     const values = [
       eventTitle,
@@ -28,6 +36,7 @@ async function createEvent(req, res) {
       eventLocation,
       eventCoverImageRelativePath,
       eventCoverImageAlt,
+      eventSlug
     ];
 
     myEventsConnection.query(insertQuery, values, (err, results) => {
@@ -86,6 +95,7 @@ function formatData(events) {
       alt: evenement.image_alt
     },
     creationDate: evenement.date_creation,
+    slug: evenement.slug
   }));
 
   return formattedEvents;

@@ -13,7 +13,7 @@
       <div class="actionIcons_container">
 
         <div class="icon_container">
-          <Icon icon="mdi:eye" class="icon" @click="navigateToEvent(event.id)"/>
+          <Icon icon="mdi:eye" class="icon" @click="navigateToEvent(event.slug)"/>
         </div>
 
         <div class="icon_container">
@@ -53,10 +53,10 @@
   const router = useRouter();
 
   // permet de naviguer vers la page de l'evenement selectionné
-  const navigateToEvent = (eventId) => {
+  const navigateToEvent = (eventSlug) => {
     router.push({
       name: 'EventDetail',
-      params: { eventId }
+      params: { eventSlug }
     });
   };
 

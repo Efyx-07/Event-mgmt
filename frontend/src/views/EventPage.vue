@@ -24,14 +24,13 @@
 
     const route = useRoute();
 
-    const eventId = Number(route.params.eventId); // convertit l'id en number pour la comparaison
+    const eventSlug = route.params.eventSlug; // récupère le slug de la route
+    console.log(eventSlug)
 
     // compare pour faire correspondre les id
     const selectedEvent = allEvents.find((event) => {
-        return event.id === eventId;
+        return event.slug === eventSlug;
     });
-
-    
 
 </script>
 
