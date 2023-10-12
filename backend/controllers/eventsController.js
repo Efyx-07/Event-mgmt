@@ -1,6 +1,7 @@
 const { myEventsConnection } = require('../db'); // importe la connexion à la base de donnée
 const path = require('path');
 const { v4: uuidv4 } = require('uuid'); // importe uuid pour générer un id unique
+const fs = require('fs');
 
 // fonction pour générer un slug (chaque évènement aura une URL constitué de son nom reformaté et d'un id unique)
 function generateUniqueSlug(title) {
@@ -61,6 +62,49 @@ async function createEvent(req, res) {
     
 };
 
+// controller pour suppression d'un évènement et fichier image associé
+async function removeEvent(req, res) {
+
+  // récupère l'ID de l'évènement à supprimer
+  const eventId = req.params.eventId; 
+
+  try {
+    // récupère l'information sur l'evenement pour obtenir le chemin de l'image à supprimer
+    const query = 'SELECT image_source FROM evenements WHERE id = ?'; 
+    myEventsConnection.query(query, [eventId], (err, results) => {
+      if (err) {
+        console.error('Erreur lors de la récupération de l\image de l\'évènement: ', err);
+        res.status(500).json({ error: 'Erreur lors de la récupération de l\image de l\'évènement' });
+        return
+      }
+
+      // supprime entrée de la base de données pour l'évènement
+      const deleteQuery = 'DELETE FROM evenements WHERE id = ?';
+      myEventsConnection.query(deleteQuery, [eventId], (err, deleteResults) => {
+        if (err) {
+          console.error('Erreur lors de la suppression de l\'événement: ', err);
+          res.status(500).json({ error: 'Erreur lors de la suppression de l\'événement' });
+          return
+        }
+
+        // supprime le fichier image associé
+        const imagePath = results[0].image_source;
+        const absolutePath = path.join(__dirname, imagePath);
+        fs.unlink(absolutePath, (err) => {
+          if (err) {
+            console.error('Erreur lors de la suppression de l\'image :', err);
+          }
+        });
+
+        res.status(200).json({ message: 'Evénement supprimé avec succès' });
+      });
+    })
+  } catch (error) {
+    console.error('Erreur lors de la suppression de l\'événement :', err);
+    res.status(500).json({ error: 'Erreur lors de la suppression de l\'événement' });
+  };
+};
+
 // controller pour recupération de tous les évènements
 async function getAllEvents(req, res) {
 
@@ -103,4 +147,4 @@ function formatData(events) {
   return formattedEvents;
 }; 
 
-module.exports = { createEvent, getAllEvents };
+module.exports = { createEvent, removeEvent, getAllEvents };

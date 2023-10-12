@@ -24,7 +24,10 @@ const upload = multer({ storage: storage });
 // route pour la création d'évèvenement
 router.post('/create', upload.single('eventCoverImage'),eventsController.createEvent);
 
+// route pour la suppression d'un évènement
+router.delete('/:eventId', eventsController.removeEvent);
+
 // route pour la récupération de tous les évènements
-router.get('/', eventsController.getAllEvents)
+router.get('/', eventsController.getAllEvents);
 
 module.exports = router;

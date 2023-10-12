@@ -3,7 +3,7 @@
         <div class="optionBox">
             <div class="askText_container">
                 <p>Etes-vous sûr de vouloir supprimer l'evenement :</p>
-                <p class="eventTitle">"{{ eventToRemove.eventTitle }}"</p>
+                <p class="eventTitle">"{{ eventToRemove.eventTitle }} {{ eventToRemove.eventId }}"</p>
             </div>
             <div class="alertMention">
                 <Icon icon="mdi:alert-outline" class="alertIcon"/>
@@ -13,7 +13,7 @@
                 <button class="cancelButton" @click="closeRemoveEventModal">
                     <p>Annuler</p>
                 </button>
-                <button class="confirmButton">
+                <button class="confirmButton" @click="confirmRemoveEvent">
                     <p>Confirmer</p>
                 </button>
             </div>
@@ -24,6 +24,7 @@
 <script setup>
     import { Icon } from '@iconify/vue';
     import { ref, onMounted } from 'vue';
+    import { useGlobalDataStore } from '@/stores/GlobalDataStore';
 
     // statut par défaut de la visibilité de la fenetre
     const isRemoveEventModalVisible  = ref(false);
@@ -31,6 +32,7 @@
     // données de l'évènement à supprimer
     const eventToRemove = ref({
         eventTitle:'',
+        eventId:''
     });
 
     // permet la fermeture de la fenetre au click du bouton Annuler
@@ -47,6 +49,33 @@
             eventToRemove.value = event.detail;
         });
     });
+
+    // Fonction pour confirmer la suppression de l'événement
+    const confirmRemoveEvent = async () => {
+        try {
+
+            const { hostName } = useGlobalDataStore();
+
+            // recupère l'id de l'évènement à supprimer
+            const eventId = eventToRemove.value.eventId;
+
+            const response = await fetch(`${hostName}/events/${eventId}`, {
+                method: 'DELETE',
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log(data.message);
+            } else {
+                console.error('Erreur lors de la suppression de l\'événement');
+            }
+
+            // ferme la fenêtre modale de suppression
+            isRemoveEventModalVisible.value = false;
+        } catch (error) {
+            console.error('Erreur lors de la suppression de l\'événement :', error);
+        }
+    };
 
 </script>
 
