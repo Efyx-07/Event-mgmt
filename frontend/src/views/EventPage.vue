@@ -6,7 +6,7 @@
             <EventCard :selectedEvent="selectedEvent"/>
         </div>
     </div>
-    <InscriptionModal />
+    <InscriptionModal :selectedEvent="selectedEvent"/>
     
 </template>
 

@@ -7,7 +7,7 @@
                 class="closeIcon" 
                 @click="closeinscriptionModalAndOverlay"
             />
-            <EventTitle class="eventTitle"/>
+            <h1 class="eventTitle">{{ selectedEvent.title }}</h1>
             <InscriptionForm />
             <footer>
                 <div class="legalLinks_container">
@@ -29,7 +29,6 @@
 
     import { Icon } from '@iconify/vue';
     import Overlay from '@/components/Overlay.vue';
-    import EventTitle from '@/sub-components/EventTitle.vue';
     import InscriptionForm from '@/sub-components/InscriptionForm.vue';
     import { ref, onMounted } from 'vue';
     
@@ -57,6 +56,9 @@
             isInscriptionModalVisible.value = true; 
         });
     });
+
+    // recupère la props de selectedEvents en provenance de EventPage
+    const { selectedEvent } = defineProps(['selectedEvent']);
 
 </script>
 
