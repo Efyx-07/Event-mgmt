@@ -57,7 +57,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        transition: opacity .3s ease-in-out;
+        transition: opacity .1s ease-in-out;
         .optionBox {
             width: 25rem;
             background: $darkColorBackOf;

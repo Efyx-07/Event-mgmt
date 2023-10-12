@@ -65,6 +65,9 @@
             flex-direction: column;
             padding: 1rem;
             gap: 1rem;
+            .eventTitle {
+                margin: 0;
+            }
             .eventCard-details {
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr;
