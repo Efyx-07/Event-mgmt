@@ -25,7 +25,7 @@
         </div>
 
         <div class="icon_container">
-          <Icon icon="mdi:trash" class="icon" />
+          <Icon icon="mdi:trash" class="icon" @click="toggleRemoveEventModalVisibility"/>
         </div>
 
       </div>
@@ -59,6 +59,14 @@
       params: { eventSlug }
     });
   };
+
+  // ouvre la fenetre 'RemoveEventModal' au clic de l'icone
+  const toggleRemoveEventModalVisibility = () => {
+        // crée un nouvel evenement personnalisé 
+        const showRemoveEventModalEvent = new Event('show-removeEventModal');
+        // déclenche l'événement 'show-inscriptionModal' sur l'objet window
+        window.dispatchEvent(showRemoveEventModalEvent);
+    }
 
 </script>
 

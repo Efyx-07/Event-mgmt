@@ -6,7 +6,7 @@
 
 <script setup>
 
-    // ouvre la fenetre 'UserAccount' au clic de l'icone
+    // ouvre la fenetre 'InscriptionModal' au clic de l'icone
     const toggleInscriptionModalVisibility = () => {
         // crée un nouvel evenement personnalisé 
         const showInscriptionModalEvent = new Event('show-inscriptionModal');

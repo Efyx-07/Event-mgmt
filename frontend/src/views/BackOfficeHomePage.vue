@@ -29,12 +29,14 @@
             <BackOfficeEventCard />
         </div>
     </div>
+    <RemoveEventModal />
     
 </template>
 
 <script setup>
     
     import BackOfficeEventCard from '@/components/BackOfficeEventCard.vue'; 
+    import RemoveEventModal from '@/components/RemoveEventModal.vue';
     import { useEventStore } from '@/stores/EventStore';
     import { computed } from 'vue';
 
