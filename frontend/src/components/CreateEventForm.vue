@@ -41,6 +41,7 @@
                 <input 
                     type="file"
                     name="eventCoverImage"
+                    required
                     accept="image/jpg, image/jpeg, image/png"
                     class="coverImage-input"
                     id="create_coverImage"
@@ -121,30 +122,36 @@
         align-items: center;
         background: $ultraLightColor;
         box-shadow: $shadow;
-        max-width: 66rem;
-        padding: 3rem 10rem;
+        max-width: 50%;
+        padding: 3rem;
         gap: 3rem;
 
         .inputs_wrapper {
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 2rem;
+            gap: 1rem;
 
             .input-container {
                 display: flex;
                 flex-direction: column;
-                gap: 1rem;
+                gap: .5rem;
 
                 label {
-                    font-size: 2rem;
+                    font-size: 1.3rem;
                     font-weight: 700;
                 }
 
                 input {
-                    height: 4rem;
-                    font-size: 1.5rem;
+                    height: 2.5rem;
+                    font-size: 1rem;
+                    padding: 1rem;
                     border: solid 1px rgba($darkColor, .25);
+
+                    &:focus {
+                        outline: none;
+                        border: solid 2px $accentColorBackof2;
+                    }
                 }
                 .coverImage-input {
                     border: none;
@@ -163,9 +170,9 @@
             p {
                 margin: 0;
                 color: $lightColor;
-                font-size: 1.5rem;
+                font-size: 1.3rem;
                 font-weight: 700;
-                padding: 1rem;
+                padding: .7rem 1rem;
             }
         }
     }

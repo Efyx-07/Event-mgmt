@@ -1,7 +1,10 @@
 <template>
     <div class="removeEventModal" :class="{ hiddenRemoveEventModal: !isRemoveEventModalVisible }">
         <div class="optionBox">
-            <p>Etes-vous sûr de vouloir supprimer l'evenement: eventTitle ?</p>
+            <div class="askText_container">
+                <p>Etes-vous sûr de vouloir supprimer l'evenement :</p>
+                <p class="eventTitle">"{{ eventToRemove.eventTitle }}"</p>
+            </div>
             <div class="alertMention">
                 <Icon icon="mdi:alert-outline" class="alertIcon"/>
                 <p>Cette opération est irréversible et supprimera l'évènement et toutes ses données</p>
@@ -25,6 +28,11 @@
     // statut par défaut de la visibilité de la fenetre
     const isRemoveEventModalVisible  = ref(false);
 
+    // données de l'évènement à supprimer
+    const eventToRemove = ref({
+        eventTitle:'',
+    });
+
     // permet la fermeture de la fenetre au click du bouton Annuler
     const closeRemoveEventModal = () => {
         isRemoveEventModalVisible.value = false;
@@ -32,8 +40,11 @@
 
     // ecoute l'événement personnalisé (créé sur 'BackOfficeEventCard') pour réafficher la fenetre
     onMounted(() => {
-        window.addEventListener('show-removeEventModal', () => {
+        window.addEventListener('show-removeEventModal', (event) => {
             isRemoveEventModalVisible.value = true;
+
+            // récupère les données de l'évènement à supprimer
+            eventToRemove.value = event.detail;
         });
     });
 
@@ -59,7 +70,6 @@
         align-items: center;
         transition: opacity .1s ease-in-out;
         .optionBox {
-            width: 25rem;
             background: $darkColorBackOf;
             color: $lightColor;
             display: flex;
@@ -67,23 +77,34 @@
             align-items: center;
             padding: 2rem;
             gap: 1rem;
+            .askText_container {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
 
-            p {
-                margin: 0;
-                text-align: center;
-                font-size: 1.2rem;
-                font-weight: 400;
+                p {
+                    margin: 0;
+                    text-align: center;
+                    font-size: 1.2rem;
+                    font-weight: 400;
+                }
+                .eventTitle {
+                    font-weight: 700;
+                }
             }
             .alertMention {
                 display: flex;
                 align-items: center;
+                gap: 1rem;
                 color: $errorColor;
                 .alertIcon {
-                    font-size: 3rem;
+                    font-size: 1.5rem;
                     color: $errorColor;
                 }
 
                 p {
+                    margin: 0;
+                    text-align: center;
                     font-size: .8rem;
                     font-weight: 200;
                 }
@@ -98,18 +119,18 @@
                     margin-top: 1rem;
                     padding: .5rem;
                     background: transparent;
+                    color: $lightColor;
                     border: solid 1px $lightColor;
                     cursor: pointer;
 
-                    &:hover {
-                        background: $accentColorBackof2;
-                    }
-
                     p {
                         margin: 0;
-                        color: $lightColor;
                         font-weight: 600;
                         font-size: 1rem;
+                    }
+
+                    &:hover {
+                        background: $accentColorBackof2;
                     }
                 }
             }
