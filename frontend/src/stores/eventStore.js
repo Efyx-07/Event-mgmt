@@ -16,6 +16,6 @@ export const useEventStore = defineStore('events', {
             } catch (error) {
                 console.error('Erreur lors du chargement des données des évènements: ', error);
             }
-        }
+        },
     },
 });

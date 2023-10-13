@@ -63,6 +63,7 @@
 
     import { ref } from 'vue';
     import { useGlobalDataStore } from '@/stores/GlobalDataStore';
+    import { useEventStore } from '@/stores/EventStore';
     import { useRouter } from 'vue-router';
 
     // propriétés du formulaire
@@ -76,6 +77,7 @@
         eventCoverImage.value = event.target.files[0];
     };
 
+    const eventStore = useEventStore();
     const router = useRouter();
 
     // soumet le formulaire
@@ -102,10 +104,18 @@
             });
 
             if (response.ok) {
-                router.push('/admin_publication-confirmation');
                 const data = await response.json();
-                console.log(data.message);
-                
+                console.log('Réponse de l\'API:', data.message);
+
+                // ajoute le nouvel evenement dans la liste d'evenements dans le store
+                eventStore.events.push(data.event);
+
+                // charge les données des évènements
+                await eventStore.loadEventsData();
+
+                // renvoie vers une page de redirection
+                router.push('/admin_publication-confirmation');
+                        
             } else {
                 console.error('Erreur lors de la création d\'evenement :', response.statusText);
             }

@@ -4,9 +4,9 @@
         <div class="publicationConfirmation_content">
             <p>Bravo, votre évènement a été publié avec succès !</p>
             <Icon icon="streamline-emojis:ok-hand-2" class="icon"/>
-            <router-link to="/admin_homepage" type="submit" class="toEvents_button">
+            <div type="submit" class="toEvents_button" @click="navigateToHomepageAndReload">
                 <p>Retour à vos évènements</p>
-            </router-link>
+            </div>
         </div>
     </div>
 
@@ -16,6 +16,13 @@
 <script setup>
 
     import { Icon } from '@iconify/vue';
+    import { useRouter } from 'vue-router';
+
+    const router = useRouter();
+
+    const navigateToHomepageAndReload = () => {
+        router.push('/admin_homepage');
+    };
 
 </script>
 
