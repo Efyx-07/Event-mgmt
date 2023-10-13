@@ -2,7 +2,7 @@
 
     <div class="publicationConfirmation">
         <div class="publicationConfirmation_content">
-            <p>Bravo, votre évènement a été publié avec succès !</p>
+            <p>Bravo, votre évènement a été publié avec succès !!</p>
             <Icon icon="streamline-emojis:ok-hand-2" class="icon"/>
             <router-link to="/admin_homepage" type="submit" class="toEvents_button">
                 <p>Retour à vos évènements</p>
