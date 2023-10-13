@@ -3,7 +3,7 @@
         <div class="optionBox">
             <div class="askText_container">
                 <p>Etes-vous sûr de vouloir supprimer l'evenement :</p>
-                <p class="eventTitle">"{{ eventToRemove.eventTitle }} {{ eventToRemove.eventId }}"</p>
+                <p class="eventTitle">"{{ eventToRemove.eventTitle }}"</p>
             </div>
             <div class="alertMention">
                 <Icon icon="mdi:alert-outline" class="alertIcon"/>
