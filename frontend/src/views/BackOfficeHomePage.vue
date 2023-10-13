@@ -19,7 +19,8 @@
         </div>
 
         <div v-if="eventsCount === 0" class="adminHomePage_empty">
-            <p>Il n'y a aucun évènement pour l'instant</p>
+            <p>Il n'y a aucun évènement pour l'instant...</p>
+            <Icon icon="streamline-emojis:magnifying-glass-tilted-left"  class="icon"/>
             <router-link to="/admin_new-event" type="submit" class="toNewEvent_button">
                 <p>Créez votre 1er évènement</p>
             </router-link>
@@ -37,6 +38,7 @@
     
     import BackOfficeEventCard from '@/components/BackOfficeEventCard.vue'; 
     import RemoveEventModal from '@/components/RemoveEventModal.vue';
+    import { Icon } from '@iconify/vue';
     import { useEventStore } from '@/stores/EventStore';
     import { computed } from 'vue';
 
@@ -111,27 +113,30 @@
                 margin: 0;
                 font-size: 1.4rem;
             }
+            .icon {
+                font-size: 6rem;
+            }
             .toNewEvent_button {
-                    text-decoration: none;
-                    justify-self: center;
-                    background: transparent;
-                    color: $darkColorBackOf;
-                    border: 2px solid $darkColorBackOf;
-                    cursor: pointer;
+                text-decoration: none;
+                justify-self: center;
+                background: transparent;
+                color: $darkColorBackOf;
+                border: 2px solid $darkColorBackOf;
+                cursor: pointer;
 
-                    &:hover {
-                        border-color: $accentColorBackof2;
-                        color: $accentColorBackof2;
-                    }
-
-                    p {
-                        margin: 0;
-                        font-size: 1.4rem;
-                        font-weight: 700;
-                        padding: 1rem 2rem;
-                    }
-                        
+                &:hover {
+                    border-color: $accentColorBackof2;
+                    color: $accentColorBackof2;
                 }
+
+                p {
+                    margin: 0;
+                    font-size: 1.4rem;
+                    font-weight: 700;
+                    padding: 1rem 2rem;
+                }
+                        
+            }
 
         }
         .eventsCountMention_container {

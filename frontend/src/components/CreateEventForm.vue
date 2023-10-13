@@ -63,6 +63,7 @@
 
     import { ref } from 'vue';
     import { useGlobalDataStore } from '@/stores/GlobalDataStore';
+    import { useRouter } from 'vue-router';
 
     // propriétés du formulaire
     const eventTitle = ref('');
@@ -74,6 +75,8 @@
     const handleCoverImageFileChange = (event) => {
         eventCoverImage.value = event.target.files[0];
     };
+
+    const router = useRouter();
 
     // soumet le formulaire
     const validateEventCreation = async () => {
@@ -99,8 +102,10 @@
             });
 
             if (response.ok) {
+                router.push('/admin_publication-confirmation');
                 const data = await response.json();
                 console.log(data.message);
+                
             } else {
                 console.error('Erreur lors de la création d\'evenement :', response.statusText);
             }
