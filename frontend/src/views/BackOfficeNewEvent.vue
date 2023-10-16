@@ -35,7 +35,7 @@
     @import '@/assets/sass/variables.scss';
     .backOfficeNewEventPage {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 3fr;
         .newEventPage {
             grid-column: 2 / -1;
             display: flex;
@@ -67,7 +67,7 @@
 
             &_content {
                 width: 100%;
-                padding: 3rem 0;
+                padding: 3rem;
                 max-width: $contentMaxWidth;
             }
         }

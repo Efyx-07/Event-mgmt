@@ -35,7 +35,7 @@
         position:relative;
         min-height: 100vh;
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 3fr;
         .publicationConfirmation_content {
             grid-column: 2 / -1;
             position: absolute;

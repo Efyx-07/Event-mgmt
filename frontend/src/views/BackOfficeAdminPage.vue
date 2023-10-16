@@ -26,7 +26,7 @@
     @import '@/assets/sass/variables.scss';
     .backOfficeAdminPage {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 3fr;
         .adminPage {
             grid-column: 2 / -1;
 

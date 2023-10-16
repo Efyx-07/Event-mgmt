@@ -63,7 +63,7 @@
 
     .backOfficeHomePage {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 3fr;
         .adminHomePage {
             grid-column: 2 / -1;
             position:relative;
