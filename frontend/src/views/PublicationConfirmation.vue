@@ -1,6 +1,7 @@
 <template>
 
     <div class="publicationConfirmation">
+        <BackOfficeNavAside class="backOfficeNavAside"/>
         <div class="publicationConfirmation_content">
             <p>Bravo, votre évènement a été publié avec succès !</p>
             <Icon icon="streamline-emojis:ok-hand-2" class="icon"/>
@@ -17,6 +18,7 @@
 
     import { Icon } from '@iconify/vue';
     import { useRouter } from 'vue-router';
+    import BackOfficeNavAside from '@/components/BackOfficeNavAside.vue';
 
     const router = useRouter();
 
@@ -32,7 +34,10 @@
     .publicationConfirmation {
         position:relative;
         min-height: 100vh;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
         .publicationConfirmation_content {
+            grid-column: 2 / -1;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -52,22 +57,20 @@
 
             .toEvents_button {
                 text-decoration: none;
-                justify-self: center;
-                background: transparent;
-                color: $darkColorBackOf;
-                border: 2px solid $darkColorBackOf;
+                border: none;
+                background: $darkColorBackOf;
                 cursor: pointer;
 
                 &:hover {
-                    border-color: $accentColorBackof2;
-                    color: $accentColorBackof2;
+                    background: $accentColorBackof2;
                 }
 
                 p {
                     margin: 0;
-                    font-size: 1.4rem;
+                    color: $lightColor;
+                    font-size: 1.3rem;
                     font-weight: 700;
-                    padding: 1rem 2rem;
+                    padding: .7rem 1rem;
                 }
                         
             }
