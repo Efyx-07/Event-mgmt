@@ -43,11 +43,15 @@
             align-items: center;
 
             .newEventPageHeader {
-                background: $darkColorBackOf;
+                background: $lightColor;
+                box-shadow: $shadow;
                 padding: 1rem 3rem;
                 width: 100%;
                 display: flex;
                 justify-content: center;
+                position: sticky;
+                top: 0;
+                z-index: 99;
 
                 &_content {
                     width: 100%;
@@ -55,8 +59,8 @@
                     
                     h1 {
                         margin: 0;
-                        font-size: 3rem;
-                        color: $lightColor;
+                        font-size: 2rem;
+                        color: $darkColor;
                     }
                 }
             }
