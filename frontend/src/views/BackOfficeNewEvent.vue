@@ -1,24 +1,31 @@
 <template>
-    
-    <div class="newEventPage">
 
-        <header class="newEventPageHeader">
-            <div class="newEventPageHeader_content">
-                <h1>Nouvel évènement</h1>
+    <div class="backOfficeNewEventPage">
+
+        <BackOfficeNavAside class="backOfficeNavAside"/>
+
+        <div class="newEventPage">
+
+            <header class="newEventPageHeader">
+                <div class="newEventPageHeader_content">
+                    <h1>Nouvel évènement</h1>
+                </div>
+            </header>
+
+            <div class="newEventPage_content">
+                <CreateEventForm />
             </div>
-        </header>
 
-        <div class="newEventPage_content">
-            <CreateEventForm />
         </div>
 
-
     </div>
+    
     
 </template>
 
 <script setup>
 
+    import BackOfficeNavAside from '@/components/BackOfficeNavAside.vue';
     import CreateEventForm from '@/components/CreateEventForm.vue'
 
 </script>
@@ -26,7 +33,11 @@
 <style lang="scss" scoped>
 
     @import '@/assets/sass/variables.scss';
+    .backOfficeNewEventPage {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
         .newEventPage {
+            grid-column: 2 / -1;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -56,5 +67,6 @@
                 max-width: $contentMaxWidth;
             }
         }
+    }
     
 </style>
