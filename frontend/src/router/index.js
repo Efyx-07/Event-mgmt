@@ -3,6 +3,7 @@ import EventPage from '@/views/EventPage.vue';
 import BackOfficeLoginPage from '@/views/BackOfficeLoginPage.vue';
 import BackOfficeHomePage from '@/views/BackOfficeHomePage.vue';
 import BackOfficeNewEvent from '@/views/BackOfficeNewEvent.vue';
+import BackOfficeAdminPage from '@/views/BackOfficeAdminPage.vue';
 import PublicationConfirmation from '@/views/PublicationConfirmation.vue';
 
 
@@ -35,6 +36,12 @@ const router = createRouter({
         name: 'BackOfficeNewEvent',
         component: BackOfficeNewEvent
       },
+      {
+        path: '/admin_admin-accounts',
+        name: 'BackOfficeAdminPage',
+        component: BackOfficeAdminPage
+      },
+
       {
         path: '/admin_publication-confirmation',
         name: 'PublicationConfirmation',

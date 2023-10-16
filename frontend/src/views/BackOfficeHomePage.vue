@@ -5,7 +5,9 @@
         <BackOfficeNavAside class="backOfficeNavAside"/>
 
         <div class="adminHomePage">
+
             <header class="adminHomePageHeader">
+
                 <div class="adminHomePageHeader_content">
                     <h1>Vos évènements</h1>
                     <div class="eventsCountMention_container">
@@ -123,6 +125,25 @@
                 }
                 .icon {
                     font-size: 6rem;
+                }
+                .toNewEvent_button {
+                    text-decoration: none;
+                    border: none;
+                    background: $darkColorBackOf;
+                    cursor: pointer;
+
+                    &:hover {
+                        background: $accentColorBackof2;
+                    }
+
+                    p {
+                        margin: 0;
+                        color: $lightColor;
+                        font-size: 1.3rem;
+                        font-weight: 700;
+                        padding: .7rem 1rem;
+                    }
+                    
                 }
             }
             .eventCards_container {

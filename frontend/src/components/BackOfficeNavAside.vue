@@ -15,6 +15,16 @@
                 <p>Nouvel évènement</p>
                 <div class="active-bar"></div>
         </router-link>
+        <router-link to="/admin_admin-accounts" class="item-section" :class="{ 'active-link': $route.path === '/admin_admin-accounts' }">
+                <Icon icon="material-symbols:manage-accounts-outline" class="icon"/>
+                <p>Compte administrateur</p>
+                <div class="active-bar"></div>
+        </router-link>
+
+        <div class="footer-section">
+            <p>Nom admin</p>
+            <Icon icon="mdi:power" class="icon"/>
+        </div>
 
 
     </div>
@@ -57,7 +67,6 @@
             padding-left: 2rem;
             cursor: pointer;
             position: relative;
-
             .icon {
                 font-size: 2.25rem;
             }
@@ -85,6 +94,34 @@
                 background-color: $accentColorBackof2;
             }
         
+        }
+        .footer-section {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 6rem;
+            background: $accentColorBackof4;
+            color: $lightColor;
+            border-top: solid 1px $accentColorBackof3;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+
+            p {
+                margin: 0;
+                font-size: 1.2rem;
+            }
+            .icon {
+                font-size: 2.25rem;
+                cursor: pointer;
+
+                &:hover {
+                    color: $accentColorBackof2;
+                }
+            }
+
         }
     }
     
