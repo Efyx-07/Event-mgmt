@@ -88,8 +88,6 @@
             &.active-link {
                 background-color: $accentColorBackof4;
             }
-
-            &:hover>.active-bar,
             &.active-link>.active-bar {
                 background-color: $accentColorBackof2;
             }
