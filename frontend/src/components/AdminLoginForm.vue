@@ -34,11 +34,10 @@
         align-items: center;
         justify-content: center;
         gap: .5rem;
-        background: $lightColor;
-        border-radius: $containerRadius;
         width: 25rem;
         padding: 2rem;
-
+        border: 1px solid $accentColorBackof3;
+        border-radius: $containerRadius;
         .inputs_wrapper {
             display: flex;
             flex-direction: column;
@@ -54,13 +53,21 @@
 
             label {
                 font-size: 1rem;
+                color: $lightColor;
+                font-weight: 200;
             }
 
             input {
                 height: 3rem;
-                background: $lightColor;
-                border: solid 1px rgba($darkColor, .25);
+                outline: none;
+                background: transparent;
+                border: solid 1px $accentColorBackof3;
                 font-size: 1rem;
+                color: $lightColor;
+
+                &:focus {
+                    border: solid 1px $accentColorBackof2;
+                }
             }
         }
         .error-message {
@@ -70,19 +77,20 @@
             margin-top: 1rem;
             padding: .5rem 1rem;
             background: $darkColorBackOf;
-            border: none;
+            border: solid 1px $accentColorBackof3;
             align-self: self-end;
             cursor: pointer;
 
             &:hover {
+                border-color: $accentColorBackof2;
                 background: $accentColorBackof2;
             }
 
             p {
                 margin: 0;
                 color: $lightColor;
-                font-weight: 600;
-                font-size: .9rem;
+                font-weight: 200;
+                font-size: 1rem;
             }
         }
     }

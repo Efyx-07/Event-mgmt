@@ -33,8 +33,8 @@
 
 <script setup>
 
-        import PlatformLogo from '@/sub-components/PlatformLogo.vue';
-        import { Icon } from '@iconify/vue';
+    import PlatformLogo from '@/sub-components/PlatformLogo.vue';
+    import { Icon } from '@iconify/vue';
 
 </script>
 
