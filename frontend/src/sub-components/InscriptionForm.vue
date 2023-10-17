@@ -74,6 +74,7 @@
 <script setup>
 
     import { ref } from 'vue';
+    import { useGlobalDataStore } from '@/stores/GlobalDataStore';
 
     //datas
     const requiredFieldMention = '*';
@@ -128,13 +129,12 @@
         validateEmail();
 
         // extrait les valeurs des objets ref
-        /*
+        
         const entrepriseOrganisationValue = entrepriseOrganisation.value;
         const nomValue = nom.value;
         const prenomValue = prenom.value;
         const telephoneValue = telephone.value;
         const emailValue = email.value;
-        */
 
         // détermine les champs requis pour soumettre le formulaire
         const requiredFieldsValid = 
@@ -148,6 +148,38 @@
             console.log('Formulaire validé');
             // Soumission du formulaire
             registrationForm.value.submit();
+
+            try {
+
+                const { hostName } = useGlobalDataStore();
+
+                const response = await fetch(`${hostName}/users/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        entrepriseOrganisation: entrepriseOrganisationValue,
+                        nom: nomValue,
+                        prenom: prenomValue,
+                        telephone: telephoneValue,
+                        email: emailValue,
+                    }),
+                });
+
+                if (response.ok) {
+                    // affiche le message d'inscription réussie ici
+                    const data = await response.json();
+                    console.log(data.message); // affiche le message dans la console
+                } else {
+                    // affiche un message d'erreur à l'utilisateur.
+                    console.error('Erreur lors de l\'inscription :', response.statusText);
+                }
+
+            } catch (error) {
+                console.error('Erreur lors de l\inscription: ', error);
+            }
+
         } else {
             console.log('Formulaire non valide');
         }

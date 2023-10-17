@@ -30,7 +30,7 @@ async function createEvent(req, res) {
 
   try {
 
-    // insert les données dans la bdd myevents
+    // insert les données dans la bdd myevents table evenements
     const insertQuery = 'INSERT INTO evenements (titre, date, lieu, image_source, image_alt, slug) VALUES(?, ?, ?, ?, ?, ?)';
 
     const values = [
