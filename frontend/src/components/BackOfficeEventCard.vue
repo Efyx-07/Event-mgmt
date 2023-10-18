@@ -21,7 +21,7 @@
         </div>
 
         <div class="icon_container">
-          <Icon icon="akar-icons:statistic-up" class="icon" />
+          <Icon icon="akar-icons:statistic-up" class="icon" @click="navigateToParticipantsList(event.slug)"/>
         </div>
 
         <div class="icon_container">
@@ -56,6 +56,14 @@
   const navigateToEvent = (eventSlug) => {
     router.push({
       name: 'EventDetail',
+      params: { eventSlug }
+    });
+  };
+
+  // permet de naviguer vers la page affichant la liste des participants à l'évènement sélectionné
+  const navigateToParticipantsList = (eventSlug) => {
+    router.push({
+      name: 'ParticipantsList',
       params: { eventSlug }
     });
   };
