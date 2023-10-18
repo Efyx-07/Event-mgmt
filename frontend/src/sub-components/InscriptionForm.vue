@@ -143,17 +143,18 @@
             prenomValid.value &&
             emailValid.value;
 
-        // Soumet le formulaire avec les champs requis
+        // soumet le formulaire avec les champs requis
         if (requiredFieldsValid) {
             console.log('Formulaire validé');
-            // Soumission du formulaire
+            // soumission du formulaire
             registrationForm.value.submit();
 
             try {
 
                 const { hostName } = useGlobalDataStore();
+                const eventSlug = window.location.pathname.split('/').pop(); // récupère le slug de l'événement depuis l'URL
 
-                const response = await fetch(`${hostName}/users/register`, {
+                const response = await fetch(`${hostName}/users/${eventSlug}/register`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -170,7 +171,8 @@
                 if (response.ok) {
                     // affiche le message d'inscription réussie ici
                     const data = await response.json();
-                    console.log(data.message); // affiche le message dans la console
+                    console.log(data.message); 
+                    
                 } else {
                     // affiche un message d'erreur à l'utilisateur.
                     console.error('Erreur lors de l\'inscription :', response.statusText);

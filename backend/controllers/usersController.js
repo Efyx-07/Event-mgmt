@@ -1,18 +1,30 @@
-const { myEventsConnection } = require('../db'); // importe la connexion à la base de donnée
+const { myEventsConnection } = require('../db');
 
 // controller pour l'inscription d'un participant
 async function registerUser(req, res) {
 
+  // récupère le slug de l'événement à partir de l'URL
+  const eventSlug = req.params.eventSlug;
+  console.log('Slug récupéré depuis l\'URL:', eventSlug);
+
+  // récupère l'ID de l'événement correspondant au slug depuis la base de données
+  myEventsConnection.query('SELECT id FROM evenements WHERE slug = ?', [eventSlug], (err, results) => {
+    if (err || results.length === 0) {
+      console.error('Erreur lors de la récupération de l\'ID de l\'événement: ', err);
+      res.status(500).json({ error: 'Événement non trouvé' });
+      return;
+    }
+
+    const eventId = results[0].id;
+
     // récupère les données du formulaire d'inscription depuis req.body
     const {
-        entrepriseOrganisation,
-        nom, 
-        prenom,
-        telephone,
-        email
+      entrepriseOrganisation,
+      nom,
+      prenom,
+      telephone,
+      email,
     } = req.body;
-
-    // récupère l'id de l'evenement à partir de l'URL
 
     // effectue les mêmes vérifications de champs côté serveur
     const companyNameRegex = /^[a-zA-Z0-9\s\.,'-]*$/;
@@ -20,45 +32,54 @@ async function registerUser(req, res) {
     const phoneFrenchNumbersRegex = /^(?!0[013]).{10}$/;
     const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
-    if (!companyNameRegex.test(entrepriseOrganisation) ||
-        !nameRegex.test(nom) ||
-        !nameRegex.test(prenom) ||
-        !phoneFrenchNumbersRegex.test(telephone) ||
-        !emailRegex.test(email)) {
-            return res.status(400).json({ error: 'Champs invalides' });
-    };
+    if (
+      !companyNameRegex.test(entrepriseOrganisation) ||
+      !nameRegex.test(nom) ||
+      !nameRegex.test(prenom) ||
+      !phoneFrenchNumbersRegex.test(telephone) ||
+      !emailRegex.test(email)
+    ) {
+      return res.status(400).json({ error: 'Champs invalides' });
+    }
 
-    try {
+    // insére le participant dans la base de données myevents table participants
+    const insertParticipantQuery = 'INSERT INTO participants (nom_entreprise, nom, prenom, email, telephone) VALUES (?, ?, ?, ?, ?)';
+    const participantValues = [
+      entrepriseOrganisation,
+      nom,
+      prenom,
+      email,
+      telephone,
+    ];
 
-        // insère les données dans la base de données myevents table participants
-        const insertQuery = 'INSERT INTO participants (nom_entreprise, nom, prenom, email, telephone) VALUES (?, ?, ?, ?, ?)';
-        const values = [
-            entrepriseOrganisation,
-            nom,
-            prenom,
-            email,
-            telephone
-        ];
+    myEventsConnection.query(insertParticipantQuery, participantValues, (err, participantResults) => {
+      if (err) {
+        console.error('Erreur lors de l\'inscription du participant: ', err);
+        res.status(500).json({ error: 'Erreur lors de l\'inscription' });
+        return;
+      }
 
-        myEventsConnection.query(insertQuery, values, (err, results) => {
+      // obtient l'ID du participant nouvellement créé
+      const participantId = participantResults.insertId;
+      console.log('ID du participant :', participantId);
 
-            if (err) {
-                console.error('Erreur lors de l\inscription: ', err);
-                res.status(500).json({ error: 'Erreur lors de l\inscription' });
-                return;
-            }
+      // insére la liaison entre le participant et l'événement
+      const insertBindingQuery = 'INSERT INTO participants_evenements (participant_id, evenement_id) VALUES (?, ?)';
+      const bindingValues = [participantId, eventId];
+      console.log('Valeurs de la liaison :', bindingValues);
 
-            // utilisateur inscrit avec succés
-            res.status(201).json({ message: 'Inscription reussie'});
-        });
+      myEventsConnection.query(insertBindingQuery, bindingValues, (err, bindingResults) => {
+        if (err) {
+          console.error('Erreur lors de la liaison participant-événement: ', err);
+          res.status(500).json({ error: 'Erreur lors de la liaison participant-événement' });
+          return;
+        }
 
-    } catch (err) {
-
-        console.error('Erreur lors de l\inscription: ', err);
-        res.status(500).json({ error: 'Erreur lors de l\inscription' });
-
-    };
-
-};
+        // utilisateur inscrit avec succès
+        res.status(201).json({ message: 'Inscription réussie' });
+      });
+    });
+  });
+}
 
 module.exports = { registerUser };
