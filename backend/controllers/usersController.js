@@ -35,7 +35,7 @@ async function registerUser(req, res) {
       !companyNameRegex.test(entrepriseOrganisation) ||
       !nameRegex.test(nom) ||
       !nameRegex.test(prenom) ||
-      !phoneFrenchNumbersRegex.test(telephone) ||
+      (telephone && !phoneFrenchNumbersRegex.test(telephone)) ||
       !emailRegex.test(email)
     ) {
       return res.status(400).json({ error: 'Champs invalides' });
@@ -69,6 +69,7 @@ async function registerUser(req, res) {
 
         myEventsConnection.query(insertParticipantQuery, participantValues, (err, participantResults) => {
           if (err) {
+            console.log('erreur lors de l\'inscription: ', err)
             console.error('Erreur lors de l\'inscription du participant: ', err);
             res.status(500).json({ error: 'Erreur lors de l\'inscription' });
             return;
@@ -91,6 +92,7 @@ async function registerUser(req, res) {
             }
 
             // utilisateur inscrit avec succès
+            console.log('inscription réussie');
             res.status(201).json({ message: 'Inscription réussie' });
           });
         });
