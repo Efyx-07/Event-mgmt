@@ -97,6 +97,39 @@ async function registerUser(req, res) {
       }
     );
   });
-}
+};
 
-module.exports = { registerUser };
+// controller pour récuperer la liste des particpants par évènement
+async function getUsersByEvent(req, res) {
+  // récupère le slug de l'événement à partir de l'URL
+  const eventSlug = req.params.eventSlug;
+
+  // récupère l'ID de l'événement correspondant au slug depuis la base de données
+  myEventsConnection.query('SELECT id FROM evenements WHERE slug = ?', [eventSlug], (err, results) => {
+    if (err || results.length === 0) {
+      console.error('Erreur lors de la récupération de l\'ID de l\'événement: ', err);
+      res.status(500).json({ error: 'Événement non trouvé' });
+      return;
+    }
+
+    const eventId = results[0].id;
+
+    // récupère la liste des participants pour cet évènement
+    myEventsConnection.query(
+      'SELECT p.nom_entreprise, p.nom, p.prenom, p.email, p.telephone FROM participants_evenements pe ' +
+      'JOIN participants p ON pe.participant_id = p.id WHERE pe.evenement_id = ?',
+      [eventId],
+      (err, participants) => {
+        if  (err) {
+          console.error('Erreur lors de la récupération des participants: ', err);
+          res.status(500).json({ error: 'Erreur lors de la récupération des participants' });
+          return;
+        }
+
+        res.status(200).json({ participants });
+      }
+    );
+  });
+};
+
+module.exports = { registerUser, getUsersByEvent };
