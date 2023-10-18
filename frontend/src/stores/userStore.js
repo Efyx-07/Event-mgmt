@@ -8,10 +8,10 @@ export const useUserStore = defineStore('participants', {
     }),
 
     actions: {
-        async fetchParticipants(eventSlug) {
+        async loadParticipantsData(eventSlug) {
             try {
                 const participants = await api.fetchParticipantsData(eventSlug);
-                console.log('Participants data:', participants);
+                console.log('Participants data niveau store:', participants);
                 this.participants = participants;
                 console.log('Store participants:', this.participants);
             } catch (error) {

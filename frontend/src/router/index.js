@@ -8,7 +8,6 @@ import PublicationConfirmation from '@/views/PublicationConfirmation.vue';
 import ParticipantsList from '@/views/ParticipantsList.vue';
 
 
-
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [

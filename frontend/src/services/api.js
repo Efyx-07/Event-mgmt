@@ -28,7 +28,6 @@ export async function fetchParticipantsData(eventSlug) {
             throw new Error('Erreur lors de la récupération des données des participants');
         }
         const participantsData = await response.json();
-        console.log('Participants data:', participantsData);
         return participantsData;
 
     } catch (error) {

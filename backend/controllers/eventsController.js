@@ -6,9 +6,13 @@ const fs = require('fs');
 // fonction pour générer un slug (chaque évènement aura une URL constitué de son nom reformaté et d'un id unique)
 function generateUniqueSlug(title) {
   const lowercaseTitle = title.toLowerCase();
+  // remplace les espaces par des underscores
   const slug = lowercaseTitle.replace(/\s+/g, '_');
-  const uniqueId = uuidv4(); // génère un identifiant unique au format uuid
-  return `${slug}_${uniqueId}`;
+  // supprime les caractères non alphanumériques (y compris les points d'interrogation)
+  const cleanedSlug = slug.replace(/[^a-zA-Z0-9_]/g, '');
+  // génère un identifiant unique au format uuid
+  const uniqueId = uuidv4(); 
+  return `${cleanedSlug}_${uniqueId}`;
 };
 
 // controller pour création d'un évènement
