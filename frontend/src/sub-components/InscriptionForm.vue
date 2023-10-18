@@ -97,7 +97,7 @@
     // RegExp
     const companyNameRegex = /^[a-zA-Z0-9\s\.,'-]*$/;
     const nameRegex = /^[\p{L}\sçÇ'-]+$/u;
-    const phoneFrenchNumbersRegex = /^(?!0[013]).{10}$/;
+    const phoneFrenchNumbersRegex = /^(0[1-7])[\d]{8}$/;
     const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
     // fonctions de validation pour chaque champ
