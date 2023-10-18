@@ -62,47 +62,56 @@ async function createEvent(req, res) {
     
 };
 
-// controller pour suppression d'un évènement et fichier image associé
+// controller pour suppression d'un événement et fichier image associé
 async function removeEvent(req, res) {
-
-  // récupère l'ID de l'évènement à supprimer
-  const eventId = req.params.eventId; 
+  // récupère l'ID de l'événement à supprimer
+  const eventId = req.params.eventId;
 
   try {
-    // récupère l'information sur l'evenement pour obtenir le chemin de l'image à supprimer
-    const query = 'SELECT image_source FROM evenements WHERE id = ?'; 
-    myEventsConnection.query(query, [eventId], (err, results) => {
+    // supprime les participants associés à l'événement
+    const deleteParticipantsQuery = 'DELETE FROM participants_evenements WHERE evenement_id = ?';
+    myEventsConnection.query(deleteParticipantsQuery, [eventId], (err) => {
       if (err) {
-        console.error('Erreur lors de la récupération de l\image de l\'évènement: ', err);
-        res.status(500).json({ error: 'Erreur lors de la récupération de l\image de l\'évènement' });
-        return
+        console.error('Erreur lors de la suppression des participants associés :', err);
+        res.status(500).json({ error: 'Erreur lors de la suppression des participants associés' });
+        return;
       }
 
-      // supprime entrée de la base de données pour l'évènement
-      const deleteQuery = 'DELETE FROM evenements WHERE id = ?';
-      myEventsConnection.query(deleteQuery, [eventId], (err, deleteResults) => {
+      // récupère l'information sur l'événement pour obtenir le chemin de l'image à supprimer
+      const query = 'SELECT image_source FROM evenements WHERE id = ?';
+      myEventsConnection.query(query, [eventId], (err, results) => {
         if (err) {
-          console.error('Erreur lors de la suppression de l\'événement: ', err);
-          res.status(500).json({ error: 'Erreur lors de la suppression de l\'événement' });
-          return
+          console.error('Erreur lors de la récupération de l\'image de l\'événement :', err);
+          res.status(500).json({ error: 'Erreur lors de la récupération de l\'image de l\'événement' });
+          return;
         }
 
-        // supprime le fichier image associé
-        const imagePath = results[0].image_source;
-        const absolutePath = path.join(__dirname, imagePath);
-        fs.unlink(absolutePath, (err) => {
+        // supprime l'entrée de la base de données pour l'événement
+        const deleteQuery = 'DELETE FROM evenements WHERE id = ?';
+        myEventsConnection.query(deleteQuery, [eventId], (err) => {
           if (err) {
-            console.error('Erreur lors de la suppression de l\'image :', err);
+            console.error('Erreur lors de la suppression de l\'événement :', err);
+            res.status(500).json({ error: 'Erreur lors de la suppression de l\'événement' });
+            return;
           }
-        });
 
-        res.status(200).json({ message: 'Evénement supprimé avec succès' });
+          // supprime le fichier image associé
+          const imagePath = results[0].image_source;
+          const absolutePath = path.join(__dirname, imagePath);
+          fs.unlink(absolutePath, (err) => {
+            if (err) {
+              console.error('Erreur lors de la suppression de l\'image :', err);
+            }
+          });
+
+          res.status(200).json({ message: 'Événement, image et participants associés supprimés avec succès' });
+        });
       });
-    })
+    });
   } catch (error) {
     console.error('Erreur lors de la suppression de l\'événement :', err);
     res.status(500).json({ error: 'Erreur lors de la suppression de l\'événement' });
-  };
+  }
 };
 
 // controller pour recupération de tous les évènements
