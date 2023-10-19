@@ -8,6 +8,9 @@
       <header>
         <div class="header_content">
           <h1 class="page-title">Vos participants</h1>
+          <router-link to="/admin_homepage" class="backToEventsButton">
+            <p>Retour à vos évènements</p>
+          </router-link>
         </div>
       </header>
 
@@ -15,7 +18,7 @@
 
         <div class="eventTitle-banner">
           <p class="eventTitle"> {{eventTitle}} </p>
-          <p class="participantsCountMention"> nbre de participants: {{ participantsCount }}</p>
+          <p class="participantsCountMention"> nombre de participants: {{ participantsCount }}</p>
         </div>
 
         <div class="participantsList-array_container">
@@ -112,7 +115,7 @@ onMounted(async () => {
       .header_content{
         display: grid;
         align-items: center;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
         width: 100%;
         max-width: $contentMaxWidth;
         .page-title {
@@ -121,18 +124,42 @@ onMounted(async () => {
           font-size: 2rem;
           color: $darkColor;
         }
+        .backToEventsButton {
+          text-decoration: none;
+          background: transparent;
+          color: $darkColor;
+          border: 1px solid $darkColorBackOf;
+          display: flex;
+          justify-content: center;
+          text-align: center;
+          cursor: pointer;
+
+          &:hover {
+            color: $accentColorBackof2;
+            border-color: $accentColorBackof2;
+          }
+
+          p {
+            margin: 0;
+            font-size: .8rem;
+            font-weight: 700;
+            padding: .5rem;
+          }
+        }
       }
     }
     .participantsListPage_content_container {
       width: 100%;
-      padding: 3rem;
+      padding: 2rem 3rem;
       display: flex;
       flex-direction: column;
-      gap: 3rem;
+      gap: 2rem;
     }
     .eventTitle-banner {
+      width: 100%;
+      align-self: center;
       position: sticky;
-      top: 7.5rem;
+      top: 6.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
