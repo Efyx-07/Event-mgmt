@@ -104,7 +104,7 @@ onMounted(async () => {
 
     header {
       width: 100%;
-      background: $lightColor;
+      background: $ultraLightColor;
       box-shadow: $shadow;
       padding: 1rem 3rem;
       display: flex;
@@ -156,19 +156,20 @@ onMounted(async () => {
       gap: 2rem;
     }
     .eventTitle-banner {
-      width: 100%;
+      width: 95%;
       align-self: center;
       position: sticky;
       top: 6.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem;
+      padding: .5rem 1rem;
       background: $darkColorBackOf;
       color: $lightColor;
+      border-radiu: $containerRadius;
       .eventTitle {
         margin: 0;
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         font-weight: 700;
       }
       .participantsCountMention {
@@ -179,6 +180,7 @@ onMounted(async () => {
     .participantsList-array_container {
       background: $ultraLightColor;
       box-shadow: $shadow;
+      border-radiuS: $containerRadius;
       padding: 2rem;
       .participantsList-array {
         width: 100%;
