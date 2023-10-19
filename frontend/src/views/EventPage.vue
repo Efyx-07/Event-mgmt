@@ -26,7 +26,7 @@
 
     const eventSlug = route.params.eventSlug; // récupère le slug de la route
 
-    // compare pour faire correspondre les id
+    // compare pour faire correspondre les slugs
     const selectedEvent = allEvents.find((event) => {
         return event.slug === eventSlug;
     });
