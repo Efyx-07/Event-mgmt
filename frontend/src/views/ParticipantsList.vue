@@ -166,7 +166,6 @@ onMounted(async () => {
       padding: .5rem 1rem;
       background: $darkColorBackOf;
       color: $lightColor;
-      border-radiu: $containerRadius;
       .eventTitle {
         margin: 0;
         font-size: 1.2rem;
