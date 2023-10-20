@@ -43,7 +43,7 @@
             align-items: center;
 
             .newEventPageHeader {
-                background: $lightColor;
+                background: $ultraLightColor;
                 box-shadow: $shadow;
                 padding: 1rem 3rem;
                 width: 100%;

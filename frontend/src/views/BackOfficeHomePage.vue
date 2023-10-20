@@ -69,7 +69,7 @@
             position:relative;
             min-height: 100vh;
             .adminHomePageHeader {
-                background: $lightColor;
+                background: $ultraLightColor;
                 box-shadow: $shadow;
                 padding: 1rem 3rem;
                 display: flex;
