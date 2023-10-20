@@ -41,6 +41,7 @@
     @import '@/assets/sass/variables.scss';
 
     .adminsList {
+        width: 50%;
         display: flex;
         flex-direction: column;
         gap: 1rem;
@@ -51,7 +52,7 @@
             .adminNameAndButton_container {
                 display: flex;
                 align-items: center;
-                gap: 1rem;
+                justify-content: space-between;
 
                 p {
                     margin: 0;
@@ -81,7 +82,6 @@
                 }
             }
             .separator {
-                width: 100%;
                 height: 1px;
                 background: rgba($accentColorBackof3, .25);
             }
