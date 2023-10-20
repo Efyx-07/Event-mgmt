@@ -71,13 +71,13 @@
   // ouvre la fenetre 'RemoveEventModal' au clic de l'icone
   const openRemoveEventModal = (event) => {
       const eventDetail = { eventTitle: event.title, eventId: event.id };
-        // crée un nouvel evenement personnalisé 
-        const showRemoveEventModalEvent = new CustomEvent('show-removeEventModal', {
-          detail: eventDetail,
-        });
-        // déclenche l'événement 'show-removeEventModal' sur l'objet window
-        window.dispatchEvent(showRemoveEventModalEvent);
-    }
+      // crée un nouvel evenement personnalisé 
+      const showRemoveEventModalEvent = new CustomEvent('show-removeEventModal', {
+        detail: eventDetail,
+      });
+      // déclenche l'événement 'show-removeEventModal' sur l'objet window
+      window.dispatchEvent(showRemoveEventModalEvent);
+  }
 
 </script>
 

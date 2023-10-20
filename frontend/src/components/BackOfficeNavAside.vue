@@ -23,9 +23,10 @@
 
         <div class="footer-section">
             <p>Nom admin</p>
-            <Icon icon="mdi:power" class="icon"/>
+            <Icon icon="mdi:power" class="icon" @click="openLogoutModal()"/>
         </div>
 
+        <LogoutModal />
 
     </div>
     
@@ -34,8 +35,16 @@
 <script setup>
 
     import PlatformLogo from '@/sub-components/PlatformLogo.vue';
+    import LogoutModal from '@/sub-components/LogoutModal.vue';
     import { Icon } from '@iconify/vue';
 
+    // ouvre la fenetre 'LogoutModal' au clic de l'icone
+    const openLogoutModal = () => {
+        // crée un nouvel evenement personnalisé 
+        const showLogoutModalEvent = new CustomEvent('show-logoutModal');
+        window.dispatchEvent(showLogoutModalEvent);
+    };
+    
 </script>
 
 <style lang="scss" scoped>

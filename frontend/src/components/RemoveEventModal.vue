@@ -1,14 +1,17 @@
 <template>
     <div class="removeEventModal" :class="{ hiddenRemoveEventModal: !isRemoveEventModalVisible }">
         <div class="optionBox">
-            <div class="askText_container">
-                <p>Etes-vous sûr de vouloir supprimer l'evenement :</p>
-                <p class="eventTitle">"{{ eventToRemove.eventTitle }}"</p>
-            </div>
+
             <div class="alertMention">
                 <Icon icon="mdi:alert-outline" class="alertIcon"/>
                 <p>Cette opération est irréversible et supprimera l'évènement et toutes ses données</p>
             </div>
+
+            <div class="askText_container">
+                <p>Etes-vous sûr de vouloir supprimer l'evenement :</p>
+                <p class="eventTitle">"{{ eventToRemove.eventTitle }}"</p>
+            </div>
+            
             <div class="buttons_container">
                 <button class="cancelButton" @click="closeRemoveEventModal">
                     <p>Annuler</p>
@@ -17,6 +20,7 @@
                     <p>Confirmer</p>
                 </button>
             </div>
+
         </div>
     </div>  
 </template>
@@ -99,7 +103,8 @@
         align-items: center;
         transition: opacity .1s ease-in-out;
         .optionBox {
-            background: $darkColorBackOf;
+            background: $accentColorBackof4;
+            border-radius: $containerRadius;
             color: $lightColor;
             display: flex;
             flex-direction: column;
@@ -109,7 +114,7 @@
             .askText_container {
                 display: flex;
                 flex-direction: column;
-                gap: 1rem;
+                gap: .5rem;
 
                 p {
                     margin: 0;
@@ -118,7 +123,7 @@
                     font-weight: 400;
                 }
                 .eventTitle {
-                    font-weight: 700;
+                    font-weight: 600;
                 }
             }
             .alertMention {
@@ -149,7 +154,7 @@
                     padding: .5rem;
                     background: transparent;
                     color: $lightColor;
-                    border: solid 1px $lightColor;
+                    border: solid 1px $accentColorBackof3;
                     cursor: pointer;
 
                     p {
@@ -159,6 +164,7 @@
                     }
 
                     &:hover {
+                        border-color: $accentColorBackof2;
                         background: $accentColorBackof2;
                     }
                 }
