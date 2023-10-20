@@ -33,7 +33,7 @@
                                 Notification: Un administrateur actuellement connecté peut créer un nouvel administrateur ici. L’administrateur nouvellement créé pourra modifier son mot de passe lors de sa future connexion et bénèficiera de tous les mêmes droits que l’administrateur actuellement connecté.
                             </p>
                         </div>
-                        <AdminAddsAdmin />
+                        <AdminAddsAdmin class="adminAddsAdmin"/>
                     </div>
 
                     <div class="adminDelete-section adminOperations-section">
@@ -120,10 +120,10 @@
                         .line {
                             width: 100%;
                             height: 1px;
-                            background: rgba($accentColorBackof3, .25);
+                            background: $accentColorBackof3;
                         }
                     }
-                    .adminModifPassword {
+                    .adminModifPassword, .adminAddsAdmin {
                         align-self: center;
                         margin-top: 3rem;
                     }
