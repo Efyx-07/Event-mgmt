@@ -20,7 +20,7 @@
                             <p class="sectionTitle">Modifier votre mot de passe</p>
                             <div class="line"></div>
                         </div>
-                        <AdminModifPassword />
+                        <AdminModifPassword class="adminModifPassword"/>
                     </div>
 
                     <div class="adminCreation-section adminOperations-section">
@@ -105,6 +105,8 @@
                 gap: 3rem;
 
                 &-section {
+                    display: flex;
+                    flex-direction: column;
                     .sectionTitle_container {
                         display: flex;
                         align-items: baseline;
@@ -120,6 +122,10 @@
                             height: 1px;
                             background: rgba($accentColorBackof3, .25);
                         }
+                    }
+                    .adminModifPassword {
+                        align-self: center;
+                        margin-top: 3rem;
                     }
                 }
                 .adminCreation-section {
