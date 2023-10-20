@@ -41,7 +41,7 @@
                             <p class="sectionTitle">Supprimer un administrateur</p>
                             <div class="line"></div>
                         </div>
-                        <AdminDeletesAdmin />
+                        <AdminDeletesAdmin class="adminDeletesAdmin"/>
                     </div>
 
                 </div>  
@@ -123,7 +123,9 @@
                             background: $accentColorBackof3;
                         }
                     }
-                    .adminModifPassword, .adminAddsAdmin {
+                    .adminModifPassword, 
+                    .adminAddsAdmin,
+                    .adminDeletesAdmin {
                         align-self: center;
                         margin-top: 3rem;
                     }
@@ -140,7 +142,7 @@
                             font-weight: 400;
                         }
                     }
-                }
+                }        
             }
         }
 
