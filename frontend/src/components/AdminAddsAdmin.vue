@@ -1,4 +1,5 @@
 <template>
+
     <form class="adminAddsAdmin-form" @submit.prevent="validateAdminRegistration">
 
         <div class="inputs_wrapper">
@@ -55,16 +56,17 @@
 
         </div>
 
-        <button class="addNewAdmin-button" type="submit">
-            <p>Ajouter</p>
-        </button>
-
         <div class="registration-success_message" v-if="successMessage">
             <p>Nouvel administrateur inscrit avec succés !</p>
             <Icon icon="ooui:success" class="successIcon"/>
         </div>
 
+        <button class="addNewAdmin-button" type="submit" v-else>
+            <p>Ajouter</p>
+        </button>
+
     </form>
+
 </template>
 
 <script setup>
@@ -267,6 +269,10 @@
             align-items: center;
             justify-content: center;
             gap: 1rem;
+
+            p {
+                margin: 0;
+            }
             .successIcon {
                 color: $validColor;
             }
