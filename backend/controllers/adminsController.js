@@ -17,7 +17,7 @@ async function registerAdmin(req, res) {
     // effectue les mêmes validations côté serveur que côté client
     const nameTypeRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ '-]+$/;
     const emailRegex = /^[a-z0-9.-]+@[a-z0-9._-]{2,}\.[a-z]{2,8}$/;
-    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$/;
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=!*]).{8,}$/;
 
     if (
         !nameTypeRegex.test(firstName) ||
@@ -28,38 +28,53 @@ async function registerAdmin(req, res) {
         return res.status(400).json({ error: 'Champs invalides' });
     };
 
-    try {
+    // vérifie si l'administrateur existe déjà avant d'insérer les données
+    const checkAdminQuery = 'SELECT COUNT(*) as count FROM administrateurs WHERE email = ?';
+    myEventsConnection.query(checkAdminQuery, [email], async (err, results) => {
+        if (err) {
+            console.error('Erreur lors de la vérification de l\'administrateur existant : ', err);
+            res.status(500).json({ error: 'Erreur lors de la vérification de l\'administrateur existant' });
+            return;
+        }
+
+        if (results[0].count > 0) {
+            // si un administrateur avec cet email existe déjà, envoie une réponse d'erreur
+            res.status(409).json({ error: 'Cet administrateur existe déjà' });
+        } else {
+
+            try {
         
-        // utilise bcrypt pour hacher le mot de passe
-        const hashedPassword = await hashPassword(password);
-
-        // insère les données dans la table "administrateurs" avec le mot de passe haché
-        const insertQuery = 'INSERT INTO administrateurs (nom, prenom, email, hashed_password) VALUES (?, ?, ?, ?)';
-
-        const values = [
-            firstName,
-            lastName,
-            email,
-            hashedPassword
-        ];
-
-        myEventsConnection.query(insertQuery, values, (err, results) => {
-
-            if(err) {
+                // utilise bcrypt pour hacher le mot de passe
+                const hashedPassword = await hashPassword(password);
+        
+                // insère les données dans la table "administrateurs" avec le mot de passe haché
+                const insertQuery = 'INSERT INTO administrateurs (nom, prenom, email, hashed_password) VALUES (?, ?, ?, ?)';
+        
+                const values = [
+                    firstName,
+                    lastName,
+                    email,
+                    hashedPassword
+                ];
+        
+                myEventsConnection.query(insertQuery, values, (err, results) => {
+        
+                    if(err) {
+                        console.error('Erreur lors de l\'inscription du nouvel administrateur: ', err);
+                        res.status(500).json({ error: 'Erreur lors de l\'inscription du nouvel administrateur'});
+                        return
+                    }
+        
+                    // nouvel administrateur inscrit avec succès
+                    res.status(201).json({ message: 'Administrateur inscrit avec succès' });
+                });
+        
+            } catch (err) {
                 console.error('Erreur lors de l\'inscription du nouvel administrateur: ', err);
                 res.status(500).json({ error: 'Erreur lors de l\'inscription du nouvel administrateur'});
-                return
-            }
-
-            // nouvel administrateur inscrit avec succès
-            res.status(201).json({ message: 'Administrateur inscrit avec succès' });
-        });
-
-    } catch (err) {
-        console.error('Erreur lors de l\'inscription du nouvel administrateur: ', err);
-        res.status(500).json({ error: 'Erreur lors de l\'inscription du nouvel administrateur'});
-    };
-
+            };
+        }
+    });
 };
 
 async function loginAdmin(req, res) {

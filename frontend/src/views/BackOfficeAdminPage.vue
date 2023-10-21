@@ -139,7 +139,7 @@
                         p {
                             margin: 0;
                             font-size: .75rem;
-                            font-weight: 400;
+                            font-weight: 600;
                         }
                     }
                 }        

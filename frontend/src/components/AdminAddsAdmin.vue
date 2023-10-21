@@ -56,9 +56,23 @@
 
         </div>
 
-        <div class="registration-success_message" v-if="successMessage">
-            <p>Nouvel administrateur inscrit avec succés !</p>
-            <Icon icon="ooui:success" class="successIcon"/>
+        <div class="registration-result_message" v-if="successMessage">
+            <div class="text_container">
+                <Icon icon="ooui:success" class="successIcon"/>
+                <p>Nouvel administrateur inscrit avec succés !</p>
+            </div>
+            <button @click="resetForm" class="okBtn">
+                <p>OK</p>
+            </button>
+        </div>
+        <div class="registration-result_message" v-else-if="emailAlreadyExistsMessage">
+            <div class="text_container">
+                <Icon icon="mdi:alert-outline" class="alertIcon"/>
+                <p>Administrateur déjà inscrit avec cet email !</p>
+            </div>
+            <button @click="resetForm" class="okBtn">
+                <p>Compris</p>
+            </button>
         </div>
 
         <button class="addNewAdmin-button" type="submit" v-else>
@@ -75,8 +89,9 @@
     import { useGlobalDataStore } from '@/stores/GlobalDataStore';
     import { Icon } from '@iconify/vue';
 
-    // visibilité par défaut de successMessage
+    // visibilité par défaut des messages de succés ou d'erreur
     const successMessage = ref(false);
+    const emailAlreadyExistsMessage = ref(false);
 
     // propriétés du formulaire
     const firstName = ref('');
@@ -95,7 +110,7 @@
     // Regex
     const nameTypeRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ '-]+$/;
     const emailRegex = /^[a-z0-9.-]+@[a-z0-9._-]{2,}\.[a-z]{2,8}$/;
-    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$/;
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=!*]).{8,}$/;
 
     // fonctions de validation pour chaque champ
     const validateFirstName = () => {
@@ -163,6 +178,11 @@
                     const data = await response.json();
                     console.log(data.message);
                     successMessage.value = true;
+                
+                } else if (response.status === 409) {
+                    // administrateur existe déjà avec un même email
+                    console.error('Cet administrateur existe déjà.');
+                    emailAlreadyExistsMessage.value = true
 
                 } else {
                     // affiche un message d'erreur à l'utilisateur.
@@ -176,6 +196,22 @@
             // Affiche un message d'erreur à l'utilisateur si le formulaire n'est pas valide
             console.error('Veuillez corriger les erreurs dans le formulaire.');
         }
+    };
+
+    // fonction qui efface les messages succés ou alerte et réinitialise tous les champs
+    const resetForm = () => {
+        successMessage.value = false;
+        emailAlreadyExistsMessage.value = false;
+        firstName.value = '';
+        lastName.value = '';
+        email.value = '';
+        password.value = '';
+        confirmPassword.value = '';
+        firstNameValid.value = true;
+        lastNameValid.value = true;
+        emailValid.value = true;
+        passwordValid.value = true;
+        confirmPasswordValid.value = true;
     };
 
 </script>
@@ -213,6 +249,7 @@
                         outline: none;
 
                         &:focus {
+                            background: transparent;
                             border: solid 1px $accentColorBackof2;
                         }
                     }
@@ -242,7 +279,6 @@
                 }
             }
         }
-
         .addNewAdmin-button {
             display: flex;
             justify-content: center;
@@ -264,17 +300,47 @@
                 font-weight: 700;
             }
         }
-        .registration-success_message {
+        .registration-result_message {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 1rem;
+            justify-content: space-between;
+            .text_container {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
 
-            p {
+                p {
                 margin: 0;
+                }
+                .succesIcon, .alertIcon {
+                    font-size: 1.3rem;
+                }
+                .successIcon {
+                    color: $validColor;
+                }
+                .alertIcon {
+                    color: $errorColor;
+                }
             }
-            .successIcon {
-                color: $validColor;
+            .okBtn {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 6rem;
+                height: 1.5rem;
+                border: none;
+                background: $darkColorBackOf;
+                color: $lightColor;
+                justify-self: end;
+                cursor: pointer;
+
+                &:hover {
+                    background: $accentColorBackof2;
+                }
+
+                p {
+                    margin: 0;
+                }
             }
         }
     }
