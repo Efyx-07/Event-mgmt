@@ -2,6 +2,7 @@ const express = require('express'); // appelle l'instance express
 const cors = require('cors'); // importe cors
 const eventsRouter = require('./routes/events');
 const usersRouter = require('./routes/users');
+const adminsRouter = require('./routes/admins')
 const path = require('path');
 
 
@@ -13,6 +14,7 @@ app.use(cors()); // utilise cors en tant que middleware, permet au server Expres
 app.use(express.json()); // middleware - analyse le corps des requetes JSON
 app.use('/events', eventsRouter); // utilise la route events
 app.use('/users', usersRouter); // utilise la route users
+app.use('/admins', adminsRouter); // utilise la route admins
 
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
