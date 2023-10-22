@@ -8,7 +8,7 @@
                 <button class="cancelBtn" @click="closeLogoutConfirmationModal">
                     <p>Annuler</p>
                 </button>
-                <button class="cancelBtn">
+                <button class="confirmBtn" @click="handleSignOut">
                     <p>Déconnexion</p>
                 </button>
             </div>
@@ -21,6 +21,8 @@
 <script setup>
 
     import { ref, onMounted } from 'vue';
+    import { useAdminStore } from '@/stores/AdminStore';
+    import { useRouter } from 'vue-router'
 
     // statut par défaut de la visibilité de la fenetre
     const isLogoutConfirmationModalVisible  = ref(false);
@@ -36,6 +38,25 @@
             isLogoutConfirmationModalVisible.value = true;
         });
     });
+
+    // gère le bouton de déconnexion et renvoie sur la page de connexion
+    const adminStore = useAdminStore();
+    const router = useRouter();
+
+    const handleSignOut = () => {
+
+        // supprime le token du localStorage
+        localStorage.removeItem('token');
+        // supprime les données administrateur du localStorage
+        localStorage.removeItem('adminData');
+        // réinitialise le store
+        adminStore.clearToken();
+        // passe le statut de l'administrateur sur 'déconnecté'
+        adminStore.isConnected = false;
+
+        // redirige vers la page de connexion
+        router.push('/admin');
+    }
 
 </script>
 
