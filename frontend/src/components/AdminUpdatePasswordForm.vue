@@ -1,6 +1,6 @@
 <template>
 
-    <form class="adminModifPassword-form">
+    <form class="adminUpdatePasswordForm">
 
         <div class="inputs_wrapper">
 
@@ -26,7 +26,7 @@
 
         </div>
     
-        <button class="adminModifyPassword-button" type="submit">
+        <button class="adminUpdatePasswordForm-button" type="submit">
             <p>Modifier</p>
         </button>
 
@@ -41,7 +41,7 @@
 <style lang="scss" scoped>
 
     @import '@/assets/sass/variables.scss';
-    .adminModifPassword-form {
+    .adminUpdatePasswordForm {
         width: 33,33%;
         display: flex;
         flex-direction: column;
@@ -81,7 +81,7 @@
                 }
             }
         }
-        .adminModifyPassword-button {
+        .adminUpdatePasswordForm-button {
             display: flex;
             justify-content: center;
             align-items: center;

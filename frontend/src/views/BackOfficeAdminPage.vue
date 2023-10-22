@@ -15,15 +15,15 @@
 
                 <div class="adminOperations">
 
-                    <div class="passwordModification-section adminOperations-section">
+                    <div class="adminPasswordUpdating-section adminOperations-section">
                         <div class="sectionTitle_container">
                             <p class="sectionTitle">Modifier votre mot de passe</p>
                             <div class="line"></div>
                         </div>
-                        <AdminModifPassword class="adminModifPassword"/>
+                        <AdminUpdatePasswordForm class="adminUpdatePasswordForm"/>
                     </div>
 
-                    <div class="adminCreation-section adminOperations-section">
+                    <div class="adminRegistration-section adminOperations-section">
                         <div class="sectionTitle_container">
                             <p class="sectionTitle">Ajouter un nouvel administrateur</p>
                             <div class="line"></div>
@@ -36,12 +36,12 @@
                         <AdminRegisterForm class="adminRegisterForm"/>
                     </div>
 
-                    <div class="adminDelete-section adminOperations-section">
+                    <div class="adminDeleting-section adminOperations-section">
                         <div class="sectionTitle_container">
                             <p class="sectionTitle">Supprimer un administrateur</p>
                             <div class="line"></div>
                         </div>
-                        <AdminDeletesAdmin class="adminDeletesAdmin"/>
+                        <AdminsToDelete class="adminsToDelete"/>
                     </div>
 
                 </div>  
@@ -55,9 +55,9 @@
 <script setup>
 
     import BackOfficeNavAside from '@/components/BackOfficeNavAside.vue';
-    import AdminModifPassword from '@/components/AdminModifPassword.vue';
+    import AdminUpdatePasswordForm from '@/components/AdminUpdatePasswordForm.vue';
     import AdminRegisterForm from '@/components/AdminRegisterForm.vue';
-    import AdminDeletesAdmin from '@/components/AdminDeletesAdmin.vue';
+    import AdminsToDelete from '@/components/AdminsToDelete.vue';
 
 </script>
 
@@ -123,14 +123,14 @@
                             background: $accentColorBackof3;
                         }
                     }
-                    .adminModifPassword, 
+                    .adminUpdatePasswordForm, 
                     .adminRegisterForm,
-                    .adminDeletesAdmin {
+                    .adminsToDelete {
                         align-self: center;
                         margin-top: 3rem;
                     }
                 }
-                .adminCreation-section {
+                .adminRegistration-section {
                     .aboutNotification {
                         border: solid 1px rgba($accentColorBackof3, .25);
                         padding: 1rem;
