@@ -1,6 +1,6 @@
 <template>
 
-    <form class="adminAddsAdmin-form" @submit.prevent="validateAdminRegistration">
+    <form class="adminRegisterForm" @submit.prevent="validateAdminRegistration">
 
         <div class="inputs_wrapper">
 
@@ -68,7 +68,7 @@
         <div class="registration-result_message" v-else-if="emailAlreadyExistsMessage">
             <div class="text_container">
                 <Icon icon="mdi:alert-outline" class="alertIcon"/>
-                <p>Administrateur déjà inscrit avec cet email !</p>
+                <p>Un administrateur existe déjà avec cet email !</p>
             </div>
             <button @click="resetForm" class="okBtn">
                 <p>Compris</p>
@@ -219,7 +219,7 @@
 <style lang="scss" scoped>
 
     @import '@/assets/sass/variables.scss';
-    .adminAddsAdmin-form {
+    .adminRegisterForm {
         width: 33,33%;
         display: flex;
         flex-direction: column;

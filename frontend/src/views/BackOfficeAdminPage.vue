@@ -33,7 +33,7 @@
                                 Notification: Un administrateur actuellement connecté peut créer un nouvel administrateur ici. L’administrateur nouvellement créé pourra modifier son mot de passe lors de sa future connexion et bénèficiera de tous les mêmes droits que l’administrateur actuellement connecté.
                             </p>
                         </div>
-                        <AdminAddsAdmin class="adminAddsAdmin"/>
+                        <AdminRegisterForm class="adminRegisterForm"/>
                     </div>
 
                     <div class="adminDelete-section adminOperations-section">
@@ -56,7 +56,7 @@
 
     import BackOfficeNavAside from '@/components/BackOfficeNavAside.vue';
     import AdminModifPassword from '@/components/AdminModifPassword.vue';
-    import AdminAddsAdmin from '@/components/AdminAddsAdmin.vue';
+    import AdminRegisterForm from '@/components/AdminRegisterForm.vue';
     import AdminDeletesAdmin from '@/components/AdminDeletesAdmin.vue';
 
 </script>
@@ -124,7 +124,7 @@
                         }
                     }
                     .adminModifPassword, 
-                    .adminAddsAdmin,
+                    .adminRegisterForm,
                     .adminDeletesAdmin {
                         align-self: center;
                         margin-top: 3rem;
