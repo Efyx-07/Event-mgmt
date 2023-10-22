@@ -1,17 +1,17 @@
 <template>
-    <button class="participateButton" @click="toggleInscriptionModalVisibility" >
+    <button class="participateButton" @click="toggleParticipantsInscriptionModalVisibility" >
         <p>Je participe</p>
     </button>
 </template>
 
 <script setup>
 
-    // ouvre la fenetre 'InscriptionModal' au clic de l'icone
-    const toggleInscriptionModalVisibility = () => {
+    // ouvre la fenetre 'ParticipantsInscriptionModal' au clic de l'icone
+    const toggleParticipantsInscriptionModalVisibility = () => {
         // crée un nouvel evenement personnalisé 
-        const showInscriptionModalEvent = new Event('show-inscriptionModal');
-        // déclenche l'événement 'show-inscriptionModal' sur l'objet window
-        window.dispatchEvent(showInscriptionModalEvent);
+        const showParticipantsInscriptionModalEvent = new Event('show-participantsInscriptionModal');
+        // déclenche l'événement 'show-participantsInscriptionModal' sur l'objet window
+        window.dispatchEvent(showParticipantsInscriptionModalEvent);
         const showOverlayEvent = new Event('show-overlay');
         // déclenche l'événement 'show-overlay' sur l'objet window
         window.dispatchEvent(showOverlayEvent);

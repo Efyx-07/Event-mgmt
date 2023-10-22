@@ -1,14 +1,15 @@
 <template>
-    <div class="inscriptionModal_container" :class="{ hiddenInscriptionModal: !isInscriptionModalVisible }">
-        <div class="inscriptionModal">
+
+    <div class="participantsInscriptionModal_container" :class="{ hiddenParticipantsInscriptionModal: !isParticipantsInscriptionModalVisible }">
+        <div class="participantsInscriptionModal">
             <Icon 
                 icon="ei:close" 
                 width="30" 
                 class="closeIcon" 
-                @click="closeinscriptionModalAndOverlay"
+                @click="closeParticipantsInscriptionModalAndOverlay"
             />
             <h1 class="eventTitle">{{ selectedEvent.title }}</h1>
-            <InscriptionForm />
+            <ParticipantsInscriptionForm />
             <footer>
                 <div class="legalLinks_container">
                     <p>Conditions d'utilisation</p>
@@ -19,41 +20,43 @@
     </div>
 
     <Overlay 
-        :showOverlay="isInscriptionModalVisible" 
+        :showOverlay="isParticipantsInscriptionModalVisible" 
         class="pageOverlay" 
-        v-show="isInscriptionModalVisible" 
+        v-show="isParticipantsInscriptionModalVisible" 
     >
     </Overlay>
+
 </template>
+
 <script setup>
 
     import { Icon } from '@iconify/vue';
     import Overlay from '@/components/Overlay.vue';
-    import InscriptionForm from '@/sub-components/InscriptionForm.vue';
+    import ParticipantsInscriptionForm from '@/sub-components/ParticipantsInscriptionForm.vue';
     import { ref, onMounted } from 'vue';
     
 
     // statut par défaut de la visibilité de la fenetre
-    const isInscriptionModalVisible = ref(false);
+    const isParticipantsInscriptionModalVisible = ref(false);
 
     // permet la fermeture de la fenetre au click sur l'icone
-    const closeInscriptionModal = () => {
-        isInscriptionModalVisible.value = false;
+    const closeParticipantsInscriptionModal = () => {
+        isParticipantsInscriptionModalVisible.value = false;
     };
 
     // déclenche evenement personnalisé 'hide-overlay' et ferme fenetre userLogin
-    const closeinscriptionModalAndOverlay = () => {
+    const closeParticipantsInscriptionModalAndOverlay = () => {
         window.dispatchEvent(new Event('hide-overlay'));
-        closeInscriptionModal();
+        closeParticipantsInscriptionModal();
     }
 
     // ecoute l'événement personnalisé (créé sur 'ParticipateButton') pour réafficher la fenetre
     onMounted(() => {
-        window.addEventListener('show-inscriptionModal', () => {
-            isInscriptionModalVisible.value = true;
+        window.addEventListener('show-participantsInscriptionModal', () => {
+            isParticipantsInscriptionModalVisible.value = true;
         });
         window.addEventListener('hide-overlay', () => {
-            isInscriptionModalVisible.value = true; 
+            isParticipantsInscriptionModalVisible.value = true; 
         });
     });
 
@@ -66,17 +69,17 @@
 
     @import '@/assets/sass/variables.scss';
 
-    .hiddenInscriptionModal { 
+    .hiddenParticipantsInscriptionModal { 
         transform: translateX(100%);
     }
-    .inscriptionModal_container {
+    .participantsInscriptionModal_container {
         position: fixed;
         z-index: 999;
         top: 0;
         right: 0;
         box-shadow: -3px 0px 5px #33333341;
         transition: transform .3s ease-in-out;
-        .inscriptionModal {
+        .participantsInscriptionModal {
             position: relative;
             width: 100vw;
             height: 100vh;

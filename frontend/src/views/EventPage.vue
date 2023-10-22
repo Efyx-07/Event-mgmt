@@ -1,20 +1,20 @@
 <template>
 
     <div class="eventPage">
-        <Header />
+        <EventPageHeader />
         <div class="eventPage_content">
             <EventCard :selectedEvent="selectedEvent"/>
         </div>
     </div>
-    <InscriptionModal :selectedEvent="selectedEvent"/>
+    <ParticipantsInscriptionModal :selectedEvent="selectedEvent"/>
     
 </template>
 
 <script setup>
 
-    import Header from '@/components/Header.vue';
+    import EventPageHeader from '@/components/EventPageHeader.vue';
     import EventCard from '@/components/EventCard.vue';
-    import InscriptionModal from '@/components/InscriptionModal.vue';
+    import ParticipantsInscriptionModal from '@/components/ParticipantsInscriptionModal.vue';
 
     import { useEventStore } from '@/stores/EventStore';
     import { useRoute } from 'vue-router';
