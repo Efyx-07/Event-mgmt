@@ -23,8 +23,10 @@
     import { ref } from 'vue';
     import { useGlobalDataStore } from '@/stores/GlobalDataStore';
     import { useRouter } from 'vue-router';
+    import { useAdminStore } from '@/stores/AdminStore';
 
     const router = useRouter();
+    const adminStore = useAdminStore();
 
     // propriétés du formulaire
     const email = ref('');
@@ -56,11 +58,19 @@
 
                 // connexion réussie, redirection vers page d'accueil du back-office
                 router.push('/admin_homepage');
-                console.log('connexion reussie')
 
-                // emplacement pour récuperer les données en provenance du futur store adminStore
+                // récupère les données de l'administrateur depuis la réponse du serveur et affiche le message de connexion réussie
+                const data = await response.json();
+                console.log(data.message);
+                adminStore.setAdminData(data.admin);
 
                 // si connexion réussie, obtient le token du serveur et le stocke dans le localStorage 
+                const token = data.token;
+                localStorage.setItem('token', token);
+
+                // stocke également le token dans AdminStore
+                adminStore.setToken(token);
+                adminStore.isConnected = true; // passe le statut de l'administrateur sur 'connecté'
                 
             } else {
 

@@ -116,8 +116,8 @@ async function loginAdmin(req, res) {
             token: token, 
             admin: {
                 id: rows[0].id,
-                firstName: rows[0].first_name,
-                lastName: rows[0].last_name,
+                firstName: rows[0].nom,
+                lastName: rows[0].prenom,
                 email: rows[0].email,
             }
         });
