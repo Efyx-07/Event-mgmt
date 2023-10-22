@@ -11,7 +11,6 @@
                 <input type="password" name="adminPassword" id="adminLogin_password" v-model="password">
             </div>
         </div>
-        <div class="error-message" v-if="error">Email or password are incorrect</div>
         <button class="adminLogin-button" type="submit">
             <p>Se connecter</p>
         </button>
@@ -20,6 +19,60 @@
 </template>
 
 <script setup>
+
+    import { ref } from 'vue';
+    import { useGlobalDataStore } from '@/stores/GlobalDataStore';
+    import { useRouter } from 'vue-router';
+
+    const router = useRouter();
+
+    // propriétés du formulaire
+    const email = ref('');
+    const password = ref('');
+
+    // valide le formulaire
+    const handleAdminLogin = async () => {
+
+        // extrait les valeurs des objets ref
+        const emailValue = email.value;
+        const passwordValue = password.value;
+
+        try {
+
+            const { hostName } = useGlobalDataStore();
+
+            const response = await fetch(`${hostName}/admins/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: emailValue,
+                    password: passwordValue,
+                }),
+            });
+
+            if (response.ok) {
+
+                // connexion réussie, redirection vers page d'accueil du back-office
+                router.push('/admin_homepage');
+                console.log('connexion reussie')
+
+                // emplacement pour récuperer les données en provenance du futur store adminStore
+
+                // si connexion réussie, obtient le token du serveur et le stocke dans le localStorage 
+                
+            } else {
+
+                // affiche une erreur et empêche la redirection
+                console.error('Erreur lors de la connexion: ', response.statusText);
+            }
+
+        } catch (error) {
+            // affiche une erreur en cas d'echec de la requete
+            console.error('Erreur lors de la connexion: ', error);
+        }
+    };
 
 </script>
 

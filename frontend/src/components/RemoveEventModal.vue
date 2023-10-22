@@ -103,7 +103,7 @@
         align-items: center;
         transition: opacity .1s ease-in-out;
         .optionBox {
-            background: $accentColorBackof4;
+            background: $darkColorBackOf;
             border-radius: $containerRadius;
             color: $lightColor;
             display: flex;
