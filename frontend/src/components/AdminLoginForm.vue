@@ -3,12 +3,12 @@
     <form class="adminLogin-form" @submit.prevent="handleAdminLogin">
         <div class="inputs_wrapper">
             <div class="input_container">
-                <label for="identifiant">Identifiant</label>
-                <input type="text" name="adminId" id="adminLogin_id" v-model="adminId">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="adminLogin_email" v-model="email">
             </div>
             <div class="input_container">
                 <label for="mot_de_passe">Mot de passe</label>
-                <input type="password" name="adminPassword" id="adminLogin_password" v-model="adminPassword">
+                <input type="password" name="adminPassword" id="adminLogin_password" v-model="password">
             </div>
         </div>
         <div class="error-message" v-if="error">Email or password are incorrect</div>

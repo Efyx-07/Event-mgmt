@@ -1,7 +1,7 @@
 const { myEventsConnection } = require('../db'); // importe la connexion à la base de donnée
 const bcrypt = require('bcrypt'); // importe bcrypt 
-//const util = require('util'); // importe util
-//const authenticate = require('../auth/authenticate');
+const util = require('util'); // importe util
+const authenticate = require('../auth/authenticate');
 
 // controller pour inscrire un nouvel administrateur
 async function registerAdmin(req, res) {
@@ -79,6 +79,53 @@ async function registerAdmin(req, res) {
 
 async function loginAdmin(req, res) {
 
+    // récupère les données du formulaire de connexion depuis req.body
+    const { email, password } = req.body;
+
+    try {
+
+        // effectue une requête dans la table 'administrateurs' pour vérifier l'email
+        const selectQuery = 'SELECT * FROM administrateurs WHERE email = ?';
+
+        // convertit la fonction query de mysql2 en promise avec util
+        const query = util.promisify(myEventsConnection.query).bind(myEventsConnection);
+
+        const rows = await query(selectQuery, [email]);
+
+        // si aucun administrateur n'est trouvé avec l'email, envoie un message d'erreur
+        if (rows.length === 0) {
+            res.status(401).json({ error: 'Identifiant invalide' });
+            return;
+        }
+
+        // compare le mot de passe renseigné avec le mot de passe haché
+        const hashedPassword = rows[0].hashed_password;
+        const isPasswordMatch = await bcrypt.compare(password, hashedPassword);
+
+        // si aucune correspondance entre les mots de passe, envoie un message d'erreur
+        if (!isPasswordMatch) {
+            res.status(401).json({ error: 'Identifiant invalide' });
+            return;
+        }
+
+        // génère un token et le renvoie à l'utilisateur
+        const token = authenticate.generateJwtToken(rows[0].id);
+        res.status(200).json({
+            success: true,
+            message: 'Connexion réussie',
+            token: token, 
+            admin: {
+                id: rows[0].id,
+                firstName: rows[0].first_name,
+                lastName: rows[0].last_name,
+                email: rows[0].email,
+            }
+        });
+
+    } catch (err) {
+        console.error('Erreur lors de la connexion :', err);
+        res.status(500).json({ error: 'Erreur lors de la connexion' });
+    }
 };
 
 async function updateAdmin(req, res) {
