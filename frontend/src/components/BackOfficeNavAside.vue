@@ -22,7 +22,7 @@
         </router-link>
 
         <div class="footer-section">
-            <p>Nom admin</p>
+            <p v-if="adminData">{{ adminData.firstName }} {{ adminData.lastName }}</p>
             <Icon icon="mdi:power" class="icon" @click="openLogoutConfirmationModal()"/>
         </div>
 
@@ -37,6 +37,8 @@
     import PlatformLogo from '@/sub-components/PlatformLogo.vue';
     import LogoutConfirmationModal from '@/sub-components/LogoutConfirmationModal.vue';
     import { Icon } from '@iconify/vue';
+    import { useAdminStore } from '@/stores/AdminStore';
+    import { ref, onMounted, watch } from 'vue';
 
     // ouvre la fenetre 'LogoutModal' au clic de l'icone
     const openLogoutConfirmationModal = () => {
@@ -44,6 +46,21 @@
         const showLogoutConfirmationModalEvent = new CustomEvent('show-logoutConfirmationModal');
         window.dispatchEvent(showLogoutConfirmationModalEvent);
     };
+
+    const adminStore = useAdminStore();
+
+    // ref par défaut des données de l'administrateur connecté
+    const adminData = ref(null);
+
+    // charge adminData depuis le localStorage avant le rendu du composant et utilise méthode de AdminStore
+    onMounted(async () => {
+        await adminStore.loadAdminDataFromLocalStorage();
+    });
+
+    // surveille les changements de adminData dans le store et met à jour adminData
+    watch(() => adminStore.adminData, (newAdminData) => {
+        adminData.value = newAdminData;
+    });
     
 </script>
 

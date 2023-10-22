@@ -5,21 +5,21 @@
         <div class="inputs_wrapper">
 
             <div class="field_container">
-                <label for="nouvel_admin_nom">Nom du nouvel administrateur</label>
+                <label for="nouvel_admin_prenom">Prénom du nouvel administrateur</label>
                 <div class="input_container">
                     <input type="text" name="firstName" required id="newAdminFirstName" v-model="firstName" @input="validateFirstName">
                     <Icon v-if="firstNameValid && firstName !== ''" icon="ooui:success" class="validateIcon"/>
                 </div>
-                <p v-if="!firstNameValid && firstName !== ''" class="error-message">Merci d'entrer un nom valide</p>
+                <p v-if="!firstNameValid && firstName !== ''" class="error-message">Merci d'entrer un prénom valide</p>
             </div>
 
             <div class="field_container">
-                <label for="nouvel_admin_prenom">Prénom du nouvel administrateur</label>
+                <label for="nouvel_admin_nom">Nom du nouvel administrateur</label>
                 <div class="input_container">
                     <input type="text" name="lastName" required id="newAdminLastName" v-model="lastName" @input="validateLastName">
                     <Icon v-if="lastNameValid && lastName !== ''" icon="ooui:success" class="validateIcon"/>
                 </div>
-                <p v-if="!lastNameValid && lastName !== ''" class="error-message">Merci d'entrer un prénom valide</p>
+                <p v-if="!lastNameValid && lastName !== ''" class="error-message">Merci d'entrer un nom valide</p>
             </div>
 
             <div class="field_container">
