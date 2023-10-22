@@ -25,7 +25,7 @@
         </div>
 
         <div class="icon_container">
-          <Icon icon="mdi:trash" class="icon" @click="openRemoveEventModal(event)"/>
+          <Icon icon="mdi:trash" class="icon" @click="openRemoveEventConfirmationModal(event)"/>
         </div>
 
       </div>
@@ -68,15 +68,15 @@
     });
   };
 
-  // ouvre la fenetre 'RemoveEventModal' au clic de l'icone
-  const openRemoveEventModal = (event) => {
+  // ouvre la fenetre 'RemoveEventConfirmationModal' au clic de l'icone
+  const openRemoveEventConfirmationModal = (event) => {
       const eventDetail = { eventTitle: event.title, eventId: event.id };
       // crée un nouvel evenement personnalisé 
-      const showRemoveEventModalEvent = new CustomEvent('show-removeEventModal', {
+      const showRemoveEventConfirmationModalEvent = new CustomEvent('show-removeEventConfirmationModal', {
         detail: eventDetail,
       });
-      // déclenche l'événement 'show-removeEventModal' sur l'objet window
-      window.dispatchEvent(showRemoveEventModalEvent);
+      // déclenche l'événement 'show-removeEventConfirmationModal' sur l'objet window
+      window.dispatchEvent(showRemoveEventConfirmationModalEvent);
   }
 
 </script>

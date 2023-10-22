@@ -1,11 +1,11 @@
 <template>
 
-    <div class="logoutModal_container" :class="{ hiddenLogoutModal: !isLogoutModalVisible }">
+    <div class="logoutConfirmationModal_container" :class="{ hiddenLogoutConfirmationModal: !isLogoutConfirmationModalVisible }">
 
-        <div class="logoutModal">
+        <div class="logoutConfirmationModal">
             <p>Souhaitez-vous vous déconnecter ?</p>
             <div class="buttons_container">
-                <button class="cancelBtn" @click="closeLogoutModal">
+                <button class="cancelBtn" @click="closeLogoutConfirmationModal">
                     <p>Annuler</p>
                 </button>
                 <button class="cancelBtn">
@@ -23,17 +23,17 @@
     import { ref, onMounted } from 'vue';
 
     // statut par défaut de la visibilité de la fenetre
-    const isLogoutModalVisible  = ref(false);
+    const isLogoutConfirmationModalVisible  = ref(false);
 
     // permet la fermeture de la fenetre au click du bouton Annuler
-    const closeLogoutModal = () => {
-        isLogoutModalVisible.value = false;
+    const closeLogoutConfirmationModal = () => {
+        isLogoutConfirmationModalVisible.value = false;
     };
 
     // ecoute l'événement personnalisé (créé sur 'BackOfficeNavAside') pour réafficher la fenetre
     onMounted(() => {
-        window.addEventListener('show-logoutModal', () => {
-            isLogoutModalVisible.value = true;
+        window.addEventListener('show-logoutConfirmationModal', () => {
+            isLogoutConfirmationModalVisible.value = true;
         });
     });
 
@@ -42,11 +42,11 @@
 <style lang="scss" scoped>
 
     @import '@/assets/sass/variables.scss';
-    .hiddenLogoutModal {
+    .hiddenLogoutConfirmationModal {
         visibility: hidden;
         opacity: 0;
     }
-    .logoutModal_container {
+    .logoutConfirmationModal_container {
         background: rgba($darkColor, .25);
         backdrop-filter: blur(2.5px);
         position: fixed;
@@ -54,7 +54,7 @@
         width: 25vw;
         height: 100%;
         transition: opacity .1s ease-in-out;
-        .logoutModal {
+        .logoutConfirmationModal {
             background: $accentColorBackof4;
             border: solid 1px $accentColorBackof3;
             border-radius: $containerRadius;

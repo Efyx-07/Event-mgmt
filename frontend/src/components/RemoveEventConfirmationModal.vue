@@ -1,5 +1,5 @@
 <template>
-    <div class="removeEventModal" :class="{ hiddenRemoveEventModal: !isRemoveEventModalVisible }">
+    <div class="removeEventConfirmationModal" :class="{ hiddenRemoveEventConfirmationModal: !isRemoveEventConfirmationModalVisible }">
         <div class="optionBox">
 
             <div class="alertMention">
@@ -13,7 +13,7 @@
             </div>
             
             <div class="buttons_container">
-                <button class="cancelButton" @click="closeRemoveEventModal">
+                <button class="cancelButton" @click="closeRemoveEventConfirmationModal">
                     <p>Annuler</p>
                 </button>
                 <button class="confirmButton" @click="confirmRemoveEvent">
@@ -31,7 +31,7 @@
     import { useGlobalDataStore } from '@/stores/GlobalDataStore';
 
     // statut par défaut de la visibilité de la fenetre
-    const isRemoveEventModalVisible  = ref(false);
+    const isRemoveEventConfirmationModalVisible  = ref(false);
 
     // données de l'évènement à supprimer
     const eventToRemove = ref({
@@ -40,14 +40,14 @@
     });
 
     // permet la fermeture de la fenetre au click du bouton Annuler
-    const closeRemoveEventModal = () => {
-        isRemoveEventModalVisible.value = false;
+    const closeRemoveEventConfirmationModal = () => {
+        isRemoveEventConfirmationModalVisible.value = false;
     };
 
     // ecoute l'événement personnalisé (créé sur 'BackOfficeEventCard') pour réafficher la fenetre
     onMounted(() => {
-        window.addEventListener('show-removeEventModal', (event) => {
-            isRemoveEventModalVisible.value = true;
+        window.addEventListener('show-removeEventConfirmationModal', (event) => {
+            isRemoveEventConfirmationModalVisible.value = true;
 
             // récupère les données de l'évènement à supprimer
             eventToRemove.value = event.detail;
@@ -75,7 +75,7 @@
             }
 
             // ferme la fenêtre modale de suppression
-            isRemoveEventModalVisible.value = false;
+            isRemoveEventConfirmationModalVisible.value = false;
         } catch (error) {
             console.error('Erreur lors de la suppression de l\'événement :', error);
         }
@@ -86,11 +86,11 @@
 <style lang="scss" scoped>
 
     @import '@/assets/sass/variables.scss';
-    .hiddenRemoveEventModal { 
+    .hiddenRemoveEventConfirmationModal { 
         visibility: hidden;
         opacity: 0;
     }
-    .removeEventModal {
+    .removeEventConfirmationModal {
         background: rgba($darkColor, .25);
         backdrop-filter: blur(2.5px);
         height: 100vh;

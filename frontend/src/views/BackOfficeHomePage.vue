@@ -33,7 +33,7 @@
                 <BackOfficeEventCard />
             </div>
         </div>
-        <RemoveEventModal />
+        <RemoveEventConfirmationModal />
 
     </div>
 
@@ -45,7 +45,7 @@
     
     import BackOfficeNavAside from '@/components/BackOfficeNavAside.vue';
     import BackOfficeEventCard from '@/components/BackOfficeEventCard.vue'; 
-    import RemoveEventModal from '@/components/RemoveEventModal.vue';
+    import RemoveEventConfirmationModal from '@/components/RemoveEventConfirmationModal.vue';
     import { Icon } from '@iconify/vue';
     import { useEventStore } from '@/stores/EventStore';
     import { computed } from 'vue';
