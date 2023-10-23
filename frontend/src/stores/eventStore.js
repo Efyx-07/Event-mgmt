@@ -8,6 +8,8 @@ export const useEventStore = defineStore('events', {
     }),
 
     actions: {
+
+        // récupère les données de tous les évènements à partir de api.js
         async loadEventsData() {
             try {
                 const eventsData = await api.fetchEventsData();

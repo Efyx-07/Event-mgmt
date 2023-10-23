@@ -35,3 +35,21 @@ export async function fetchParticipantsData(eventSlug) {
         throw error;
     }
 }; 
+
+// récupère du backend, l'API des datas des administrateurs
+export async function fetchAdminsData() {
+
+    try {
+
+        const response = await fetch (`${hostName}/admins`);
+        if (!response.ok) {
+            throw new Error ('Erreur lors de la récupération des données des administrateurs');
+        }
+        const adminsData = await response.json();
+        return adminsData;
+
+    } catch (error) {
+        console.error('Erreur lors de la récupération des données des administrateurs: ', error);
+        throw error
+    }
+};

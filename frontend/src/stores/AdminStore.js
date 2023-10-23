@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { reactive } from 'vue';
+import * as api from '@/services/api'; // importe les fonctions de l'api du fichier api.js
 
 export const useAdminStore = defineStore('admins', {
 
@@ -7,6 +8,7 @@ export const useAdminStore = defineStore('admins', {
         token: null, // initialise le token à null par défaut
         isConnected: false, // statut initial de l'administrateur à 'non-connecté'
         adminData: reactive({}), // déclare adminData comme réactif
+        admins: [], // initialise admins comme un tableau vide
     }),
 
     actions: {
@@ -39,8 +41,28 @@ export const useAdminStore = defineStore('admins', {
             const localStorageAdminData = localStorage.getItem('adminData');
             if (localStorageAdminData) {
                 this.adminData = JSON.parse(localStorageAdminData);
-                console.log('UserData chargées depuis le localStorage: ', this.adminData);
+                console.log('AdminData chargées depuis le localStorage: ', this.adminData);
+            }
+        },
+
+        // récupère les données de tous les administrateurs à partir de api.js
+        async loadAdminsData() {
+            try {
+                const adminsData = await api.fetchAdminsData();
+                this.admins = adminsData.admins;
+
+            } catch (error) {
+                console.error('Erreur lors du chargement des données des administrateurs');
             }
         },
     },
+
+    getters: {
+
+        // méthode pour filtrer les administrateurs en comparant avec l'id de l'administrateur actuellement connecté
+        filteredAdmins() {
+            const connectedAdminId = this.adminData.id;
+            return this.admins.filter(admin => admin.id !== connectedAdminId);
+        }
+    }
 });

@@ -1,38 +1,35 @@
 <template>
-    <div class="adminsList">
 
-        <div class="adminsList_block">
+    <div class="adminsList">
+        <div class="adminsList_block" v-for="admin in filteredAdmins" :key="admin.nom">
             <div class="adminNameAndButton_container">
-                <p>Nom de l'administrateur</p>
+                <p>{{ admin.prenom }} {{ admin.nom }}</p>
                 <button>
                     <p>Supprimer</p>
                 </button>
             </div>
             <div class="separator"></div>
-        </div>
-        <div class="adminsList_block">
-            <div class="adminNameAndButton_container">
-                <p>Nom de l'administrateur</p>
-                <button>
-                    <p>Supprimer</p>
-                </button>
-            </div>
-            <div class="separator"></div>
-        </div>
-        <div class="adminsList_block">
-            <div class="adminNameAndButton_container">
-                <p>Nom de l'administrateur</p>
-                <button>
-                    <p>Supprimer</p>
-                </button>
-            </div>
-            <div class="separator"></div>
-        </div>
-        
+        </div>     
     </div>
+
 </template>
 
 <script setup>
+
+import { useAdminStore } from '@/stores/AdminStore';
+import { ref, onMounted } from 'vue';
+
+const adminStore = useAdminStore();
+const filteredAdmins = ref([]); // initialise un tableau vide des administrateurs filtrés
+
+// chargement asynchrone des données depuis le store.
+onMounted(() => {
+    adminStore.loadAdminDataFromLocalStorage();
+    adminStore.loadAdminsData();
+
+    // filtre les administrateurs une fois les données chargées avec la methode définie dans le store
+    filteredAdmins.value = adminStore.filteredAdmins;
+});
 
 </script>
 
