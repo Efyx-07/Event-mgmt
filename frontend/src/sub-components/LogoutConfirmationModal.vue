@@ -55,7 +55,7 @@
         adminStore.isConnected = false;
 
         // redirige vers la page de connexion
-        router.push('/admin');
+        router.push('/');
     }
 
 </script>
