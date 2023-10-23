@@ -126,9 +126,10 @@ async function getAllEvents(req, res) {
 
   // execute la requête pour les évènements
   myEventsConnection.query(eventsQuery, (err, eventsResults) => {
+    
     if (err) {
       console.error('Erreur lors de la récupération des évènements: ', err);
-      res.status(500).json({ error: 'Erreur lors de la récupération des évènements'});
+      res.status(500).json({ error: 'Erreur lors de la récupération des évènements' });
       return;
     };
 

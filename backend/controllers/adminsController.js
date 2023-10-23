@@ -8,8 +8,8 @@ async function registerAdmin(req, res) {
 
     // récupère les données du formulaire d'inscription depuis req.body
     const {
-        firstName,
         lastName,
+        firstName,
         email,
         password
     } = req.body;
@@ -20,8 +20,8 @@ async function registerAdmin(req, res) {
     const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=!*]).{8,}$/;
 
     if (
-        !nameTypeRegex.test(firstName) ||
         !nameTypeRegex.test(lastName) ||
+        !nameTypeRegex.test(firstName) ||
         !emailRegex.test(email) ||
         !passwordRegex.test(password)
     ) {
@@ -51,8 +51,8 @@ async function registerAdmin(req, res) {
                 const insertQuery = 'INSERT INTO administrateurs (nom, prenom, email, hashed_password) VALUES (?, ?, ?, ?)';
         
                 const values = [
-                    firstName,
                     lastName,
+                    firstName,
                     email,
                     hashedPassword
                 ];
@@ -77,6 +77,7 @@ async function registerAdmin(req, res) {
     });
 };
 
+// controller pour la connexion d'un administrateur
 async function loginAdmin(req, res) {
 
     // récupère les données du formulaire de connexion depuis req.body
@@ -128,12 +129,48 @@ async function loginAdmin(req, res) {
     }
 };
 
+// controller pour mofifier le mot de passe d'un administrateur
 async function updateAdmin(req, res) {
-
 };
 
+// controller pour supprimer un administrateur
 async function deleteAdmin(req, res) {
+};
 
+// controller pour la récupération de tous les administrateurs
+async function getAllAdmins(req, res) {
+
+    // requête sql pour obtenir tous les administrateurs
+    const adminsQuery = 'SELECT * FROM administrateurs'; 
+    
+    // éxécute la requête pour les administrateurs
+    myEventsConnection.query(adminsQuery, (err, adminsResults) => {
+
+        if (err) {
+            console.error('Erreur lors de la récupération des administrateurs: ', err);
+            res.status(500).json({ error: 'Erreur lors de la récupération des administrateurs' });
+            return;
+        };
+
+        // formate les résultats en un objet JSON contenant les administrateurs
+        const admins = adminsResults;
+        const formattedAdminsData = formatAdminsData(admins);
+        // renvoie les résultats au format JSON en réponse
+        res.json({ admins: formattedAdminsData });
+
+    });
+};
+
+// fonction de formatage pour transformer les données brutes en un objet JSON 
+function formatAdminsData(admins) {
+    const formattedAdmins = admins.map(administrateur => ({
+        id: administrateur.id,
+        nom: administrateur.nom,
+        prenom: administrateur.prenom,
+        email: administrateur.email,
+    }));
+
+    return formattedAdmins;
 };
 
 // permet de hacher le mot de passe avec bcrypt
@@ -156,5 +193,6 @@ module.exports = {
     registerAdmin,
     loginAdmin,
     updateAdmin,
-    deleteAdmin
+    deleteAdmin,
+    getAllAdmins
 };

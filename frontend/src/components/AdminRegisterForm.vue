@@ -5,21 +5,21 @@
         <div class="inputs_wrapper">
 
             <div class="field_container">
-                <label for="nouvel_admin_prenom">Prénom du nouvel administrateur</label>
-                <div class="input_container">
-                    <input type="text" name="firstName" required id="newAdminFirstName" v-model="firstName" @input="validateFirstName">
-                    <Icon v-if="firstNameValid && firstName !== ''" icon="ooui:success" class="validateIcon"/>
-                </div>
-                <p v-if="!firstNameValid && firstName !== ''" class="error-message">Merci d'entrer un prénom valide</p>
-            </div>
-
-            <div class="field_container">
                 <label for="nouvel_admin_nom">Nom du nouvel administrateur</label>
                 <div class="input_container">
                     <input type="text" name="lastName" required id="newAdminLastName" v-model="lastName" @input="validateLastName">
                     <Icon v-if="lastNameValid && lastName !== ''" icon="ooui:success" class="validateIcon"/>
                 </div>
                 <p v-if="!lastNameValid && lastName !== ''" class="error-message">Merci d'entrer un nom valide</p>
+            </div>
+
+            <div class="field_container">
+                <label for="nouvel_admin_prenom">Prénom du nouvel administrateur</label>
+                <div class="input_container">
+                    <input type="text" name="firstName" required id="newAdminFirstName" v-model="firstName" @input="validateFirstName">
+                    <Icon v-if="firstNameValid && firstName !== ''" icon="ooui:success" class="validateIcon"/>
+                </div>
+                <p v-if="!firstNameValid && firstName !== ''" class="error-message">Merci d'entrer un prénom valide</p>
             </div>
 
             <div class="field_container">
@@ -94,15 +94,15 @@
     const emailAlreadyExistsMessage = ref(false);
 
     // propriétés du formulaire
-    const firstName = ref('');
     const lastName = ref('');
+    const firstName = ref('');
     const email = ref('');
     const password = ref('');
     const confirmPassword = ref('');
 
     // états de validation
-    const firstNameValid = ref(true);
     const lastNameValid = ref(true);
+    const firstNameValid = ref(true);
     const emailValid = ref (true);
     const passwordValid = ref (true);
     const confirmPasswordValid = ref (true);
@@ -113,11 +113,11 @@
     const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=!*]).{8,}$/;
 
     // fonctions de validation pour chaque champ
-    const validateFirstName = () => {
-        firstNameValid.value = nameTypeRegex.test(firstName.value);
-    };
     const validateLastName = () => {
         lastNameValid.value = nameTypeRegex.test(lastName.value);
+    };
+    const validateFirstName = () => {
+        firstNameValid.value = nameTypeRegex.test(firstName.value);
     };
     const validateEmail = () => {
         emailValid.value = emailRegex.test(email.value);
@@ -133,22 +133,22 @@
     const validateAdminRegistration = async () => {
 
         // valide chaque champ individuellement
-        validateFirstName();
         validateLastName(); 
+        validateFirstName();
         validateEmail();
         validatePassword();
         validateConfirmPassword();
 
         // extrait les valeurs des objets ref
-        const firstNameValue = firstName.value;
         const lastNameValue = lastName.value;
+        const firstNameValue = firstName.value;
         const emailValue = email.value;
         const passwordValue = password.value;
 
         // détermine les champs requis pour soumettre le formulaire
         const requiredFieldsValid = 
-            firstNameValid.value &&
             lastNameValid.value &&
+            firstNameValid.value &&
             emailValid.value &&
             passwordValid.value &&
             confirmPasswordValid.value;
@@ -166,8 +166,8 @@
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        firstName: firstNameValue,
                         lastName: lastNameValue,
+                        firstName: firstNameValue,
                         email: emailValue,
                         password: passwordValue,
                     }),
@@ -202,13 +202,13 @@
     const resetForm = () => {
         successMessage.value = false;
         emailAlreadyExistsMessage.value = false;
-        firstName.value = '';
         lastName.value = '';
+        firstName.value = '';
         email.value = '';
         password.value = '';
         confirmPassword.value = '';
-        firstNameValid.value = true;
         lastNameValid.value = true;
+        firstNameValid.value = true;
         emailValid.value = true;
         passwordValid.value = true;
         confirmPasswordValid.value = true;
