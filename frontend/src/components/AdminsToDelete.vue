@@ -4,7 +4,7 @@
         <div class="adminsList_block" v-for="admin in filteredAdmins" :key="admin.nom">
             <div class="adminNameAndButton_container">
                 <p>{{ admin.prenom }} {{ admin.nom }}</p>
-                <button>
+                <button @click="deleteAdmin">
                     <p>Supprimer</p>
                 </button>
             </div>
@@ -75,6 +75,26 @@ onMounted(() => {
                         margin: 0;
                         font-size: .7rem;
                         font-weight: 700;
+                    }
+                }
+                .confirmationAsk {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: .5rem;
+
+                    p {
+                        margin: 0;
+                        font-size: .9rem;
+                    }
+
+                    .buttons_container {
+                        display: flex;
+                        gap: .5rem;
+                        
+                        p {
+                            font-size: .7rem;
+                        }
                     }
                 }
             }

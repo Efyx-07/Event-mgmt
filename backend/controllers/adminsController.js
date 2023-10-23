@@ -135,6 +135,39 @@ async function updateAdmin(req, res) {
 
 // controller pour supprimer un administrateur
 async function deleteAdmin(req, res) {
+
+    // récupère l'ID de l'administrateur à supprimer
+    const adminId = parseInt(req.params.adminId);
+
+    // vérifie que l'ID est valide
+    if (isNaN(adminId) || adminId <= 0) {
+        return res.status(400).json({ error: 'ID d\'administrateur non valide' });
+    }
+
+    try {
+
+        // supprime l'entrée de la base de données pour l'administrateur
+        const deleteQuery = 'DELETE FROM administrateurs WHERE id = ?';
+        myEventsConnection.query(deleteQuery, [adminId], (err) => {
+            if (err) {
+                console.error('Erreur lors de la suppression de l\'administrateur :', err);
+                res.status(500).json({ error: 'Erreur lors de la suppression de l\'administrateur' });
+                return;
+            }
+
+            if(results.affectedRows === 0) {
+                // aucune ligne n'a été supprimée, l'ID n'a pas été trouvé
+                return res.status(404).json({ error: 'L\'administrateur avec cet ID n\'existe pas' });
+            }
+
+            res.status(200).json({ message: 'Administrateur supprimé avec succès' });
+        });
+
+    } catch (error) {
+        console.error('Erreur lors de la suppression de l\'administrateur :', error);
+        res.status(500).json({ error: 'Erreur lors de la suppression de l\'administrateur' });
+    }
+
 };
 
 // controller pour la récupération de tous les administrateurs
