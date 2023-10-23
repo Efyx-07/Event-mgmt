@@ -55,6 +55,12 @@ export const useAdminStore = defineStore('admins', {
                 console.error('Erreur lors du chargement des données des administrateurs');
             }
         },
+
+        // ajoute administrateur nouvellement créé à admins
+        addToAdmins(admin) {
+            this.admins.push(admin);
+            console.log('Nouvel administrateur ajouté au tableau admins:', admin);
+        },
     },
 
     getters: {

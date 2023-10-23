@@ -65,8 +65,21 @@ async function registerAdmin(req, res) {
                         return
                     }
         
-                    // nouvel administrateur inscrit avec succès
-                    res.status(201).json({ message: 'Administrateur inscrit avec succès' });
+                     // nouvel administrateur inscrit avec succès
+                     const newAdminId = results.insertId; // récupère l'ID du nouvel administrateur
+
+                     // execute une requête pour obtenir les données du nouvel administrateur
+                     const selectQuery = 'SELECT * FROM administrateurs WHERE id = ?';
+                     myEventsConnection.query(selectQuery, [newAdminId], (err, adminResults) => {
+                         if (err) {
+                             console.error('Erreur lors de la récupération des données du nouvel administrateur : ', err);
+                             res.status(500).json({ error: 'Erreur lors de la récupération des données du nouvel administrateur' });
+                             return;
+                         }
+                         const newAdmin = adminResults[0];
+                         // renvoie un message de succés et les données du nouvel administrateur
+                         res.status(201).json({ message: 'Administrateur inscrit avec succès', admin: newAdmin });
+                     });
                 });
         
             } catch (err) {

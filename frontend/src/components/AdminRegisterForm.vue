@@ -88,6 +88,7 @@
     import { ref } from 'vue';
     import { useGlobalDataStore } from '@/stores/GlobalDataStore';
     import { Icon } from '@iconify/vue';
+    import { useAdminStore } from '@/stores/AdminStore';
 
     // visibilité par défaut des messages de succés ou d'erreur
     const successMessage = ref(false);
@@ -174,9 +175,18 @@
                 });
 
                 if (response.ok) {
+
                     // inscription réussie 
                     const data = await response.json();
+                    console.log('Réponse complète du serveur :', data);
                     console.log(data.message);
+
+                    // met à jour la liste des administrateurs
+                    const adminStore = useAdminStore();
+                    adminStore.addToAdmins(data.admin);
+
+                    console.log('les donnees nouvel admin sont: ', data.admin)
+
                     successMessage.value = true;
                 
                 } else if (response.status === 409) {
