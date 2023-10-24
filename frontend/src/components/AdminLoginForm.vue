@@ -11,7 +11,15 @@
                 <input type="password" name="adminPassword" id="adminLogin_password" v-model="password">
             </div>
         </div>
-        <button class="adminLogin-button" type="submit">
+
+        <div class="registration-result_message" v-if="wrongIds">
+            <div class="text_container">
+                <Icon icon="mdi:alert-outline" class="alertIcon"/>
+                <p>Identifiants invalides !</p>
+            </div>
+        </div>
+
+        <button class="adminLogin-button" type="submit" v-else>
             <p>Se connecter</p>
         </button>
     </form>
@@ -24,9 +32,13 @@
     import { useGlobalDataStore } from '@/stores/GlobalDataStore';
     import { useRouter } from 'vue-router';
     import { useAdminStore } from '@/stores/AdminStore';
+    import { Icon } from '@iconify/vue';
 
     const router = useRouter();
     const adminStore = useAdminStore();
+
+    // visibilité par défaut du message d'erreur
+    const wrongIds = ref(false)
 
     // propriétés du formulaire
     const email = ref('');
@@ -76,6 +88,13 @@
 
                 // affiche une erreur et empêche la redirection
                 console.error('Erreur lors de la connexion: ', response.statusText);
+                wrongIds.value = true;
+                // Réinitialise wrongIds après 3 secondes
+                setTimeout(() => {
+                    wrongIds.value = false;
+                    resetForm();
+                }, 3000);
+
             }
 
         } catch (error) {
@@ -83,6 +102,12 @@
             console.error('Erreur lors de la connexion: ', error);
         }
     };
+
+    // réinitialise le formulaire
+    const resetForm = () => {
+        email.value = '';
+        password.value = '';
+    }
 
 </script>
 
@@ -133,9 +158,6 @@
                 }
             }
         }
-        .error-message {
-            @include errorMessage;
-        }
         .adminLogin-button {
             margin-top: 1rem;
             padding: .5rem 1rem;
@@ -154,6 +176,26 @@
                 color: $lightColor;
                 font-weight: 200;
                 font-size: 1rem;
+            }
+        }
+
+        .registration-result_message {
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: $errorColor;
+            .text_container {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+
+                p {
+                margin: 0;
+                }
+                .alertIcon {
+                    font-size: 1.3rem;
+                }
             }
         }
     }
