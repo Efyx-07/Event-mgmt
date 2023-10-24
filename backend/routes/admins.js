@@ -13,7 +13,7 @@ router.post('/login', adminsController.loginAdmin);
 router.put('/updatePassword', authenticate.authenticateToken, adminsController.updateAdminPassword);
 
 // route pour la suppression d'un administrateur
-router.post('/:adminId', adminsController.deleteAdmin);
+router.delete('/:adminId', adminsController.deleteAdmin);
 
 // route pour la récupération de tous les administrateurs
 router.get('/', adminsController.getAllAdmins);

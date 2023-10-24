@@ -215,11 +215,6 @@ async function deleteAdmin(req, res) {
                 return;
             }
 
-            if(results.affectedRows === 0) {
-                // aucune ligne n'a été supprimée, l'ID n'a pas été trouvé
-                return res.status(404).json({ error: 'L\'administrateur avec cet ID n\'existe pas' });
-            }
-
             res.status(200).json({ message: 'Administrateur supprimé avec succès' });
         });
 

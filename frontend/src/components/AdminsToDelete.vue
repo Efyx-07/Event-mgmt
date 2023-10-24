@@ -3,8 +3,8 @@
     <div class="adminsList">
         <div class="adminsList_block" v-for="admin in filteredAdmins" :key="admin.nom">
             <div class="adminNameAndButton_container">
-                <p>{{ admin.prenom }} {{ admin.nom }}</p>
-                <button>
+                <p> {{ admin.prenom }} {{ admin.nom }} </p>
+                <button @click="deleteAdmin(admin.id)">
                     <p>Supprimer</p>
                 </button>
             </div>
@@ -18,11 +18,42 @@
 
 import { useAdminStore } from '@/stores/AdminStore';
 import { ref, onMounted } from 'vue';
+import { useGlobalDataStore } from '@/stores/GlobalDataStore';
 
 const adminStore = useAdminStore();
-const filteredAdmins = ref([]); // initialise un tableau vide des administrateurs filtrés
 
-// chargement asynchrone des données depuis le store.
+// initialise un tableau vide des administrateurs filtrés
+const filteredAdmins = ref([]); 
+
+// fonction pour supprimer un administrateur
+const deleteAdmin = async (adminId) => {
+  try {
+
+    const { hostName } = useGlobalDataStore();
+
+    const response = await fetch(`${hostName}/admins/${adminId}`, {
+      method: 'DELETE',
+    });
+
+    if (response.ok) {
+      // administrateur supprimé avec succès, met à jour la liste des administrateurs filtrés
+      filteredAdmins.value = adminStore.filteredAdmins;
+      console.log('administrateur supprimé avec succès')
+
+      setTimeout(() => {
+            window.location.reload();
+        }, 1000);
+      
+    } else {
+        console.error('Erreur lors de la suppression de l\'administrateur');
+    }
+
+  } catch (error) {
+    console.error('Erreur lors de la suppression de l\'administrateur :', error);
+  }
+};
+
+// chargement asynchrone des données depuis le store
 onMounted(() => {
 
     adminStore.loadAdminDataFromLocalStorage();
@@ -32,6 +63,8 @@ onMounted(() => {
      filteredAdmins.value = adminStore.filteredAdmins;
 
 });
+
+
 
 </script>
 

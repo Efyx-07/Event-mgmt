@@ -54,7 +54,7 @@
         });
     });
 
-    // Fonction pour confirmer la suppression de l'événement
+    // fonction pour confirmer la suppression de l'événement
     const confirmRemoveEvent = async () => {
         try {
 
