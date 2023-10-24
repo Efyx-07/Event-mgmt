@@ -208,7 +208,7 @@
         }
     };
 
-    // fonction qui efface les messages succés ou alerte et réinitialise tous les champs
+    // fonction qui efface les messages succès ou alerte et réinitialise tous les champs
     const resetForm = () => {
         successMessage.value = false;
         emailAlreadyExistsMessage.value = false;

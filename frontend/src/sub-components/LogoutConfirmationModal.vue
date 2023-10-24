@@ -22,7 +22,7 @@
 
     import { ref, onMounted } from 'vue';
     import { useAdminStore } from '@/stores/AdminStore';
-    import { useRouter } from 'vue-router'
+    import { useRouter } from 'vue-router';
 
     // statut par défaut de la visibilité de la fenetre
     const isLogoutConfirmationModalVisible  = ref(false);
