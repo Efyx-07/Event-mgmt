@@ -134,7 +134,7 @@
 
                 const { hostName } = useGlobalDataStore();
 
-                const response = await fetch (`${hostName}/admins/update`, {
+                const response = await fetch (`${hostName}/admins/updatePassword`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',

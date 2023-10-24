@@ -10,7 +10,7 @@ router.post('/register', adminsController.registerAdmin);
 router.post('/login', adminsController.loginAdmin);
 
 // route pour la mise à jour du mot de passe d'un administrateur
-router.put('/update', authenticate.authenticateToken, adminsController.updateAdminPassword);
+router.put('/updatePassword', authenticate.authenticateToken, adminsController.updateAdminPassword);
 
 // route pour la suppression d'un administrateur
 router.post('/:adminId', adminsController.deleteAdmin);
