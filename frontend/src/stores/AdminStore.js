@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 import * as api from '@/services/api'; // importe les fonctions de l'api du fichier api.js
 
 export const useAdminStore = defineStore('admins', {
@@ -9,6 +9,7 @@ export const useAdminStore = defineStore('admins', {
         isConnected: false, // statut initial de l'administrateur à 'non-connecté'
         adminData: reactive({}), // déclare adminData comme réactif
         admins: [], // initialise admins comme un tableau vide
+        filteredAdmins: ref([]),
     }),
 
     actions: {

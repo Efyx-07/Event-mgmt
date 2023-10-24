@@ -4,7 +4,7 @@
         <div class="adminsList_block" v-for="admin in filteredAdmins" :key="admin.nom">
             <div class="adminNameAndButton_container">
                 <p>{{ admin.prenom }} {{ admin.nom }}</p>
-                <button @click="deleteAdmin">
+                <button>
                     <p>Supprimer</p>
                 </button>
             </div>
@@ -24,11 +24,13 @@ const filteredAdmins = ref([]); // initialise un tableau vide des administrateur
 
 // chargement asynchrone des données depuis le store.
 onMounted(() => {
+
     adminStore.loadAdminDataFromLocalStorage();
     adminStore.loadAdminsData();
 
     // filtre les administrateurs une fois les données chargées avec la methode définie dans le store
-    filteredAdmins.value = adminStore.filteredAdmins;
+     filteredAdmins.value = adminStore.filteredAdmins;
+
 });
 
 </script>
