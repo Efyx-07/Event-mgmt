@@ -1,6 +1,6 @@
 <template>
 
-    <form class="adminUpdatePasswordForm">
+    <form class="adminUpdatePasswordForm" @submit.prevent="validateAdminPasswordUpdating">
 
         <div class="inputs_wrapper">
 
@@ -16,12 +16,12 @@
                         (doit contenir au moins 8 caractères dont: 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial)
                     </p>
                 </div>
-                <input type="password" name="adminNewPassword" id="adminNewPassword" v-model="adminNewPassword">
+                <input type="password" name="adminNewPassword" id="adminNewPassword" v-model="adminNewPassword" @input="validateAdminNewPassword">
             </div>
 
             <div class="input_container">
                 <label for="confirmer_nouveau_mot_de_passe">Confirmez votre nouveau mot de passe</label>
-                <input type="password" name="adminConfirmNewPassword" id="adminConfirmNewPassword" v-model="adminConfirmNewPassword">
+                <input type="password" name="confirmAdminNewPassword" id="confirmAdminNewPassword" v-model="confirmAdminNewPassword" @input="validateConfirmAdminNewPassword">
             </div>
 
         </div>
@@ -35,6 +35,100 @@
 </template>
 
 <script setup>
+
+    import { ref } from 'vue';
+    import { useGlobalDataStore } from '@/stores/GlobalDataStore';
+
+    // propriétés du formulaire
+    const adminCurrentPassword = ref('');
+    const adminNewPassword = ref('');
+    const confirmAdminNewPassword = ref('');
+
+    // états de validation
+    const adminNewPasswordValid = ref(true);
+    const confirmAdminNewPasswordValid = ref(true);
+
+    // Regex
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=!*]).{8,}$/;
+
+    // fonctions de validation des champs
+    const validateAdminNewPassword = () => {
+        adminNewPasswordValid.value = passwordRegex.test(adminNewPassword.value);
+        console.log('Validation du nouveau mot de passe :', adminNewPasswordValid.value);
+    };
+    const validateConfirmAdminNewPassword = () => {
+        confirmAdminNewPasswordValid.value = adminNewPassword.value === confirmAdminNewPassword.value;
+        console.log('Validation de la confirmation du nouveau mot de passe :', confirmAdminNewPasswordValid.value);
+    };
+
+    // valide le formulaire
+    const validateAdminPasswordUpdating = async () => {
+        console.log('Soumission du formulaire');
+
+        // valide les champs individuels
+        validateAdminNewPassword();
+        validateConfirmAdminNewPassword();
+
+        // extrait les valeurs des objets ref
+        const adminCurrentPasswordValue = adminCurrentPassword.value;
+        const adminNewPasswordValue = adminNewPassword.value;
+
+        // détermine les chapms requis pour soumettre le formulaire
+        const requiredFieldsValid = 
+            adminNewPasswordValid.value &&
+            confirmAdminNewPasswordValid.value;
+
+        // soumet le formulaire avec les champs requis
+        if(requiredFieldsValid) {
+
+            try {
+
+                // obtient le token du localStorage
+                const token = localStorage.getItem('token'); 
+
+                if(!token) {
+                    console.error('Token introuvable dans le localStorage');
+                    return;
+                }
+
+                // décode le token pour obtenir adminId
+                const tokenParts = token.split('.');
+                // décode la partie payload
+                const tokenPayload = JSON.parse(atob(tokenParts[1]));
+                // extrait adminId du payload
+                const adminIdValue = tokenPayload.adminId;
+
+                const { hostName } = useGlobalDataStore();
+
+                const response = await fetch (`${hostName}/admins/update`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}` // utilise le token dans l'en-tête de la requête
+                    },
+                    body: JSON.stringify({
+                        adminId: adminIdValue,
+                        adminCurrentPassword: adminCurrentPasswordValue,
+                        adminNewPassword: adminNewPasswordValue,
+
+                    }),
+                });
+
+                if (response.ok) {
+
+                    // mise à jour du mot de passe réussie
+                    const data = await response.json();
+                    console.log(data.message);
+
+                } else {
+                    // affiche un message d'erreur à l'utilisateur
+                    console.error('Erreur lors de la modification du mot de passe', response.statusText)
+                }
+            } catch (error) {
+                console.error('Erreur lors de la modification du mot de passe: ', error);
+            }
+        }
+    }
 
 </script>
 

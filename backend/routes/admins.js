@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const adminsController = require('../controllers/adminsController');
-// const authenticate = require('../auth/authenticate');
+const authenticate = require('../auth/authenticate');
 
 // route pour la création d'un administrateur
 router.post('/register', adminsController.registerAdmin);
@@ -10,7 +10,7 @@ router.post('/register', adminsController.registerAdmin);
 router.post('/login', adminsController.loginAdmin);
 
 // route pour la mise à jour du mot de passe d'un administrateur
-// router.put('/update', authenticate.authenticateToken, adminsController.updateAdmin);
+router.put('/update', authenticate.authenticateToken, adminsController.updateAdminPassword);
 
 // route pour la suppression d'un administrateur
 router.post('/:adminId', adminsController.deleteAdmin);

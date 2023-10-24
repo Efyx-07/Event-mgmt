@@ -143,7 +143,54 @@ async function loginAdmin(req, res) {
 };
 
 // controller pour mofifier le mot de passe d'un administrateur
-async function updateAdmin(req, res) {
+async function updateAdminPassword(req, res) {
+
+    // récupère les nouvelles informations à partir de req.body
+    const {
+        adminId,
+        adminCurrentPassword,
+        adminNewPassword
+    } = req.body;
+
+    try {
+        
+        // valide les données
+        const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=!*]).{8,}$/;
+        if(!passwordRegex.test(adminNewPassword)) {
+            return res.status(400).json({ error: 'Nouveau mot de passe invalide' });
+        }
+
+        // récupère l'administrateur de la base de données à partir de son ID
+        const selectQuery = 'SELECT * FROM administrateurs WHERE id = ?';
+        const adminQuery = util.promisify(myEventsConnection.query).bind(myEventsConnection);
+        const rows = await adminQuery(selectQuery, [adminId]);
+
+        // vérifie si l'administrateur existe
+        if (rows.length === 0) {
+            return res.status(404).json({ error: 'Administrateur non trouvé' });
+        }
+
+        // vérifie la correspondance du mot de passe actuel
+        const hashedPassword = rows[0].hashed_password;
+        const isPasswordMatch = await bcrypt.compare(adminCurrentPassword, hashedPassword);
+        if (!isPasswordMatch) {
+            return res.status(401).json({ error: 'Mot de passe actuel incorrect' });
+        }
+
+        // hache le nouveau mot de passe
+        const hashedNewPassword = await hashPassword(adminNewPassword);
+
+        // met à jour le mot de passe dans la base de données
+        const updateQuery = 'UPDATE administrateurs SET hashed_password = ? WHERE id = ?';
+        const updateValues = [hashedNewPassword, adminId];
+        await adminQuery(updateQuery, updateValues);
+
+        res.status(200).json({ message: 'Mot de passe mis à jour avec succès' });
+
+    } catch (error) {
+        console.error('Erreur lors de la mise à jour du mot de passe :', error);
+        res.status(500).json({ error: 'Erreur lors de la mise à jour du mot de passe' });
+    }
 };
 
 // controller pour supprimer un administrateur
@@ -238,7 +285,7 @@ async function hashPassword(password) {
 module.exports = {
     registerAdmin,
     loginAdmin,
-    updateAdmin,
+    updateAdminPassword,
     deleteAdmin,
     getAllAdmins
 };

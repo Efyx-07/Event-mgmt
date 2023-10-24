@@ -9,7 +9,6 @@ export const useAdminStore = defineStore('admins', {
         isConnected: false, // statut initial de l'administrateur à 'non-connecté'
         adminData: reactive({}), // déclare adminData comme réactif
         admins: [], // initialise admins comme un tableau vide
-        filteredAdmins: ref([]),
     }),
 
     actions: {
