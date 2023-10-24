@@ -9,7 +9,7 @@
             <div class="eventCard-details">
                 <div class="eventDate_container">
                     <Icon icon="healthicons:calendar" class="icon"/>
-                    <p class="eventDate">{{ selectedEvent.date}}</p>
+                    <p class="eventDate">{{ formatDate(selectedEvent.date)}}</p>
                 </div>
                 <div class="eventPlace_container">
                     <Icon icon="mdi:place-outline" class="icon"/>
@@ -29,6 +29,12 @@
     import { useGlobalDataStore } from '@/stores/GlobalDataStore';
 
     const { hostName } = useGlobalDataStore();
+
+    // reformate la date sous la forme 'ven. 7 juillet 2023'
+    const formatDate = (date) => {
+        const options = { weekday: 'short', day: 'numeric', month: 'long', year: 'numeric' };
+        return new Date(date).toLocaleDateString('fr-FR', options);
+    };
 
     // recupère la props de selectedEvents en provenance de EventPage
     const { selectedEvent } = defineProps(['selectedEvent']);

@@ -32,7 +32,7 @@
 
     </div>
 
-    <p class="creationDate">créé le {{ event.creationDate }}</p>
+    <p class="creationDate">créé le {{ formatDateShort(event.creationDate) }}</p>
 
   </div>
 
@@ -51,6 +51,12 @@
   const { hostName } = useGlobalDataStore();
 
   const router = useRouter();
+
+  // formate la date de crétion de l'évènement sous la forme dd-mm-yy
+  const formatDateShort = (date) => {
+    const options = { day: '2-digit', month: '2-digit', year: '2-digit' };
+    return new Date(date).toLocaleDateString('fr-FR', options).replace(/\//g, '-');
+};
 
   // permet de naviguer vers la page de l'evenement selectionné
   const navigateToEvent = (eventSlug) => {
