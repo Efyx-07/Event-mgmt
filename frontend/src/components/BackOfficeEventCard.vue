@@ -17,7 +17,7 @@
         </div>
 
         <div class="icon_container">
-          <Icon icon="ic:baseline-edit" class="icon" />
+          <Icon icon="ic:baseline-edit" class="icon" @click="navigateToEventUpdatePage(event.slug)"/>
         </div>
 
         <div class="icon_container">
@@ -62,6 +62,14 @@
   const navigateToEvent = (eventSlug) => {
     router.push({
       name: 'EventDetail',
+      params: { eventSlug }
+    });
+  };
+
+  // permet de naviguer vers la page de modification de l'évènement selectionné
+  const navigateToEventUpdatePage = (eventSlug) => {
+    router.push({
+      name: 'BackOfficeEventUpdatePage',
       params: { eventSlug }
     });
   };
