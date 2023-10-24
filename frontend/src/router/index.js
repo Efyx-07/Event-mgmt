@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import authGuard from './authGuard';
 import EventPage from '@/views/EventPage.vue';
 import BackOfficeLoginPage from '@/views/BackOfficeLoginPage.vue';
 import BackOfficeHomePage from '@/views/BackOfficeHomePage.vue';
@@ -29,27 +30,32 @@ const router = createRouter({
       {
         path: '/admin_homepage',
         name: 'BackOfficeHomePage',
-        component: BackOfficeHomePage
+        component: BackOfficeHomePage,
+        beforeEnter: authGuard,
       },
       {
         path: '/admin_new-event',
         name: 'BackOfficeNewEvent',
-        component: BackOfficeNewEvent
+        component: BackOfficeNewEvent,
+        beforeEnter: authGuard,
       },
       {
         path: '/admin_admin-accounts',
         name: 'BackOfficeAdminPage',
-        component: BackOfficeAdminPage
+        component: BackOfficeAdminPage,
+        beforeEnter: authGuard,
       },
       {
         path: '/admin_publication-confirmation',
         name: 'PublicationConfirmation',
-        component: PublicationConfirmation
+        component: PublicationConfirmation,
+        beforeEnter: authGuard,
       },
       {
         path: '/admin_participants-list/:eventSlug',
         name: 'ParticipantsList',
-        component: ParticipantsList
+        component: ParticipantsList,
+        beforeEnter: authGuard,
       },
       
     ]
