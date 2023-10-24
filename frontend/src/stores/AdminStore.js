@@ -26,14 +26,12 @@ export const useAdminStore = defineStore('admins', {
         // sauvegarde les données de l'administrateur connecté dans le localStorage
         saveAdminDataInLocalStorage() {
             localStorage.setItem('adminData', JSON.stringify(this.adminData));
-            console.log('AdminData sauvegardées dans le localStorage: ', this.adminData);
         },
 
         // charge les données de l'administrateur à partir de la réponse JSON
         setAdminData(adminData) {
             this.adminData = adminData;
             this.saveAdminDataInLocalStorage();
-            console.log('AdminData définies dans le store: ', this.adminData);
         },
 
         // charge les données de l'administrateur à partir du localStorage
@@ -41,7 +39,6 @@ export const useAdminStore = defineStore('admins', {
             const localStorageAdminData = localStorage.getItem('adminData');
             if (localStorageAdminData) {
                 this.adminData = JSON.parse(localStorageAdminData);
-                console.log('AdminData chargées depuis le localStorage: ', this.adminData);
             }
         },
 
@@ -59,7 +56,6 @@ export const useAdminStore = defineStore('admins', {
         // ajoute administrateur nouvellement créé à admins
         addToAdmins(admin) {
             this.admins.push(admin);
-            console.log('Nouvel administrateur ajouté au tableau admins:', admin);
         },
     },
 

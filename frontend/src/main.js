@@ -18,6 +18,14 @@ const initApp = async () => {
     const eventStore = useEventStore();
     const adminStore = useAdminStore();
 
+    // verifie si un token est dans le localStorage
+    const token = localStorage.getItem('token');
+
+    // si le token est présent conserve la valeur true après rafraichissement de l'app
+    if (token) {
+        adminStore.isConnected = true;
+    }
+
     try {
         await eventStore.loadEventsData();
         await adminStore.loadAdminsData();
