@@ -27,7 +27,7 @@
             max-width: $contentMaxWidth;
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: baseline;
                     
             h1 {
                 @include pageTitlesBasicSettings;
