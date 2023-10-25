@@ -1,70 +1,85 @@
 <template>
 
     <div class="adminsList">
-        <div class="adminsList_block" v-for="admin in filteredAdmins" :key="admin.nom">
-            <div class="adminNameAndButton_container">
+
+        <div class="adminsList_block" v-for="admin in filteredAdmins" :key="admin.nom" >
+
+            <div class="deleting-result_message" v-if="successMessage[admin.id]">
+                <div class="text_container">
+                    <Icon icon="ooui:success" class="successIcon"/>
+                    <p>Administrateur supprimé avec succés !</p>
+                </div>
+            </div>
+
+            <div class="adminNameAndButton_container" v-else>
                 <p> {{ admin.prenom }} {{ admin.nom }} </p>
                 <button @click="deleteAdmin(admin.id)">
                     <p>Supprimer</p>
                 </button>
             </div>
+
             <div class="separator"></div>
-        </div>     
+
+        </div>
+            
     </div>
 
 </template>
 
 <script setup>
 
-import { useAdminStore } from '@/stores/AdminStore';
-import { ref, onMounted } from 'vue';
-import { useGlobalDataStore } from '@/stores/GlobalDataStore';
+    import { useAdminStore } from '@/stores/AdminStore';
+    import { ref, onMounted } from 'vue';
+    import { useGlobalDataStore } from '@/stores/GlobalDataStore';
+    import { Icon } from '@iconify/vue';
 
-const adminStore = useAdminStore();
+    const adminStore = useAdminStore();
 
-// initialise un tableau vide des administrateurs filtrés
-const filteredAdmins = ref([]); 
+    // statut par défaut de la visibilité de successMessage
+    const successMessage = ref({});
 
-// fonction pour supprimer un administrateur
-const deleteAdmin = async (adminId) => {
-  try {
+    // initialise un tableau vide des administrateurs filtrés
+    const filteredAdmins = ref([]); 
 
-    const { hostName } = useGlobalDataStore();
+    // fonction pour supprimer un administrateur
+    const deleteAdmin = async (adminId) => {
+    try {
 
-    const response = await fetch(`${hostName}/admins/${adminId}`, {
-      method: 'DELETE',
-    });
+        const { hostName } = useGlobalDataStore();
 
-    if (response.ok) {
-      // administrateur supprimé avec succès, met à jour la liste des administrateurs filtrés
-      filteredAdmins.value = adminStore.filteredAdmins;
-      console.log('administrateur supprimé avec succès')
+        const response = await fetch(`${hostName}/admins/${adminId}`, {
+        method: 'DELETE',
+        });
 
-      setTimeout(() => {
-            window.location.reload();
-        }, 1000);
-      
-    } else {
-        console.error('Erreur lors de la suppression de l\'administrateur');
+        if (response.ok) {
+        // administrateur supprimé avec succès, met à jour la liste des administrateurs filtrés
+        filteredAdmins.value = adminStore.filteredAdmins;
+        
+        successMessage.value[adminId] = true;
+
+        setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+        
+        } else {
+            console.error('Erreur lors de la suppression de l\'administrateur');
+        }
+
+    } catch (error) {
+        console.error('Erreur lors de la suppression de l\'administrateur :', error);
     }
+    };
 
-  } catch (error) {
-    console.error('Erreur lors de la suppression de l\'administrateur :', error);
-  }
-};
+    // chargement asynchrone des données depuis le store
+    onMounted(() => {
 
-// chargement asynchrone des données depuis le store
-onMounted(() => {
+        adminStore.loadAdminDataFromLocalStorage();
+        adminStore.loadAdminsData();
 
-    adminStore.loadAdminDataFromLocalStorage();
-    adminStore.loadAdminsData();
+        // filtre les administrateurs une fois les données chargées avec la methode définie dans le store
+        filteredAdmins.value = adminStore.filteredAdmins;
 
-    // filtre les administrateurs une fois les données chargées avec la methode définie dans le store
-     filteredAdmins.value = adminStore.filteredAdmins;
-
-});
-
-
+    });
 
 </script>
 
@@ -112,24 +127,22 @@ onMounted(() => {
                         font-weight: 700;
                     }
                 }
-                .confirmationAsk {
+            }
+            .deleting-result_message {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                .text_container {
                     display: flex;
-                    flex-direction: column;
                     align-items: center;
-                    gap: .5rem;
+                    gap: 1rem;
 
                     p {
-                        margin: 0;
-                        font-size: .9rem;
+                    margin: 0;
                     }
-
-                    .buttons_container {
-                        display: flex;
-                        gap: .5rem;
-                        
-                        p {
-                            font-size: .7rem;
-                        }
+                    .successIcon {
+                        font-size: 1.3rem;
+                        color: $validColor;
                     }
                 }
             }

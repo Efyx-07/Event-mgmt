@@ -318,7 +318,7 @@
                 p {
                 margin: 0;
                 }
-                .succesIcon, .alertIcon {
+                .successIcon, .alertIcon {
                     font-size: 1.3rem;
                 }
                 .successIcon {
