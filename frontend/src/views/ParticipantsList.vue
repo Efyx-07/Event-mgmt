@@ -89,6 +89,7 @@ onMounted(async () => {
 <style lang="scss" scoped>
 
   @import '@/assets/sass/variables.scss';
+  @import '@/assets/sass/mixins.scss';
   .participantsListPage {
     display: grid;
     grid-template-columns: 1fr 3fr;
@@ -103,15 +104,7 @@ onMounted(async () => {
     }
 
     header {
-      width: 100%;
-      background: $ultraLightColor;
-      box-shadow: $shadow;
-      padding: 1rem 3rem;
-      display: flex;
-      justify-content: center;
-      position: sticky;
-      top: 0;
-      z-index: 99;
+      @include headersBasicSettings;
       .header_content{
         display: grid;
         align-items: center;
@@ -120,9 +113,7 @@ onMounted(async () => {
         max-width: $contentMaxWidth;
         .page-title {
           grid-column: 1 / -2;
-          margin: 0;
-          font-size: 2rem;
-          color: $darkColor;
+          @include pageTitlesBasicSettings;
         }
         .backToEventsButton {
           text-decoration: none;

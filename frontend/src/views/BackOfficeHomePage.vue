@@ -60,6 +60,7 @@
 <style lang="scss" scoped>
 
     @import '@/assets/sass/variables.scss';
+    @import '@/assets/sass/mixins.scss';
 
     .backOfficeHomePage {
         display: grid;
@@ -69,14 +70,7 @@
             position:relative;
             min-height: 100vh;
             .adminHomePageHeader {
-                background: $ultraLightColor;
-                box-shadow: $shadow;
-                padding: 1rem 3rem;
-                display: flex;
-                justify-content: center;
-                position: sticky;
-                top: 0;
-                z-index: 99;
+                @include headersBasicSettings;
 
                 &_content {
                     display: grid;
@@ -86,10 +80,8 @@
                     max-width: $contentMaxWidth;
 
                     h1 {
-                    grid-column: 1 / -2;
-                    margin: 0;
-                    font-size: 2rem;
-                    color: $darkColor;
+                        grid-column: 1 / -2;
+                        @include pageTitlesBasicSettings;
                     }
 
                     .eventsCountMention_container {

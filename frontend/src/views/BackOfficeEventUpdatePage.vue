@@ -34,6 +34,7 @@
 <style lang="scss" scoped>
 
     @import '@/assets/sass/variables.scss';
+    @import '@/assets/sass/mixins.scss';
     .backOfficeEventUpdatePage {
         display: grid;
         grid-template-columns: 1fr 3fr;
@@ -44,15 +45,7 @@
             align-items: center;
 
             .eventUpdatePageHeader {
-                background: $ultraLightColor;
-                box-shadow: $shadow;
-                padding: 1rem 3rem;
-                width: 100%;
-                display: flex;
-                justify-content: center;
-                position: sticky;
-                top: 0;
-                z-index: 99;
+                @include headersBasicSettings;
 
                 &_content {
                     display: grid;
@@ -63,9 +56,7 @@
                     
                     h1 {
                         grid-column: 1 / -2;
-                        margin: 0;
-                        font-size: 2rem;
-                        color: $darkColor;
+                        @include pageTitlesBasicSettings;
                     }
                 }
             }
