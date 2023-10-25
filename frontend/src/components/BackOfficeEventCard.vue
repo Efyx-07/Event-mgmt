@@ -103,6 +103,7 @@
         height: 21rem;
         background: $ultraLightColor;
         box-shadow: $shadow;
+        border-radius: $containerRadius 0 $containerRadius 0;
         position: relative;
         .eventImage_container {
             width: 100%;
@@ -110,6 +111,7 @@
             display: inline-block;
             position: relative;
             overflow: hidden;
+            border-radius: $containerRadius 0 0 0;
             .eventImage {
                 width: 100%;
                 height: 100%;
@@ -132,9 +134,7 @@
                 position: absolute;
                 right: 1rem;
                 bottom: 1rem;
-
                 .icon_container {
-
                     .icon {
                         font-size: 1.5rem;
                         cursor: pointer;
@@ -149,11 +149,14 @@
         }
         .creationDate {
           position: absolute;
-          top: .25rem;
-          left: .25rem;
+          top: .5rem;
+          left: .5rem;
           font-size: .7rem;
+          font-weight: 600;
           margin: 0;
-          background: $lightColor;
+          background: $ultraLightColor;
+          box-shadow: $shadow;
+          border-radius: 10px 0 0 0;
           padding: .25rem;
         }
     }
