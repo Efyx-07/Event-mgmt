@@ -178,14 +178,10 @@
 
                     // inscription réussie 
                     const data = await response.json();
-                    console.log('Réponse complète du serveur :', data);
-                    console.log(data.message);
 
                     // met à jour la liste des administrateurs
                     const adminStore = useAdminStore();
                     adminStore.addToAdmins(data.admin);
-
-                    console.log('les donnees nouvel admin sont: ', data.admin)
 
                     successMessage.value = true;
                 
@@ -223,12 +219,6 @@
         passwordValid.value = true;
         confirmPasswordValid.value = true;
     };
-
-    // const refresh = () => {
-    //     setTimeout(() => {
-    //         window.location.reload();
-    //     }, 1000);
-    // }
 
 </script>
 
