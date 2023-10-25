@@ -35,7 +35,7 @@
 
     const adminStore = useAdminStore();
 
-    // statut par défaut de la visibilité de successMessage
+    // initialise un tableau vide de successMessage
     const successMessage = ref({});
 
     // initialise un tableau vide des administrateurs filtrés
@@ -55,8 +55,10 @@
         // administrateur supprimé avec succès, met à jour la liste des administrateurs filtrés
         filteredAdmins.value = adminStore.filteredAdmins;
         
+        // rend visible successMessage
         successMessage.value[adminId] = true;
 
+        // fais un reload de la page après apparition de successMessage
         setTimeout(() => {
                 window.location.reload();
             }, 1000);

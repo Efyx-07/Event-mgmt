@@ -44,28 +44,6 @@
         grid-template-columns: 1fr 3fr;
         .adminPage {
             grid-column: 2 / -1;
-
-            header {
-                background: $ultraLightColor;
-                box-shadow: $shadow;
-                padding: 1rem 3rem;
-                width: 100%;
-                display: flex;
-                justify-content: center;
-                position: sticky;
-                top: 0;
-                z-index: 99;
-                .header_content {
-                    width: 100%;
-                    max-width: $contentMaxWidth;
-                    
-                    h1 {
-                        margin: 0;
-                        font-size: 2rem;
-                        color: $darkColor;
-                    }
-                }
-            }
         }
         .adminOperations_container {
             width: 100%;
@@ -97,27 +75,12 @@
                             height: 1px;
                             background: $accentColorBackof3;
                         }
-                    }
-                    .adminUpdatePasswordForm, 
-                    .adminRegisterForm,
+                    }                    
                     .adminsToDelete {
                         align-self: center;
                         margin-top: 3rem;
                     }
-                }
-                .adminRegistration-section {
-                    .aboutNotification {
-                        border: solid 1px rgba($accentColorBackof3, .25);
-                        padding: 1rem;
-                        margin-top: 2rem;
-
-                        p {
-                            margin: 0;
-                            font-size: .75rem;
-                            font-weight: 600;
-                        }
-                    }
-                }        
+                }      
             }
         }
 
