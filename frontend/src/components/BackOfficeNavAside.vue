@@ -5,17 +5,23 @@
         <div class="head-section">
             <PlatformLogo />
         </div>
+
         <router-link to="/admin_homepage" class="item-section" :class="{ 'active-link': $route.path === '/admin_homepage' }">
                 <Icon icon="material-symbols:home-outline" class="icon"/>
                 <p>Vos évènements</p>
                 <div class="active-bar"></div>
         </router-link>
+
         <router-link to="/admin_new-event" class="item-section" :class="{ 'active-link': $route.path === '/admin_new-event' }">
                 <Icon icon="ic:outline-create" class="icon"/>
                 <p>Nouvel évènement</p>
                 <div class="active-bar"></div>
         </router-link>
-        <router-link to="/admin_admin-accounts" class="item-section" :class="{ 'active-link': $route.path === '/admin_admin-accounts' }">
+
+        <router-link 
+            to="/admin_your-account" 
+            class="item-section" 
+            :class="{ 'active-link': $route.path === '/admin_your-account' || $route.path === '/admin_add-admin' || $route.path === '/admin_delete-admin' }">
                 <Icon icon="material-symbols:manage-accounts-outline" class="icon"/>
                 <p>Compte administrateur</p>
                 <div class="active-bar"></div>

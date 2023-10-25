@@ -5,36 +5,12 @@
         <BackOfficeNavAside class="backOfficeNavAside"/>
 
         <div class="adminPage">
-            <header>
-                <div class="header_content">
-                    <h1>Gestion compte administrateur</h1>
-                </div>   
-            </header>
+            
+            <AdminPageHeader />
 
             <div class="adminOperations_container">
 
                 <div class="adminOperations">
-
-                    <div class="adminPasswordUpdating-section adminOperations-section">
-                        <div class="sectionTitle_container">
-                            <p class="sectionTitle">Modifier votre mot de passe</p>
-                            <div class="line"></div>
-                        </div>
-                        <AdminUpdatePasswordForm class="adminUpdatePasswordForm"/>
-                    </div>
-
-                    <div class="adminRegistration-section adminOperations-section">
-                        <div class="sectionTitle_container">
-                            <p class="sectionTitle">Ajouter un nouvel administrateur</p>
-                            <div class="line"></div>
-                        </div>
-                        <div class="aboutNotification">
-                            <p>
-                                Notification: Un administrateur actuellement connecté peut créer un nouvel administrateur ici. L’administrateur nouvellement créé pourra modifier son mot de passe lors de sa future connexion et bénèficiera de tous les mêmes droits que l’administrateur actuellement connecté.
-                            </p>
-                        </div>
-                        <AdminRegisterForm class="adminRegisterForm"/>
-                    </div>
 
                     <div class="adminDeleting-section adminOperations-section">
                         <div class="sectionTitle_container">
@@ -55,9 +31,8 @@
 <script setup>
 
     import BackOfficeNavAside from '@/components/BackOfficeNavAside.vue';
-    import AdminUpdatePasswordForm from '@/components/AdminUpdatePasswordForm.vue';
-    import AdminRegisterForm from '@/components/AdminRegisterForm.vue';
     import AdminsToDelete from '@/components/AdminsToDelete.vue';
+    import AdminPageHeader from '@/components/AdminPageHeader.vue';
 
 </script>
 

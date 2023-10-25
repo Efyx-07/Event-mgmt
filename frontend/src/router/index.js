@@ -1,13 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import authGuard from './authGuard';
+
 import EventPage from '@/views/EventPage.vue';
 import BackOfficeLoginPage from '@/views/BackOfficeLoginPage.vue';
 import BackOfficeHomePage from '@/views/BackOfficeHomePage.vue';
 import BackOfficeNewEvent from '@/views/BackOfficeNewEvent.vue';
 import BackOfficeEventUpdatePage from '@/views/BackOfficeEventUpdatePage.vue';
-import BackOfficeAdminPage from '@/views/BackOfficeAdminPage.vue';
 import PublicationConfirmation from '@/views/PublicationConfirmation.vue';
 import ParticipantsList from '@/views/ParticipantsList.vue';
+import BackOfficeAdminYourAccount from '@/views/BackOfficeAdminYourAccount.vue';
+import BackOfficeAdminAddAdmin from '@/views/BackOfficeAdminAddAdmin.vue';
+import BackOfficeAdminDeleteAdmin from '@/views/BackOfficeAdminDeleteAdmin.vue';
 
 
 const router = createRouter({
@@ -47,9 +50,21 @@ const router = createRouter({
         beforeEnter: authGuard,
       },
       {
-        path: '/admin_admin-accounts',
-        name: 'BackOfficeAdminPage',
-        component: BackOfficeAdminPage,
+        path: '/admin_your-account',
+        name: 'BackOfficeAdminYourAccount',
+        component: BackOfficeAdminYourAccount,
+        beforeEnter: authGuard,
+      },
+      {
+        path: '/admin_add-admin',
+        name: 'BackOfficeAdminAddAdmin',
+        component: BackOfficeAdminAddAdmin,
+        beforeEnter: authGuard,
+      },
+      {
+        path: '/admin_delete-admin',
+        name: 'BackOfficeAdminDeleteAdmin',
+        component: BackOfficeAdminDeleteAdmin,
         beforeEnter: authGuard,
       },
       {

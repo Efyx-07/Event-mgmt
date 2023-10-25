@@ -61,7 +61,7 @@
                 <Icon icon="ooui:success" class="successIcon"/>
                 <p>Nouvel administrateur inscrit avec succés !</p>
             </div>
-            <button @click="refresh" class="okBtn">
+            <button @click="resetForm" class="okBtn">
                 <p>OK</p>
             </button>
         </div>
@@ -224,11 +224,11 @@
         confirmPasswordValid.value = true;
     };
 
-    const refresh = () => {
-        setTimeout(() => {
-            window.location.reload();
-        }, 1000);
-    }
+    // const refresh = () => {
+    //     setTimeout(() => {
+    //         window.location.reload();
+    //     }, 1000);
+    // }
 
 </script>
 
