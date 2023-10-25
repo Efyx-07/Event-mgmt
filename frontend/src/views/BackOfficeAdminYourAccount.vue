@@ -39,53 +39,10 @@
 <style lang="scss" scoped>
 
     @import '@/assets/sass/variables.scss';
-    .backOfficeAdminPage {
-        display: grid;
-        grid-template-columns: 1fr 3fr;
-        .adminPage {
-            grid-column: 2 / -1;
-        }
-        .adminOperations_container {
-            width: 100%;
-            padding: 2rem 3rem;
-            .adminOperations {
-                background: $ultraLightColor;
-                box-shadow: $shadow;
-                border-radiuS: $containerRadius;
-                padding: 2rem;
-                display: flex;
-                flex-direction: column;
-                gap: 3rem;
-
-                &-section {
-                    display: flex;
-                    flex-direction: column;
-                    .sectionTitle_container {
-                        display: flex;
-                        align-items: baseline;
-                        gap: 1rem;
-                        .sectionTitle {
-                            margin: 0;
-                            font-size: 1.25rem;
-                            font-weight: 700;
-                            white-space: nowrap;
-                        }
-                        .line {
-                            width: 100%;
-                            height: 1px;
-                            background: $accentColorBackof3;
-                        }
-                    }
-                    .adminUpdatePasswordForm {
-                        align-self: center;
-                        margin-top: 3rem;
-                    }
-                }       
-            }
-        }
-
-        
+    @import '@/assets/sass/adminPagesStyle.scss';
+    @import '@/assets/sass/mixins.scss';
+    .adminUpdatePasswordForm {
+        @include adminForm;
     }
-
-    
+  
 </style>

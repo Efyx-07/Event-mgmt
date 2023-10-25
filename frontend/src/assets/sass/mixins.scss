@@ -25,3 +25,8 @@
     color: $errorColor;
     align-self: flex-end;
 }
+
+@mixin adminForm {
+    align-self: center;
+    margin-top: 3rem;
+}
