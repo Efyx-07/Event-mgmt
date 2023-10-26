@@ -100,7 +100,7 @@ async function removeEvent(req, res) {
       }
 
       // récupère l'information sur l'événement pour obtenir le chemin de l'image à supprimer
-      const query = 'SELECT image_source FROM evenements WHERE id = ?';
+      const query = 'SELECT image_source, logo_client_source FROM evenements WHERE id = ?';
       myEventsConnection.query(query, [eventId], (err, results) => {
         if (err) {
           console.error('Erreur lors de la récupération de l\'image de l\'événement :', err);
@@ -117,14 +117,23 @@ async function removeEvent(req, res) {
             return;
           }
 
-          // supprime le fichier image associé
-          const imagePath = results[0].image_source;
-          const absolutePath = path.join(__dirname, imagePath);
-          fs.unlink(absolutePath, (err) => {
+          // supprime le fichier image de couverture
+          const coverImagePath = results[0].image_source;
+          const absoluteCoverImagePath = path.join(__dirname, coverImagePath);
+          fs.unlink(absoluteCoverImagePath, (err) => {
             if (err) {
-              console.error('Erreur lors de la suppression de l\'image :', err);
+              console.error('Erreur lors de la suppression de l\'image de couverture :', err);
             }
           });
+
+          // supprime le fichier logo de l'organisateur
+          const organizerLogoPath = results[0].logo_client_source;
+          const absoluteorganizerLogoPath = path.join(__dirname, organizerLogoPath);
+          fs.unlink(absoluteorganizerLogoPath, (err) => {
+            if (err) {
+              console.error('Erreur lors de la suppression du logo de l\organisateur :', err);
+            }
+          })
 
           res.status(200).json({ message: 'Événement, image et participants associés supprimés avec succès' });
         });
