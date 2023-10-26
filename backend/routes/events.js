@@ -21,8 +21,11 @@ const storage = multer.diskStorage({
 // configure le dossier de destination pour les fichiers téléchargés
 const upload = multer({ storage: storage });
 
-// route pour la création d'évèvenement
-router.post('/create', upload.single('eventCoverImage'),eventsController.createEvent);
+// route pour la création d'évènement
+router.post('/create', upload.fields([
+  { name: 'eventCoverImage', maxCount: 1 },
+  { name: 'eventOrganizerLogo', maxCount: 1 },
+]), eventsController.createEvent);
 
 // route pour la suppression d'un évènement
 router.delete('/:eventId', eventsController.removeEvent);

@@ -20,14 +20,14 @@ async function createEvent(req, res) {
 
   // récupère les données du formulaire 
   const eventTitle = req.body.eventTitle;
-  const eventCoverImage = req.file;
+  const eventCoverImage = req.files['eventCoverImage'][0];
   const eventDate = req.body.eventDate;
   const eventLocation = req.body.eventLocation;
   const eventPresentation = req.body.eventPresentation;
   const eventProgramme = req.body.eventProgramme;
   const eventPracticalInformations = req.body.eventPracticalInformations;
   const eventOrganizerName = req.body.eventOrganizerName;
-  //const eventOrganizerLogo = req.file;
+  const eventOrganizerLogo = req.files['eventOrganizerLogo'][0];
   const eventOrganizerWebsite = req.body.eventOrganizerWebsite;
  
   // génère le slug pour l'évènement
@@ -35,17 +35,18 @@ async function createEvent(req, res) {
 
   // crée et formate la legende alt pour l'image de couverture
   const eventCoverImageAlt = eventTitle.toLowerCase();
-  // crée et formate la legende alt pour le logo de l'organisateur
-  //const eventOrganizerLogoAlt = eventOrganizerName.toLowerCase();
 
-  // Obtient le chemin relatif de l'image de couverture et du logo de l'organisateur
+  // crée et formate la légende alt pour le logo de l'organisateur
+  const eventOrganizerLogoAlt = eventOrganizerName.toLowerCase();
+
+  // obtient le chemin relatif de l'image de couverture et du logo de l'organisateur
   const eventCoverImageRelativePath = path.relative(__dirname, eventCoverImage.path).replace(/\\/g, '/');
-  //const eventOrganizerLogoRelativePath = path.relative(__dirname, eventOrganizerLogo.path).replace(/\\/g, '/');
+  const eventOrganizerLogoRelativePath = path.relative(__dirname, eventOrganizerLogo.path).replace(/\\/g, '/');
 
   try {
 
     // insert les données dans la bdd myevents table evenements
-    const insertQuery = 'INSERT INTO evenements (titre, date, lieu, image_source, image_alt, presentation, programme, infos_pratiques, nom_client, site_client, slug) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    const insertQuery = 'INSERT INTO evenements (titre, date, lieu, image_source, image_alt, presentation, programme, infos_pratiques, nom_client, logo_client_source, logo_client_alt, site_client, slug) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
 
     const values = [
       eventTitle,
@@ -57,6 +58,8 @@ async function createEvent(req, res) {
       eventProgramme,
       eventPracticalInformations,
       eventOrganizerName,
+      eventOrganizerLogoRelativePath,
+      eventOrganizerLogoAlt,
       eventOrganizerWebsite, 
       eventSlug
     ];
@@ -173,6 +176,10 @@ function formatData(events) {
     programme: evenement.programme,
     practicalInformations: evenement.infos_pratiques,
     organizerName: evenement.nom_client,
+    organizerLogo: {
+      source: `/assets/events-covers/${path.basename(evenement.logo_client_source)}`,
+      alt: evenement.logo_client_alt,
+    },
     organizerWebsite: evenement.site_client,
     creationDate: evenement.date_creation,
     slug: evenement.slug
