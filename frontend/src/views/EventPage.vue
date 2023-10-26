@@ -1,7 +1,7 @@
 <template>
 
     <div class="eventPage">
-        <EventPageHeader />
+        <EventPageHeader :selectedEvent="selectedEvent"/>
         <div class="eventPage_content">
             <EventCard :selectedEvent="selectedEvent"/>
         </div>
@@ -45,12 +45,6 @@
         &_content {
             width: 100%;
             max-width: 75rem;
-        }
-        .sticky-bar {
-            width: 100%;
-            max-width: 75rem;
-            position: sticky;
-            top: 1rem;
         }
     }
     
