@@ -4,7 +4,11 @@
         <EventPageHeader :selectedEvent="selectedEvent"/>
         <div class="eventPage_content">
             <EventCard :selectedEvent="selectedEvent"/>
-            <EventPageSectionPresentation :selectedEvent="selectedEvent"/>
+            <div class="eventPage-sections_container">
+                <EventPageSectionPresentation :selectedEvent="selectedEvent"/>
+                <EventPageSectionProgramme :selectedEvent="selectedEvent"/>
+                <EventPageSectionPracticalInformations :selectedEvent="selectedEvent"/>
+            </div>
         </div>
     </div>
     <ParticipantsInscriptionModal :selectedEvent="selectedEvent"/>
@@ -16,6 +20,8 @@
     import EventPageHeader from '@/components/EventPageHeader.vue';
     import EventCard from '@/components/EventCard.vue';
     import EventPageSectionPresentation from '@/components/EventPageSectionPresentation.vue';
+    import EventPageSectionProgramme from '@/components/EventPageSectionProgramme.vue';
+    import EventPageSectionPracticalInformations from '@/components/EventPageSectionPracticalInformations.vue';
     import ParticipantsInscriptionModal from '@/components/ParticipantsInscriptionModal.vue';
 
     import { useEventStore } from '@/stores/EventStore';
@@ -42,11 +48,18 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        height: 200vh;
 
         &_content {
             width: 100%;
             max-width: 75rem;
+            display: flex;
+            flex-direction: column;
+            .eventPage-sections_container {
+                display: flex;
+                flex-direction: column;
+                gap: 3rem;
+                padding: 5rem 0;
+            }
         }
     }
     
