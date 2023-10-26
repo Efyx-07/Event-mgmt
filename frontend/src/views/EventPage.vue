@@ -4,6 +4,7 @@
         <EventPageHeader :selectedEvent="selectedEvent"/>
         <div class="eventPage_content">
             <EventCard :selectedEvent="selectedEvent"/>
+            <EventPageSectionPresentation :selectedEvent="selectedEvent"/>
         </div>
     </div>
     <ParticipantsInscriptionModal :selectedEvent="selectedEvent"/>
@@ -14,6 +15,7 @@
 
     import EventPageHeader from '@/components/EventPageHeader.vue';
     import EventCard from '@/components/EventCard.vue';
+    import EventPageSectionPresentation from '@/components/EventPageSectionPresentation.vue';
     import ParticipantsInscriptionModal from '@/components/ParticipantsInscriptionModal.vue';
 
     import { useEventStore } from '@/stores/EventStore';
