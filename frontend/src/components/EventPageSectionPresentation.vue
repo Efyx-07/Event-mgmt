@@ -37,7 +37,7 @@
             .separator {
                 width: 100%;
                 height: 1px;
-                background: $accentColor2;
+                background: rgba($accentColor1, .25);
             }
 
         }
