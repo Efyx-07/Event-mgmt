@@ -94,7 +94,7 @@
                 >
             </div>
 
-            <div class="input-container">
+            <!-- <div class="input-container">
                 <label for="event-organizerLogo">Logo de l'organisateur</label>
                 <input 
                     type="file"
@@ -105,7 +105,7 @@
                     id="create_eventOrganizerLogo"
                     @change="handleOrganizerLogoFileChange"
                 >
-            </div> 
+            </div>  -->
 
             <div class="input-container">
                 <label for="event-organizerWebsite">Site web de l'organisateur</label>
@@ -145,7 +145,7 @@
     const eventProgramme = ref('');
     const eventPracticalInformations = ref('');
     const eventOrganizerName = ref('');
-    const eventOrganizerLogo = ref('');
+    //const eventOrganizerLogo = ref('');
     const eventOrganizerWebsite  = ref('');
 
 
@@ -155,9 +155,9 @@
     };
 
     // gère le téléchargement du fichier logo de l'organisateur et stocke le fichier selectionné
-    const handleOrganizerLogoFileChange = (event) => {
-        eventOrganizerLogo.value = event.target.files[0];
-    };
+    // const handleOrganizerLogoFileChange = (event) => {
+    //     eventOrganizerLogo.value = event.target.files[0];
+    // };
 
     const eventStore = useEventStore();
     const router = useRouter();
@@ -174,7 +174,7 @@
         formData.append('eventProgramme', eventProgramme.value);
         formData.append('eventPracticalInformations', eventPracticalInformations.value);
         formData.append('eventOrganizerName', eventOrganizerName.value);
-        formData.append('eventOrganizerLogo', eventOrganizerLogo.value);
+        //formData.append('eventOrganizerLogo', eventOrganizerLogo.value);
         formData.append('eventOrganizerWebsite', eventOrganizerWebsite.value);
 
         // affiche les valeurs dans la console

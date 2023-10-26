@@ -20,22 +20,32 @@ async function createEvent(req, res) {
 
   // récupère les données du formulaire 
   const eventTitle = req.body.eventTitle;
+  const eventCoverImage = req.file;
   const eventDate = req.body.eventDate;
   const eventLocation = req.body.eventLocation;
-  const eventCoverImage = req.file; 
-
+  const eventPresentation = req.body.eventPresentation;
+  const eventProgramme = req.body.eventProgramme;
+  const eventPracticalInformations = req.body.eventPracticalInformations;
+  const eventOrganizerName = req.body.eventOrganizerName;
+  //const eventOrganizerLogo = req.file;
+  const eventOrganizerWebsite = req.body.eventOrganizerWebsite;
+ 
   // génère le slug pour l'évènement
   const eventSlug = generateUniqueSlug(eventTitle);
 
   // crée et formate la legende alt pour l'image de couverture
   const eventCoverImageAlt = eventTitle.toLowerCase();
+  // crée et formate la legende alt pour le logo de l'organisateur
+  //const eventOrganizerLogoAlt = eventOrganizerName.toLowerCase();
 
+  // Obtient le chemin relatif de l'image de couverture et du logo de l'organisateur
   const eventCoverImageRelativePath = path.relative(__dirname, eventCoverImage.path).replace(/\\/g, '/');
+  //const eventOrganizerLogoRelativePath = path.relative(__dirname, eventOrganizerLogo.path).replace(/\\/g, '/');
 
   try {
 
     // insert les données dans la bdd myevents table evenements
-    const insertQuery = 'INSERT INTO evenements (titre, date, lieu, image_source, image_alt, slug) VALUES(?, ?, ?, ?, ?, ?)';
+    const insertQuery = 'INSERT INTO evenements (titre, date, lieu, image_source, image_alt, presentation, programme, infos_pratiques, nom_client, site_client, slug) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
 
     const values = [
       eventTitle,
@@ -43,6 +53,11 @@ async function createEvent(req, res) {
       eventLocation,
       eventCoverImageRelativePath,
       eventCoverImageAlt,
+      eventPresentation,
+      eventProgramme,
+      eventPracticalInformations,
+      eventOrganizerName,
+      eventOrganizerWebsite, 
       eventSlug
     ];
 
@@ -154,11 +169,16 @@ function formatData(events) {
       source: `/assets/events-covers/${path.basename(evenement.image_source)}`, 
       alt: evenement.image_alt
     },
+    presentation: evenement.presentation,
+    programme: evenement.programme,
+    practicalInformations: evenement.infos_pratiques,
+    organizerName: evenement.nom_client,
+    organizerWebsite: evenement.site_client,
     creationDate: evenement.date_creation,
     slug: evenement.slug
   }));
 
   return formattedEvents;
-}; 
+};
 
 module.exports = { createEvent, removeEvent, getAllEvents };
