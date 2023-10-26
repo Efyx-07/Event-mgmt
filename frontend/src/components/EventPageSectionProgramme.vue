@@ -27,6 +27,10 @@
     .EventPageSectionProgramme {
         .title_container {
 
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+
             h2 {
                 margin: 0;
                 font-size: 1.5rem;
@@ -37,6 +41,13 @@
                 background: $accentColor2;
             }
 
+        }
+        .programme_container {
+            padding: 2rem 0;
+            
+            p {
+                margin: 0;
+            }
         }
     }
     

@@ -26,6 +26,9 @@
     @import '@/assets/sass/variables.scss';
     .EventPageSectionPracticalInformations {
         .title_container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
 
             h2 {
                 margin: 0;
@@ -37,6 +40,13 @@
                 background: $accentColor2;
             }
 
+        }
+        .practicalInformations_container {
+            padding: 2rem 0;
+            
+            p {
+                margin: 0;
+            }
         }
     }
     
