@@ -1,0 +1,79 @@
+<template>
+
+    <div class="footer">
+
+        <div class="content">
+
+            <div class="links_container">
+                <p>Conditions d'utilisation</p>
+                <p>Contact</p>
+            </div>
+
+            <div class="toTopButton_container"  @click="scrollToTop">
+                <Icon icon="iconamoon:arrow-up-2-duotone" class="toTopIcon"/>
+            </div>
+
+        </div>
+
+    </div>
+    
+</template>
+
+<script setup>
+
+    import { Icon } from '@iconify/vue';
+
+     // permet le retour vers le haut de page
+     const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    };
+
+</script>
+
+<style lang="scss" scoped>
+
+    @import '@/assets/sass/variables.scss';
+    .footer {
+        width: 100%;
+        height: 8rem;
+        background: $lightColor;
+        border-top: solid 1px rgba($darkColor, .25);
+        display: flex;
+        justify-content: center;
+        .content {
+            width: 100%;
+            max-width: 75rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .links_container {
+                display: flex;
+                gap: 3rem;
+
+                p {
+                    margin: 0;
+                    font-size: .9rem ;
+                }
+            }
+            .toTopButton_container {
+                width: 3rem;
+                height: 3rem;
+                background: $accentColor2;
+                box-shadow: $shadow;
+                border-radius: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                .toTopIcon {
+                    color: $lightColor;
+                    font-size: 2.5rem;
+                }
+            }
+        }
+    }
+    
+</style>

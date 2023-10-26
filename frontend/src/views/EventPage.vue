@@ -10,6 +10,7 @@
                 <EventPageSectionPracticalInformations :selectedEvent="selectedEvent"/>
             </div>
         </div>
+        <EventPageFooter />
     </div>
     <ParticipantsInscriptionModal :selectedEvent="selectedEvent"/>
     
@@ -18,6 +19,7 @@
 <script setup>
 
     import EventPageHeader from '@/components/EventPageHeader.vue';
+    import EventPageFooter from '@/components/EventPageFooter.vue'
     import EventCard from '@/components/EventCard.vue';
     import EventPageSectionPresentation from '@/components/EventPageSectionPresentation.vue';
     import EventPageSectionProgramme from '@/components/EventPageSectionProgramme.vue';
