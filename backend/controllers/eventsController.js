@@ -145,6 +145,10 @@ async function removeEvent(req, res) {
   }
 };
 
+// controller pour la modification d'un évènement
+async function updateEvent(req, res) {
+};
+
 // controller pour recupération de tous les évènements
 async function getAllEvents(req, res) {
 
@@ -197,4 +201,4 @@ function formatData(events) {
   return formattedEvents;
 };
 
-module.exports = { createEvent, removeEvent, getAllEvents };
+module.exports = { createEvent, removeEvent, updateEvent, getAllEvents };

@@ -1,136 +1,134 @@
 <template>
     
-    <form class="createEventForm" @submit.prevent="validateEventCreation" enctype="multipart/form-data">
+    <form class="updateEventForm" @submit.prevent="updateEvent" enctype="multipart/form-data">
 
         <div class="inputs_wrapper">
 
             <div class="input-container">
-                <label for="event-title">Titre de l'évènement</label>
+                <label for="newEvent-title">Titre de l'évènement</label>
                 <input 
-                    type="text"
-                    name="eventTitle"
-                    required
-                    id="create_eventTitle"
                     class="input-text"
-                    v-model="eventTitle"
+                    type="text"
+                    name="newEventTitle"
+                    required
+                    id="newEventTitle"
+                    v-model="newEventTitle"
                 >
             </div>
 
             <div class="input-container" >
-                <label for="event-coverImage">Image de couverture</label>
-                <input 
+                <label for="newEvent-coverImage">Image de couverture</label>
+                <input
                     type="file"
-                    name="eventCoverImage"
-                    required
+                    name="newEventCoverImage"
                     accept="image/jpg, image/jpeg, image/png"
                     class="image-input"
-                    id="create_coverImage"
-                    @change="handleCoverImageFileChange"
+                    id="newEventCoverImage"
+                    @change="handleNewCoverImageFileChange"
                 >
             </div> 
 
             <div class="input-container">
-                <label for="event-date">Date de l'évènement</label>
+                <label for="newEvent-date">Date de l'évènement</label>
                 <input 
+                    class="input-text"
                     type="date"
-                    name="eventDate"
+                    name="newEventDate"
                     required
-                    id="create_eventDate"
-                    class="input-text"
-                    v-model="eventDate"
+                    id="newEventDate"
+                    v-model="newEventDate"
                 >
             </div>
 
             <div class="input-container">
-                <label for="event-location">Lieu de l'évènement</label>
+                <label for="newEvent-location">Lieu de l'évènement</label>
                 <input 
-                    type="text"
-                    name="eventLocation"
-                    required
-                    id="create_eventLocation"
                     class="input-text"
-                    v-model="eventLocation"
+                    type="text"
+                    name="newEventLocation"
+                    required
+                    id="newEventLocation"
+                    v-model="newEventLocation"
                 >
             </div>
 
             <div class="input-container">
-                <label for="event-presentation">Présentation de l'évènement</label>
+                <label for="newEvent-presentation">Présentation de l'évènement</label>
                 <textarea
-                    name="eventPresentation"
-                    required
-                    id="create_eventPresentation"
                     class="input-text"
-                    v-model="eventPresentation"
+                    name="newEventPresentation"
+                    required
+                    id="newEventPresentation"
+                    v-model="newEventPresentation"
                 >   
                 </textarea>   
             </div>
 
             <div class="input-container">
-                <label for="event-programme">Programme de l'évènement</label>
+                <label for="newEvent-programme">Programme de l'évènement</label>
                 <textarea
-                    name="eventProgramme"
-                    required
-                    id="create_eventProgramme"
                     class="input-text"
-                    v-model="eventProgramme"
+                    name="newEventProgramme"
+                    required
+                    id="newEventProgramme"
+                    v-model="newEventProgramme"
                 >   
                 </textarea>   
             </div>
 
             <div class="input-container">
-                <label for="event-practicalInformations">Informations pratiques</label>
+                <label for="newEvent-practicalInformations">Informations pratiques</label>
                 <textarea
-                    name="eventPracticalInformations"
-                    required
-                    id="create_eventPracticalInformations"
                     class="input-text"
-                    v-model="eventPracticalInformations"
+                    name="newEventPracticalInformations"
+                    required
+                    id="newEventPracticalInformations"
+                    v-model="newEventPracticalInformations"
                 >   
                 </textarea>   
             </div>
 
             <div class="input-container">
-                <label for="event-organizerName">Nom de l'organisateur</label>
+                <label for="newEvent-organizerName">Nom de l'organisateur</label>
                 <input 
-                    type="text"
-                    name="eventOrganizerName"
-                    required
-                    id="create_eventOrganizerName"
                     class="input-text"
-                    v-model="eventOrganizerName"
+                    type="text"
+                    name="newEventOrganizerName"
+                    required
+                    id="newEventOrganizerName"
+                    v-model="newEventOrganizerName"
                 >
             </div>
 
             <div class="input-container">
-                <label for="event-organizerLogo">Logo de l'organisateur</label>
+                <label for="newEvent-organizerLogo">Logo de l'organisateur</label>
                 <input 
                     type="file"
-                    name="eventOrganizerLogo"
-                    required
+                    name="newEventOrganizerLogo"
                     accept="image/jpg, image/jpeg, image/png"
                     class="image-input"
-                    id="create_eventOrganizerLogo"
-                    @change="handleOrganizerLogoFileChange"
+                    id="newEventOrganizerLogo"
+                    @change="handleNewOrganizerLogoFileChange"
                 >
             </div> 
 
             <div class="input-container">
-                <label for="event-organizerWebsite">Site web de l'organisateur</label>
+                <label for="newEvent-organizerWebsite">Site web de l'organisateur</label>
                 <input 
+                    class="input-text"
                     type="url"
-                    name="eventOrganizerWebsite"
+                    name="newEventOrganizerWebsite"
                     placeholder="https://www.example.com"
                     required
-                    id="create_eventOrganizerWebsite"
-                    class="input-text"
-                    v-model="eventOrganizerWebsite"
+                    id="newEventOrganizerWebsite"
+                    v-model="newEventOrganizerWebsite"
                 >
             </div>
 
         </div>
         
-        <button class="createEvent-button" type="submit">
-            <p>Publier</p>
+        <button class="updateEvent-button" type="submit">
+            <p>Mettre à jour</p>
         </button>
 
     </form>
@@ -139,51 +137,75 @@
 
 <script setup>
 
-    import { ref } from 'vue';
+    import { ref, computed } from 'vue';
     import { useGlobalDataStore } from '@/stores/GlobalDataStore';
     import { useEventStore } from '@/stores/EventStore';
     import { useRouter } from 'vue-router';
 
-    // propriétés du formulaire
-    const eventTitle = ref('');
-    const eventCoverImage = ref('');
-    const eventDate = ref('');
-    const eventLocation = ref('');
-    const eventPresentation = ref('');
-    const eventProgramme = ref('');
-    const eventPracticalInformations = ref('');
-    const eventOrganizerName = ref('');
-    const eventOrganizerLogo = ref('');
-    const eventOrganizerWebsite  = ref('');
+    // recupère la props de selectedEvents en provenance de BackOfficeEventUpdatePage
+    const { selectedEvent } = defineProps(['selectedEvent']);
 
+    // convertit la date en objet Date
+    const dateObject = new Date(Date.parse(selectedEvent.date));
+
+    // formate la date pour pour préremplissage de l'input type "date"
+    const formattedDate = computed(() => {
+        return dateObject.toISOString().split('T')[0];
+    });
+
+    // propriétés du formulaire
+    const newEventTitle = ref(selectedEvent.title);
+    const newEventCoverImage = ref('');
+    const newEventDate = ref(formattedDate);
+    const newEventLocation = ref(selectedEvent.location);
+    const newEventPresentation = ref(selectedEvent.presentation);
+    const newEventProgramme = ref(selectedEvent.programme);
+    const newEventPracticalInformations = ref(selectedEvent.practicalInformations);
+    const newEventOrganizerName = ref(selectedEvent.organizerName);
+    const newEventOrganizerLogo = ref('');
+    const newEventOrganizerWebsite  = ref(selectedEvent.organizerWebsite);
+
+    // récupère l'ID de l'évènement sélectionné
+    const selectedEventId = ref(selectedEvent.id);
+    const eventId = selectedEventId.value;
+
+    console.log('id event selectionné: ', eventId)
 
     // gère le téléchargement du fichier image de couverture et stocke le fichier selectionné
-    const handleCoverImageFileChange = (event) => {
-        eventCoverImage.value = event.target.files[0];
+    const handleNewCoverImageFileChange = (event) => {
+        newEventCoverImage.value = event.target.files[0];
     };
 
     // gère le téléchargement du fichier logo de l'organisateur et stocke le fichier selectionné
-    const handleOrganizerLogoFileChange = (event) => {
-        eventOrganizerLogo.value = event.target.files[0];
+    const handleNewOrganizerLogoFileChange = (event) => {
+        newEventOrganizerLogo.value = event.target.files[0];
     };
 
     const eventStore = useEventStore();
     const router = useRouter();
 
     // soumet le formulaire
-    const validateEventCreation = async () => {
-        
+    const updateEvent = async () => {
+
+        console.log('ok')
+
         const formData = new FormData();
-        formData.append('eventTitle', eventTitle.value);
-        formData.append('eventCoverImage', eventCoverImage.value);
-        formData.append('eventDate', eventDate.value);
-        formData.append('eventLocation', eventLocation.value);
-        formData.append('eventPresentation', eventPresentation.value);
-        formData.append('eventProgramme', eventProgramme.value);
-        formData.append('eventPracticalInformations', eventPracticalInformations.value);
-        formData.append('eventOrganizerName', eventOrganizerName.value);
-        formData.append('eventOrganizerLogo', eventOrganizerLogo.value);
-        formData.append('eventOrganizerWebsite', eventOrganizerWebsite.value);
+        formData.append('newEventTitle', newEventTitle.value);
+        formData.append('newEventCoverImage', newEventCoverImage.value);
+        formData.append('newEventDate', newEventDate.value);
+        formData.append('newEventLocation', newEventLocation.value);
+        formData.append('newEventPresentation', newEventPresentation.value);
+        formData.append('newEventProgramme', newEventProgramme.value);
+        formData.append('newEventPracticalInformations', newEventPracticalInformations.value);
+        formData.append('newEventOrganizerName', newEventOrganizerName.value);
+        formData.append('newEventOrganizerLogo', newEventOrganizerLogo.value);
+        formData.append('newEventOrganizerWebsite', newEventOrganizerWebsite.value);
+
+        // vérifie si un fichier image de couverture a été sélectionné
+        if (!newEventCoverImage.value) {
+            // laisse l'image actuelle de l'événement en place
+            formData.delete('newEventCoverImage');
+        }
 
         // affiche les valeurs dans la console
         for (const pair of formData.entries()) {
@@ -194,8 +216,8 @@
 
             const { hostName } = useGlobalDataStore();
             
-            const response = await fetch (`${hostName}/events/create`, {
-                method: 'POST', 
+            const response = await fetch (`${hostName}/events/${eventId}`, {
+                method: 'PUT', 
                 body: formData,           
             });
 
@@ -203,31 +225,29 @@
                 const data = await response.json();
                 console.log('Réponse de l\'API:', data.message);
 
-                // ajoute le nouvel evenement dans la liste d'evenements dans le store
-                eventStore.events.push(data.event);
-
                 // charge les données des évènements
                 await eventStore.loadEventsData();
 
                 // renvoie vers une page de redirection
                 router.push('/admin_publication-confirmation');
-                        
+
             } else {
-                console.error('Erreur lors de la création d\'evenement :', response.statusText);
+                console.error('Erreur lors de la mise à jour de l\'evenement :', response.statusText);
             }
 
-        } catch(error) {
-            console.error('Erreur lors de la création d\'evenement :', error);
-        }  
+        } catch (error) {
+            console.error('Erreur lors de la mise à jour de l\'evenement :', error);
+        }
 
     };
+
 
 </script>
 
 <style lang="scss" scoped>
 
     @import '@/assets/sass/variables.scss';
-    .createEventForm {
+    .updateEventForm {
         width: 75%;
         display: flex;
         flex-direction: column;
@@ -305,7 +325,7 @@
                 
             }
         }
-        .createEvent-button {
+        .updateEvent-button {
             display: flex;
             justify-content: center;
             align-items: center;

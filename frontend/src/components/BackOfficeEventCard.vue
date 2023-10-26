@@ -69,7 +69,7 @@
   // permet de naviguer vers la page de modification de l'évènement selectionné
   const navigateToEventUpdatePage = (eventSlug) => {
     router.push({
-      name: 'BackOfficeEventUpdatePage',
+      name: 'EventToUpdate',
       params: { eventSlug }
     });
   };

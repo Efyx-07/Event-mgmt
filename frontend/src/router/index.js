@@ -50,6 +50,12 @@ const router = createRouter({
         beforeEnter: authGuard,
       },
       {
+        path: '/admin_event-update/:eventSlug',
+        name: 'EventToUpdate',
+        component: BackOfficeEventUpdatePage,
+        beforeEnter: authGuard,
+      },
+      {
         path: '/admin_your-account',
         name: 'BackOfficeAdminYourAccount',
         component: BackOfficeAdminYourAccount,

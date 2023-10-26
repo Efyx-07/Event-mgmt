@@ -30,6 +30,12 @@ router.post('/create', upload.fields([
 // route pour la suppression d'un évènement
 router.delete('/:eventId', eventsController.removeEvent);
 
+// route pour la modification d'un évènement
+router.put('/:eventId', upload.fields([
+  { name: 'eventCoverImage', maxCount: 1 },
+  { name: 'eventOrganizerLogo', maxCount: 1 },
+]), eventsController.updateEvent);
+
 // route pour la récupération de tous les évènements
 router.get('/', eventsController.getAllEvents);
 
