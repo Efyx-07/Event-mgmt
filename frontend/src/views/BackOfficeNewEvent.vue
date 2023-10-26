@@ -12,15 +12,29 @@
                 </div>
             </header>
 
-            <div class="newEventPage_content">
-                <CreateEventForm />
+            <div class="newEventOperations_container">
+
+                <div class="newEventOperations">
+
+                    <div class="newEventCreation-section newEventOperations-section">
+
+                        <div class="sectionTitle_container">
+                            <p class="sectionTitle">Données de l'évènement</p>
+                            <div class="line"></div>
+                        </div>
+
+                        <CreateEventForm class="createEventForm"/>
+
+                    </div>
+
+                </div>
+
             </div>
 
         </div>
 
     </div>
-    
-    
+      
 </template>
 
 <script setup>
@@ -51,12 +65,48 @@
                     }
                 }
             }
-
-            &_content {
+            .newEventOperations_container {
                 width: 100%;
-                padding: 3rem;
-                max-width: $contentMaxWidth;
+                padding: 2rem 3rem;
+                .newEventOperations {
+                    background: $ultraLightColor;
+                    box-shadow: $shadow;
+                    border-radiuS: $containerRadius;
+                    padding: 2rem;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 3rem;
+
+                    &-section {
+                        display: flex;
+                        flex-direction: column;
+                        .sectionTitle_container {
+                            display: flex;
+                            align-items: baseline;
+                            gap: 1rem;
+
+                            .sectionTitle {
+                                margin: 0;
+                                font-size: 1.25rem;
+                                font-weight: 700;
+                                white-space: nowrap;
+                            }
+
+                            .line {
+                                width: 100%;
+                                height: 1px;
+                                background: $accentColorBackof3;
+                            }
+                        }
+                        .createEventForm {
+                            align-self: center;
+                            margin-top: 3rem;
+                        }
+
+                    }
+                }
             }
+            
         }
     }
     

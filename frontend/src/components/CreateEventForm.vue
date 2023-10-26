@@ -1,4 +1,5 @@
 <template>
+    
     <form class="createEventForm" @submit.prevent="validateEventCreation" enctype="multipart/form-data">
 
         <div class="inputs_wrapper">
@@ -14,16 +15,18 @@
                 >
             </div>
 
-            <div class="input-container">
-                <label for="event-location">Lieu de l'évènement</label>
+            <div class="input-container" >
+                <label for="event-coverImage">Image de couverture</label>
                 <input 
-                    type="text"
-                    name="eventLocation"
+                    type="file"
+                    name="eventCoverImage"
                     required
-                    id="create_eventLocation"
-                    v-model="eventLocation"
+                    accept="image/jpg, image/jpeg, image/png"
+                    class="image-input"
+                    id="create_coverImage"
+                    @change="handleCoverImageFileChange"
                 >
-            </div>
+            </div> 
 
             <div class="input-container">
                 <label for="event-date">Date de l'évènement</label>
@@ -37,22 +40,89 @@
             </div>
 
             <div class="input-container">
-                <label for="event-coverImage">Photo de couverture</label>
+                <label for="event-location">Lieu de l'évènement</label>
+                <input 
+                    type="text"
+                    name="eventLocation"
+                    required
+                    id="create_eventLocation"
+                    v-model="eventLocation"
+                >
+            </div>
+
+            <div class="input-container">
+                <label for="event-presentation">Présentation de l'évènement</label>
+                <textarea
+                    name="eventPresentation"
+                    required
+                    id="create_eventPresentation"
+                    v-model="eventPresentation"
+                >   
+                </textarea>   
+            </div>
+
+            <div class="input-container">
+                <label for="event-programme">Programme de l'évènement</label>
+                <textarea
+                    name="eventProgramme"
+                    required
+                    id="create_eventProgramme"
+                    v-model="eventProgramme"
+                >   
+                </textarea>   
+            </div>
+
+            <div class="input-container">
+                <label for="event-practicalInformations">Informations pratiques</label>
+                <textarea
+                    name="eventPracticalInformations"
+                    required
+                    id="create_eventPracticalInformations"
+                    v-model="eventPracticalInformations"
+                >   
+                </textarea>   
+            </div>
+
+            <div class="input-container">
+                <label for="event-organizerName">Nom de l'organisateur</label>
+                <input 
+                    type="text"
+                    name="eventOrganizerName"
+                    required
+                    id="create_eventOrganizerName"
+                    v-model="eventOrganizerName"
+                >
+            </div>
+
+            <div class="input-container">
+                <label for="event-organizerLogo">Logo de l'organisateur</label>
                 <input 
                     type="file"
-                    name="eventCoverImage"
+                    name="eventOrganizerLogo"
                     required
                     accept="image/jpg, image/jpeg, image/png"
-                    class="coverImage-input"
-                    id="create_coverImage"
-                    @change="handleCoverImageFileChange"
+                    class="image-input"
+                    id="create_eventOrganizerLogo"
+                    @change="handleOrganizerLogoFileChange"
                 >
             </div> 
+
+            <div class="input-container">
+                <label for="event-organizerWebsite">Site web de l'organisateur</label>
+                <input 
+                    type="url"
+                    name="eventOrganizerWebsite"
+                    placeholder="https://www.example.com"
+                    required
+                    id="create_eventOrganizerWebsite"
+                    v-model="eventOrganizerWebsite"
+                >
+            </div>
 
         </div>
         
         <button class="createEvent-button" type="submit">
-            <p>Publier l'évènement</p>
+            <p>Publier</p>
         </button>
 
     </form>
@@ -68,13 +138,25 @@
 
     // propriétés du formulaire
     const eventTitle = ref('');
-    const eventLocation = ref('');
-    const eventDate = ref('');
     const eventCoverImage = ref('');
+    const eventDate = ref('');
+    const eventLocation = ref('');
+    const eventPresentation = ref('');
+    const eventProgramme = ref('');
+    const eventPracticalInformations = ref('');
+    const eventOrganizerName = ref('');
+    const eventOrganizerLogo = ref('');
+    const eventOrganizerWebsite  = ref('');
 
-    // gère le telechargement du fichier image et stocke le fichier selectionné
+
+    // gère le téléchargement du fichier image de couverture et stocke le fichier selectionné
     const handleCoverImageFileChange = (event) => {
         eventCoverImage.value = event.target.files[0];
+    };
+
+    // gère le téléchargement du fichier logo de l'organisateur et stocke le fichier selectionné
+    const handleOrganizerLogoFileChange = (event) => {
+        eventOrganizerLogo.value = event.target.files[0];
     };
 
     const eventStore = useEventStore();
@@ -85,9 +167,15 @@
         
         const formData = new FormData();
         formData.append('eventTitle', eventTitle.value);
-        formData.append('eventLocation', eventLocation.value);
-        formData.append('eventDate', eventDate.value);
         formData.append('eventCoverImage', eventCoverImage.value);
+        formData.append('eventDate', eventDate.value);
+        formData.append('eventLocation', eventLocation.value);
+        formData.append('eventPresentation', eventPresentation.value);
+        formData.append('eventProgramme', eventProgramme.value);
+        formData.append('eventPracticalInformations', eventPracticalInformations.value);
+        formData.append('eventOrganizerName', eventOrganizerName.value);
+        formData.append('eventOrganizerLogo', eventOrganizerLogo.value);
+        formData.append('eventOrganizerWebsite', eventOrganizerWebsite.value);
 
         // affiche les valeurs dans la console
         for (const pair of formData.entries()) {
@@ -132,50 +220,88 @@
 
     @import '@/assets/sass/variables.scss';
     .createEventForm {
+        width: 75%;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        background: $ultraLightColor;
-        box-shadow: $shadow;
-        max-width: 50%;
-        padding: 3rem;
-        gap: 3rem;
-
+        gap: 2rem;
         .inputs_wrapper {
-            width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 1rem;
-
+            gap: 2rem;
             .input-container {
                 display: flex;
                 flex-direction: column;
                 gap: .5rem;
 
                 label {
-                    font-size: 1.3rem;
+                    margin: 0;
                     font-weight: 700;
                 }
 
                 input {
-                    height: 2.5rem;
+                    width: 100%;
+                    height: 3rem;
+                    border: solid 1px rgba($accentColorBackof3, .25);
                     font-size: 1rem;
-                    padding: 1rem;
-                    border: solid 1px rgba($darkColor, .25);
+                    outline: none;
 
                     &:focus {
-                        outline: none;
-                        border: solid 2px $accentColorBackof2;
+                        background: transparent;
+                        border: solid 1px $accentColorBackof2;
                     }
                 }
-                .coverImage-input {
-                    border: none;
+
+                textarea {
+                    width: 100%;
+                    height: 6rem;
+                    border: solid 1px rgba($accentColorBackof3, .25);
+                    font-size: 1rem;
+                    outline: none;
+
+                    &:focus {
+                        background: transparent;
+                        border: solid 1px $accentColorBackof2;
+                    }
                 }
+                .image-input {
+                    border: none;
+
+                    &::file-selector-button {
+                        height: 2.5rem;
+                        padding: 0 1rem;
+                        margin-right: 1rem;
+                        border: solid 1px rgba($accentColorBackof3, .25);
+                        background: transparent;
+                        color: $darkColor;
+                        cursor: pointer;
+
+                        &:hover {
+                            color: $accentColorBackof2;
+                            border: solid 1px $accentColorBackof2;
+                        }
+
+                    }
+
+                    &:focus {
+                        border: none
+                    }
+                }
+
+                
+
+                
             }
         }
         .createEvent-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 8rem;
+            height: 2rem;
             border: none;
             background: $darkColorBackOf;
+            color: $lightColor;
+            align-self: end;
             cursor: pointer;
 
             &:hover {
@@ -184,10 +310,7 @@
 
             p {
                 margin: 0;
-                color: $lightColor;
-                font-size: 1.3rem;
                 font-weight: 700;
-                padding: .7rem 1rem;
             }
         }
     }

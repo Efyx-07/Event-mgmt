@@ -51,17 +51,17 @@
         @include adminForm;
     }
     .adminRegistration-section {
-    .aboutNotification {
-        border: solid 1px rgba($accentColorBackof3, .25);
-        padding: 1rem;
-        margin-top: 2rem;
+        .aboutNotification {
+            border: solid 1px rgba($accentColorBackof3, .25);
+            padding: 1rem;
+            margin-top: 2rem;
 
-        p {
-            margin: 0;
-            font-size: .75rem;
-            font-weight: 600;
+            p {
+                margin: 0;
+                font-size: .75rem;
+                font-weight: 600;
+            }
         }
     }
-}
         
 </style>
