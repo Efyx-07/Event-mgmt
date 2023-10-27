@@ -145,9 +145,164 @@ async function removeEvent(req, res) {
   }
 };
 
-// controller pour la modification d'un évènement
+// controller pour la modification d'un événement
 async function updateEvent(req, res) {
-};
+  // id de l'événement à mettre à jour
+  const eventId = req.params.eventId;
+
+  // récupère les données textuelles mises à jour du formulaire
+  const updatedData = {
+    eventTitle: req.body.newEventTitle,
+    eventDate: req.body.newEventDate,
+    eventLocation: req.body.newEventLocation,
+    eventPresentation: req.body.newEventPresentation,
+    eventProgramme: req.body.newEventProgramme,
+    eventPracticalInformations: req.body.newEventPracticalInformations,
+    eventOrganizerName: req.body.newEventOrganizerName,
+    eventOrganizerWebsite: req.body.newEventOrganizerWebsite,
+  };
+
+  try {
+    const updateTextDataQuery = 'UPDATE evenements SET titre=?, date=?, lieu=?, presentation=?, programme=?, infos_pratiques=?, nom_client=?, site_client=? WHERE id=?';
+
+    const textDataValues = [
+      updatedData.eventTitle,
+      updatedData.eventDate,
+      updatedData.eventLocation,
+      updatedData.eventPresentation,
+      updatedData.eventProgramme,
+      updatedData.eventPracticalInformations,
+      updatedData.eventOrganizerName,
+      updatedData.eventOrganizerWebsite,
+      eventId
+    ];
+
+    // éxécute la requête pour la mise à jour des données textuelles
+    myEventsConnection.query(updateTextDataQuery, textDataValues, (err, results) => {
+      if (err) {
+        console.error('Erreur lors de la mise à jour des données textuelles :', err);
+        return res.status(500).json({ error: 'Erreur lors de la mise à jour des données textuelles' });
+      }
+
+      // gère la mise à jour de l'image de couverture
+      if (req.files['newEventCoverImage'] && req.files['newEventCoverImage'][0]) {
+        const eventCoverImage = req.files['newEventCoverImage'][0];
+        // crée le chemin relatif pour la nouvelle image de couverture
+        updatedData.eventCoverImageRelativePath = path.relative(__dirname, eventCoverImage.path).replace(/\\/g, '/');
+        // crée et formate la légende alt pour l'image de couverture
+        updatedData.eventCoverImageAlt = updatedData.eventTitle.toLowerCase();
+
+        myEventsConnection.query('SELECT image_source FROM evenements WHERE id = ?', [eventId], (err, imageResults) => {
+          if (err) {
+            console.error('Erreur lors de la récupération du chemin de l\'ancienne image :', err);
+            return res.status(500).json({ error: 'Erreur lors de la récupération du chemin de l\'ancienne image' });
+          }
+
+          const oldEventCoverImagePath = imageResults[0].image_source;
+
+          // supprime l'ancienne image de couverture de son dossier de stockage
+          if (fs.existsSync(oldEventCoverImagePath)) {
+            fs.unlink(oldEventCoverImagePath, (err) => {
+              if (err) {
+                console.error('Erreur lors de la suppression de l\'ancienne image de couverture :', err);
+              }
+            });
+          }
+
+          // met à jour l'image de couverture dans la base de données
+          const updateImageQuery = 'UPDATE evenements SET image_source=?, image_alt=? WHERE id = ?';
+          const imageValues = [
+            updatedData.eventCoverImageRelativePath,
+            updatedData.eventCoverImageAlt,
+            eventId,
+          ];
+
+          // éxécute la requête pour la mise à jour de l'image de couverture
+          myEventsConnection.query(updateImageQuery, imageValues, (err, imageUpdateResults) => {
+            if (err) {
+              console.error('Erreur lors de la mise à jour de l\'image de couverture dans la base de données :', err);
+              return res.status(500).json({ error: 'Erreur lors de la mise à jour de l\'image de couverture dans la base de données' });
+            }
+
+            // gère la mise à jour du logo de l'organisateur
+            if (req.files['newEventOrganizerLogo'] && req.files['newEventOrganizerLogo'][0]) {
+              const eventOrganizerLogo = req.files['newEventOrganizerLogo'][0];
+              // crée le chemin relatif pour le nouveau logo de l'organisateur
+              updatedData.eventOrganizerLogoRelativePath = path.relative(__dirname, eventOrganizerLogo.path).replace(/\\/g, '/');
+              // crée et formate la légende alt pour le logo de l'organisateur
+              updatedData.eventOrganizerLogoAlt = updatedData.eventOrganizerName.toLowerCase();
+
+              myEventsConnection.query('SELECT logo_client_source FROM evenements WHERE id = ?', [eventId], (err, logoResults) => {
+                if (err) {
+                  console.error('Erreur lors de la récupération du chemin de l\'ancien logo de l\'organisateur :', err);
+                  return res.status(500).json({ error: 'Erreur lors de la récupération du chemin de l\'ancien logo de l\'organisateur' });
+                }
+
+                const oldEventOrganizerLogoPath = logoResults[0].logo_client_source;
+
+                // supprime l'ancien logo de son dossier de stockage
+                if (fs.existsSync(oldEventOrganizerLogoPath)) {
+                  fs.unlink(oldEventOrganizerLogoPath, (err) => {
+                    if (err) {
+                      console.error('Erreur lors de la suppression de l\'ancien logo de l\'organisateur :', err);
+                    }
+                  });
+                }
+
+                // met à jour le logo de l'organisateur dans la base de données
+                const updateLogoQuery = 'UPDATE evenements SET logo_client_source=?, logo_client_alt=? WHERE id = ?';
+                const logoValues = [
+                  updatedData.eventOrganizerLogoRelativePath,
+                  updatedData.eventOrganizerLogoAlt,
+                  eventId,
+                ];
+
+                // éxécute la requête pour la mise à jour du logo de l'organisateur
+                myEventsConnection.query(updateLogoQuery, logoValues, (err, logoUpdateResults) => {
+                  if (err) {
+                    console.error('Erreur lors de la mise à jour du logo de l\'organisateur dans la base de données :', err);
+                    return res.status(500).json({ error: 'Erreur lors de la mise à jour du logo de l\'organisateur dans la base de données' });
+                  }
+
+                  res.status(200).json({ message: 'Événement modifié avec succès' });
+                });
+              });
+
+            } else {
+              // si aucun nouveau logo de l'organisateur n'a été renseigné, conserve les données du logo existant
+              myEventsConnection.query('SELECT logo_client_source, logo_client_alt FROM evenements WHERE id = ?', [eventId], (err, logoResults) => {
+                if (err) {
+                  console.error('Erreur lors de la récupération du chemin de l\'ancien logo de l\'organisateur :', err);
+                  return res.status(500).json({ error: 'Erreur lors de la récupération du chemin de l\'ancien logo de l\'organisateur' });
+                }
+                updatedData.eventOrganizerLogoRelativePath = logoResults[0].logo_client_source;
+                updatedData.eventOrganizerLogoAlt = logoResults[0].logo_client_alt;
+
+                res.status(200).json({ message: 'Événement modifié avec succès' });
+              });
+            }
+          });
+        });
+      } else {
+        // si aucune nouvelle image de couverture n'a été renseignée, conserve les données de l'image existante
+        myEventsConnection.query('SELECT image_source, image_alt FROM evenements WHERE id = ?', [eventId], (err, imageResults) => {
+          if (err) {
+            console.error('Erreur lors de la récupération du chemin de l\'ancienne image de couverture :', err);
+            return res.status(500).json({ error: 'Erreur lors de la récupération du chemin de l\'ancienne image de couverture' });
+          }
+          updatedData.eventCoverImageRelativePath = imageResults[0].image_source;
+          updatedData.eventCoverImageAlt = imageResults[0].image_alt;
+
+          res.status(200).json({ message: 'Événement modifié avec succès' });
+        });
+      }
+    });
+
+  } catch (error) {
+    console.error('Erreur :', error);
+    res.status(500).json({ error: 'Une erreur s\'est produite lors de la mise à jour des données textuelles' });
+  }
+}
 
 // controller pour recupération de tous les évènements
 async function getAllEvents(req, res) {
