@@ -162,6 +162,9 @@ async function updateEvent(req, res) {
     eventOrganizerWebsite: req.body.newEventOrganizerWebsite,
   };
 
+  // génère le slug pour l'évènement en cas de modification de titre
+  const eventSlug = generateUniqueSlug(updatedData.eventTitle);
+
   let updateEventCover = false; // Indicateur pour vérifier si la couverture doit être mise à jour
 
   if (req.files['newEventCoverImage'] && req.files['newEventCoverImage'][0]) {
@@ -169,7 +172,7 @@ async function updateEvent(req, res) {
   }
 
   try {
-    const updateTextDataQuery = 'UPDATE evenements SET titre=?, date=?, lieu=?, presentation=?, programme=?, infos_pratiques=?, nom_client=?, site_client=? WHERE id=?';
+    const updateTextDataQuery = 'UPDATE evenements SET titre=?, date=?, lieu=?, presentation=?, programme=?, infos_pratiques=?, nom_client=?, site_client=?, slug=? WHERE id=?';
 
     const textDataValues = [
       updatedData.eventTitle,
@@ -180,6 +183,7 @@ async function updateEvent(req, res) {
       updatedData.eventPracticalInformations,
       updatedData.eventOrganizerName,
       updatedData.eventOrganizerWebsite,
+      eventSlug,
       eventId
     ];
 
