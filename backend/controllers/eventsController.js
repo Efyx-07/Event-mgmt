@@ -220,34 +220,54 @@ function updateEventCoverImage(req, eventId, updatedData, res) {
     }
 
     const oldEventCoverImagePath = imageResults[0].image_source;
+    const absoluteOldEventCoverImagePath = path.join(__dirname, oldEventCoverImagePath);
 
     // Supprimer l'ancienne image de couverture de son dossier de stockage
-    if (fs.existsSync(oldEventCoverImagePath)) {
-      fs.unlink(oldEventCoverImagePath, (err) => {
+    if (fs.existsSync(absoluteOldEventCoverImagePath)) {
+      fs.unlink(absoluteOldEventCoverImagePath, (err) => {
         if (err) {
           console.error('Erreur lors de la suppression de l\'ancienne image de couverture :', err);
+        } else {
+          // Mettre à jour l'image de couverture dans la base de données
+          const updateImageQuery = 'UPDATE evenements SET image_source=?, image_alt=? WHERE id = ?';
+          const imageValues = [
+            updatedData.eventCoverImageRelativePath,
+            updatedData.eventCoverImageAlt,
+            eventId,
+          ];
+
+          // Exécuter la requête pour la mise à jour de l'image de couverture
+          myEventsConnection.query(updateImageQuery, imageValues, (err, imageUpdateResults) => {
+            if (err) {
+              console.error('Erreur lors de la mise à jour de l\'image de couverture dans la base de données :', err);
+              return res.status(500).json({ error: 'Erreur lors de la mise à jour de l\'image de couverture dans la base de données' });
+            }
+
+            // Appeler la fonction pour mettre à jour le logo de l'organisateur
+            updateOrganizerLogo(req, eventId, updatedData, res);
+          });
         }
       });
+    } else {
+      // Si le fichier image n'existe pas, mettez à jour directement la base de données
+      const updateImageQuery = 'UPDATE evenements SET image_source=?, image_alt=? WHERE id = ?';
+      const imageValues = [
+        updatedData.eventCoverImageRelativePath,
+        updatedData.eventCoverImageAlt,
+        eventId,
+      ];
+
+      // Exécuter la requête pour la mise à jour de l'image de couverture
+      myEventsConnection.query(updateImageQuery, imageValues, (err, imageUpdateResults) => {
+        if (err) {
+          console.error('Erreur lors de la mise à jour de l\'image de couverture dans la base de données :', err);
+          return res.status(500).json({ error: 'Erreur lors de la mise à jour de l\'image de couverture dans la base de données' });
+        }
+
+        // Appeler la fonction pour mettre à jour le logo de l'organisateur
+        updateOrganizerLogo(req, eventId, updatedData, res);
+      });
     }
-
-    // Mettre à jour l'image de couverture dans la base de données
-    const updateImageQuery = 'UPDATE evenements SET image_source=?, image_alt=? WHERE id = ?';
-    const imageValues = [
-      updatedData.eventCoverImageRelativePath,
-      updatedData.eventCoverImageAlt,
-      eventId,
-    ];
-
-    // Exécuter la requête pour la mise à jour de l'image de couverture
-    myEventsConnection.query(updateImageQuery, imageValues, (err, imageUpdateResults) => {
-      if (err) {
-        console.error('Erreur lors de la mise à jour de l\'image de couverture dans la base de données :', err);
-        return res.status(500).json({ error: 'Erreur lors de la mise à jour de l\'image de couverture dans la base de données' });
-      }
-
-      // Appeler la fonction pour mettre à jour le logo de l'organisateur
-      updateOrganizerLogo(req, eventId, updatedData, res);
-    });
   });
 }
 
@@ -268,10 +288,11 @@ function updateOrganizerLogo(req, eventId, updatedData, res) {
       }
 
       const oldEventOrganizerLogoPath = logoResults[0].logo_client_source;
+      const absoluteOldEventOrganizerLogoPath = path.join(__dirname, oldEventOrganizerLogoPath);
 
       // Supprimer l'ancien logo de son dossier de stockage
-      if (fs.existsSync(oldEventOrganizerLogoPath)) {
-        fs.unlink(oldEventOrganizerLogoPath, (err) => {
+      if (fs.existsSync(absoluteOldEventOrganizerLogoPath)) {
+        fs.unlink(absoluteOldEventOrganizerLogoPath, (err) => {
           if (err) {
             console.error('Erreur lors de la suppression de l\'ancien logo de l\'organisateur :', err);
           }
