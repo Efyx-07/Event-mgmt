@@ -162,8 +162,14 @@ async function updateEvent(req, res) {
     eventOrganizerWebsite: req.body.newEventOrganizerWebsite,
   };
 
-  // génère le slug pour l'évènement en cas de modification de titre
+  // modifie le slug pour l'évènement en cas de modification de titre
   const eventSlug = generateUniqueSlug(updatedData.eventTitle);
+
+  // modifie la legende alt pour l'image de couverture en cas de modification de titre
+  const eventCoverImageAlt = updatedData.eventTitle.toLowerCase();
+
+  // modifie la légende alt pour le logo de l'organisateur en cas de modification du nom de l'organisateur
+  const eventOrganizerLogoAlt = updatedData.eventOrganizerName.toLowerCase();
 
   let updateEventCover = false; // Indicateur pour vérifier si la couverture doit être mise à jour
 
@@ -172,16 +178,18 @@ async function updateEvent(req, res) {
   }
 
   try {
-    const updateTextDataQuery = 'UPDATE evenements SET titre=?, date=?, lieu=?, presentation=?, programme=?, infos_pratiques=?, nom_client=?, site_client=?, slug=? WHERE id=?';
+    const updateTextDataQuery = 'UPDATE evenements SET titre=?, date=?, lieu=?, image_alt=?, presentation=?, programme=?, infos_pratiques=?, nom_client=?, logo_client_alt=?, site_client=?, slug=? WHERE id=?';
 
     const textDataValues = [
       updatedData.eventTitle,
       updatedData.eventDate,
       updatedData.eventLocation,
+      eventCoverImageAlt,
       updatedData.eventPresentation,
       updatedData.eventProgramme,
       updatedData.eventPracticalInformations,
       updatedData.eventOrganizerName,
+      eventOrganizerLogoAlt,
       updatedData.eventOrganizerWebsite,
       eventSlug,
       eventId
@@ -233,10 +241,9 @@ function updateEventCoverImage(req, eventId, updatedData, res) {
           console.error('Erreur lors de la suppression de l\'ancienne image de couverture :', err);
         } else {
           // Mettre à jour l'image de couverture dans la base de données
-          const updateImageQuery = 'UPDATE evenements SET image_source=?, image_alt=? WHERE id = ?';
+          const updateImageQuery = 'UPDATE evenements SET image_source=? WHERE id = ?';
           const imageValues = [
             updatedData.eventCoverImageRelativePath,
-            updatedData.eventCoverImageAlt,
             eventId,
           ];
 
@@ -281,8 +288,6 @@ function updateOrganizerLogo(req, eventId, updatedData, res) {
     const eventOrganizerLogo = req.files['newEventOrganizerLogo'][0];
     // Créer le chemin relatif pour le nouveau logo de l'organisateur
     updatedData.eventOrganizerLogoRelativePath = path.relative(__dirname, eventOrganizerLogo.path).replace(/\\/g, '/');
-    // Créer et formater la légende alt pour le logo de l'organisateur
-    updatedData.eventOrganizerLogoAlt = updatedData.eventOrganizerName.toLowerCase();
 
     // Récupérer le chemin de l'ancien logo de l'organisateur depuis la base de données
     myEventsConnection.query('SELECT logo_client_source FROM evenements WHERE id = ?', [eventId], (err, logoResults) => {
@@ -304,10 +309,9 @@ function updateOrganizerLogo(req, eventId, updatedData, res) {
       }
 
       // Mettre à jour le logo de l'organisateur dans la base de données
-      const updateLogoQuery = 'UPDATE evenements SET logo_client_source=?, logo_client_alt=? WHERE id = ?';
+      const updateLogoQuery = 'UPDATE evenements SET logo_client_source=? WHERE id = ?';
       const logoValues = [
         updatedData.eventOrganizerLogoRelativePath,
-        updatedData.eventOrganizerLogoAlt,
         eventId,
       ];
 
@@ -323,13 +327,12 @@ function updateOrganizerLogo(req, eventId, updatedData, res) {
     });
   } else {
     // Si aucun nouveau logo de l'organisateur n'a été renseigné, conserve les données du logo existant
-    myEventsConnection.query('SELECT logo_client_source, logo_client_alt FROM evenements WHERE id = ?', [eventId], (err, logoResults) => {
+    myEventsConnection.query('SELECT logo_client_source FROM evenements WHERE id = ?', [eventId], (err, logoResults) => {
       if (err) {
         console.error('Erreur lors de la récupération du chemin de l\'ancien logo de l\'organisateur :', err);
         return res.status(500).json({ error: 'Erreur lors de la récupération du chemin de l\'ancien logo de l\'organisateur' });
       }
       updatedData.eventOrganizerLogoRelativePath = logoResults[0].logo_client_source;
-      updatedData.eventOrganizerLogoAlt = logoResults[0].logo_client_alt;
 
       res.status(200).json({ message: 'Événement modifié avec succès' });
     });
