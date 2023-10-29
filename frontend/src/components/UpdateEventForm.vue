@@ -229,7 +229,7 @@
                 await eventStore.loadEventsData();
 
                 // renvoie vers une page de redirection
-                router.push('/admin_publication-confirmation');
+                router.push('/admin_update-confirmation');
 
             } else {
                 console.error('Erreur lors de la mise à jour de l\'evenement :', response.statusText);

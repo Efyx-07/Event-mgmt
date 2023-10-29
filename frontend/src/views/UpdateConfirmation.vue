@@ -1,9 +1,9 @@
 <template>
 
-    <div class="publicationConfirmation">
+    <div class="updateConfirmation">
         <BackOfficeNavAside class="backOfficeNavAside"/>
-        <div class="publicationConfirmation_content">
-            <p>Bravo, votre évènement a été publié avec succès !</p>
+        <div class="updateConfirmation_content">
+            <p>Bravo, votre évènement a été modifié avec succès !</p>
             <Icon icon="streamline-emojis:ok-hand-2" class="icon"/>
             <div type="submit" class="toEvents_button" @click="navigateToHomepage">
                 <p>Retour à vos évènements</p>
@@ -32,12 +32,12 @@
 <style lang="scss" scoped>
 
     @import '@/assets/sass/variables.scss';
-    .publicationConfirmation {
+    .updateConfirmation {
         position:relative;
         min-height: 100vh;
         display: grid;
         grid-template-columns: 1fr 3fr;
-        .publicationConfirmation_content {
+        .updateConfirmation_content {
             grid-column: 2 / -1;
             position: absolute;
             top: 50%;

@@ -7,6 +7,7 @@ import BackOfficeHomePage from '@/views/BackOfficeHomePage.vue';
 import BackOfficeNewEvent from '@/views/BackOfficeNewEvent.vue';
 import BackOfficeEventUpdatePage from '@/views/BackOfficeEventUpdatePage.vue';
 import PublicationConfirmation from '@/views/PublicationConfirmation.vue';
+import UpdateConfirmation from '@/views/UpdateConfirmation.vue';
 import ParticipantsList from '@/views/ParticipantsList.vue';
 import BackOfficeAdminYourAccount from '@/views/BackOfficeAdminYourAccount.vue';
 import BackOfficeAdminAddAdmin from '@/views/BackOfficeAdminAddAdmin.vue';
@@ -74,18 +75,26 @@ const router = createRouter({
         beforeEnter: authGuard,
       },
       {
+        path: '/admin_participants-list/:eventSlug',
+        name: 'ParticipantsList',
+        component: ParticipantsList,
+        beforeEnter: authGuard,
+      },
+
+      // pages de confirmation
+      {
         path: '/admin_publication-confirmation',
         name: 'PublicationConfirmation',
         component: PublicationConfirmation,
         beforeEnter: authGuard,
       },
       {
-        path: '/admin_participants-list/:eventSlug',
-        name: 'ParticipantsList',
-        component: ParticipantsList,
+        path: '/admin_update-confirmation',
+        name: 'UpdateConfirmation',
+        component: UpdateConfirmation,
         beforeEnter: authGuard,
-      },
-      
+      }, 
+
     ]
 });
 
