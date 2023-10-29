@@ -145,12 +145,13 @@
     // recupère la props de selectedEvents en provenance de BackOfficeEventUpdatePage
     const { selectedEvent } = defineProps(['selectedEvent']);
 
-    // convertit la date en objet Date
-    const dateObject = new Date(Date.parse(selectedEvent.date));
-
+    // convertit la date de l'API en une date locale
+    const dateFromAPI = new Date(selectedEvent.date);
+    // ajuste l'heure à midi (12:00) pour éviter les problèmes de fuseau horaire
+    dateFromAPI.setHours(12, 0, 0, 0);
     // formate la date pour pour préremplissage de l'input type "date"
     const formattedDate = computed(() => {
-        return dateObject.toISOString().split('T')[0];
+        return dateFromAPI.toISOString().split('T')[0];
     });
 
     // propriétés du formulaire
@@ -240,7 +241,6 @@
         }
 
     };
-
 
 </script>
 
