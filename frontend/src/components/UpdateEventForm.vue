@@ -180,8 +180,6 @@
     const selectedEventId = ref(selectedEvent.id);
     const eventId = selectedEventId.value;
 
-    console.log('id event selectionné: ', eventId)
-
     // gère le téléchargement du fichier image de couverture et stocke le fichier selectionné
     const handleNewCoverImageFileChange = (event) => {
         newEventCoverImage.value = event.target.files[0];
@@ -197,8 +195,6 @@
 
     // soumet le formulaire
     const updateEvent = async () => {
-
-        console.log('ok')
 
         const formData = new FormData();
         formData.append('newEventTitle', newEventTitle.value);
@@ -234,7 +230,6 @@
 
             if (response.ok) {
                 const data = await response.json();
-                console.log('Réponse de l\'API:', data.message);
 
                 // charge les données des évènements
                 await eventStore.loadEventsData();

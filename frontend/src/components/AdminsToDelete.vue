@@ -52,16 +52,17 @@
         });
 
         if (response.ok) {
-        // administrateur supprimé avec succès, met à jour la liste des administrateurs filtrés
-        filteredAdmins.value = adminStore.filteredAdmins;
-        
-        // rend visible successMessage
-        successMessage.value[adminId] = true;
+            
+            // administrateur supprimé avec succès, met à jour la liste des administrateurs filtrés
+            filteredAdmins.value = adminStore.filteredAdmins;
+            
+            // rend visible successMessage
+            successMessage.value[adminId] = true;
 
-        // fais un reload de la page après apparition de successMessage
-        setTimeout(() => {
-                window.location.reload();
-            }, 1000);
+            // fais un reload de la page après apparition de successMessage
+            setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
         
         } else {
             console.error('Erreur lors de la suppression de l\'administrateur');
