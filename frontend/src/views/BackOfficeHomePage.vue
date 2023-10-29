@@ -48,11 +48,16 @@
     import RemoveEventConfirmationModal from '@/components/RemoveEventConfirmationModal.vue';
     import { Icon } from '@iconify/vue';
     import { useEventStore } from '@/stores/EventStore';
-    import { computed } from 'vue';
+    import { computed, onMounted } from 'vue';
 
     // permet de vérifier le nombre d'évènements créés
     const eventsCount = computed(() => {
         return useEventStore().events.length;
+    });
+
+    // appel de la fonction de tri par date de creation (du plus récent au plus ancien) au moment du chargement des données
+    onMounted(() => {
+        useEventStore().sortEventByCreationDateNewToOld();
     });
 
 </script>

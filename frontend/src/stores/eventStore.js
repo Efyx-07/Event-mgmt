@@ -19,5 +19,12 @@ export const useEventStore = defineStore('events', {
                 console.error('Erreur lors du chargement des données des évènements: ', error);
             }
         },
+
+        // trie les évènements par date de création (du plus récent au plus ancien)
+        sortEventByCreationDateNewToOld() {
+            this.events.sort((a, b) => {
+                return new Date(b.creationDate) - new Date(a.creationDate);
+              });
+        },
     },
 });
