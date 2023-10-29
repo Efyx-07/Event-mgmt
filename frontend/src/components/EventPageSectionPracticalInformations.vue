@@ -6,9 +6,7 @@
             <div class="separator"></div>
         </div>
         <div class="practicalInformations_container">
-            <p>
-                {{ selectedEvent.practicalInformations }}
-            </p>
+            <p v-html="formattedPracticalInformations"></p>
         </div>
     </div>
     
@@ -16,8 +14,15 @@
 
 <script setup>
 
+    import { computed } from 'vue';
+
     // recupère la props de selectedEvents en provenance de EventPage
     const { selectedEvent } = defineProps(['selectedEvent']);
+
+    // fonction pour formater les sauts de ligne en balises <br>
+    const formattedPracticalInformations = computed(() => {
+        return selectedEvent.practicalInformations.replace(/\r\n/g, '<br>');
+    });
 
 </script>
 
