@@ -1,11 +1,11 @@
 <template>
 
-    <div class="updateConfirmation">
+    <div class="removeConfirmation">
         <BackOfficeNavAside class="backOfficeNavAside"/>
-        <div class="updateConfirmation_content">
-            <p>Bravo, votre évènement a été modifié avec succès !</p>
+        <div class="removeConfirmation_content">
+            <p>Bravo, votre évènement a été supprimé avec succès !</p>
             <Icon icon="streamline-emojis:ok-hand-2" class="icon"/>
-            <div type="submit" class="toEvents_button" @click="navigateToHomepage">
+            <div type="submit" class="toEvents_button" @click="navigateToHomepageAndReload">
                 <p>Retour à vos évènements</p>
             </div>
         </div>
@@ -23,7 +23,7 @@
     const router = useRouter();
 
     // reconduis vers la page 'vos évènements'
-    const navigateToHomepage = () => {
+    const navigateToHomepageAndReload = () => {
         router.push('/admin_homepage');
     };
 
@@ -32,12 +32,12 @@
 <style lang="scss" scoped>
 
     @import '@/assets/sass/variables.scss';
-    .updateConfirmation {
+    .removeConfirmation {
         position:relative;
         min-height: 100vh;
         display: grid;
         grid-template-columns: 1fr 3fr;
-        .updateConfirmation_content {
+        .removeConfirmation_content {
             grid-column: 2 / -1;
             position: absolute;
             top: 50%;
@@ -77,5 +77,5 @@
             }
         }
     }
-       
+      
 </style>

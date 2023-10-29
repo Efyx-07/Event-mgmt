@@ -8,6 +8,7 @@ import BackOfficeNewEvent from '@/views/BackOfficeNewEvent.vue';
 import BackOfficeEventUpdatePage from '@/views/BackOfficeEventUpdatePage.vue';
 import PublicationConfirmation from '@/views/PublicationConfirmation.vue';
 import UpdateConfirmation from '@/views/UpdateConfirmation.vue';
+import RemoveConfirmation from '@/views/RemoveConfirmation.vue';
 import ParticipantsList from '@/views/ParticipantsList.vue';
 import BackOfficeAdminYourAccount from '@/views/BackOfficeAdminYourAccount.vue';
 import BackOfficeAdminAddAdmin from '@/views/BackOfficeAdminAddAdmin.vue';
@@ -94,6 +95,12 @@ const router = createRouter({
         component: UpdateConfirmation,
         beforeEnter: authGuard,
       }, 
+      {
+        path: '/admin_remove-confirmation',
+        name: 'RemoveConfirmation',
+        component: RemoveConfirmation,
+        beforeEnter: authGuard,
+      },
 
     ]
 });

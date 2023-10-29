@@ -29,6 +29,8 @@
     import { Icon } from '@iconify/vue';
     import { ref, onMounted } from 'vue';
     import { useGlobalDataStore } from '@/stores/GlobalDataStore';
+    import { useEventStore } from '@/stores/EventStore';
+    import { useRouter } from 'vue-router';
 
     // statut par défaut de la visibilité de la fenetre
     const isRemoveEventConfirmationModalVisible  = ref(false);
@@ -54,6 +56,9 @@
         });
     });
 
+    const eventStore = useEventStore();
+    const router = useRouter();
+
     // fonction pour confirmer la suppression de l'événement
     const confirmRemoveEvent = async () => {
         try {
@@ -70,6 +75,13 @@
             if (response.ok) {
                 const data = await response.json();
                 console.log(data.message);
+
+                // charge les données des évènements
+                await eventStore.loadEventsData();
+
+                // renvoie vers une page de redirection
+                router.push('/admin_remove-confirmation');
+
             } else {
                 console.error('Erreur lors de la suppression de l\'événement');
             }
