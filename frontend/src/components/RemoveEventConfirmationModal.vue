@@ -10,6 +10,7 @@
             <div class="askText_container">
                 <p>Etes-vous sûr de vouloir supprimer l'evenement :</p>
                 <p class="eventTitle">"{{ eventToRemove.eventTitle }}"</p>
+                <p>?</p>
             </div>
             
             <div class="buttons_container">
@@ -115,9 +116,10 @@
         align-items: center;
         transition: opacity .1s ease-in-out;
         .optionBox {
-            background: $darkColorBackOf;
-            border-radius: $containerRadius;
-            color: $lightColor;
+            background: $ultraLightColor;
+            border: solid 1px $darkColorBackOf;
+            box-shadow: $shadow;
+            color: $darkColor;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -135,7 +137,7 @@
                     font-weight: 400;
                 }
                 .eventTitle {
-                    font-weight: 600;
+                    font-weight: 700;
                 }
             }
             .alertMention {
@@ -152,7 +154,7 @@
                     margin: 0;
                     text-align: center;
                     font-size: .8rem;
-                    font-weight: 200;
+                    font-weight: 400;
                 }
             }
 
@@ -165,7 +167,7 @@
                     margin-top: 1rem;
                     padding: .5rem;
                     background: transparent;
-                    color: $lightColor;
+                    color: $darkColor;
                     border: solid 1px $accentColorBackof3;
                     cursor: pointer;
 
@@ -178,6 +180,7 @@
                     &:hover {
                         border-color: $accentColorBackof2;
                         background: $accentColorBackof2;
+                        color: $lightColor;
                     }
                 }
             }
