@@ -36,7 +36,7 @@
                     name="newEventDate"
                     required
                     id="newEventDate"
-                    v-model="newEventDate"
+                    v-model="userSelectedDate"
                 >
             </div>
 
@@ -137,7 +137,7 @@
 
 <script setup>
 
-    import { ref, computed } from 'vue';
+    import { ref, computed, watchEffect } from 'vue';
     import { useGlobalDataStore } from '@/stores/GlobalDataStore';
     import { useEventStore } from '@/stores/EventStore';
     import { useRouter } from 'vue-router';
@@ -154,10 +154,20 @@
         return dateFromAPI.toISOString().split('T')[0];
     });
 
+    // nouvelle variable réactive pour stocker la date modifiée par l'utilisateur
+    const userSelectedDate = ref(formattedDate.value);
+
+    // mettre cette nouvelle variable quand l'utilisateur modifie la date
+    watchEffect(() => {
+        if (userSelectedDate.value !== formattedDate.value) {
+            formattedDate.value = userSelectedDate.value;
+        }
+    });
+
     // propriétés du formulaire
     const newEventTitle = ref(selectedEvent.title);
     const newEventCoverImage = ref('');
-    const newEventDate = ref(formattedDate);
+    const newEventDate = ref(userSelectedDate);
     const newEventLocation = ref(selectedEvent.location);
     const newEventPresentation = ref(selectedEvent.presentation);
     const newEventProgramme = ref(selectedEvent.programme);
