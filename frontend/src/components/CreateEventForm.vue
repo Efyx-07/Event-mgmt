@@ -55,38 +55,17 @@
 
             <div class="input-container">
                 <label for="event-presentation">Présentation de l'évènement</label>
-                <textarea
-                    name="eventPresentation"
-                    required
-                    id="create_eventPresentation"
-                    class="input-text"
-                    v-model="eventPresentation"
-                >   
-                </textarea>   
+                <ckeditor :editor="editor" v-model="editorDataPresentation" :config="editorConfig" @input="updateEventPresentation"></ckeditor>
             </div>
 
             <div class="input-container">
                 <label for="event-programme">Programme de l'évènement</label>
-                <textarea
-                    name="eventProgramme"
-                    required
-                    id="create_eventProgramme"
-                    class="input-text"
-                    v-model="eventProgramme"
-                >   
-                </textarea>   
+                <ckeditor :editor="editor" v-model="editorDataProgramme" :config="editorConfig" @input="updateEventProgramme"></ckeditor>
             </div>
 
             <div class="input-container">
                 <label for="event-practicalInformations">Informations pratiques</label>
-                <textarea
-                    name="eventPracticalInformations"
-                    required
-                    id="create_eventPracticalInformations"
-                    class="input-text"
-                    v-model="eventPracticalInformations"
-                >   
-                </textarea>   
+                <ckeditor :editor="editor" v-model="editorDataPracticalInformations" :config="editorConfig" @input="updateEventPracticalInformations"></ckeditor>
             </div>
 
             <div class="input-container">
@@ -139,10 +118,11 @@
 
 <script setup>
 
-    import { ref } from 'vue';
+    import { ref, onMounted } from 'vue';
     import { useGlobalDataStore } from '@/stores/GlobalDataStore';
     import { useEventStore } from '@/stores/EventStore';
     import { useRouter } from 'vue-router';
+    import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
     // propriétés du formulaire
     const eventTitle = ref('');
@@ -156,7 +136,6 @@
     const eventOrganizerLogo = ref('');
     const eventOrganizerWebsite  = ref('');
 
-
     // gère le téléchargement du fichier image de couverture et stocke le fichier selectionné
     const handleCoverImageFileChange = (event) => {
         eventCoverImage.value = event.target.files[0];
@@ -165,6 +144,43 @@
     // gère le téléchargement du fichier logo de l'organisateur et stocke le fichier selectionné
     const handleOrganizerLogoFileChange = (event) => {
         eventOrganizerLogo.value = event.target.files[0];
+    };
+
+    // crée une instance CKEditor
+    const editor = ClassicEditor;
+    let editorDataPresentation = '';
+    let editorDataProgramme = '';
+    let editorDataPracticalInformations = '';
+    const editorConfig = {
+        toolbar: {
+        items: [
+            'bold', 
+            'italic',
+            'bulletedList', 
+            'numberedList', 
+            'undo', 
+            'redo'
+        ]
+        },
+        language: 'fr',
+    };
+
+    // lie les editorData aux propriétés du formulaire envoyées
+    onMounted(() => {
+        editorDataPresentation = eventPresentation.value;
+        editorDataProgramme = eventProgramme.value;
+        editorDataPracticalInformations = eventPracticalInformations.value;
+    });
+
+    // fonctions pour mettre à jour les propriétés du formulaires quand le contenu de l'éditeur change
+    const updateEventPresentation = (event) => {
+        eventPresentation.value = event;
+    }
+    const updateEventProgramme = (event) => {
+        eventProgramme.value = event;
+    };
+    const updateEventPracticalInformations = (event) => {
+        eventPracticalInformations.value = event;
     };
 
     const eventStore = useEventStore();
@@ -261,21 +277,6 @@
                 .input-text {
                     padding-left: 1rem;
                 }
-
-                textarea {
-                    width: 100%;
-                    height: 6rem;
-                    border: solid 1px rgba($accentColorBackof3, .25);
-                    font-size: 1rem;
-                    outline: none;
-                    font-family: 'Inter', sans-serif;
-                    padding: .5rem 1rem;
-
-                    &:focus {
-                        background: transparent;
-                        border: solid 1px $accentColorBackof2;
-                    }
-                }
                 .image-input {
                     border: none;
 
@@ -298,11 +299,7 @@
                     &:focus {
                         border: none
                     }
-                }
-
-                
-
-                
+                }  
             }
         }
         .createEvent-button {

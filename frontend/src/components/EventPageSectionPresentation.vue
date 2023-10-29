@@ -6,9 +6,7 @@
             <div class="separator"></div>
         </div>
         <div class="presentation_container">
-            <p>
-                {{ selectedEvent.presentation }}
-            </p>
+            <p v-html="selectedEvent.presentation"></p>
         </div>
     </div>
     

@@ -6,7 +6,7 @@
             <div class="separator"></div>
         </div>
         <div class="programme_container">
-            <p v-html="formattedProgramme"></p>
+            <p v-html="selectedEvent.programme"></p>
         </div>
     </div>
     
@@ -14,21 +14,8 @@
 
 <script setup>
 
-    import { computed } from 'vue';
-
     // recupère la props de selectedEvents en provenance de EventPage
     const { selectedEvent } = defineProps(['selectedEvent']);
-
-    // Fonction pour formater les sauts de ligne en balises <br> et [b] en <strong>
-  const formattedProgramme = computed(() => {
-    const text = selectedEvent.programme;
-
-    // Remplacer les balises [b] par <strong>
-    const formattedText = text.replace(/\[b\]/g, '<strong>').replace(/\[\/b\]/g, '</strong>');
-
-    // Remplacer les sauts de ligne par <br>
-    return formattedText.replace(/\r\n/g, '<br>');
-  });
 
 </script>
 
@@ -60,7 +47,6 @@
             
             p {
                 margin: 0;
-                text-align: center;
             }
         }
     }

@@ -2,6 +2,7 @@ import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import { useEventStore } from './stores/EventStore';
 import { useAdminStore } from './stores/AdminStore';
+import CKEditor from '@ckeditor/ckeditor5-vue';
 import App from './App.vue';
 import router from './router';
 
@@ -34,6 +35,7 @@ const initApp = async () => {
         console.error('Erreur lors du chargement des données: ', error);
     };
 
+    app.use(CKEditor);
     app.use(router);
     app.mount('#app');
 }; 
