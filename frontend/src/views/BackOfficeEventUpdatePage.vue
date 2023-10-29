@@ -20,9 +20,10 @@
                     <div class="updateEventOperations-section">
 
                         <div class="sectionTitle_container">
-                            <p class="sectionTitle">Modifier les données de l'évènement: {{ selectedEvent.title }}</p>
+                            <p class="sectionTitle">Modifier les données de l'évènement</p>
                             <div class="line"></div>
                         </div>
+                        <h2>{{ selectedEvent.title }}</h2>
 
                         <UpdateEventForm class="updateEventForm" :selectedEvent="selectedEvent"/>
 
@@ -116,19 +117,23 @@
                             display: flex;
                             align-items: baseline;
                             gap: 1rem;
-
                             .sectionTitle {
                                 margin: 0;
                                 font-size: 1.25rem;
                                 font-weight: 700;
                                 white-space: nowrap;
                             }
-
                             .line {
                                 width: 100%;
                                 height: 1px;
                                 background: $accentColorBackof3;
                             }
+                        }
+
+                        h2 {
+                            margin: 3rem 0 0 0;
+                            text-align: center;
+                            color: $accentColorBackof3;
                         }
                         .updateEventForm {
                             align-self: center;

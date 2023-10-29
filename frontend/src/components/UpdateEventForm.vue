@@ -17,7 +17,10 @@
             </div>
 
             <div class="input-container" >
-                <label for="newEvent-coverImage">Image de couverture</label>
+                <div class="labelAndNotif_container">
+                    <label for="newEvent-coverImage">Image de couverture</label>
+                    <p class="notification">{{ notification }}</p>
+                </div>
                 <input
                     type="file"
                     name="newEventCoverImage"
@@ -80,7 +83,10 @@
             </div>
 
             <div class="input-container">
-                <label for="newEvent-organizerLogo">Logo de l'organisateur</label>
+                <div class="labelAndNotif_container">
+                    <label for="newEvent-organizerLogo">Logo de l'organisateur</label>
+                    <p class="notification">{{ notification }}</p>
+                </div>
                 <input 
                     type="file"
                     name="newEventOrganizerLogo"
@@ -124,6 +130,9 @@
 
     // recupère la props de selectedEvents en provenance de BackOfficeEventUpdatePage
     const { selectedEvent } = defineProps(['selectedEvent']);
+
+    // data
+    const notification = '(Sans choix de votre part, l\'image actuelle restera en place)'
 
     // convertit la date de l'API en une date locale
     const dateFromAPI = new Date(selectedEvent.date);
@@ -286,6 +295,16 @@
                 label {
                     margin: 0;
                     font-weight: 700;
+                    
+                }
+                .labelAndNotif_container {
+                    display: flex;
+                    flex-direction: column;
+                    .notification {
+                        margin: 0;
+                        font-size: .7rem;
+                    }
+
                 }
 
                 input {
