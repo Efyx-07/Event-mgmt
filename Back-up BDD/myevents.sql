@@ -22,6 +22,10 @@ CREATE TABLE evenements (
     FOREIGN KEY (administrateur_id) REFERENCES administrateurs(id)
 );
 
+UPDATE evenements
+SET administrateur_id = 1  -- ID de l'administrateur générique
+WHERE administrateur_id = 3;  -- ID de l'administrateur supprimé
+
 CREATE TABLE participants (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nom_entreprise VARCHAR(255),
@@ -47,3 +51,6 @@ CREATE TABLE administrateurs (
     email VARCHAR(255) UNIQUE NOT NULL,
     hashed_password VARCHAR(255) NOT NULL
 );
+
+INSERT INTO administrateurs (nom, prenom, email, hashed_password)
+VALUES ('Administrateur', 'Supprimé', 'adminsupprime@example.com', 'motdepassehashé');

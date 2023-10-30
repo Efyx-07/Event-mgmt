@@ -206,17 +206,29 @@ async function deleteAdmin(req, res) {
 
     try {
 
-        // supprime l'entrée de la base de données pour l'administrateur
-        const deleteQuery = 'DELETE FROM administrateurs WHERE id = ?';
-        myEventsConnection.query(deleteQuery, [adminId], (err) => {
+        // permet la réaffectation des données d'un évènement à un administrateur générique
+        const adminGeneriqueID = 1; 
+        const updateQuery = 'UPDATE evenements SET administrateur_id = ? WHERE administrateur_id = ?';
+
+        myEventsConnection.query(updateQuery, [adminGeneriqueID, adminId], (err) => {
             if (err) {
-                console.error('Erreur lors de la suppression de l\'administrateur :', err);
+                console.error('Erreur lors de la mise à jour des événements :', err);
                 res.status(500).json({ error: 'Erreur lors de la suppression de l\'administrateur' });
                 return;
             }
 
-            res.status(200).json({ message: 'Administrateur supprimé avec succès' });
-        });
+            // supprime l'entrée de la base de données pour l'administrateur
+            const deleteQuery = 'DELETE FROM administrateurs WHERE id = ?';
+            myEventsConnection.query(deleteQuery, [adminId], (err) => {
+                if (err) {
+                    console.error('Erreur lors de la suppression de l\'administrateur :', err);
+                    res.status(500).json({ error: 'Erreur lors de la suppression de l\'administrateur' });
+                    return;
+                }
+
+                res.status(200).json({ message: 'Administrateur supprimé avec succès' });
+            });
+        });       
 
     } catch (error) {
         console.error('Erreur lors de la suppression de l\'administrateur :', error);

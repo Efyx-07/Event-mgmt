@@ -121,6 +121,7 @@
     import { ref, onMounted } from 'vue';
     import { useGlobalDataStore } from '@/stores/GlobalDataStore';
     import { useEventStore } from '@/stores/EventStore';
+    import { useAdminStore } from '@/stores/AdminStore';
     import { useRouter } from 'vue-router';
     import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
@@ -184,6 +185,7 @@
     };
 
     const eventStore = useEventStore();
+    const adminStore = useAdminStore();
     const router = useRouter();
 
     // soumet le formulaire
@@ -201,6 +203,10 @@
         formData.append('eventOrganizerLogo', eventOrganizerLogo.value);
         formData.append('eventOrganizerWebsite', eventOrganizerWebsite.value);
 
+        const adminId = adminStore.adminData.id;
+
+        formData.append('adminId', adminId);
+
         // affiche les valeurs dans la console
         for (const pair of formData.entries()) {
             console.log(pair[0], pair[1]);
@@ -212,7 +218,7 @@
             
             const response = await fetch (`${hostName}/events/create`, {
                 method: 'POST', 
-                body: formData,           
+                body: formData,          
             });
 
             if (response.ok) {

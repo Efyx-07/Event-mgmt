@@ -29,7 +29,8 @@ async function createEvent(req, res) {
   const eventOrganizerName = req.body.eventOrganizerName;
   const eventOrganizerLogo = req.files['eventOrganizerLogo'][0];
   const eventOrganizerWebsite = req.body.eventOrganizerWebsite;
- 
+  const adminId = req.body.adminId;
+
   // génère le slug pour l'évènement
   const eventSlug = generateUniqueSlug(eventTitle);
 
@@ -46,7 +47,7 @@ async function createEvent(req, res) {
   try {
 
     // insert les données dans la bdd myevents table evenements
-    const insertQuery = 'INSERT INTO evenements (titre, date, lieu, image_source, image_alt, presentation, programme, infos_pratiques, nom_client, logo_client_source, logo_client_alt, site_client, slug) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    const insertQuery = 'INSERT INTO evenements (titre, date, lieu, image_source, image_alt, presentation, programme, infos_pratiques, nom_client, logo_client_source, logo_client_alt, site_client, slug, administrateur_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
 
     const values = [
       eventTitle,
@@ -61,7 +62,8 @@ async function createEvent(req, res) {
       eventOrganizerLogoRelativePath,
       eventOrganizerLogoAlt,
       eventOrganizerWebsite, 
-      eventSlug
+      eventSlug,
+      adminId
     ];
 
     myEventsConnection.query(insertQuery, values, (err, results) => {
@@ -75,7 +77,6 @@ async function createEvent(req, res) {
       res.status(201).json({ message: 'Evènement créé avec succès'});
 
     });
-
 
   } catch (err) {
       console.error('Erreur lors de la création d\'évènement: ', err);
@@ -340,8 +341,8 @@ function updateOrganizerLogo(req, eventId, updatedData, res) {
 // controller pour recupération de tous les évènements
 async function getAllEvents(req, res) {
 
-  // requête sql pour obtenir tous les évènements
-  const eventsQuery = 'SELECT * FROM evenements';
+  // requête sql pour obtenir tous les évènements + id, nom et prenom de l'administrateur associé
+  const eventsQuery = 'SELECT evenements.*, administrateurs.nom AS adminNom, administrateurs.prenom AS adminPrenom FROM evenements LEFT JOIN administrateurs ON evenements.administrateur_id = administrateurs.id';
 
   // execute la requête pour les évènements
   myEventsConnection.query(eventsQuery, (err, eventsResults) => {
@@ -383,7 +384,12 @@ function formatData(events) {
     },
     organizerWebsite: evenement.site_client,
     creationDate: evenement.date_creation,
-    slug: evenement.slug
+    slug: evenement.slug,
+    admin: {
+      id: evenement.administrateur_id,
+      nom: evenement.adminNom,
+      prenom: evenement.adminPrenom
+    }
   }));
 
   return formattedEvents;

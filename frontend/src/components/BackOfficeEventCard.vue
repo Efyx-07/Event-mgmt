@@ -32,7 +32,7 @@
 
     </div>
 
-    <p class="creationDate">créé le {{ formatDateShort(event.creationDate) }}</p>
+    <p class="creationDate">créé le {{ formatDateShort(event.creationDate) }} <span v-if="event.admin.id">par {{ event.admin.prenom }}</span></p>
 
   </div>
 
