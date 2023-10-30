@@ -68,6 +68,10 @@
                 justify-content: center;
                 align-items: center;
                 cursor: pointer;
+
+                &:hover {
+                    background: $accentColor1;
+                }
                 .toTopIcon {
                     color: $lightColor;
                     font-size: 2.5rem;
