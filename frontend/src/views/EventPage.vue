@@ -5,9 +5,15 @@
         <div class="eventPage_content">
             <EventCard :selectedEvent="selectedEvent"/>
             <div class="eventPage-sections_container">
-                <EventPageSectionPresentation :selectedEvent="selectedEvent"/>
-                <EventPageSectionProgramme :selectedEvent="selectedEvent"/>
-                <EventPageSectionPracticalInformations :selectedEvent="selectedEvent"/>
+                <div id="presentation">
+                    <EventPageSectionPresentation :selectedEvent="selectedEvent"/>
+                </div>
+                <div id="programme">
+                    <EventPageSectionProgramme :selectedEvent="selectedEvent"/>
+                </div>
+                <div id="practicalInformations">
+                    <EventPageSectionPracticalInformations :selectedEvent="selectedEvent"/>
+                </div>
             </div>
         </div>
         <EventPageFooter />
@@ -59,8 +65,8 @@
             .eventPage-sections_container {
                 display: flex;
                 flex-direction: column;
-                gap: 3rem;
-                padding: 5rem 0;
+                gap: 1rem;
+                padding: 3rem 0;
             }
         }
     }

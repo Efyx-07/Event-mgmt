@@ -23,6 +23,7 @@
 
     @import '@/assets/sass/variables.scss';
     .EventPageSectionPresentation {
+        padding-top: 2rem;
         .title_container {
             display: flex;
             flex-direction: column;
