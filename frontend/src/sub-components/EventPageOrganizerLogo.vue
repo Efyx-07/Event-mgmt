@@ -1,7 +1,9 @@
 <template>
     
     <div class="organizerLogo_container">
-        <img class="organizerLogo" :src="hostName + selectedEvent.organizerLogo.source">
+        <a :href="selectedEvent.organizerWebsite" target="_blank" rel="noopener noreferrer">
+            <img class="organizerLogo" :src="hostName + selectedEvent.organizerLogo.source">
+        </a>
     </div>
 
 </template>
