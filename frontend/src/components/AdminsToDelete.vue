@@ -13,7 +13,7 @@
 
             <div class="adminNameAndButton_container" v-else>
                 <p> {{ admin.prenom }} {{ admin.nom }} </p>
-                <button @click="deleteAdmin(admin.id)">
+                <button v-if="admin.id > 1" @click="deleteAdmin(admin.id)">
                     <p>Supprimer</p>
                 </button>
             </div>

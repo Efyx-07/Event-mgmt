@@ -3,7 +3,9 @@
     <div class="eventPage">
         <EventPageHeader :selectedEvent="selectedEvent"/>
         <div class="eventPage_content">
-            <EventCard :selectedEvent="selectedEvent"/>
+            <div class="eventCard_container" ref="eventCard">
+                <EventCard :selectedEvent="selectedEvent" />
+            </div>
             <div class="eventPage-sections_container">
                 <div id="presentation">
                     <EventPageSectionPresentation :selectedEvent="selectedEvent"/>
@@ -17,6 +19,9 @@
             </div>
         </div>
         <EventPageFooter />
+        <div class="stickyBarContainer" v-show="!isEventCardVisible">
+            <EventPageStickyBar :selectedEvent="selectedEvent"/>
+        </div>
     </div>
     <ParticipantsInscriptionModal :selectedEvent="selectedEvent"/>
     
@@ -31,6 +36,9 @@
     import EventPageSectionProgramme from '@/components/EventPageSectionProgramme.vue';
     import EventPageSectionPracticalInformations from '@/components/EventPageSectionPracticalInformations.vue';
     import ParticipantsInscriptionModal from '@/components/ParticipantsInscriptionModal.vue';
+    import EventPageStickyBar from '@/components/EventPageStickyBar.vue';
+
+    import { ref, onMounted, onBeforeUnmount } from 'vue';
 
     import { useEventStore } from '@/stores/EventStore';
     import { useRoute } from 'vue-router';
@@ -40,22 +48,49 @@
 
     const route = useRoute();
 
-    const eventSlug = route.params.eventSlug; // récupère le slug de la route
+    // récupère le slug de la route
+    const eventSlug = route.params.eventSlug; 
 
     // compare pour faire correspondre les slugs
     const selectedEvent = allEvents.find((event) => {
         return event.slug === eventSlug;
     });
 
+    const eventCard = ref(null);
+    const isEventCardVisible = ref(true);
+
+    const observer = new IntersectionObserver((entries) => {
+        for (let entry of entries) {
+            if(entry.target === eventCard.value) {
+                isEventCardVisible.value = entry.isIntersecting;
+                console.log('EventCard est visible :', isEventCardVisible.value);
+            }
+        }
+    });
+
+    onMounted(() => {
+        if (eventCard.value) {
+            observer.observe(eventCard.value);
+            console.log('Observation de EventCard a commencé');
+        }
+    });
+  
+    onBeforeUnmount(() => {
+        if (eventCard.value) {
+            observer.unobserve(eventCard.value);
+            console.log('Observation de EventCard s\'est terminée');
+        }
+    });
+
 </script>
 
 <style lang="scss" scoped>
-
     .eventPage {
         position: relative;
         display: flex;
         flex-direction: column;
         align-items: center;
+        min-height: 200vh;
 
         &_content {
             width: 100%;
@@ -69,6 +104,13 @@
                 padding: 3rem 0;
             }
         }
+        .stickyBarContainer {
+            position: fixed;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
     }
+    
     
 </style>
