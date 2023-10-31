@@ -9,6 +9,7 @@
             <header class="newEventPageHeader">
                 <div class="newEventPageHeader_content">
                     <h1>Nouvel évènement</h1>
+                    <BackToEventsButtonVue class="backToEventsButton"/>
                 </div>
             </header>
 
@@ -40,6 +41,7 @@
 <script setup>
 
     import BackOfficeNavAside from '@/components/BackOfficeNavAside.vue';
+    import BackToEventsButtonVue from '@/sub-components/BackToEventsButton.vue';
     import CreateEventForm from '@/components/CreateEventForm.vue'
 
 </script>
@@ -57,10 +59,14 @@
                 @include headersBasicSettings;
 
                 &_content {
+                    display: grid;
+                    align-items: center;
+                    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
                     width: 100%;
                     max-width: $contentMaxWidth;
                     
                     h1 {
+                        grid-column: 1 / -2;
                         @include pageTitlesBasicSettings
                     }
                 }
@@ -72,7 +78,7 @@
                     background: $ultraLightColor;
                     box-shadow: $shadow;
                     border-radiuS: $containerRadius;
-                    padding: 2rem;
+                    padding: 2rem 2rem 4rem 2rem;
                     display: flex;
                     flex-direction: column;
                     gap: 3rem;

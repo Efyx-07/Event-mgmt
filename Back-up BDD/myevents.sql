@@ -23,8 +23,8 @@ CREATE TABLE evenements (
 );
 
 UPDATE evenements
-SET administrateur_id = 1  -- ID de l'administrateur générique
-WHERE administrateur_id = 3;  -- ID de l'administrateur supprimé
+SET administrateur_id = 1  
+WHERE administrateur_id = 3;  
 
 CREATE TABLE participants (
     id INT AUTO_INCREMENT PRIMARY KEY,

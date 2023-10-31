@@ -72,10 +72,6 @@
         grid-template-columns: 1fr 3fr;
         .eventUpdatePage {
             grid-column: 2 / -1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-
             .eventUpdatePageHeader {
                 @include headersBasicSettings;
 
@@ -92,12 +88,6 @@
                     }
                 }
             }
-
-            &_content {
-                width: 100%;
-                padding: 3rem;
-                max-width: $contentMaxWidth;
-            }
             .updateEventOperations_container {
                 width: 100%;
                 padding: 2rem 3rem;
@@ -105,7 +95,7 @@
                     background: $ultraLightColor;
                     box-shadow: $shadow;
                     border-radiuS: $containerRadius;
-                    padding: 2rem;
+                    padding: 2rem 2rem 4rem 2rem;
                     display: flex;
                     flex-direction: column;
                     gap: 3rem;

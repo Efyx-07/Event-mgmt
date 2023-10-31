@@ -107,10 +107,15 @@
             </div>
 
         </div>
-        
-        <button class="createEvent-button" type="submit">
-            <p>Publier</p>
-        </button>
+
+        <div class="createEventForm-buttons_container">
+            <button class="createEventForm-button" @click="navigateToHomepage">
+                <p>Annuler</p>
+            </button>     
+            <button class="createEventForm-button" type="submit">
+                <p>Publier</p>
+            </button>
+        </div>
 
     </form>
 
@@ -244,6 +249,11 @@
 
     };
 
+    // reconduis vers la page 'vos évènements'
+    const navigateToHomepage = () => {
+        router.push('/admin_homepage');
+    };
+
 </script>
 
 <style lang="scss" scoped>
@@ -308,27 +318,32 @@
                 }  
             }
         }
-        .createEvent-button {
+        .createEventForm-buttons_container {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 8rem;
-            height: 2rem;
-            border: none;
-            background: $darkColorBackOf;
-            color: $lightColor;
             align-self: end;
-            cursor: pointer;
+            gap: 1rem;
+            .createEventForm-button {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 8rem;
+                height: 2rem;
+                border: none;
+                background: $darkColorBackOf;
+                color: $lightColor;
+                cursor: pointer;
 
-            &:hover {
-                background: $accentColorBackof2;
-            }
+                &:hover {
+                    background: $accentColorBackof2;
+                }
 
-            p {
-                margin: 0;
-                font-weight: 700;
+                p {
+                    margin: 0;
+                    font-weight: 700;
+                }
             }
         }
+    
     }
     
 </style>

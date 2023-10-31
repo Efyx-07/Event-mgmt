@@ -112,9 +112,14 @@
 
         </div>
         
-        <button class="updateEvent-button" type="submit">
-            <p>Mettre à jour</p>
-        </button>
+        <div class="updateEventForm-buttons_container">
+            <button class="updateEventForm-button" @click="navigateToHomepage">
+                <p>Annuler</p>
+            </button> 
+            <button class="updateEventForm-button" type="submit">
+                <p>Mettre à jour</p>
+            </button>
+        </div>
 
     </form>
 
@@ -273,6 +278,11 @@
 
     };
 
+    // reconduis vers la page 'vos évènements'
+    const navigateToHomepage = () => {
+        router.push('/admin_homepage');
+    };
+
 </script>
 
 <style lang="scss" scoped>
@@ -347,27 +357,33 @@
                 }               
             }
         }
-        .updateEvent-button {
+        .updateEventForm-buttons_container {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 8rem;
-            height: 2rem;
-            border: none;
-            background: $darkColorBackOf;
-            color: $lightColor;
             align-self: end;
-            cursor: pointer;
+            gap: 1rem;
+            .updateEventForm-button {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 8rem;
+                height: 2rem;
+                border: none;
+                background: $darkColorBackOf;
+                color: $lightColor;
+                align-self: end;
+                cursor: pointer;
 
-            &:hover {
-                background: $accentColorBackof2;
-            }
+                &:hover {
+                    background: $accentColorBackof2;
+                }
 
-            p {
-                margin: 0;
-                font-weight: 700;
+                p {
+                    margin: 0;
+                    font-weight: 700;
+                }
             }
         }
+
     }
     
     
