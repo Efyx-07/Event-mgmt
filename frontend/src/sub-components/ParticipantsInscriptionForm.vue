@@ -1,6 +1,6 @@
 <template>
 
-    <form class="inscriptionForm" ref="registrationForm" @submit.prevent="validate">
+    <form class="inscriptionForm" @submit.prevent="validate" v-if="formIsvisible">
 
         <div class="input-container">
             <label for="entreprise">Entreprise / Organisation <span>{{requiredFieldMention}}</span></label>
@@ -68,6 +68,8 @@
         </button>
 
     </form>
+
+    <InscriptionConfirmation v-else/>
     
 </template>
 
@@ -75,9 +77,13 @@
 
     import { ref } from 'vue';
     import { useGlobalDataStore } from '@/stores/GlobalDataStore';
+    import InscriptionConfirmation from '@/sub-components/InscriptionConfirmation.vue'
 
     //datas
     const requiredFieldMention = '*';
+
+    // statut de visibilité du formulaire
+    const formIsvisible = ref(true)
 
     // propriétés du formulaire
     const entrepriseOrganisation = ref('');
@@ -85,7 +91,6 @@
     const prenom = ref('');
     const telephone = ref('');
     const email = ref('');
-    const registrationForm = ref(null);
 
     // etats de validation
     const entrepriseOrganisationValid = ref(true);
@@ -145,9 +150,6 @@
 
         // soumet le formulaire avec les champs requis
         if (requiredFieldsValid) {
-            console.log('Formulaire validé');
-            // soumission du formulaire
-            registrationForm.value.submit();
 
             try {
 
@@ -169,9 +171,12 @@
                 });
 
                 if (response.ok) {
+
                     // affiche le message d'inscription réussie ici
                     const data = await response.json();
-                    console.log(data.message); 
+
+                    // change le statut de la visibilité du formulaire à false
+                    formIsvisible.value = false;
                     
                 } else {
                     // affiche un message d'erreur à l'utilisateur.
