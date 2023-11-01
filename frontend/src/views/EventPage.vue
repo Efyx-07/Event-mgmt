@@ -93,13 +93,13 @@
         flex-direction: column;
         align-items: center;
         min-height: 200vh;
-        padding: 0 1rem;
 
         &_content {
             width: 100%;
             max-width: 75rem;
             display: flex;
             flex-direction: column;
+            padding: 0 1rem;
             .eventPage-sections_container {
                 display: flex;
                 flex-direction: column;

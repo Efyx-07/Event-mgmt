@@ -84,7 +84,7 @@
                     align-items: center;
                     gap: .5rem;
                     .icon {
-                        font-size: 2.5rem;
+                        font-size: 2rem;
                         color: $accentColor1;
                     }
 

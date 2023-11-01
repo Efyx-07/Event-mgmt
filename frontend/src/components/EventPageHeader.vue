@@ -29,13 +29,14 @@
 
     .header {
         width: 100%;
-        height: 4rem;
+        height: 3rem;
         display: flex;
         justify-content: center;
         .content {
             width: 100%;
             display: flex;
             align-items: center;
+            padding: 0 1rem;
             .eventPageNavigation {
                 display: none;
             }
@@ -51,6 +52,7 @@
                 max-width: 75rem;
                 display: grid;
                 grid-template-columns: 1fr 1fr;
+                padding: 0;
                 .eventPageNavigation {
                     display: flex;
                 }

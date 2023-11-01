@@ -16,12 +16,17 @@
         </div>
 
     </div>
+
+    <div class="footer_mobile">
+        <ParticipateButton class="footer_mobile-button"/>
+    </div>
     
 </template>
 
 <script setup>
 
     import { Icon } from '@iconify/vue';
+    import ParticipateButton from '@/sub-components/ParticipateButton.vue';
 
      // permet le retour vers le haut de page
      const scrollToTop = () => {
@@ -36,45 +41,68 @@
 <style lang="scss" scoped>
 
     @import '@/assets/sass/variables.scss';
+    @import '@/assets/sass/varMediaQueries.scss';
+
     .footer {
+        display: none;
+    }
+    .footer_mobile {
         width: 100%;
-        height: 8rem;
-        background: $lightColor;
-        border-top: solid 1px rgba($darkColor, .25);
+        height: 4rem;
         display: flex;
         justify-content: center;
-        .content {
+        align-items: center;
+        position: fixed;
+        bottom: 0;
+        background: $ultraLightColor;
+        box-shadow: $shadow;
+        padding: 0 1rem;
+    }
+
+    @media screen and (min-width: $breakpointDesktop) {
+        .footer_mobile {
+            display: none;
+        }
+        .footer {
             width: 100%;
-            max-width: 75rem;
+            height: 8rem;
+            background: $lightColor;
+            border-top: solid 1px rgba($darkColor, .25);
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            .links_container {
+            justify-content: center;
+            .content {
+                width: 100%;
+                max-width: 75rem;
                 display: flex;
-                gap: 3rem;
-
-                p {
-                    margin: 0;
-                    font-size: .9rem ;
-                }
-            }
-            .toTopButton_container {
-                width: 3rem;
-                height: 3rem;
-                background: $accentColor2;
-                box-shadow: $shadow;
-                border-radius: 100%;
-                display: flex;
-                justify-content: center;
                 align-items: center;
-                cursor: pointer;
+                justify-content: space-between;
+                .links_container {
+                    display: flex;
+                    gap: 3rem;
 
-                &:hover {
-                    background: $accentColor1;
+                    p {
+                        margin: 0;
+                        font-size: .9rem ;
+                    }
                 }
-                .toTopIcon {
-                    color: $lightColor;
-                    font-size: 2.5rem;
+                .toTopButton_container {
+                    width: 3rem;
+                    height: 3rem;
+                    background: $accentColor2;
+                    box-shadow: $shadow;
+                    border-radius: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+
+                    &:hover {
+                        background: $accentColor1;
+                    }
+                    .toTopIcon {
+                        color: $lightColor;
+                        font-size: 2.5rem;
+                    }
                 }
             }
         }

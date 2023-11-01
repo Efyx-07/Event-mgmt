@@ -23,8 +23,32 @@
 
     @import '@/assets/sass/variables.scss';
     @import '@/assets/sass/mixins.scss';
+    @import '@/assets/sass/varMediaQueries.scss';
 
     .participateButton {
-        @include buttonStyle;
+        width: 100%;
+        background: $accentColor2;
+        border: none;
+        border-radius: $containerRadius * 2;
+        box-shadow: $shadow;
+
+        &:hover {
+            background: $accentColor1;
+        }
+
+        p {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: $lightColor;
+            padding: .5rem 0;
+        }
     }
+
+    @media screen and (min-width: $breakpointDesktop) {
+        .participateButton {
+            @include buttonStyle;
+        }
+    }
+
 </style>
