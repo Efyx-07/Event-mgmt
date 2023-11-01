@@ -53,7 +53,7 @@
         width: 100%;
         .eventImage_container {
             width: 100%;
-            height: 18rem;
+            height: 16rem;
             display: inline-block;
             position: relative;
             overflow: hidden;
@@ -74,7 +74,7 @@
             gap: 1rem;
             .eventTitle {
                 margin: 0;
-                font-size: 1.3rem;
+                font-size: 1.2rem;
             }
             .eventCard-details {
                 display: flex;

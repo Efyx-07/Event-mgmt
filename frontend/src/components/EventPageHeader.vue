@@ -4,7 +4,7 @@
         <div class="content">
 
             <EventPageOrganizerLogo :selectedEvent="selectedEvent"/>
-            <EventPageNavigation />
+            <EventPageNavigation class="eventPageNavigation"/>
 
         </div>
         
@@ -26,20 +26,37 @@
 
     @import '@/assets/sass/variables.scss';
     @import '@/assets/sass/varMediaQueries.scss';
+
     .header {
         width: 100%;
-        height: 5rem;
-        background: $lightColor;
-        box-shadow: $shadow;
+        height: 4rem;
         display: flex;
         justify-content: center;
         .content {
             width: 100%;
-            max-width: 75rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            display: flex;
             align-items: center;
+            .eventPageNavigation {
+                display: none;
+            }
         }       
     }
+
+    @media screen and (min-width: $breakpointDesktop) {
+        .header {
+            height: 5rem;
+            background: $lightColor;
+            box-shadow: $shadow;
+            .content {
+                max-width: 75rem;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                .eventPageNavigation {
+                    display: flex;
+                }
+            }       
+        }
+    }
+    
 
 </style>

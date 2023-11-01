@@ -22,9 +22,10 @@
 <style lang="scss" scoped>
 
     @import '@/assets/sass/variables.scss';
+    @import '@/assets/sass/varMediaQueries.scss';
     .organizerLogo_container {
         width: 100%;
-        height: 4rem;
+        height: 2.125rem;
         display: inline-block;
         position: relative;
         overflow: hidden;
@@ -34,6 +35,12 @@
             display: block;
             position: relative;
             object-fit: contain;
+        }
+    }
+
+    @media screen and (min-width: $breakpointDesktop) {
+        .organizerLogo_container {
+            height: 4rem;
         }
     }
     
