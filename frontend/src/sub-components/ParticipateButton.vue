@@ -31,6 +31,7 @@
         border: none;
         border-radius: $containerRadius * 2;
         box-shadow: $shadow;
+        cursor: pointer;
 
         &:hover {
             background: $accentColor1;

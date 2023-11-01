@@ -63,7 +63,6 @@
         for (let entry of entries) {
             if(entry.target === eventCard.value) {
                 isEventCardVisible.value = entry.isIntersecting;
-                console.log('EventCard est visible :', isEventCardVisible.value);
             }
         }
     });
@@ -71,14 +70,12 @@
     onMounted(() => {
         if (eventCard.value) {
             observer.observe(eventCard.value);
-            console.log('Observation de EventCard a commencé');
         }
     });
   
     onBeforeUnmount(() => {
         if (eventCard.value) {
             observer.unobserve(eventCard.value);
-            console.log('Observation de EventCard s\'est terminée');
         }
     });
 
@@ -104,7 +101,7 @@
                 display: flex;
                 flex-direction: column;
                 gap: 1rem;
-                padding: 3rem 0;
+                padding: 0 0 3rem 0;
             }
         }
         .stickyBarContainer {
@@ -116,6 +113,14 @@
         .eventPage {
             padding: 0;
             position: relative;
+
+            &_content {
+                padding: 0;
+                .eventPage-sections_container {
+                    gap: 1rem;
+                    padding: 3rem 0;
+                }
+            }
             .stickyBarContainer {
                 display: block;
                 position: fixed;
