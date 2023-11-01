@@ -25,6 +25,7 @@
 <style lang="scss" scoped>
 
     @import '@/assets/sass/variables.scss';
+    @import '@/assets/sass/varMediaQueries.scss';
     .header {
         width: 100%;
         height: 5rem;
