@@ -44,15 +44,16 @@
 <style lang="scss" scoped>
 
     @import '@/assets/sass/variables.scss';
+    @import '@/assets/sass/varMediaQueries.scss';
+
     .eventCard {
-        margin-top: 3rem;
         background: $ultraLightColor;
         border-radius: $containerRadius;
         box-shadow: $shadow;
         width: 100%;
         .eventImage_container {
             width: 100%;
-            height: 25rem;
+            height: 18rem;
             display: inline-block;
             position: relative;
             overflow: hidden;
@@ -73,34 +74,72 @@
             gap: 1rem;
             .eventTitle {
                 margin: 0;
+                font-size: 1.3rem;
             }
             .eventCard-details {
-                display: grid;
-                grid-template-columns: 1fr 1fr 1fr;
-                .eventDate_container {
-                    grid-column: 1 / -3;
-                }
-                .eventPlace_container {
-                    grid-column: 2 / -2;
-                }
+                display: flex;
+                flex-direction: column;  
                 .eventDate_container, .eventPlace_container {
                     display: flex;
                     align-items: center;
                     gap: .5rem;
                     .icon {
-                        font-size: 3rem;
+                        font-size: 2.5rem;
                         color: $accentColor1;
                     }
 
                     p {
                         margin: 0;
-                        font-size: 1.1rem;
+                        font-size: 1rem;
                     }
                 }
                 .eventCard-button {
-                    grid-column: 3 / -1;
-                    align-self: center;
-                    justify-self: end;
+                    display: none;
+                }
+            }
+        }
+    }
+
+    @media screen and (min-width: $breakpointDesktop) {
+        .eventCard {
+            margin-top: 3rem;
+            .eventImage_container {
+                height: 25rem;
+            }
+
+            &-infos {
+                .eventTitle {
+                    font-size: 2rem;
+                }
+                .eventCard-details {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr 1fr;
+                    .eventDate_container {
+                        grid-column: 1 / -3;
+                    }
+                    .eventPlace_container {
+                        grid-column: 2 / -2;
+                    }
+                    .eventDate_container, .eventPlace_container {
+                        display: flex;
+                        align-items: center;
+                        gap: .5rem;
+                        .icon {
+                            font-size: 3rem;
+                            color: $accentColor1;
+                        }
+
+                        p {
+                            margin: 0;
+                            font-size: 1.1rem;
+                        }
+                    }
+                    .eventCard-button {
+                        display: block;
+                        grid-column: 3 / -1;
+                        align-self: center;
+                        justify-self: end;
+                    }
                 }
             }
         }

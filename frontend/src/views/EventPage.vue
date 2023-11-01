@@ -85,12 +85,15 @@
 </script>
 
 <style lang="scss" scoped>
+
+    @import '@/assets/sass/varMediaQueries.scss';
+
     .eventPage {
-        position: relative;
         display: flex;
         flex-direction: column;
         align-items: center;
         min-height: 200vh;
+        padding: 0 1rem;
 
         &_content {
             width: 100%;
@@ -105,12 +108,24 @@
             }
         }
         .stickyBarContainer {
-            position: fixed;
-            width: 100%;
-            display: flex;
-            justify-content: center;
+            display: none;
         }
     }
+
+    @media screen and (min-width: $breakpointDesktop) {
+        .eventPage {
+            padding: 0;
+            position: relative;
+            .stickyBarContainer {
+                display: block;
+                position: fixed;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+        }
+    }
+    
     
     
 </style>
