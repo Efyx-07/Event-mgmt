@@ -158,6 +158,7 @@ async function updateEvent(req, res) {
     eventTitle: req.body.newEventTitle,
     eventDate: req.body.newEventDate,
     eventLocation: req.body.newEventLocation,
+    eventLocationGoogleMapsUrl: req.body.newEventLocationGoogleMapsUrl,
     eventPresentation: req.body.newEventPresentation,
     eventProgramme: req.body.newEventProgramme,
     eventPracticalInformations: req.body.newEventPracticalInformations,
@@ -181,12 +182,13 @@ async function updateEvent(req, res) {
   }
 
   try {
-    const updateTextDataQuery = 'UPDATE evenements SET titre=?, date=?, lieu=?, image_alt=?, presentation=?, programme=?, infos_pratiques=?, nom_client=?, logo_client_alt=?, site_client=?, slug=? WHERE id=?';
+    const updateTextDataQuery = 'UPDATE evenements SET titre=?, date=?, lieu=?, lieu_googlemaps_url=?, image_alt=?, presentation=?, programme=?, infos_pratiques=?, nom_client=?, logo_client_alt=?, site_client=?, slug=? WHERE id=?';
 
     const textDataValues = [
       updatedData.eventTitle,
       updatedData.eventDate,
       updatedData.eventLocation,
+      updatedData.eventLocationGoogleMapsUrl,
       eventCoverImageAlt,
       updatedData.eventPresentation,
       updatedData.eventProgramme,
