@@ -11,6 +11,7 @@
                     <Icon icon="healthicons:calendar" class="icon"/>
                     <p class="eventDate">{{ formatDate(selectedEvent.date)}}</p>
                 </div>
+                <div class="separator"></div>
                 <div class="eventPlace_container">
                     <Icon icon="mdi:place-outline" class="icon"/>
                     <p class="eventPlace">{{ selectedEvent.location }}</p>
@@ -93,6 +94,12 @@
                         font-size: .95rem;
                     }
                 }
+                .separator {
+                    height: 1px;
+                    width: 100%;
+                    background: rgba($darkColor, .25);
+                    margin: .3rem 0;
+                }
                 .eventCard-button {
                     display: none;
                 }
@@ -131,6 +138,9 @@
                         p {
                             font-size: 1.1rem;
                         }
+                    }
+                    .separator {
+                        display: none;
                     }
                     .eventCard-button {
                         display: block;
