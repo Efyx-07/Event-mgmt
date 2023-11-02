@@ -22,17 +22,16 @@
 <style lang="scss" scoped>
 
     @import '@/assets/sass/variables.scss';
+    @import '@/assets/sass/varMediaQueries.scss';
     .EventPageSectionProgramme {
-        padding-top: 2rem;
         .title_container {
-
             display: flex;
             flex-direction: column;
             gap: 1rem;
 
             h2 {
                 margin: 0;
-                font-size: 1.5rem;
+                font-size: 1.2rem;
             }
             .separator {
                 width: 100%;
@@ -42,12 +41,36 @@
 
         }
         .programme_container {
-            padding: 2rem 0;
             display: flex;
             justify-content: center;
             
             p {
                 margin: 0;
+                font-size: .95rem;
+                line-height: 1.6;
+            }
+        }
+    }
+
+    @media screen and (min-width: $breakpointDesktop) {
+        .EventPageSectionProgramme {
+            padding-top: 2rem;
+            .title_container {
+
+                h2 {
+                    font-size: 1.5rem;
+                }
+
+            }
+            .programme_container {
+                padding: 2rem 0;
+                display: grid;
+                grid-template-columns: 1fr 2fr 1fr;
+                
+                p {
+                    grid-column: 2 / -2;
+                    font-size: 1rem;
+                }
             }
         }
     }

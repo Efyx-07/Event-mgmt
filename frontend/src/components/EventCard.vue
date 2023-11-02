@@ -90,7 +90,7 @@
 
                     p {
                         margin: 0;
-                        font-size: 1rem;
+                        font-size: .95rem;
                     }
                 }
                 .eventCard-button {

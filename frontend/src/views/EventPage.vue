@@ -100,8 +100,8 @@
             .eventPage-sections_container {
                 display: flex;
                 flex-direction: column;
-                gap: 1rem;
-                padding: 0 0 3rem 0;
+                gap: 2rem;
+                padding: 3rem 0 6rem 0;
             }
         }
         .stickyBarContainer {
@@ -116,10 +116,6 @@
 
             &_content {
                 padding: 0;
-                .eventPage-sections_container {
-                    gap: 1rem;
-                    padding: 3rem 0;
-                }
             }
             .stickyBarContainer {
                 display: block;

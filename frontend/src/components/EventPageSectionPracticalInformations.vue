@@ -22,8 +22,8 @@
 <style lang="scss" scoped>
 
     @import '@/assets/sass/variables.scss';
+    @import '@/assets/sass/varMediaQueries.scss';
     .EventPageSectionPracticalInformations {
-        padding-top: 2rem;
         .title_container {
             display: flex;
             flex-direction: column;
@@ -31,7 +31,7 @@
 
             h2 {
                 margin: 0;
-                font-size: 1.5rem;
+                font-size: 1.2rem;
             }
             .separator {
                 width: 100%;
@@ -41,10 +41,31 @@
 
         }
         .practicalInformations_container {
-            padding: 2rem 0;
             
             p {
                 margin: 0;
+                font-size: .95rem;
+                line-height: 1.8;
+            }
+        }
+    }
+
+    @media screen and (min-width: $breakpointDesktop) {
+        .EventPageSectionPracticalInformations {
+            padding-top: 2rem;
+            .title_container {
+
+                h2 {
+                    font-size: 1.5rem;
+                }
+
+            }
+            .practicalInformations_container {
+                padding: 2rem 0;
+                
+                p {
+                    font-size: 1rem;
+                }
             }
         }
     }
