@@ -19,6 +19,9 @@
 
     <div class="footer_mobile">
         <ParticipateButton class="footer_mobile-button"/>
+        <div class="mobileToTopButton_container"  @click="scrollToTop">
+            <Icon icon="iconamoon:arrow-up-2-duotone" class="mobileToTopIcon"/>
+        </div>
     </div>
     
 </template>
@@ -52,11 +55,30 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        gap: 1rem;
         position: fixed;
         bottom: 0;
         background: $ultraLightColor;
         box-shadow: $shadow;
         padding: 0 1rem;
+        .mobileToTopButton_container {
+            padding: .3rem;
+            color: rgba($darkColor, .75);
+            border: solid 1px rgba($darkColor, .25);
+            border-radius: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+
+            &:hover {
+                color: $accentColor1;
+                border-color: $accentColor1;
+            }
+            .mobileToTopIcon {
+                font-size: 2rem;
+            }
+        }
     }
 
     @media screen and (min-width: $breakpointDesktop) {

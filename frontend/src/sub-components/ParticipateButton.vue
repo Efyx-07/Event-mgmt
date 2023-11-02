@@ -42,7 +42,7 @@
             font-size: 1.25rem;
             font-weight: 600;
             color: $lightColor;
-            padding: .5rem 0;
+            padding: .7rem 0;
         }
     }
 
