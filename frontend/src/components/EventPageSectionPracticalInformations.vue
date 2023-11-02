@@ -39,7 +39,7 @@
             .separator {
                 width: 100%;
                 height: 1px;
-                background: rgba($accentColor1, .25);
+                background: $accentColor1;
             }
 
         }
@@ -70,7 +70,10 @@
                 display: grid;
                 grid-template-columns: 1fr 1fr;
                 gap: 2rem;
-                padding: 2rem 0;
+                margin-top: 2rem;
+                padding: 1rem 2rem;
+                border: solid 1px rgba($darkColor, .1);
+                border-radius: 5px;
                 
                 p {
                     font-size: 1rem;

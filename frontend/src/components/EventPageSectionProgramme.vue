@@ -36,7 +36,7 @@
             .separator {
                 width: 100%;
                 height: 1px;
-                background: rgba($accentColor1, .25);
+                background: $accentColor1;
             }
 
         }
@@ -63,9 +63,12 @@
 
             }
             .programme_container {
+                margin-top: 2rem;
                 padding: 2rem 0;
                 display: grid;
                 grid-template-columns: 1fr 2fr 1fr;
+                border: solid 1px rgba($darkColor, .1);
+                border-radius: 5px;
                 
                 p {
                     grid-column: 2 / -2;
