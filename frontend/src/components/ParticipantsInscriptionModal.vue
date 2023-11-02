@@ -1,22 +1,36 @@
 <template>
 
     <div class="participantsInscriptionModal_container" :class="{ hiddenParticipantsInscriptionModal: !isParticipantsInscriptionModalVisible }">
+
         <div class="participantsInscriptionModal">
-            <Icon 
-                icon="ei:close" 
-                width="30" 
-                class="closeIcon" 
-                @click="closeParticipantsInscriptionModalAndOverlay"
-            />
-            <h1 class="eventTitle">{{ selectedEvent.title }}</h1>
-            <ParticipantsInscriptionForm />
+
+            <header>
+                <Icon 
+                    icon="ei:close" 
+                    width="30" 
+                    class="closeIcon" 
+                    @click="closeParticipantsInscriptionModalAndOverlay"
+                />
+            </header>
+    
+            <div class="modal_content">
+
+                <div class="titleAndForm_container">
+                    <h1 class="eventTitle">{{ selectedEvent.title }}</h1>
+                    <ParticipantsInscriptionForm />
+                </div>
+
+            </div>
+
             <footer>
                 <div class="legalLinks_container">
                     <p>Conditions d'utilisation</p>
                     <p>Contact</p>
                 </div>
             </footer>
+
         </div>  
+
     </div>
 
     <Overlay 
@@ -68,6 +82,7 @@
 <style lang="scss" scoped>
 
     @import '@/assets/sass/variables.scss';
+    @import '@/assets/sass/varMediaQueries.scss';
 
     .hiddenParticipantsInscriptionModal { 
         transform: translateX(100%);
@@ -83,51 +98,78 @@
             position: relative;
             width: 100vw;
             height: 100vh;
+            background: $lightColor;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            background: $lightColor;
-            padding: 0 3rem;
+            overflow-y: scroll;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
 
+            &::-webkit-scrollbar {
+                display: none;
+            }
+            
             @media screen and (min-width: $breakpointTablet) {
                 width: 36rem;
             }
-            .closeIcon {
-                position: absolute;
-                z-index: 1000;
-                top: 1rem;
-                right: 1rem;
-                cursor: pointer;
-                transition: transform .15s ease-in-out;
 
-                &:hover {
-                    transform: rotate(90deg);
+            header {
+                position: sticky;
+                top: 0;
+                z-index: 9999;
+                width: 100%;
+                padding: .5rem 1rem;
+                display: flex;
+                justify-content: flex-end;
+                background: $lightColor;
+                .closeIcon {
+                    cursor: pointer;
+                    transition: transform .15s ease-in-out;
+
+                    &:hover {
+                        transform: rotate(90deg);
+                    }
                 }
             }
-
-            .eventTitle {
-                position: absolute;
-                top: 0;
-                padding: 4rem 3rem;
-                text-align: center;
-                font-size: 1.6rem;
+            .modal_content {
+                width: 100%;
+                .titleAndForm_container {
+                    padding: 2rem;
+                    padding-bottom: 6rem;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 3rem;
+                    .eventTitle {
+                        text-align: center;
+                        font-size: 1.5rem;
+                    }
+                }
             }
 
             footer {
                 width: 100%;
-                position: absolute;
+                max-width: 36rem;
+                position: fixed;
                 bottom: 0;
-                .legalLinks_container {
-                    display: flex;
-                    gap: 2rem;
-                    justify-content: end;
-                    padding: 0 3rem 1rem 0;
-                    font-size: .8rem;
-                }
+                display: flex;
+                justify-content: center;
+                padding: 0 3rem;
+                background: $lightColor;
 
+                .legalLinks_container {
+                    width: 100%;
+                    display: flex;
+                    justify-content: flex-end;
+                    align-items: center;
+                    gap: 2rem;
+                    font-size: .8rem;
+                    margin: 0;
+                    padding: .5rem 0;
+                }
             }
-        }
+
+        }     
     }
 
 
