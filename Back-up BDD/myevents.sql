@@ -6,6 +6,7 @@ CREATE TABLE evenements (
     titre VARCHAR(255) NOT NULL,
     date DATE NOT NULL,
     lieu VARCHAR(255) NOT NULL,
+    lieu_googlemaps_url VARCHAR(255),
     image_source VARCHAR(255) NOT NULL,
     image_alt VARCHAR(255) NOT NULL,
     presentation LONGTEXT,
