@@ -15,6 +15,7 @@
                 </div>
                 <div id="practicalInformations">
                     <EventPageSectionPracticalInformations :selectedEvent="selectedEvent"/>
+                    <EventPageLocationMap :selectedEvent="selectedEvent"/>
                 </div>
             </div>
         </div>
@@ -37,6 +38,7 @@
     import EventPageSectionPracticalInformations from '@/components/EventPageSectionPracticalInformations.vue';
     import ParticipantsInscriptionModal from '@/components/ParticipantsInscriptionModal.vue';
     import EventPageStickyBar from '@/components/EventPageStickyBar.vue';
+    import EventPageLocationMap from '@/components/EventPageLocationMap.vue';
 
     import { ref, onMounted, onBeforeUnmount } from 'vue';
 
