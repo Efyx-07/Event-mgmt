@@ -30,6 +30,8 @@
     .header {
         width: 100%;
         height: 3rem;
+        background: $lightColor;
+        box-shadow: $shadow;
         display: flex;
         justify-content: center;
         .content {
@@ -46,8 +48,6 @@
     @media screen and (min-width: $breakpointDesktop) {
         .header {
             height: 5rem;
-            background: $lightColor;
-            box-shadow: $shadow;
             .content {
                 max-width: 75rem;
                 display: grid;

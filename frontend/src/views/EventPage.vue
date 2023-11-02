@@ -96,7 +96,7 @@
             max-width: 75rem;
             display: flex;
             flex-direction: column;
-            padding: 0 1rem;
+            padding: 1rem;
             .eventPage-sections_container {
                 display: flex;
                 flex-direction: column;
