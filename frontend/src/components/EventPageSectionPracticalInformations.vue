@@ -7,12 +7,15 @@
         </div>
         <div class="practicalInformations_container">
             <p v-html="selectedEvent.practicalInformations"></p>
+            <EventPageLocationMap :selectedEvent="selectedEvent" class="locationMap"/>
         </div>
     </div>
     
 </template>
 
 <script setup>
+
+    import EventPageLocationMap from '@/components/EventPageLocationMap.vue';
 
     // recupère la props de selectedEvents en provenance de EventPage
     const { selectedEvent } = defineProps(['selectedEvent']);
@@ -47,6 +50,9 @@
                 font-size: .95rem;
                 line-height: 1.8;
             }
+            .locationMap {
+                display: none;
+            }
         }
     }
 
@@ -61,10 +67,16 @@
 
             }
             .practicalInformations_container {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
                 padding: 2rem 0;
                 
                 p {
                     font-size: 1rem;
+                }
+                .locationMap {
+                    display: block;
                 }
             }
         }

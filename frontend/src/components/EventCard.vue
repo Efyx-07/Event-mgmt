@@ -14,7 +14,7 @@
                 <div class="separator"></div>
                 <div class="eventPlace_container">
                     <Icon icon="mdi:place-outline" class="icon"/>
-                    <p class="eventPlace">{{ selectedEvent.location }}</p>
+                    <a :href="selectedEvent.locationUrl" target="_blank" rel="noopener noreferrer" class="eventPlace">{{ selectedEvent.location }}</a>
                 </div>
                 <ParticipateButton class="eventCard-button"/>
             </div>
@@ -89,9 +89,17 @@
                         color: $accentColor1;
                     }
 
-                    p {
+                    p, a {
                         margin: 0;
                         font-size: .95rem;
+                    }
+
+                    a {
+                        color: $darkColor;
+
+                        &:hover {
+                            color: $accentColor1; 
+                        }
                     }
                 }
                 .separator {
@@ -135,7 +143,7 @@
                             font-size: 3rem;
                         }
 
-                        p {
+                        p, a {
                             font-size: 1.1rem;
                         }
                     }
