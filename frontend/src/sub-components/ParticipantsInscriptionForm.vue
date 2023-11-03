@@ -216,7 +216,7 @@
                 font-size: 1rem;
                 color: rgba($darkColor, .8);
                 span {
-                    color: $accentColor2;
+                    color: $accentColor1;
                 }
             }
 
@@ -228,7 +228,7 @@
                 border: solid 1px rgba($darkColor, .25);
 
                 &:focus {
-                    border-color: $accentColor2 !important;
+                    border-color: $accentColor1 !important;
                     outline: none;
                 }
             }
@@ -245,7 +245,7 @@
             align-self: flex-end;
 
             span {
-                color: $accentColor2;
+                color: $accentColor1;
             }
         }
         .inscription-button {
