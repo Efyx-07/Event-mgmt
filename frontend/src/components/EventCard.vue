@@ -6,18 +6,14 @@
         </div>
         <div class="eventCard-infos">
             <h1 class="eventTitle">{{ selectedEvent.title }}</h1>
-            <div class="separator"></div>
-            <div class="organizer_container">
-                <div class="oganizerLogo_container">
-                    <img class="organizerLogo" :src="hostName + selectedEvent.organizerLogo.source">
-                </div>
-                <div class="organizerName_container">
-                    <p>Organisé par</p>
-                    <a :href="selectedEvent.organizerWebsite" target="_blank" rel="noopener noreferrer">{{ selectedEvent.organizerName }}</a>
-                </div>
-            </div>
-            <div class="separator"></div>
             <div class="eventCard-details">
+                <div class="eventOrganizer_container">
+                    <div class="content">
+                        <p>Organisé par</p>
+                        <a :href="selectedEvent.organizerWebsite" target="_blank" rel="noopener noreferrer">{{ selectedEvent.organizerName }}</a>
+                    </div>    
+                </div>
+                <div class="separator"></div>
                 <div class="eventDate_container">
                     <Icon icon="healthicons:calendar" class="icon"/>
                     <p class="eventDate">{{ formatDate(selectedEvent.date)}}</p>
@@ -82,6 +78,7 @@
         &-infos {
             display: flex;
             flex-direction: column;
+            gap: 1rem;
             padding: 1rem;
             .eventTitle {
                 margin: 0;
@@ -91,56 +88,12 @@
                 height: 1px;
                 width: 100%;
                 background: rgba($darkColor, .25);
-                margin: .5rem 0;
-            }
-            .organizer_container {
-                display: flex;
-                align-items: center;
-                gap: .5rem;
-                .oganizerLogo_container {
-                    max-width: 4rem;
-                    height: 2rem;
-                    display: inline-block;
-                    position: relative;
-                    overflow: hidden;
-                    .organizerLogo {
-                        max-width: 100%;
-                        height: 100%;
-                        display: block;
-                        position: relative;
-                        object-fit: contain;
-                    }
-                }
-                .organizerName_container {
-                    display: flex;
-                    align-items: baseline;
-                    gap: .5rem;
-
-                    p {
-                        margin: 0;
-                        font-size: .8rem;
-                        font-style: italic;
-                    }
-
-                    a {
-                        margin: 0;
-                        font-size: .95rem;
-                    }
-
-                    a {
-                        color: $darkColor;
-
-                        &:hover {
-                            color: $accentColor1; 
-                        }
-                    }
-                }
-
             }
             .eventCard-details {
                 display: flex;
-                flex-direction: column;  
-                .eventDate_container, .eventPlace_container {
+                flex-direction: column;
+                gap: .5rem;  
+                .eventOrganizer_container, .eventDate_container, .eventPlace_container {
                     display: flex;
                     align-items: center;
                     gap: .5rem;
@@ -155,13 +108,25 @@
                     }
 
                     a {
-                        color: $darkColor;
+                        color: rgba($darkColor, .8);
 
                         &:hover {
                             color: $accentColor1; 
                         }
                     }
                 }
+                .eventOrganizer_container {
+                    
+                    .content {
+                        display: flex;
+                        gap: .5rem;
+                        align-items: baseline;
+                    }
+                    p {
+                        font-style: italic;
+                        font-size: .7rem;
+                    }
+                } 
                 .eventCard-button {
                     display: none;
                 }
@@ -173,49 +138,36 @@
         .eventCard {
             margin-top: 3rem;
             .eventImage_container {
-                height: 25rem;
+                height: 30rem;
             }
 
             &-infos {
-                gap: 1rem;
+                gap: 1.5rem;
                 .eventTitle {
                     font-size: 2rem;
                 }
                 .separator {
                     display: none;
                 }
-                .organizer_container {
-                    .oganizerLogo_container {
-                        height: 3rem;
-                    }
-                    .organizerName_container {
-                        align-items: baseline;
-                        
+                .eventCard-details {
+                    flex-direction: row;
+                    justify-content: space-between;
+                    .eventOrganizer_container {
+
                         p {
                             font-size: .8rem;
-                            font-style: italic;
                         }
 
                         a {
                             font-size: 1.1rem;
                         }
                     }
-                }
-                .eventCard-details {
-                    display: grid;
-                    grid-template-columns: 1fr 1fr 1fr;
-                    .eventDate_container {
-                        grid-column: 1 / -3;
-                    }
-                    .eventPlace_container {
-                        grid-column: 2 / -2;
-                    }
                     .eventDate_container, .eventPlace_container {
                         display: flex;
                         align-items: center;
                         gap: .5rem;
                         .icon {
-                            font-size: 3rem;
+                            font-size: 2.5rem;
                         }
 
                         p, a {
@@ -224,7 +176,6 @@
                     }
                     .eventCard-button {
                         display: block;
-                        grid-column: 3 / -1;
                         align-self: center;
                         justify-self: end;
                     }
