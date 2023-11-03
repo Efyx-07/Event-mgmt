@@ -134,11 +134,25 @@
         }
     }
 
+    @media screen and (min-width: $breakpointTablet) {
+        .eventCard {
+            .eventImage_container {
+                height: 20rem;
+            }
+
+            &-infos {
+                .eventTitle {
+                    font-size: 1.5rem;
+                }
+            }
+        }
+    }
+
     @media screen and (min-width: $breakpointDesktop) {
         .eventCard {
-            margin-top: 3rem;
+            margin-top: 2rem;
             .eventImage_container {
-                height: 30rem;
+                height: 27rem;
             }
 
             &-infos {

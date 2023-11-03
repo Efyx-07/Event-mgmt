@@ -41,9 +41,10 @@
                 height: 1px;
                 background: $accentColor1;
             }
-
         }
         .practicalInformations_container {
+            display: flex;
+            flex-wrap: wrap;
             margin-top: 1rem;
             padding: 0 1rem;
             border: solid 1px rgba($darkColor, .1);
@@ -53,9 +54,6 @@
                 margin: 0;
                 font-size: .95rem;
                 line-height: 1.8;
-            }
-            .locationMap {
-                display: none;
             }
         }
     }
@@ -71,16 +69,15 @@
 
             }
             .practicalInformations_container {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
                 gap: 2rem;
                 margin-top: 2rem;
                 
                 p {
+                    flex: 1;
                     font-size: 1rem;
                 }
                 .locationMap {
-                    display: block;
+                    flex: 1;
                     padding: 1rem 0;
                 }
             }
