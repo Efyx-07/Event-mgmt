@@ -56,6 +56,8 @@
         return event.slug === eventSlug;
     });
 
+    // permet l'apparition de stickyBar à la disparition de eventCard avec observer
+
     const eventCard = ref(null);
     const isEventCardVisible = ref(true);
 
@@ -92,7 +94,7 @@
 
         &_content {
             width: 100%;
-            max-width: 75rem;
+            max-width: 77rem;
             display: flex;
             flex-direction: column;
             padding: 1rem;

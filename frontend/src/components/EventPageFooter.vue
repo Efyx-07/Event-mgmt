@@ -94,7 +94,7 @@
             justify-content: center;
             .content {
                 width: 100%;
-                max-width: 75rem;
+                max-width: 77rem;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;

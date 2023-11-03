@@ -49,7 +49,7 @@
         .header {
             height: 5rem;
             .content {
-                max-width: 75rem;
+                max-width: 77rem;
                 display: grid;
                 grid-template-columns: 1fr 1fr;
                 padding: 0 1rem;

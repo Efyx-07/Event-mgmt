@@ -30,7 +30,7 @@
     @import '@/assets/sass/variables.scss';
     .stickyBar_container {
         width: 100%;
-        max-width: 75rem;
+        max-width: 77rem;
         padding: 0 1rem;
         .stickyBar {
             display: flex;
