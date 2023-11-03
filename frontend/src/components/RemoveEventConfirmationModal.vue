@@ -9,8 +9,7 @@
 
             <div class="askText_container">
                 <p>Etes-vous sûr de vouloir supprimer l'evenement :</p>
-                <p class="eventTitle">"{{ eventToRemove.eventTitle }}"</p>
-                <p>?</p>
+                <p class="eventTitle">"{{ eventToRemove.eventTitle }}" ?</p>
             </div>
             
             <div class="buttons_container">
@@ -117,23 +116,21 @@
         transition: opacity .1s ease-in-out;
         .optionBox {
             background: $ultraLightColor;
-            border: solid 1px $darkColorBackOf;
             box-shadow: $shadow;
+            border-radius: 10px;
             color: $darkColor;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            padding: 2rem;
+            padding: 3rem 2rem;
             gap: 1rem;
             .askText_container {
                 display: flex;
-                flex-direction: column;
                 gap: .5rem;
 
                 p {
                     margin: 0;
-                    text-align: center;
-                    font-size: 1.2rem;
+                    text-align: left;
+                    font-size: 1rem;
                     font-weight: 400;
                 }
                 .eventTitle {
@@ -146,7 +143,7 @@
                 gap: 1rem;
                 color: $errorColor;
                 .alertIcon {
-                    font-size: 1.5rem;
+                    font-size: 1rem;
                     color: $errorColor;
                 }
 
@@ -161,6 +158,7 @@
             .buttons_container {
                 display: flex;
                 gap: 1.5rem;
+                align-self: center;
 
                 button {
                     width: 8rem;
