@@ -8,6 +8,11 @@
 
     <div class="eventCard-titleAndActions_container">
 
+      <div class="eventLocation_container">
+        <Icon icon="mdi:place-outline" class="loc-icon"/>
+        <p>{{ event.location }}</p>
+      </div>
+
       <h1 class="eventTitle">{{ event.title }}</h1>
 
       <div class="actionIcons_container">
@@ -69,7 +74,7 @@
     return new Date(date).toLocaleDateString('fr-FR', options).replace(/\//g, '-');
   };
   */
- 
+
   // reformate la date et sépare jour / mois / année
   const formatDateDay = (date) => {
       const options = { day: 'numeric' };
@@ -150,7 +155,19 @@
         .eventCard-titleAndActions_container {
             display: flex;
             flex-direction: column;
-            padding: 1rem;
+            gap: .5rem;
+            padding: 0 1rem;
+            .eventLocation_container {
+              display: flex;
+              align-items: center;
+              gap: .2rem;
+              p, .loc-icon  {
+                margin: 0;
+                font-size: .9rem;
+                font-weight: 500;
+                color: rgba($darkColor, .5)
+              }
+            }
             .eventTitle {
               margin: 0;
               font-size: 1.25rem;
