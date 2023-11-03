@@ -32,7 +32,17 @@
 
     </div>
 
-    <p class="creationDate">créé le {{ formatDateShort(event.creationDate) }} <span v-if="event.admin.id">par {{ event.admin.prenom }}</span></p>
+
+
+    <!-- <p class="creationDate">créé le {{ formatDateShort(event.creationDate) }} <span v-if="event.admin.id">par {{ event.admin.prenom }}</span></p> -->
+
+    <div class="dateCard">
+      <p class="dateCard-day"> {{ formatDateDay(event.date) }} </p>
+      <div class="monthYear_container">
+        <p class="dateCard-month"> {{ formatDateMonth(event.date) }} </p>
+        <p class="dateCard-year"> {{ formatDateYear(event.date) }} </p>
+      </div> 
+    </div>
 
   </div>
 
@@ -52,11 +62,28 @@
 
   const router = useRouter();
 
-  // formate la date de crétion de l'évènement sous la forme dd-mm-yy
+  // formate la date de création de l'évènement sous la forme dd-mm-yy
+  /*
   const formatDateShort = (date) => {
     const options = { day: '2-digit', month: '2-digit', year: '2-digit' };
     return new Date(date).toLocaleDateString('fr-FR', options).replace(/\//g, '-');
-};
+  };
+  */
+ 
+  // reformate la date et sépare jour / mois / année
+  const formatDateDay = (date) => {
+      const options = { day: 'numeric' };
+      return new Date(date).toLocaleDateString('fr-FR', options);
+  };
+  const formatDateMonth = (date) => {
+      const options = { month: 'short' };
+      return new Date(date).toLocaleDateString('fr-FR', options);
+  };
+  const formatDateYear = (date) => {
+      const options = { year: 'numeric' };
+      return new Date(date).toLocaleDateString('fr-FR', options);
+  };
+
 
   // permet de naviguer vers la page de l'evenement selectionné
   const navigateToEvent = (eventSlug) => {
@@ -148,6 +175,7 @@
             }
         }
         .creationDate {
+          display: none;
           position: absolute;
           top: .5rem;
           left: .5rem;
@@ -158,6 +186,36 @@
           box-shadow: $shadow;
           border-radius: 10px 0 0 0;
           padding: .25rem;
+        }
+        .dateCard {
+          background: rgba($ultraLightColor, .8);
+          border-radius: 10px 0;
+          display: flex;
+          align-items: center;
+          gap:.2rem;
+          position: absolute;
+          top: .5rem;
+          right: .5rem;
+          padding: .3rem;
+
+          p {
+            margin: 0;
+          }
+          .dateCard-day {
+            font-size: 2rem;
+          }
+          .monthYear_container {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+            .dateCard-month {
+              font-size: .8rem;
+            }
+            .dateCard-year {
+              font-size: .9rem;
+            }
+
+          }
         }
     }
     
