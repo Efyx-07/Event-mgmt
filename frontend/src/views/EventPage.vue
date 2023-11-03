@@ -89,7 +89,6 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        min-height: 200vh;
 
         &_content {
             width: 100%;
@@ -115,7 +114,7 @@
             position: relative;
 
             &_content {
-                padding: 0;
+                padding: 0 1rem;
             }
             .stickyBarContainer {
                 display: block;

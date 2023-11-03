@@ -52,7 +52,7 @@
                 max-width: 75rem;
                 display: grid;
                 grid-template-columns: 1fr 1fr;
-                padding: 0;
+                padding: 0 1rem;
                 .eventPageNavigation {
                     display: flex;
                 }
