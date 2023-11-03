@@ -27,7 +27,7 @@
             .title_container {
                 display: flex;
                 flex-direction: column;
-                gap: 1rem;
+                gap: .5rem;
 
                 h2 {
                     margin: 0;
@@ -41,11 +41,16 @@
 
             }
             .presentation_container {
+                margin-top: 1rem;
+                padding: 0 1rem;
+                border: solid 1px rgba($darkColor, .1);
+                border-radius: 5px;
                 
                 p {
                     margin: 0;
                     font-size: .95rem;
                     line-height: 1.8;
+                    text-align: justify;
                 }
             }
         }
@@ -54,7 +59,8 @@
         .EventPageSectionPresentation {
             padding-top: 2rem;
             .title_container {
-
+                gap: 1rem;
+                
                 h2 {
                     font-size: 1.5rem;
                 }
@@ -62,9 +68,6 @@
             }
             .presentation_container {
                 margin-top: 2rem;
-                padding: 1rem 2rem;
-                border: solid 1px rgba($darkColor, .1);
-                border-radius: 5px;
                 
                 p {
                     font-size: 1rem;

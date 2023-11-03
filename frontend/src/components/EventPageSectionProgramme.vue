@@ -27,7 +27,7 @@
         .title_container {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: .5rem;
 
             h2 {
                 margin: 0;
@@ -43,6 +43,10 @@
         .programme_container {
             display: flex;
             justify-content: center;
+            margin-top: 1rem;
+            padding: 0 1rem;
+            border: solid 1px rgba($darkColor, .1);
+            border-radius: 5px;
             
             p {
                 margin: 0;
@@ -56,7 +60,8 @@
         .EventPageSectionProgramme {
             padding-top: 2rem;
             .title_container {
-
+                gap: 1rem;
+                
                 h2 {
                     font-size: 1.5rem;
                 }

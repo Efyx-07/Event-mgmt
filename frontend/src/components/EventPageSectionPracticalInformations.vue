@@ -44,7 +44,11 @@
 
         }
         .practicalInformations_container {
-            
+            margin-top: 1rem;
+            padding: 0 1rem;
+            border: solid 1px rgba($darkColor, .1);
+            border-radius: 5px;
+
             p {
                 margin: 0;
                 font-size: .95rem;
@@ -71,15 +75,13 @@
                 grid-template-columns: 1fr 1fr;
                 gap: 2rem;
                 margin-top: 2rem;
-                padding: 1rem 2rem;
-                border: solid 1px rgba($darkColor, .1);
-                border-radius: 5px;
                 
                 p {
                     font-size: 1rem;
                 }
                 .locationMap {
                     display: block;
+                    padding: 1rem 0;
                 }
             }
         }
