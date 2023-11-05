@@ -125,6 +125,8 @@
             gap: 1rem;
             .askText_container {
                 display: flex;
+                flex-direction: column;
+                align-items: center;
                 gap: .5rem;
 
                 p {
