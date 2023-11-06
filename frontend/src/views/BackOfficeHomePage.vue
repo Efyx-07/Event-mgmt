@@ -38,6 +38,7 @@
 
     </div>
 
+    <BackOfficeNavMobile />
     
     
 </template>
@@ -48,6 +49,7 @@
     import BackOfficeEventCard from '@/components/BackOfficeEventCard.vue'; 
     import RemoveEventConfirmationModal from '@/components/RemoveEventConfirmationModal.vue';
     import MobileMenuIcon from '@/sub-components/MobileMenuIcon.vue';
+    import BackOfficeNavMobile from '@/components/BackOfficeNavMobile.vue';
     import { Icon } from '@iconify/vue';
     import { useEventStore } from '@/stores/EventStore';
     import { computed, onMounted } from 'vue';
@@ -86,10 +88,10 @@
                     h1 {
                         margin: 0;
                     }
-
                     .eventsCountMention_container {
                         display: none;
                     }
+                    
                 }
 
             }

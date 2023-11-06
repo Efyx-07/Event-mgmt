@@ -4,6 +4,7 @@
         <div class="header_content">
             <h1>Gestion compte administrateur</h1>
             <AdminPageNav />
+            <MobileMenuIcon class="mobileMenuIcon"/>
         </div>   
     </header>
     
@@ -12,6 +13,7 @@
 <script setup>
 
     import AdminPageNav from '@/components/AdminPageNav.vue';
+    import MobileMenuIcon from '@/sub-components/MobileMenuIcon.vue';
 
 </script>
 
