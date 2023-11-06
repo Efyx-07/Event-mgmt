@@ -31,6 +31,18 @@
     margin-top: 3rem;
 }
 
+@mixin headersMobileBasicSettings {
+    background: $ultraLightColor;
+    box-shadow: $shadow;
+    padding: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 99;
+}
+
 @mixin headersBasicSettings {
     background: $ultraLightColor;
     box-shadow: $shadow;

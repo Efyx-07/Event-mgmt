@@ -73,86 +73,96 @@
 <style lang="scss" scoped>
 
     @import '@/assets/sass/variables.scss';
+    @import '@/assets/sass/varMediaQueries.scss';
+
     .backOfficeNavAside {
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100vh;
-        width: 25vw;
-        background: $darkColorBackOf;
-        z-index: 199;
-        .head-section {
-            height: 6rem;
-            display: flex;
-            justify-content: center;
-        }
-        .head-section, .item-section {
-            border-bottom: solid 1px $accentColorBackof3;
-        }
-        .item-section {
-            text-decoration: none;
-            height: 5rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            color: $lightColor;
-            padding-left: 2rem;
-            cursor: pointer;
-            position: relative;
-            .icon {
-                font-size: 2.25rem;
-            }
+        display: none;
+    }
 
-            p {
-                margin: 0;
-                font-size: 1.5rem;
-            }
-            .active-bar {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: .25rem;
-                height: 100%;
-                background-color: transparent;
-            }
-
-            &:hover,
-            &.active-link {
-                background-color: $accentColorBackof4;
-            }
-            &.active-link>.active-bar {
-                background-color: $accentColorBackof2;
-            }
-        
-        }
-        .footer-section {
-            position: absolute;
+    @media screen and (min-width: $breakpointDesktop) {
+        .backOfficeNavAside {
+            display: block;
+            position: fixed;
+            top: 0;
             left: 0;
-            bottom: 0;
-            width: 100%;
-            height: 6rem;
-            background: $accentColorBackof4;
-            color: $lightColor;
-            border-top: solid 1px $accentColorBackof3;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 2rem;
-
-            p {
-                margin: 0;
-                font-size: 1.2rem;
+            height: 100vh;
+            width: 25vw;
+            background: $darkColorBackOf;
+            z-index: 199;
+            .head-section {
+                height: 6rem;
+                display: flex;
+                justify-content: center;
             }
-            .icon {
-                font-size: 2.25rem;
+            .head-section, .item-section {
+                border-bottom: solid 1px $accentColorBackof3;
+            }
+            .item-section {
+                text-decoration: none;
+                height: 5rem;
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                color: $lightColor;
+                padding-left: 2rem;
                 cursor: pointer;
-
-                &:hover {
-                    color: $accentColorBackof2;
+                position: relative;
+                .icon {
+                    font-size: 2.25rem;
                 }
-            }
 
+                p {
+                    margin: 0;
+                    font-size: 1.5rem;
+                }
+                .active-bar {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: .25rem;
+                    height: 100%;
+                    background-color: transparent;
+                }
+
+                &:hover,
+                &.active-link {
+                    background-color: $accentColorBackof4;
+                }
+                &.active-link>.active-bar {
+                    background-color: $accentColorBackof2;
+                }
+            
+            }
+            .footer-section {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                height: 6rem;
+                background: $accentColorBackof4;
+                color: $lightColor;
+                border-top: solid 1px $accentColorBackof3;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 2rem;
+
+                p {
+                    margin: 0;
+                    font-size: 1.2rem;
+                }
+                .icon {
+                    font-size: 2.25rem;
+                    cursor: pointer;
+
+                    &:hover {
+                        color: $accentColorBackof2;
+                    }
+                }
+
+            }
         }
+
     }
     
 </style>

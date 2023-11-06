@@ -2,7 +2,7 @@
 
     <div class="backOfficeHomePage">
 
-        <BackOfficeNavAside class="backOfficeNavAside"/>
+        <BackOfficeNavAside />
 
         <div class="adminHomePage">
 
@@ -17,6 +17,7 @@
                             <p v-if="eventsCount >= 2">évènements créés</p>
                         </div>
                     </div>
+                    <MobileMenuIcon class="mobileMenuIcon"/>
                 </div>
 
             </header>
@@ -46,6 +47,7 @@
     import BackOfficeNavAside from '@/components/BackOfficeNavAside.vue';
     import BackOfficeEventCard from '@/components/BackOfficeEventCard.vue'; 
     import RemoveEventConfirmationModal from '@/components/RemoveEventConfirmationModal.vue';
+    import MobileMenuIcon from '@/sub-components/MobileMenuIcon.vue';
     import { Icon } from '@iconify/vue';
     import { useEventStore } from '@/stores/EventStore';
     import { computed, onMounted } from 'vue';
@@ -65,43 +67,28 @@
 <style lang="scss" scoped>
 
     @import '@/assets/sass/variables.scss';
+    @import '@/assets/sass/varMediaQueries.scss';
     @import '@/assets/sass/mixins.scss';
 
     .backOfficeHomePage {
-        display: grid;
-        grid-template-columns: 1fr 3fr;
         .adminHomePage {
-            grid-column: 2 / -1;
             position:relative;
             min-height: 100vh;
             .adminHomePageHeader {
-                @include headersBasicSettings;
+                @include headersMobileBasicSettings;
 
                 &_content {
-                    display: grid;
-                    align-items: center;
-                    grid-template-columns: 1fr 1fr 1fr 1fr;
                     width: 100%;
-                    max-width: $contentMaxWidth;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
 
                     h1 {
-                        grid-column: 1 / -2;
-                        @include pageTitlesBasicSettings;
+                        margin: 0;
                     }
 
                     .eventsCountMention_container {
-                        grid-column: 4 / -1;
-                        display: flex;
-                        justify-content: end;
-                        width: 100%;
-                        .eventsCountMention {
-                            display: flex;
-                            gap: .3rem;
-
-                            p {
-                                margin: 0;
-                            }
-                        }
+                        display: none;
                     }
                 }
 
@@ -119,6 +106,7 @@
                 p {
                     margin: 0;
                     font-size: 1.4rem;
+                    text-align: center;
                 }
                 .icon {
                     font-size: 6rem;
@@ -136,21 +124,76 @@
                     p {
                         margin: 0;
                         color: $lightColor;
-                        font-size: 1.3rem;
+                        font-size: 1.1rem;
                         font-weight: 700;
-                        padding: .7rem 1rem;
+                        padding: .5rem;
                     }
-                    
+                        
                 }
             }
             .eventCards_container {
-                padding: 2rem 3rem;
+                padding: 1rem 1rem 3rem 1rem;
                 display: flex;
                 gap: 2rem;
                 justify-content: center;
                 flex-wrap: wrap;
             }
         }
+    }
+
+    @media screen and (min-width: $breakpointDesktop) {
+        .backOfficeHomePage {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            .adminHomePage {
+                grid-column: 2 / -1;
+                .adminHomePageHeader {
+                    @include headersBasicSettings;
+
+                    &_content {
+                        display: grid;
+                        align-items: center;
+                        grid-template-columns: 1fr 1fr 1fr 1fr;
+                        max-width: $contentMaxWidth;
+
+                        h1 {
+                            grid-column: 1 / -2;
+                            @include pageTitlesBasicSettings;
+                        }
+
+                        .eventsCountMention_container {
+                            grid-column: 4 / -1;
+                            display: flex;
+                            justify-content: end;
+                            width: 100%;
+                            .eventsCountMention {
+                                display: flex;
+                                gap: .3rem;
+
+                                p {
+                                    margin: 0;
+                                }
+                            }
+                        }
+                    }
+
+                }
+                .adminHomePage_empty {
+                    .toNewEvent_button {
+
+                        p {
+                            font-size: 1.3rem;
+                            padding: .7rem 1rem;
+                        }
+                        
+                    }
+                }
+                .eventCards_container {
+                    padding: 2rem 3rem;
+                }
+            }
+        }
+
     }
     
 
