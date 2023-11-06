@@ -1,6 +1,6 @@
 <template>
 
-    <Icon icon="iconamoon:menu-burger-horizontal" class="burgerMenuIcon" @click="toggleBackOfficeNavMobileVisibility"/>
+    <Icon icon="iconamoon:menu-burger-horizontal" class="mobileMenuIcon" @click="toggleBackOfficeNavMobileVisibility"/>
 
 </template>
 
@@ -22,7 +22,7 @@
 
     @import '@/assets/sass/variables.scss';
     @import '@/assets/sass/varMediaQueries.scss';
-    .burgerMenuIcon {
+    .mobileMenuIcon {
         font-size: 1.5rem;
         cursor: pointer;
 
@@ -32,7 +32,7 @@
     }
 
     @media screen and (min-width: $breakpointDesktop) {
-        .burgerMenuIcon {
+        .mobileMenuIcon {
             display: none;
         }
     }

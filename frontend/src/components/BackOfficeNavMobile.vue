@@ -116,7 +116,7 @@
             padding: 4rem 0 2rem 0;
             .closeIcon {
                 position: absolute;
-                top: .5rem;
+                top: 1rem;
                 right: 1rem;
                 color: $lightColor;
                 cursor: pointer;
