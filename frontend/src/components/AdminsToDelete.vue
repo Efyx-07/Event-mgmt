@@ -91,7 +91,7 @@
     @import '@/assets/sass/variables.scss';
 
     .adminsList {
-        width: 50%;
+        width: 100%;
         display: flex;
         flex-direction: column;
         gap: 1rem;
