@@ -102,18 +102,18 @@
                 height: 5rem;
                 display: flex;
                 align-items: center;
-                gap: 1rem;
+                gap: .5rem;
                 color: $lightColor;
-                padding-left: 2rem;
+                padding-left: 1rem;
                 cursor: pointer;
                 position: relative;
                 .icon {
-                    font-size: 2.25rem;
+                    font-size: 1.5rem;
                 }
 
                 p {
                     margin: 0;
-                    font-size: 1.5rem;
+                    font-size: clamp(1.5vw, 1.1rem, 1.5vw);
                 }
                 .active-bar {
                     position: absolute;
@@ -149,15 +149,43 @@
 
                 p {
                     margin: 0;
-                    font-size: 1.2rem;
+                    font-size: clamp(1.5vw, 1.1rem, 1.5vw);
                 }
                 .icon {
-                    font-size: 2.25rem;
+                    font-size: 1.5rem;
                     cursor: pointer;
 
                     &:hover {
                         color: $accentColorBackof2;
                     }
+                }
+
+            }
+        }
+
+    }
+
+    @media screen and (min-width: 1440px) {
+        .backOfficeNavAside {
+            .item-section {
+                gap: 1rem;
+                padding-left: 2rem;
+                .icon {
+                    font-size: 2.25rem;
+                }
+
+                p {
+                    font-size: 1.5rem;
+                }
+            
+            }
+            .footer-section {
+
+                p {
+                    font-size: 1.2rem;
+                }
+                .icon {
+                    font-size: 2.25rem;
                 }
 
             }
