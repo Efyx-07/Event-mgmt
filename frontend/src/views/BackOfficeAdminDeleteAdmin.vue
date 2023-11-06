@@ -25,6 +25,8 @@
             </div>
         </div>
     </div>
+
+    <BackOfficeNavMobile />
     
 </template>
 
@@ -33,6 +35,7 @@
     import BackOfficeNavAside from '@/components/BackOfficeNavAside.vue';
     import AdminsToDelete from '@/components/AdminsToDelete.vue';
     import AdminPageHeader from '@/components/AdminPageHeader.vue';
+    import BackOfficeNavMobile from '@/components/BackOfficeNavMobile.vue';
 
 </script>
 

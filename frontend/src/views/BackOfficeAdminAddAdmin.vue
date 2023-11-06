@@ -30,6 +30,8 @@
             </div>
         </div>
     </div>
+
+    <BackOfficeNavMobile />
     
 </template>
 
@@ -38,7 +40,7 @@
     import BackOfficeNavAside from '@/components/BackOfficeNavAside.vue';
     import AdminRegisterForm from '@/components/AdminRegisterForm.vue';
     import AdminPageHeader from '@/components/AdminPageHeader.vue';
-
+    import BackOfficeNavMobile from '@/components/BackOfficeNavMobile.vue';
 </script>
 
 <style lang="scss" scoped>
