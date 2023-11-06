@@ -114,6 +114,7 @@
 <style lang="scss" scoped>
 
     @import '@/assets/sass/variables.scss';
+    @import '@/assets/sass/varMediaQueries.scss';
     @import '@/assets/sass/mixins.scss';
 
     .adminLogin-form {
@@ -122,8 +123,8 @@
         align-items: center;
         justify-content: center;
         gap: .5rem;
-        width: 25rem;
-        padding: 2rem;
+        width: 90vw;
+        padding: 1rem;
         border: 1px solid $accentColorBackof3;
         border-radius: $containerRadius;
         .inputs_wrapper {
@@ -197,6 +198,13 @@
                     font-size: 1.3rem;
                 }
             }
+        }
+    }
+
+    @media screen and (min-width: $breakpointDesktop) {
+        .adminLogin-form {
+            width: 25rem;
+            padding: 2rem;
         }
     }
     

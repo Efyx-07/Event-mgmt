@@ -21,35 +21,35 @@
     @import '@/assets/sass/variables.scss';
     @import '@/assets/sass/varMediaQueries.scss';
 
-    @media screen and (min-width: $breakpointDesktop) {
-        .platformLogo {
-            font-family: 'Blinker', sans-serif;
-            color: $lightColor;
+    .platformLogo {
+        width: 100%;
+        font-family: 'Blinker', sans-serif;
+        color: $lightColor;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        .icon {
+            font-size: 1.5rem;
+        }
+        .platformName {
             display: flex;
-            align-items: center;
-            gap: 1rem;
-            .icon {
-                font-size: 1.5rem;
+            flex-direction: column;
+            align-items:flex-end;
+
+            p {
+                margin: 0;
+                line-height: 1;
             }
-            .platformName {
-                display: flex;
-                flex-direction: column;
-                align-items:flex-end;
 
-                p {
-                    margin: 0;
-                    line-height: 1;
-                }
-
-                .mainName {
-                    font-size: 1.5rem;
-                    font-weight: 300;
-                }
-                .subName {
-                    font-size: .8rem;
-                    color: $accentColorBackof3;
-                    font-weight: 400;
-                }
+            .mainName {
+                font-size: 1.5rem;
+                font-weight: 300;
+            }
+            .subName {
+                font-size: .8rem;
+                color: $accentColorBackof3;
+                font-weight: 400;
             }
         }
     }

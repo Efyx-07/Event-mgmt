@@ -19,15 +19,13 @@
     .backOffice {
         height: 100vh;
         background: $darkColorBackOf;
-        display: flex;
+        display: grid;
+        grid-template-rows: 1fr 1fr 1fr;
+        gap: 2rem;
         justify-content: center;
-        align-items: center;
-        position: relative;
         .platformLogo {
-            position: absolute;
-            top: 20%;
-            left: 50%;
-            transform: translateX(-50%);
+            grid-row: 1 / -3;
+            align-self: end;
         }
     }
 
