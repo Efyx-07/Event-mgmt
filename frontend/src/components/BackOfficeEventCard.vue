@@ -130,9 +130,10 @@
 <style lang="scss" scoped>
 
     @import '@/assets/sass/variables.scss';
+    @import '@/assets/sass/varMediaQueries.scss';
     .backOfficeEventCard {
         width: 24rem;
-        height: 21rem;
+        height: 22rem;
         background: $ultraLightColor;
         box-shadow: $shadow;
         border-radius: $containerRadius 0 $containerRadius 0;
