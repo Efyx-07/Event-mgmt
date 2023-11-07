@@ -28,7 +28,7 @@
         if (selectedEvent.locationUrl) {
             const urlWithApiKey = `https://www.google.com/maps/embed/v1/place?key=${googleMapsEmbedApiKey}&q=${encodeURIComponent(selectedEvent.location)}`;
             return urlWithApiKey;
-            // si aucun n'est trouvé renvoie une chaine de caractères vide
+            // si aucun lien n'est trouvé renvoie une chaine de caractères vide
         } else {
             return '';
         }
