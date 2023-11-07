@@ -4,6 +4,7 @@
         <div class="header_content">
             <h1>Gestion compte administrateur</h1>
             <AdminPageNav class="desktopAdminNav"/>
+            <AdminPageNavMobile class="mobileAdminNav2"/>
             <MobileMenuIcon class="mobileMenuIcon"/>
         </div>  
         <AdminPageNavMobile class="mobileAdminNav"/>
@@ -44,6 +45,9 @@
             .desktopAdminNav {
                 display: none;
             }
+            .mobileAdminNav2 {
+                display: none;
+            }
             .mobileMenuIcon {
                 justify-self: right;
             }
@@ -55,24 +59,39 @@
         header {
             @include headersBasicSettings;
             .header_content {
-                width: 100%;
-                max-width: $contentMaxWidth;
-                display: flex;
-                justify-content: space-between;
-                align-items: baseline;
-                        
+                grid-template-columns: 2fr 1fr;
+
                 h1 {
                     @include pageTitlesBasicSettings;
                 }
-                .desktopAdminNav {
+                .mobileAdminNav2 {
                     display: flex;
-                }
+                    justify-content: space-around;
+                } 
             }
             .mobileAdminNav {
                 display: none;
             }
         }
+               
     }
 
-    
+    @media screen and (min-width: 1525px) {
+
+        header {
+            .header_content {
+                max-width: $contentMaxWidth;
+                display: flex;
+                justify-content: space-between;
+                align-items: baseline;
+                .desktopAdminNav {
+                    display: flex;
+                }
+                .mobileAdminNav2 {
+                    display: none;
+                }
+            }
+        }
+    }
+
 </style>
