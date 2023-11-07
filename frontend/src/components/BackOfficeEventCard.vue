@@ -130,7 +130,6 @@
 <style lang="scss" scoped>
 
     @import '@/assets/sass/variables.scss';
-    @import '@/assets/sass/varMediaQueries.scss';
     .backOfficeEventCard {
         width: 24rem;
         height: 22rem;
