@@ -71,6 +71,7 @@
             .practicalInformations_container {
                 gap: 2rem;
                 margin-top: 2rem;
+                padding: 0 1rem;
                 
                 p {
                     flex: 1;
