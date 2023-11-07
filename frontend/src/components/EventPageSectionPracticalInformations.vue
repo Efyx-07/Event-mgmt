@@ -46,7 +46,7 @@
             display: flex;
             flex-wrap: wrap;
             margin-top: 1rem;
-            padding: 0 1rem;
+            padding: 0 1rem 1rem 1rem;
             border: solid 1px rgba($darkColor, .1);
             border-radius: 5px;
 

@@ -39,7 +39,6 @@
 <style lang="scss" scoped>
 
     @import '@/assets/sass/varMediaQueries.scss';
-
     .locationMap {
         width: 100%;
         height: 20rem;
