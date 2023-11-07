@@ -10,6 +10,7 @@
                 <div class="newEventPageHeader_content">
                     <h1>Nouvel évènement</h1>
                     <BackToEventsButtonVue class="backToEventsButton"/>
+                    <MobileMenuIcon class="mobileMenuIcon"/>
                 </div>
             </header>
 
@@ -35,6 +36,8 @@
         </div>
 
     </div>
+
+    <BackOfficeNavMobile />
       
 </template>
 
@@ -42,38 +45,40 @@
 
     import BackOfficeNavAside from '@/components/BackOfficeNavAside.vue';
     import BackToEventsButtonVue from '@/sub-components/BackToEventsButton.vue';
-    import CreateEventForm from '@/components/CreateEventForm.vue'
+    import CreateEventForm from '@/components/CreateEventForm.vue';
+    import MobileMenuIcon from '@/sub-components/MobileMenuIcon.vue';
+    import BackOfficeNavMobile from '@/components/BackOfficeNavMobile.vue';
 
 </script>
 
 <style lang="scss" scoped>
 
     @import '@/assets/sass/variables.scss';
+    @import '@/assets/sass/varMediaQueries.scss';
     @import '@/assets/sass/mixins.scss';
     .backOfficeNewEventPage {
-        display: grid;
-        grid-template-columns: 1fr 3fr;
         .newEventPage {
-            grid-column: 2 / -1;
             .newEventPageHeader {
-                @include headersBasicSettings;
+                @include headersMobileBasicSettings;
 
                 &_content {
-                    display: grid;
-                    align-items: center;
-                    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
                     width: 100%;
-                    max-width: $contentMaxWidth;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
                     
                     h1 {
-                        grid-column: 1 / -2;
-                        @include pageTitlesBasicSettings
+                        margin: 0;
+                        font-size: 1.5rem;
+                    }
+                    .backToEventsButton {
+                        display: none;
                     }
                 }
             }
             .newEventOperations_container {
                 width: 100%;
-                padding: 2rem 3rem;
+                padding: 1rem 1rem 3rem 1rem;
                 .newEventOperations {
                     background: $ultraLightColor;
                     box-shadow: $shadow;
@@ -95,7 +100,6 @@
                                 margin: 0;
                                 font-size: 1.25rem;
                                 font-weight: 700;
-                                white-space: nowrap;
                             }
 
                             .line {
@@ -105,14 +109,54 @@
                             }
                         }
                         .createEventForm {
-                            align-self: center;
-                            margin-top: 3rem;
+                            @include adminForm;
                         }
 
                     }
                 }
             }
             
+        }
+    }
+
+    @media screen and (min-width: $breakpointDesktop) {
+        .backOfficeNewEventPage {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            .newEventPage {
+                grid-column: 2 / -1;
+                .newEventPageHeader {
+                    @include headersBasicSettings;
+
+                    &_content {
+                        display: grid;
+                        grid-template-columns: 6fr 1fr;
+                        max-width: $contentMaxWidth;
+                        
+                        h1 {
+                            grid-column: 1 / -2;
+                            @include pageTitlesBasicSettings
+                        }
+                        .backToEventsButton {
+                            display: block;
+                            white-space: nowrap;
+                        }
+                    }
+                }
+                .newEventOperations_container {
+                    padding: 2rem 3rem;
+                    .newEventOperations {
+
+                        &-section {
+                            .sectionTitle_container {
+                                .sectionTitle {
+                                    white-space: nowrap;
+                                }
+                            }
+                        }
+                    }
+                }    
+            }
         }
     }
     

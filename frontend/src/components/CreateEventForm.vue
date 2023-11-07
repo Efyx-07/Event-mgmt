@@ -274,8 +274,9 @@
 <style lang="scss" scoped>
 
     @import '@/assets/sass/variables.scss';
+    @import '@/assets/sass/varMediaQueries.scss';
     .createEventForm {
-        width: 75%;
+        width: 100%;
         display: flex;
         flex-direction: column;
         gap: 2rem;
@@ -335,7 +336,8 @@
         }
         .createEventForm-buttons_container {
             display: flex;
-            align-self: end;
+            flex-wrap: wrap;
+            justify-content: end;
             gap: 1rem;
             .createEventForm-button {
                 display: flex;
@@ -359,6 +361,12 @@
             }
         }
     
+    }
+
+    @media screen and (min-width: $breakpointDesktop) {
+        .createEventForm {
+            width: 75%;   
+        }
     }
     
 </style>
