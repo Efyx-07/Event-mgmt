@@ -10,6 +10,7 @@
                 <div class="eventUpdatePageHeader_content">
                     <h1>Modifier votre évènement</h1>
                     <BackToEventsButtonVue class="backToEventsButton"/>
+                    <MobileMenuIcon class="mobileMenuIcon"/>
                 </div>
             </header>
 
@@ -36,8 +37,9 @@
         </div>
 
     </div>
-    
-    
+
+    <BackOfficeNavMobile />
+       
 </template>
 
 <script setup>
@@ -45,6 +47,8 @@
     import BackOfficeNavAside from '@/components/BackOfficeNavAside.vue';
     import BackToEventsButtonVue from '@/sub-components/BackToEventsButton.vue';
     import UpdateEventForm from '@/components/UpdateEventForm.vue';
+    import MobileMenuIcon from '@/sub-components/MobileMenuIcon.vue';
+    import BackOfficeNavMobile from '@/components/BackOfficeNavMobile.vue';
 
     import { useEventStore } from '@/stores/EventStore';
     import { useRoute } from 'vue-router';
@@ -66,31 +70,31 @@
 <style lang="scss" scoped>
 
     @import '@/assets/sass/variables.scss';
+    @import '@/assets/sass/varMediaQueries.scss';
     @import '@/assets/sass/mixins.scss';
     .backOfficeEventUpdatePage {
-        display: grid;
-        grid-template-columns: 1fr 3fr;
         .eventUpdatePage {
-            grid-column: 2 / -1;
             .eventUpdatePageHeader {
-                @include headersBasicSettings;
+                @include headersMobileBasicSettings;
 
                 &_content {
-                    display: grid;
-                    align-items: center;
-                    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
                     width: 100%;
-                    max-width: $contentMaxWidth;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
                     
                     h1 {
-                        grid-column: 1 / -2;
-                        @include pageTitlesBasicSettings;
+                        margin: 0;
+                        font-size: 1.5rem;
+                    }
+                    .backToEventsButton {
+                        display: none;
                     }
                 }
             }
             .updateEventOperations_container {
                 width: 100%;
-                padding: 2rem 3rem;
+                padding: 1rem 1rem 3rem 1rem;
                 .updateEventOperations {
                     background: $ultraLightColor;
                     box-shadow: $shadow;
@@ -111,7 +115,6 @@
                                 margin: 0;
                                 font-size: 1.25rem;
                                 font-weight: 700;
-                                white-space: nowrap;
                             }
                             .line {
                                 width: 100%;
@@ -121,15 +124,65 @@
                         }
 
                         h2 {
+                            font-size: 1.3rem;
                             margin: 3rem 0 0 0;
+                            padding: 1rem;
                             text-align: center;
-                            color: $accentColorBackof3;
+                            background: $darkColorBackOf;
+                            color: $lightColor;
                         }
                         .updateEventForm {
-                            align-self: center;
-                            margin-top: 3rem;
+                            @include adminForm;
                         }
 
+                    }
+                }
+            }
+        }
+    }
+
+    @media screen and (min-width: $breakpointDesktop) {
+        .backOfficeEventUpdatePage {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            .eventUpdatePage {
+                grid-column: 2 / -1;
+                .eventUpdatePageHeader {
+                    @include headersBasicSettings;
+
+                    &_content {
+                        display: grid;
+                        grid-template-columns: 6fr 1fr;
+                        max-width: $contentMaxWidth;
+                        
+                        h1 {
+                            grid-column: 1 / -2;
+                            @include pageTitlesBasicSettings;
+                        }
+                        .backToEventsButton {
+                            display: block;
+                            white-space: nowrap;
+                        }
+                    }
+                }
+                .updateEventOperations_container {
+                    padding: 2rem 3rem;
+                    .updateEventOperations {
+
+                        &-section {
+                            .sectionTitle_container {
+                                .sectionTitle {
+                                    white-space: nowrap;
+                                }
+                            }
+
+                            h2 {
+                                font-size: 1.5rem;
+                                width: 75%;
+                                align-self: center;
+                            }
+
+                        }
                     }
                 }
             }

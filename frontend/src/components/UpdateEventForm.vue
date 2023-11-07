@@ -303,8 +303,9 @@
 <style lang="scss" scoped>
 
     @import '@/assets/sass/variables.scss';
+    @import '@/assets/sass/varMediaQueries.scss';
     .updateEventForm {
-        width: 75%;
+        width: 100%;
         display: flex;
         flex-direction: column;
         gap: 2rem;
@@ -374,7 +375,8 @@
         }
         .updateEventForm-buttons_container {
             display: flex;
-            align-self: end;
+            flex-wrap: wrap;
+            justify-content: end;
             gap: 1rem;
             .updateEventForm-button {
                 display: flex;
@@ -385,7 +387,6 @@
                 border: none;
                 background: $darkColorBackOf;
                 color: $lightColor;
-                align-self: end;
                 cursor: pointer;
 
                 &:hover {
@@ -399,6 +400,12 @@
             }
         }
 
+    }
+
+    @media screen and (min-width: $breakpointDesktop) {
+        .updateEventForm {
+            width: 75%;   
+        }
     }
     
     
