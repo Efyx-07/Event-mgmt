@@ -144,7 +144,7 @@
       background: $ultraLightColor;
       box-shadow: $shadow;
       border-radiuS: $containerRadius;
-      padding: 2rem;
+      padding: 1rem 2rem 2rem 2rem;
       .participantsList-array {
         width: 100%;
         text-align: center;
