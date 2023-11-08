@@ -15,22 +15,31 @@
 
 <script setup>
 
-    import { computed } from 'vue';
+    import { ref, onMounted } from 'vue';
+    import { useGlobalDataStore } from '@/stores/GlobalDataStore';
 
     // recupère la props de selectedEvents en provenance de EventPage
     const { selectedEvent } = defineProps(['selectedEvent']);
+    // rend reactif le lien google maps
+    const embedUrl = ref('');
 
-    // clé google maps (à remplacer par la clé du client)
-    const googleMapsEmbedApiKey = 'AIzaSyBZqDbBpqGQwhdR34PVpRViRe1oFcvj4Mk';
+    // fetch l'URL du lieu via le backend pour mettre à jour la carte
+    onMounted(async() => {
+        try {
 
-    // récupère le locationUrl de l'API evenements et le reformate avec la clé API selon format googleMaps
-    const embedUrl = computed(() => {
-        if (selectedEvent.locationUrl) {
-            const urlWithApiKey = `https://www.google.com/maps/embed/v1/place?key=${googleMapsEmbedApiKey}&q=${encodeURIComponent(selectedEvent.location)}`;
-            return urlWithApiKey;
-            // si aucun lien n'est trouvé renvoie une chaine de caractères vide
-        } else {
-            return '';
+            const { hostName } = useGlobalDataStore();
+
+            if (selectedEvent.locationUrl) {
+                const response = await fetch(`${hostName}/maps?location=${encodeURIComponent(selectedEvent.location)}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    embedUrl.value = data.embedUrl;
+                } else {
+                    console.error('Erreur lors de la récupération de l\'URL sécurisée de la carte.');
+                }
+            }
+        } catch (error) {
+            console.error('Erreur lors de la récupération de l\'URL sécurisée de la carte :', error);
         }
     });
 

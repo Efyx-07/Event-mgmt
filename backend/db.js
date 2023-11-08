@@ -2,7 +2,7 @@ const mysql = require('mysql2'); // appelle l'instance mysql2
 
 const hostName = 'localhost';
 const userName = 'root';
-const password = 'FXMysql2023!';
+const password = 'FXMysql';
 
 // connexion à la base de données 'myevents'
 const myEventsConnection = mysql.createConnection({
