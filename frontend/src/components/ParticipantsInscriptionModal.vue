@@ -111,6 +111,10 @@
             }
             
             @media screen and (min-width: $breakpointTablet) {
+                width: 30rem;
+            }
+
+            @media screen and (min-width: 1440px) {
                 width: 36rem;
             }
 
@@ -122,7 +126,6 @@
                 padding: .5rem 1rem;
                 display: flex;
                 justify-content: flex-end;
-                background: $lightColor;
                 .closeIcon {
                     cursor: pointer;
                     transition: transform .15s ease-in-out;
@@ -134,13 +137,16 @@
             }
             .modal_content {
                 width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
                 .titleAndForm_container {
-                    padding: 2rem;
-                    padding-bottom: 6rem;
+                    padding: 0rem 2rem 6rem 2rem;
                     display: flex;
                     flex-direction: column;
-                    gap: 3rem;
+                    gap: 2rem;
                     .eventTitle {
+                        margin: 0;
                         text-align: center;
                         font-size: 1.5rem;
                     }
@@ -149,13 +155,18 @@
 
             footer {
                 width: 100%;
-                max-width: 36rem;
+                max-width: 30rem;
                 position: fixed;
                 bottom: 0;
                 display: flex;
                 justify-content: center;
-                padding: 0 3rem;
+                padding: 0 2rem;
                 background: $lightColor;
+
+                @media screen and (min-width: 1440px) {
+                    max-width: 36rem;
+                    padding: 0 3rem;
+                }
 
                 .legalLinks_container {
                     width: 100%;
