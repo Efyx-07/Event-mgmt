@@ -7,7 +7,6 @@
         <div class="adminHomePage">
 
             <header class="adminHomePageHeader">
-
                 <div class="adminHomePageHeader_content">
                     <h1>Vos évènements</h1>
                     <div class="eventsCountMention_container">
@@ -19,7 +18,6 @@
                     </div>
                     <MobileMenuIcon class="mobileMenuIcon"/>
                 </div>
-
             </header>
 
             <div v-if="eventsCount === 0" class="adminHomePage_empty">
@@ -33,11 +31,12 @@
             <div class="eventCards_container" v-if="eventsCount >= 1">
                 <BackOfficeEventCard />
             </div>
+
         </div>
-        <RemoveEventConfirmationModal />
 
     </div>
 
+    <RemoveEventConfirmationModal />
     <BackOfficeNavMobile />
     
     
