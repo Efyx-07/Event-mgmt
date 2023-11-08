@@ -8,9 +8,8 @@
       <header>
         <div class="header_content">
           <h1 class="page-title">Vos participants</h1>
-          <router-link to="/admin_homepage" class="backToEventsButton">
-            <p>Retour à vos évènements</p>
-          </router-link>
+          <BackToEventsButton class="backToEventsButton"/>
+          <MobileMenuIcon class="mobileMenuIcon"/>
         </div>
       </header>
 
@@ -51,109 +50,83 @@
     </div>
 
   </div>
+
+  <BackOfficeNavMobile />
   
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue';
-import { useRoute } from 'vue-router';
-import { fetchParticipantsData } from '@/services/api'; // importe la fonction à partir de api.js
-import { useEventStore } from '@/stores/EventStore'; 
-import BackOfficeNavAside from '@/components/BackOfficeNavAside.vue';
 
-const route = useRoute();
-const participants = ref([]);
-const eventTitle = ref(''); // titre de l'évènement sélectionné
-const eventStore = useEventStore();
+  import { ref, onMounted, computed } from 'vue';
+  import { useRoute } from 'vue-router';
+  import { fetchParticipantsData } from '@/services/api'; // importe la fonction à partir de api.js
+  import { useEventStore } from '@/stores/EventStore'; 
+  import BackOfficeNavAside from '@/components/BackOfficeNavAside.vue';
+  import BackToEventsButton from '@/sub-components/BackToEventsButton.vue';
+  import MobileMenuIcon from '@/sub-components/MobileMenuIcon.vue';
+  import BackOfficeNavMobile from '@/components/BackOfficeNavMobile.vue';
 
-const participantsCount = computed(() => participants.value.length); // detecte le nombre de participants
+  const route = useRoute();
+  const participants = ref([]);
+  const eventTitle = ref(''); // titre de l'évènement sélectionné
+  const eventStore = useEventStore();
 
-onMounted(async () => {
-  const eventSlug = route.params.eventSlug;
-   // utilise la route pour récupérer le slug et le titre de l'évènement correspondant
-   const event = eventStore.events.find((event) => event.slug === eventSlug);
-   if (event) {
-    eventTitle.value = event.title;
-   }
-  try {
-    // fetch les données des participants selon le slug de l'evenement selectionné
-    const response = await fetchParticipantsData(eventSlug); 
-    participants.value = response.participants;
-  } catch (error) {
-    console.error('Erreur lors du chargement des participants :', error);
-  }
-});
+  const participantsCount = computed(() => participants.value.length); // detecte le nombre de participants
+
+  onMounted(async () => {
+    const eventSlug = route.params.eventSlug;
+    // utilise la route pour récupérer le slug et le titre de l'évènement correspondant
+    const event = eventStore.events.find((event) => event.slug === eventSlug);
+    if (event) {
+      eventTitle.value = event.title;
+    }
+    try {
+      // fetch les données des participants selon le slug de l'evenement selectionné
+      const response = await fetchParticipantsData(eventSlug); 
+      participants.value = response.participants;
+    } catch (error) {
+      console.error('Erreur lors du chargement des participants :', error);
+    }
+  });
 
 </script>
 
 <style lang="scss" scoped>
 
   @import '@/assets/sass/variables.scss';
+  @import '@/assets/sass/varMediaQueries.scss';
   @import '@/assets/sass/mixins.scss';
   .participantsListPage {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-
-    &_content {
-      grid-column: 2 / -1;
-      position:relative;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
 
     header {
-      @include headersBasicSettings;
+      @include headersMobileBasicSettings;
       .header_content{
-        display: grid;
-        align-items: center;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
         width: 100%;
-        max-width: $contentMaxWidth;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         .page-title {
-          grid-column: 1 / -2;
-          @include pageTitlesBasicSettings;
+          margin: 0;
+          font-size: 1.5rem;
         }
         .backToEventsButton {
-          text-decoration: none;
-          background: transparent;
-          color: $darkColor;
-          border: 1px solid $darkColorBackOf;
-          display: flex;
-          justify-content: center;
-          text-align: center;
-          cursor: pointer;
-
-          &:hover {
-            color: $accentColorBackof2;
-            border-color: $accentColorBackof2;
-          }
-
-          p {
-            margin: 0;
-            font-size: .8rem;
-            font-weight: 700;
-            padding: .5rem;
-          }
+          display: none;
         }
       }
     }
     .participantsListPage_content_container {
       width: 100%;
-      padding: 2rem 3rem;
+      padding: 1rem;
       display: flex;
       flex-direction: column;
-      gap: 2rem;
+      gap: 1rem;
     }
     .eventTitle-banner {
-      width: 95%;
-      align-self: center;
-      position: sticky;
-      top: 6.5rem;
       display: flex;
-      justify-content: space-between;
+      flex-wrap: wrap;
+      justify-content: center;
       align-items: center;
+      gap: .5rem;
       padding: .5rem 1rem;
       background: $darkColorBackOf;
       color: $lightColor;
@@ -166,8 +139,8 @@ onMounted(async () => {
         margin: 0;
       }
     }
-
     .participantsList-array_container {
+      overflow-x: scroll;
       background: $ultraLightColor;
       box-shadow: $shadow;
       border-radiuS: $containerRadius;
@@ -193,7 +166,54 @@ onMounted(async () => {
         }
       } 
     }
- 
+  }
+
+  @media screen and (min-width: $breakpointDesktop) {
+    .participantsListPage {
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+
+      &_content {
+        grid-column: 2 / -1;
+        position:relative;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      header {
+        @include headersBasicSettings;
+        .header_content{
+          display: grid;
+          align-items: center;
+          grid-template-columns: 6fr 1fr;
+          max-width: $contentMaxWidth;
+          .page-title {
+            grid-column: 1 / -2;
+            @include pageTitlesBasicSettings;
+          }
+          .backToEventsButton {
+            display: block;
+          }
+        }
+      }
+      .participantsListPage_content_container {
+        padding: 2rem 3rem;
+        gap: 2rem;
+      }
+      .eventTitle-banner {
+        width: 95%;
+        align-self: center;
+        position: sticky;
+        top: 6.5rem;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .participantsList-array_container {
+        overflow-x: unset;
+      } 
+    }
   }
 
 </style>

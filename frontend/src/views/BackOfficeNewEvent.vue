@@ -9,7 +9,7 @@
             <header class="newEventPageHeader">
                 <div class="newEventPageHeader_content">
                     <h1>Nouvel évènement</h1>
-                    <BackToEventsButtonVue class="backToEventsButton"/>
+                    <BackToEventsButton class="backToEventsButton"/>
                     <MobileMenuIcon class="mobileMenuIcon"/>
                 </div>
             </header>
@@ -44,7 +44,7 @@
 <script setup>
 
     import BackOfficeNavAside from '@/components/BackOfficeNavAside.vue';
-    import BackToEventsButtonVue from '@/sub-components/BackToEventsButton.vue';
+    import BackToEventsButton from '@/sub-components/BackToEventsButton.vue';
     import CreateEventForm from '@/components/CreateEventForm.vue';
     import MobileMenuIcon from '@/sub-components/MobileMenuIcon.vue';
     import BackOfficeNavMobile from '@/components/BackOfficeNavMobile.vue';
