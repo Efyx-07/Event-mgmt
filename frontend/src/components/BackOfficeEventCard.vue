@@ -116,15 +116,12 @@
   // déclare currentFilter comme réactif avec valeur 'all' par défaut
   const currentFilter = ref('all');
 
-  // obtient la date du jour
-  const currentDate = new Date();
-
-  // procède au filtrage des évènements selon la date du jour 'à venir' / 'passés', affiche tous les évènements par défaut
+  // procède au filtrage des évènements 'à venir' / 'passés' selon la methode de eventStore et affiche tous les évènements par défaut
   const filteredEvents = computed(() => {
       if (currentFilter.value === 'upcoming') {
-        return events.filter(event => new Date(event.date) > currentDate);
+        return eventStore.upcomingEvents;
       } else if (currentFilter.value === 'past') {
-        return events.filter(event => new Date(event.date) <= currentDate);
+        return eventStore.pastEvents;
       } else {
         return events
       }

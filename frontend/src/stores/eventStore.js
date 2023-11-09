@@ -5,6 +5,8 @@ export const useEventStore = defineStore('events', {
 
     state: () => ({
         events: [], // initialise events comme un tableau vide
+        upcomingEvents: [],
+        pastEvents: [],
     }),
 
     actions: {
@@ -14,7 +16,8 @@ export const useEventStore = defineStore('events', {
             try {
                 const eventsData = await api.fetchEventsData();
                 this.events = eventsData.events;
-
+                this.sortEventByCreationDateNewToOld();
+                this.updateFilteredEvents();
             } catch (error) {
                 console.error('Erreur lors du chargement des données des évènements: ', error);
             }
@@ -25,6 +28,12 @@ export const useEventStore = defineStore('events', {
             this.events.sort((a, b) => {
                 return new Date(b.creationDate) - new Date(a.creationDate);
               });
+        },
+
+        updateFilteredEvents() {
+            const currentDate = new Date();
+            this.upcomingEvents = this.events.filter(event => new Date(event.date) > currentDate);
+            this.pastEvents = this.events.filter(event => new Date(event.date) <= currentDate);
         },
     },
 });
