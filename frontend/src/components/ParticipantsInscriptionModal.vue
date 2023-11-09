@@ -139,8 +139,10 @@
                 width: 100%;
                 height: 100%;
                 display: flex;
+                justify-content: center;
                 align-items: center;
                 .titleAndForm_container {
+                    width: 100%;
                     padding: 0rem 2rem 6rem 2rem;
                     display: flex;
                     flex-direction: column;
