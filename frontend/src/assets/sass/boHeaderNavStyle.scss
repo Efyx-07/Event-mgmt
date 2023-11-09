@@ -1,0 +1,38 @@
+@import '@/assets/sass/variables.scss';
+
+.boHeaderNav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    .navItem {
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        color: $darkColor;
+        cursor: pointer;
+
+        p {
+            margin: 0;
+        }
+        .activeBar {
+            height: 1px;
+            width: 100%;
+            background-color: $accentColorBackof2;
+            clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
+            transition: clip-path .2s ease-in-out;
+        }
+
+        &:hover,
+        &.active-link {
+            color: $accentColorBackof2;
+        }
+
+        &:hover>.activeBar {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        }
+        &.active-link>.activeBar {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        }
+    }
+}

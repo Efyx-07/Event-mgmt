@@ -55,18 +55,34 @@
     }
 
     @media screen and (min-width: $breakpointDesktop) {
-
         header {
             @include headersBasicSettings;
             .header_content {
-                grid-template-columns: 2fr 1fr;
 
                 h1 {
                     @include pageTitlesBasicSettings;
                 }
+            }
+            
+        }
+    }
+
+    @media screen and (min-width: 1148px) {
+
+        header {
+            .header_content {
+                //grid-template-columns: 2fr 1fr;
+                display: flex;
+                justify-content: space-between;
+                align-items: baseline;
+
+                h1 {
+                    flex: 2;
+                }
                 .mobileAdminNav2 {
                     display: flex;
-                    justify-content: space-around;
+                    justify-content: space-between;
+                    flex:1;
                 } 
             }
             .mobileAdminNav {

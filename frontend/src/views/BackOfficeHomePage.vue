@@ -9,15 +9,10 @@
             <header class="adminHomePageHeader">
                 <div class="adminHomePageHeader_content">
                     <h1>Vos évènements</h1>
-                    <div class="eventsCountMention_container">
-                        <div class="eventsCountMention">
-                            <p v-if="eventsCount >= 1"> {{ eventsCount }}</p> 
-                            <p v-if="eventsCount === 1">évènement créé</p>
-                            <p v-if="eventsCount >= 2">évènements créés</p>
-                        </div>
-                    </div>
+                    <BackOfficeEventsNav class="backOfficeEventsNavDesktop"/>
                     <MobileMenuIcon class="mobileMenuIcon"/>
                 </div>
+                <BackOfficeEventsNav class="backOfficeEventsNavMobile"/>
             </header>
 
             <div v-if="eventsCount === 0" class="adminHomePage_empty">
@@ -49,6 +44,7 @@
     import RemoveEventConfirmationModal from '@/components/RemoveEventConfirmationModal.vue';
     import MobileMenuIcon from '@/sub-components/MobileMenuIcon.vue';
     import BackOfficeNavMobile from '@/components/BackOfficeNavMobile.vue';
+    import BackOfficeEventsNav from '@/components/BackOfficeEventsNav.vue';
     import { Icon } from '@iconify/vue';
     import { useEventStore } from '@/stores/EventStore';
     import { computed, onMounted } from 'vue';
@@ -77,6 +73,10 @@
             min-height: 100vh;
             .adminHomePageHeader {
                 @include headersMobileBasicSettings;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
 
                 &_content {
                     width: 100%;
@@ -88,7 +88,7 @@
                         margin: 0;
                         font-size: 1.5rem;
                     }
-                    .eventsCountMention_container {
+                    .backOfficeEventsNavDesktop {
                         display: none;
                     }
                     
@@ -153,30 +153,21 @@
                     @include headersBasicSettings;
 
                     &_content {
-                        display: grid;
-                        align-items: center;
-                        grid-template-columns: 1fr 1fr 1fr 1fr;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: baseline;
                         max-width: $contentMaxWidth;
 
                         h1 {
                             grid-column: 1 / -2;
                             @include pageTitlesBasicSettings;
                         }
-
-                        .eventsCountMention_container {
-                            grid-column: 4 / -1;
+                        .backOfficeEventsNavDesktop {
                             display: flex;
-                            justify-content: end;
-                            width: 100%;
-                            .eventsCountMention {
-                                display: flex;
-                                gap: .3rem;
-
-                                p {
-                                    margin: 0;
-                                }
-                            }
                         }
+                    }
+                    .backOfficeEventsNavMobile {
+                        display: none;
                     }
 
                 }
