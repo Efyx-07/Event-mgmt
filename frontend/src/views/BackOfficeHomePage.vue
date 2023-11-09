@@ -136,7 +136,7 @@
             .eventCards_container {
                 padding: 1rem 1rem 3rem 1rem;
                 display: flex;
-                gap: 2rem;
+                gap: 1rem;
                 justify-content: center;
                 flex-wrap: wrap;
             }
@@ -183,6 +183,7 @@
                 }
                 .eventCards_container {
                     padding: 2rem 3rem;
+                    gap: 2rem;
                 }
             }
         }
