@@ -1,6 +1,6 @@
 <template>
 
-  <div class="backOfficeEventCard" v-for="event in events" :key="event.title">
+  <div class="backOfficeEventCard" v-for="event in filteredEvents" :key="event.title" >
 
     <div class="eventImage_container">
       <img :src="hostName + event.image.source" :alt="event.image.alt" class="eventImage">
@@ -37,10 +37,6 @@
 
     </div>
 
-
-
-    <!-- <p class="creationDate">créé le {{ formatDateShort(event.creationDate) }} <span v-if="event.admin.id">par {{ event.admin.prenom }}</span></p> -->
-
     <div class="dateCard">
       <p class="dateCard-day"> {{ formatDateDay(event.date) }} </p>
       <div class="monthYear_container">
@@ -59,6 +55,7 @@
   import { useEventStore } from '@/stores/EventStore';
   import { useGlobalDataStore } from '@/stores/GlobalDataStore';
   import { useRouter } from 'vue-router';
+  import { ref, computed, onMounted } from 'vue';
 
   const eventStore = useEventStore();
   const events = eventStore.events;
@@ -66,14 +63,6 @@
   const { hostName } = useGlobalDataStore();
 
   const router = useRouter();
-
-  // formate la date de création de l'évènement sous la forme dd-mm-yy
-  /*
-  const formatDateShort = (date) => {
-    const options = { day: '2-digit', month: '2-digit', year: '2-digit' };
-    return new Date(date).toLocaleDateString('fr-FR', options).replace(/\//g, '-');
-  };
-  */
 
   // reformate la date et sépare jour / mois / année
   const formatDateDay = (date) => {
@@ -88,7 +77,6 @@
       const options = { year: 'numeric' };
       return new Date(date).toLocaleDateString('fr-FR', options);
   };
-
 
   // permet de naviguer vers la page de l'evenement selectionné
   const navigateToEvent = (eventSlug) => {
@@ -124,6 +112,35 @@
       // déclenche l'événement 'show-removeEventConfirmationModal' sur l'objet window
       window.dispatchEvent(showRemoveEventConfirmationModalEvent);
   }
+
+  // déclare currentFilter comme réactif avec valeur 'all' par défaut
+  const currentFilter = ref('all');
+
+  // obtient la date du jour
+  const currentDate = new Date();
+
+  // procède au filtrage des évènements selon la date du jour 'à venir' / 'passés', affiche tous les évènements par défaut
+  const filteredEvents = computed(() => {
+      if (currentFilter.value === 'upcoming') {
+        return events.filter(event => new Date(event.date) > currentDate);
+      } else if (currentFilter.value === 'past') {
+        return events.filter(event => new Date(event.date) <= currentDate);
+      } else {
+        return events
+      }
+  });
+
+  // écoute l'évènement personnalisé émis par BackOfficeEventNav
+  onMounted(() => {
+    window.addEventListener('filterChanged', handleFilterChanged);
+  });
+
+  // modifie la valeur du filtre selon l'evenement emis
+  const handleFilterChanged = (event) => {
+    currentFilter.value = event.detail; 
+  };
+
+ 
 
 </script>
 
