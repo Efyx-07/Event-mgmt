@@ -6,11 +6,11 @@
             <div class="activeBar"></div>
         </div>
         <div class="navItem" @click="displayOnlyUpcomingEvents" :class="{ 'active-link': currentFilter === 'upcoming' }">
-            <p>A venir <span>({{ eventsCount }})</span></p>
+            <p>A venir <span>({{ upcomingEventsCount }})</span></p>
             <div class="activeBar"></div>
         </div>
         <div class="navItem" @click="displayOnlyPastEvents" :class="{ 'active-link': currentFilter === 'past' }">
-            <p>Passés <span>({{ eventsCount }})</span></p>
+            <p>Passés <span>({{ pastEventsCount }})</span></p>
             <div class="activeBar"></div>
         </div>
     </div>
@@ -24,9 +24,19 @@
 
     const eventStore = useEventStore();
 
-    // permet de vérifier le nombre d'évènements créés
+    // récupère le nombre d'évènements total
     const eventsCount = computed(() => {
         return eventStore.events.length;
+    });
+
+    // récupère le nombre d'évènements 'à venir'
+    const upcomingEventsCount = computed(() => {
+        return eventStore.upcomingEvents.length;
+    });
+
+     // récupère le nombre d'évènements 'passés'
+     const pastEventsCount = computed(() => {
+        return eventStore.pastEvents.length;
     });
 
     // déclare currentFilter comme réactif avec valeur 'all' par défaut
