@@ -26,7 +26,6 @@
         width: 100vw;
         height: 100vh;
         background: rgba($darkColor, .25);
-        backdrop-filter: blur(2.5px);
         top: 0;
         z-index: 998;
         transition: transform .3s ease-in-out;

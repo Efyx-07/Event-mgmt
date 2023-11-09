@@ -106,7 +106,6 @@
     }
     .removeEventConfirmationModal {
         background: rgba($darkColor, .25);
-        backdrop-filter: blur(2.5px);
         height: 100vh;
         width: 100vw;
         position: fixed;
@@ -194,6 +193,7 @@
         .removeEventConfirmationModal {
             .optionBox {
                 margin: unset;
+                padding: 2rem;
                 .part1 {
                     .alertIcon_container {
                         width: 2.5rem;
