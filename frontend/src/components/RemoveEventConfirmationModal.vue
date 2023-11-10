@@ -121,6 +121,7 @@
             max-width: 500px;
             background: $ultraLightColor;
             box-shadow: $shadow;
+            border: solid 1px rgba($darkColor, .5);
             border-radius: 10px;
             color: $darkColor;
             display: flex;
@@ -160,7 +161,7 @@
             }
             .alertMessage {
                 margin: 0;
-                font-size: 1rem;
+                font-size: .95rem;
                 text-align: justify;
             }
             .buttons_container {
