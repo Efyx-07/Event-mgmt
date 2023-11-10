@@ -68,7 +68,7 @@
 
             <div class="input-container">
                 <label for="event-presentation">Présentation de l'évènement</label>
-                <ckeditor :editor="editor" v-model="editorDataPresentation" :config="editorConfig" @input="updateEventPresentation"></ckeditor>
+                <ckeditor class="ckeditor-input" :editor="editor" v-model="editorDataPresentation" :config="editorConfig" @input="updateEventPresentation"></ckeditor>
             </div>
 
             <div class="input-container">
@@ -122,12 +122,8 @@
         </div>
 
         <div class="createEventForm-buttons_container">
-            <button class="createEventForm-button" @click="navigateToHomepage">
-                <p>Annuler</p>
-            </button>     
-            <button class="createEventForm-button" type="submit">
-                <p>Publier</p>
-            </button>
+            <ReusableSecondaryButton  @click="navigateToHomepage">Annuler</ReusableSecondaryButton> 
+            <ReusablePrimaryButton type="submit">Publier l'évènement</ReusablePrimaryButton>
         </div>
 
     </form>
@@ -141,6 +137,8 @@
     import { useEventStore } from '@/stores/EventStore';
     import { useAdminStore } from '@/stores/AdminStore';
     import { useRouter } from 'vue-router';
+    import ReusablePrimaryButton from '@/sub-components/ReusablePrimaryButton.vue';
+    import ReusableSecondaryButton from '@/sub-components/ReusableSecondaryButton.vue';
     import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
     // propriétés du formulaire
@@ -298,6 +296,7 @@
                     width: 100%;
                     height: 3rem;
                     border: solid 1px rgba($accentColorBackof3, .25);
+                    border-radius: 5px;
                     font-size: 1rem;
                     outline: none;
 
@@ -339,26 +338,6 @@
             flex-wrap: wrap;
             justify-content: end;
             gap: 1rem;
-            .createEventForm-button {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 8rem;
-                height: 2rem;
-                border: none;
-                background: $darkColorBackOf;
-                color: $lightColor;
-                cursor: pointer;
-
-                &:hover {
-                    background: $accentColorBackof2;
-                }
-
-                p {
-                    margin: 0;
-                    font-weight: 700;
-                }
-            }
         }
     
     }

@@ -9,13 +9,13 @@
                 <p>Supprimer l'évènement</p>
             </div>
 
-            <ReusableSeparator></ReusableSeparator>
+            <ReusableSeparator/>
 
             <p class="eventTitle">"{{ eventToRemove.eventTitle }}"</p>
 
             <p class="alertMessage">Etes-vous sûr de vouloir supprimer l'evenement? Cette opération est irréversible et supprimera l'évènement et toutes ses données. </p>
 
-            <ReusableSeparator></ReusableSeparator>
+            <ReusableSeparator/>
             
             <div class="buttons_container">
                 <ReusableSecondaryButton  @click="closeRemoveEventConfirmationModal">Annuler</ReusableSecondaryButton> 

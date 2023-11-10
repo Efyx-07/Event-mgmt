@@ -13,19 +13,10 @@
 <style lang="scss" scoped>
 
     @import '@/assets/sass/variables.scss';
-
+    @import '@/assets/sass/mixins.scss';
     .primaryBtn {
-        font-size: 1rem;
-        padding: .6rem 1.1rem;
-        border: none;
+        @include backOfficeButtonStyle;
         background: $accentColorBackof2;
-        color: $ultraLightColor;
-        border-radius: 5px;
-        cursor: pointer;
-
-        &:hover {
-            background: $darkColorBackOf;
-        }
     }
 
 </style>

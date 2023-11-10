@@ -13,12 +13,10 @@
 
             <div class="adminNameAndButton_container" v-else>
                 <p> {{ admin.prenom }} {{ admin.nom }} </p>
-                <button v-if="admin.id > 1" @click="deleteAdmin(admin.id)">
-                    <p>Supprimer</p>
-                </button>
+                <ReusablePrimaryButton v-if="admin.id > 1" @click="deleteAdmin(admin.id)">Supprimer</ReusablePrimaryButton>
             </div>
 
-            <div class="separator"></div>
+            <ReusableSeparator/>
 
         </div>
             
@@ -32,6 +30,8 @@
     import { ref, onMounted } from 'vue';
     import { useGlobalDataStore } from '@/stores/GlobalDataStore';
     import { Icon } from '@iconify/vue';
+    import ReusablePrimaryButton from '@/sub-components/ReusablePrimaryButton.vue';
+    import ReusableSeparator from '@/sub-components/ReusableSeparator.vue';
 
     const adminStore = useAdminStore();
 
@@ -89,6 +89,7 @@
 <style lang="scss" scoped>
 
     @import '@/assets/sass/variables.scss';
+    @import '@/assets/sass/varMediaQueries.scss';
 
     .adminsList {
         width: 100%;
@@ -101,35 +102,14 @@
             gap: 1rem;
             .adminNameAndButton_container {
                 display: flex;
+                flex-direction: column;
                 align-items: center;
-                justify-content: space-between;
+                gap: 1rem;
 
                 p {
                     margin: 0;
                 }
 
-                button {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    width: 6rem;
-                    height: 1.5rem;
-                    border: none;
-                    background: $darkColorBackOf;
-                    color: $lightColor;
-                    align-self: end;
-                    cursor: pointer;
-
-                    &:hover {
-                        background: $accentColorBackof2;
-                    }
-
-                    p {
-                        margin: 0;
-                        font-size: .7rem;
-                        font-weight: 700;
-                    }
-                }
             }
             .deleting-result_message {
                 display: flex;
@@ -149,9 +129,51 @@
                     }
                 }
             }
-            .separator {
-                height: 1px;
-                background: rgba($accentColorBackof3, .25);
+        }
+    }
+
+    @media screen and (min-width: 360px) {
+        .adminsList {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            .adminsList_block {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                .adminNameAndButton_container {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    p {
+                        margin: 0;
+                    }
+
+                    button {
+                        align-self: end;
+                    }
+                }
+                .deleting-result_message {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    .text_container {
+                        display: flex;
+                        align-items: center;
+                        gap: 1rem;
+
+                        p {
+                        margin: 0;
+                        }
+                        .successIcon {
+                            font-size: 1.3rem;
+                            color: $validColor;
+                        }
+                    }
+                }
             }
         }
     }

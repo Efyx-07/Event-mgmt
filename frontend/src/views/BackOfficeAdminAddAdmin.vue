@@ -15,7 +15,7 @@
                     <div class="adminRegistration-section adminOperations-section">
                         <div class="sectionTitle_container">
                             <p class="sectionTitle">Ajouter un nouvel administrateur</p>
-                            <div class="line"></div>
+                            <ReusableSeparator/>
                         </div>
                         <div class="aboutNotification">
                             <p>
@@ -41,6 +41,8 @@
     import AdminRegisterForm from '@/components/AdminRegisterForm.vue';
     import AdminPageHeader from '@/components/AdminPageHeader.vue';
     import BackOfficeNavMobile from '@/components/BackOfficeNavMobile.vue';
+    import ReusableSeparator from '@/sub-components/ReusableSeparator.vue';
+
 </script>
 
 <style lang="scss" scoped>

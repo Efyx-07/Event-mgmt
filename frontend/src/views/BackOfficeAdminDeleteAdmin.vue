@@ -15,7 +15,7 @@
                     <div class="adminDeleting-section adminOperations-section">
                         <div class="sectionTitle_container">
                             <p class="sectionTitle">Supprimer un administrateur</p>
-                            <div class="line"></div>
+                            <ReusableSeparator/>
                         </div>
                         <AdminsToDelete class="adminsToDelete"/>
                     </div>
@@ -36,6 +36,7 @@
     import AdminsToDelete from '@/components/AdminsToDelete.vue';
     import AdminPageHeader from '@/components/AdminPageHeader.vue';
     import BackOfficeNavMobile from '@/components/BackOfficeNavMobile.vue';
+    import ReusableSeparator from '@/sub-components/ReusableSeparator.vue';
 
 </script>
 

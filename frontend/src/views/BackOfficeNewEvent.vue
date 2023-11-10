@@ -22,7 +22,7 @@
 
                         <div class="sectionTitle_container">
                             <p class="sectionTitle">Données de l'évènement</p>
-                            <div class="line"></div>
+                            <ReusableSeparator/>
                         </div>
 
                         <CreateEventForm class="createEventForm"/>
@@ -48,6 +48,7 @@
     import CreateEventForm from '@/components/CreateEventForm.vue';
     import MobileMenuIcon from '@/sub-components/MobileMenuIcon.vue';
     import BackOfficeNavMobile from '@/components/BackOfficeNavMobile.vue';
+    import ReusableSeparator from '@/sub-components/ReusableSeparator.vue';
 
 </script>
 
@@ -95,17 +96,10 @@
                             display: flex;
                             align-items: baseline;
                             gap: 1rem;
-
                             .sectionTitle {
                                 margin: 0;
                                 font-size: 1.25rem;
                                 font-weight: 700;
-                            }
-
-                            .line {
-                                width: 100%;
-                                height: 1px;
-                                background: $accentColorBackof3;
                             }
                         }
                         .createEventForm {

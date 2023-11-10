@@ -61,23 +61,17 @@
                 <Icon icon="ooui:success" class="successIcon"/>
                 <p>Nouvel administrateur inscrit avec succés !</p>
             </div>
-            <button @click="resetForm" class="okBtn">
-                <p>OK</p>
-            </button>
+            <ReusablePrimaryButton @click="resetForm">Ok</ReusablePrimaryButton>
         </div>
         <div class="registration-result_message" v-else-if="emailAlreadyExistsMessage">
             <div class="text_container">
                 <Icon icon="mdi:alert-outline" class="alertIcon"/>
                 <p>Un administrateur existe déjà avec cet email !</p>
             </div>
-            <button @click="resetForm" class="okBtn">
-                <p>Compris</p>
-            </button>
+            <ReusablePrimaryButton @click="resetForm">Compris</ReusablePrimaryButton>
         </div>
 
-        <button class="addNewAdmin-button" type="submit" v-else>
-            <p>Ajouter</p>
-        </button>
+        <ReusablePrimaryButton class="addNewAdmin-button" type="submit" v-else>Ajouter l'administrateur</ReusablePrimaryButton>
 
     </form>
 
@@ -89,6 +83,7 @@
     import { useGlobalDataStore } from '@/stores/GlobalDataStore';
     import { Icon } from '@iconify/vue';
     import { useAdminStore } from '@/stores/AdminStore';
+    import ReusablePrimaryButton from '@/sub-components/ReusablePrimaryButton.vue';
 
     // visibilité par défaut des messages de succés ou d'erreur
     const successMessage = ref(false);
@@ -286,25 +281,7 @@
             }
         }
         .addNewAdmin-button {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 8rem;
-            height: 2rem;
-            border: none;
-            background: $darkColorBackOf;
-            color: $lightColor;
             align-self: end;
-            cursor: pointer;
-
-            &:hover {
-                background: $accentColorBackof2;
-            }
-
-            p {
-                margin: 0;
-                font-weight: 700;
-            }
         }
         .registration-result_message {
             display: flex;
@@ -326,26 +303,6 @@
                 }
                 .alertIcon {
                     color: $errorColor;
-                }
-            }
-            .okBtn {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 6rem;
-                height: 1.5rem;
-                border: none;
-                background: $darkColorBackOf;
-                color: $lightColor;
-                justify-self: end;
-                cursor: pointer;
-
-                &:hover {
-                    background: $accentColorBackof2;
-                }
-
-                p {
-                    margin: 0;
                 }
             }
         }

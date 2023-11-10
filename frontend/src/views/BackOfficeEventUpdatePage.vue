@@ -22,7 +22,7 @@
 
                         <div class="sectionTitle_container">
                             <p class="sectionTitle">Modifier les données de l'évènement</p>
-                            <div class="line"></div>
+                            <ReusableSeparator/>
                         </div>
                         <h2>{{ selectedEvent.title }}</h2>
 
@@ -49,6 +49,7 @@
     import UpdateEventForm from '@/components/UpdateEventForm.vue';
     import MobileMenuIcon from '@/sub-components/MobileMenuIcon.vue';
     import BackOfficeNavMobile from '@/components/BackOfficeNavMobile.vue';
+    import ReusableSeparator from '@/sub-components/ReusableSeparator.vue';
 
     import { useEventStore } from '@/stores/EventStore';
     import { useRoute } from 'vue-router';
@@ -116,20 +117,16 @@
                                 font-size: 1.25rem;
                                 font-weight: 700;
                             }
-                            .line {
-                                width: 100%;
-                                height: 1px;
-                                background: $accentColorBackof3;
-                            }
                         }
 
                         h2 {
                             font-size: 1.3rem;
                             margin: 3rem 0 0 0;
-                            padding: 1rem;
+                            padding: .5rem;
                             text-align: center;
                             background: $darkColorBackOf;
                             color: $lightColor;
+                            border-radius: 10px;
                         }
                         .updateEventForm {
                             @include adminForm;
