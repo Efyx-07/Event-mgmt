@@ -1,10 +1,11 @@
 <template>
-    <div class="removeEventConfirmationModal" :class="{ hiddenRemoveEventConfirmationModal: !isRemoveEventConfirmationModalVisible }">
-        <div class="optionBox">
+    <div class="modal" :class="{ hiddenRemoveEventConfirmationModal: !isRemoveEventConfirmationModalVisible }">
 
-            <div class="part1">
-                <div class="alertIcon_container">
-                    <Icon icon="mdi:alert-outline" class="alertIcon"/>
+        <div class="modal-content">
+
+            <div class="head-part">
+                <div class="icon_container">
+                    <Icon icon="mdi:alert-outline" class="icon"/>
                 </div>
                 <p>Supprimer l'évènement</p>
             </div>
@@ -100,108 +101,14 @@
 
 <style lang="scss" scoped>
 
-    @import '@/assets/sass/variables.scss';
-    @import '@/assets/sass/varMediaQueries.scss';
+    @import '@/assets/sass/backOfficeModalStyle';
     .hiddenRemoveEventConfirmationModal { 
         visibility: hidden;
         opacity: 0;
     }
-    .removeEventConfirmationModal {
-        background: $overlayTransparencyColor;
-        height: 100vh;
-        width: 100vw;
-        position: fixed;
-        z-index: 999;
-        top: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transition: all .2s ease-in-out;
-        .optionBox {
-            max-width: 500px;
-            background: $ultraLightColor;
-            box-shadow: $shadow;
-            border: solid 1px rgba($darkColor, .5);
-            border-radius: 10px;
-            color: $darkColor;
-            display: flex;
-            flex-direction: column;
-            padding: 1rem;
-            margin: 1rem;
-            gap: 1rem;
-            .part1 {
-                display: flex;
-                align-items: center;
-                gap: 1rem;
-                .alertIcon_container {
-                    background: rgba($errorColor, .15);
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    width: 2rem;
-                    height: 2rem;
-                    border-radius: 100%;
-                    .alertIcon {
-                        color: $errorColor;
-                        font-size: 1rem;
-                    }
-                }
-
-                p {
-                    margin: 0;
-                    font-size: 1rem;
-                    font-weight: 700;
-                    white-space: nowrap;
-                }
-                 
-            }
-            .eventTitle {
-                margin: 0;
-                font-weight: 700;
-            }
-            .alertMessage {
-                margin: 0;
-                font-size: .95rem;
-                text-align: justify;
-            }
-            .buttons_container {
-                display: flex;
-                align-items: center;
-                justify-content: end;
-                gap: 1rem;
-            }
-
-        }
+    .eventTitle {
+        margin: 0;
+        font-weight: 700;
     }
-
-    @media screen and (min-width: $breakpointDesktop) {
-        .removeEventConfirmationModal {
-            .optionBox {
-                margin: unset;
-                .part1 {
-                    .alertIcon_container {
-                        width: 2.5rem;
-                        height: 2.5rem;
-                        .alertIcon {
-                            font-size: 1.5rem;
-                        }
-                    }
-
-                    p {
-                        font-size: 1.2rem;
-                    }
-                    
-                }
-                .alertMessage {
-                    text-align: unset;
-                }
-                .buttons_container {
-                    justify-content: end;
-                }
-
-            }
-        }
-    }
-
-    
+ 
 </style>

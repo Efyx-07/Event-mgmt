@@ -1,17 +1,27 @@
 <template>
 
-    <div class="logoutConfirmationModal_container" :class="{ hiddenLogoutConfirmationModal: !isLogoutConfirmationModalVisible }">
+    <div class="modal" :class="{ hiddenLogoutConfirmationModal: !isLogoutConfirmationModalVisible }">
 
-        <div class="logoutConfirmationModal">
-            <p>Souhaitez-vous vous déconnecter ?</p>
-            <div class="buttons_container">
-                <button class="cancelBtn" @click="closeLogoutConfirmationModal">
-                    <p>Annuler</p>
-                </button>
-                <button class="confirmBtn" @click="handleSignOut">
-                    <p>Déconnexion</p>
-                </button>
+        <div class="modal-content">
+
+            <div class="head-part">
+                <div class="icon_container">
+                    <Icon icon="uiw:logout" class="icon"/>
+                </div>
+                <p>Déconnexion</p>
             </div>
+
+            <ReusableSeparator/>
+
+            <p class="alertMessage">Souhaitez-vous vous déconnecter ? </p>
+
+            <ReusableSeparator/>
+
+            <div class="buttons_container">
+                <ReusableSecondaryButton  @click="closeLogoutConfirmationModal">Annuler</ReusableSecondaryButton> 
+                <ReusablePrimaryButton @click="handleSignOut">Se déconnecter</ReusablePrimaryButton>
+            </div>
+
         </div>
 
     </div>
@@ -23,6 +33,10 @@
     import { ref, onMounted } from 'vue';
     import { useAdminStore } from '@/stores/AdminStore';
     import { useRouter } from 'vue-router';
+    import { Icon } from '@iconify/vue';
+    import ReusablePrimaryButton from '@/sub-components/ReusablePrimaryButton.vue';
+    import ReusableSecondaryButton from '@/sub-components/ReusableSecondaryButton.vue';
+    import ReusableSeparator from '@/sub-components/ReusableSeparator.vue';
 
     // statut par défaut de la visibilité de la fenetre
     const isLogoutConfirmationModalVisible  = ref(false);
@@ -62,80 +76,11 @@
 
 <style lang="scss" scoped>
 
-    @import '@/assets/sass/variables.scss';
-    @import '@/assets/sass/varMediaQueries.scss';
+    @import '@/assets/sass/backOfficeModalStyle';
 
     .hiddenLogoutConfirmationModal {
         visibility: hidden;
         opacity: 0;
     }
-    .logoutConfirmationModal_container {
-        background: rgba($darkColor, .25);
-        backdrop-filter: blur(2.5px);
-        position: fixed;
-        top: 0;
-        width: 100vw;
-        height: 100%;
-        transition: opacity .1s ease-in-out;
-        .logoutConfirmationModal {
-            width: 90%;
-            background: $accentColorBackof4;
-            border: solid 1px $accentColorBackof3;
-            border-radius: $containerRadius;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem 2rem;
-            position: absolute;
-            bottom: 3rem;
-            left: 50%;
-            transform: translate(-50%, -50%);
-
-            p {
-                margin: 0;
-                color: $lightColor;
-            }
-            .buttons_container {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 1rem;
-
-                button {
-                    width: 8rem;
-                    background: transparent;
-                    border: solid 1px $accentColorBackof3;
-                    padding: .5rem;
-                    cursor: pointer;
-
-                    &:hover {
-                        border-color: $accentColorBackof2;
-                        background: $accentColorBackof2;
-                    }
-                }
-            }
-        }
-    }
     
-
-    @media screen and (min-width: $breakpointDesktop) {
-        .logoutConfirmationModal_container {
-            width: 25vw;
-        }
-    }
-    
-    @media screen and (min-width: 1440px) {
-        .logoutConfirmationModal_container {
-            .logoutConfirmationModal {
-                width: unset;
-                padding: 2rem;
-                .buttons_container {
-                    flex-direction: row;
-                    flex-wrap: unset;
-                }
-            }
-        }
-    }
-
 </style>
