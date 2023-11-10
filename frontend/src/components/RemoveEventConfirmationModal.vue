@@ -22,7 +22,8 @@
                 <ReusableSecondaryButton  @click="closeRemoveEventConfirmationModal">Annuler</ReusableSecondaryButton> 
                 <ReusablePrimaryButton @click="confirmRemoveEvent">Confirmer</ReusablePrimaryButton>
             </div>
-
+            
+            <Icon icon="ci:close-sm" class="closeIcon" @click="closeRemoveEventConfirmationModal"/>
         </div>
     </div>  
 </template>

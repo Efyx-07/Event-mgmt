@@ -22,6 +22,8 @@
                 <ReusablePrimaryButton @click="handleSignOut">Se déconnecter</ReusablePrimaryButton>
             </div>
 
+            <Icon icon="ci:close-sm" class="closeIcon" @click="closeLogoutConfirmationModal"/>
+
         </div>
 
     </div>
