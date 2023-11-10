@@ -1,9 +1,11 @@
     @import '@/assets/sass/variables.scss';
     @import '@/assets/sass/varMediaQueries.scss';
+    @import '@/assets/sass/mixins.scss';
     
     .confirmation {
         position:relative;
         min-height: 100vh;
+
         .mobileMenuIcon {
             position: absolute;
             top: 1rem;

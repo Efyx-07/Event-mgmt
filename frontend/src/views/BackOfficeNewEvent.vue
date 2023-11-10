@@ -58,6 +58,8 @@
     @import '@/assets/sass/varMediaQueries.scss';
     @import '@/assets/sass/mixins.scss';
     .backOfficeNewEventPage {
+        background: linear-gradient(to top, #29313D, #f7f7f7);
+        background-attachment: fixed;
         .newEventPage {
             .newEventPageHeader {
                 @include headersMobileBasicSettings;

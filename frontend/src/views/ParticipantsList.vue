@@ -97,7 +97,8 @@
   @import '@/assets/sass/varMediaQueries.scss';
   @import '@/assets/sass/mixins.scss';
   .participantsListPage {
-
+    @include backOfficePageStyle;
+    
     header {
       @include headersMobileBasicSettings;
       .header_content{

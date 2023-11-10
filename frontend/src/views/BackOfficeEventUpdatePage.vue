@@ -74,6 +74,7 @@
     @import '@/assets/sass/varMediaQueries.scss';
     @import '@/assets/sass/mixins.scss';
     .backOfficeEventUpdatePage {
+        @include backOfficePageStyle;
         .eventUpdatePage {
             .eventUpdatePageHeader {
                 @include headersMobileBasicSettings;

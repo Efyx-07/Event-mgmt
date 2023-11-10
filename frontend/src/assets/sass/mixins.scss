@@ -19,6 +19,13 @@
     }
 }
 
+@mixin backOfficePageStyle {
+    min-height: 100vh;
+    color: $darkColor;
+    background: linear-gradient(to top, #29313D, #f7f7f7);
+    background-attachment: fixed;
+}
+
 @mixin backOfficeButtonStyle {
     font-size: 1rem;
     font-weight: 600;

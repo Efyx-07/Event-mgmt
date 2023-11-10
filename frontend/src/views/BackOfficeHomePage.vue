@@ -68,6 +68,7 @@
     @import '@/assets/sass/mixins.scss';
 
     .backOfficeHomePage {
+        @include backOfficePageStyle;
         .adminHomePage {
             position:relative;
             min-height: 100vh;

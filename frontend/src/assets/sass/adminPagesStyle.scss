@@ -1,7 +1,9 @@
 @import '@/assets/sass/variables.scss';
 @import '@/assets/sass/varMediaQueries.scss';
+@import '@/assets/sass/mixins.scss';
 
 .backOfficeAdminPage {
+    @include backOfficePageStyle;
 
     .adminOperations_container {
         width: 100%;
