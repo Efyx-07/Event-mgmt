@@ -2,7 +2,7 @@
 
   <div class="backOfficeEventCard" v-for="event in filteredEvents" :key="event.title" >
 
-    <div class="eventImage_container">
+    <div class="eventImage_container" @click="navigateToEvent(event.slug)">
       <img :src="hostName + event.image.source" :alt="event.image.alt" class="eventImage">
     </div>
 
@@ -26,7 +26,7 @@
         </div>
 
         <div class="icon_container">
-          <Icon icon="akar-icons:statistic-up" class="icon" @click="navigateToParticipantsList(event.slug)"/>
+          <Icon icon="heroicons:users-solid" class="icon" @click="navigateToParticipantsList(event.slug)"/>
         </div>
 
         <div class="icon_container">
@@ -164,6 +164,12 @@
                 display: block;
                 position: relative;
                 object-fit: cover;
+                cursor: pointer;
+                transition: transform .6s ease-in-out;
+
+                &:hover {
+                  transform: scale(1.05);
+                }
             }
         }
         .eventCard-titleAndActions_container {
@@ -204,19 +210,6 @@
 
                 }
             }
-        }
-        .creationDate {
-          display: none;
-          position: absolute;
-          top: .5rem;
-          left: .5rem;
-          font-size: .7rem;
-          font-weight: 600;
-          margin: 0;
-          background: $ultraLightColor;
-          box-shadow: $shadow;
-          border-radius: 10px 0 0 0;
-          padding: .25rem;
         }
         .dateCard {
           background: rgba($ultraLightColor, .8);
