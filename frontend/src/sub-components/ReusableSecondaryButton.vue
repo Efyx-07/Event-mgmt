@@ -17,6 +17,10 @@
     .secondaryBtn {
         @include backOfficeButtonStyle;
         background: $secondaryButtonColor;
+
+        &:hover {
+            background: rgba($secondaryButtonColor, .7);
+        }
     }
 
 </style>

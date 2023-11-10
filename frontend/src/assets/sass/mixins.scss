@@ -22,7 +22,7 @@
 @mixin backOfficePageStyle {
     min-height: 100vh;
     color: $darkColor;
-    background: linear-gradient(to top, #29313D, #f7f7f7);
+    background: linear-gradient(to top, $accentColorBackof3, $lightColor 60%);
     background-attachment: fixed;
 }
 
@@ -34,10 +34,6 @@
     color: $ultraLightColor;
     border-radius: 5px;
     cursor: pointer;
-
-    &:hover {
-        background: $darkColorBackOf;
-    }
 }
 
 @mixin errorMessage {

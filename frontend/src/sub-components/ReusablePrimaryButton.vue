@@ -17,6 +17,10 @@
     .primaryBtn {
         @include backOfficeButtonStyle;
         background: $accentColorBackof2;
+
+        &:hover {
+            background: $darkColorBackOf;
+        }
     }
 
 </style>
