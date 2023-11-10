@@ -19,6 +19,19 @@
     }
 }
 
+@mixin backOfficeButtonStyle {
+    font-size: 1rem;
+    padding: .6rem 1.1rem;
+    border: none;
+    color: $ultraLightColor;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+        background: $darkColorBackOf;
+    }
+}
+
 @mixin errorMessage {
     margin: 0;
     font-size: .7rem;

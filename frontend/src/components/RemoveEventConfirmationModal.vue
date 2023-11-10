@@ -9,17 +9,17 @@
                 <p>Supprimer l'évènement</p>
             </div>
 
+            <ReusableSeparator></ReusableSeparator>
+
             <p class="eventTitle">"{{ eventToRemove.eventTitle }}"</p>
 
             <p class="alertMessage">Etes-vous sûr de vouloir supprimer l'evenement? Cette opération est irréversible et supprimera l'évènement et toutes ses données. </p>
+
+            <ReusableSeparator></ReusableSeparator>
             
             <div class="buttons_container">
-                <button class="cancelButton" @click="closeRemoveEventConfirmationModal">
-                    <p>Annuler</p>
-                </button>
-                <button class="confirmButton" @click="confirmRemoveEvent">
-                    <p>Confirmer</p>
-                </button>
+                <ReusableSecondaryButton  @click="closeRemoveEventConfirmationModal">Annuler</ReusableSecondaryButton> 
+                <ReusablePrimaryButton @click="confirmRemoveEvent">Confirmer</ReusablePrimaryButton>
             </div>
 
         </div>
@@ -32,6 +32,9 @@
     import { useGlobalDataStore } from '@/stores/GlobalDataStore';
     import { useEventStore } from '@/stores/EventStore';
     import { useRouter } from 'vue-router';
+    import ReusablePrimaryButton from '@/sub-components/ReusablePrimaryButton.vue';
+    import ReusableSecondaryButton from '@/sub-components/ReusableSecondaryButton.vue';
+    import ReusableSeparator from '@/sub-components/ReusableSeparator.vue';
 
     // statut par défaut de la visibilité de la fenetre
     const isRemoveEventConfirmationModalVisible  = ref(false);
@@ -51,7 +54,6 @@
     onMounted(() => {
         window.addEventListener('show-removeEventConfirmationModal', (event) => {
             isRemoveEventConfirmationModalVisible.value = true;
-
             // récupère les données de l'évènement à supprimer
             eventToRemove.value = event.detail;
         });
@@ -105,7 +107,7 @@
         opacity: 0;
     }
     .removeEventConfirmationModal {
-        background: rgba($darkColor, .25);
+        background: $overlayTransparencyColor;
         height: 100vh;
         width: 100vw;
         position: fixed;
@@ -114,7 +116,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        transition: opacity .1s ease-in-out;
+        transition: all .2s ease-in-out;
         .optionBox {
             max-width: 500px;
             background: $ultraLightColor;
@@ -158,32 +160,14 @@
             }
             .alertMessage {
                 margin: 0;
-                font-size: .9rem;
+                font-size: 1rem;
                 text-align: justify;
             }
             .buttons_container {
-                margin-top: 1rem;
                 display: flex;
                 align-items: center;
-                justify-content: center;
+                justify-content: end;
                 gap: 1rem;
-
-                button {
-                    width: 6rem;
-                    height: 2rem;
-                    border: none;
-                    background: $darkColorBackOf;
-                    color: $ultraLightColor;
-                    cursor: pointer;
-
-                    &:hover {
-                        background: $accentColorBackof2;
-                    }
-
-                    p {
-                        margin: 0;
-                    }
-                }
             }
 
         }
@@ -193,7 +177,6 @@
         .removeEventConfirmationModal {
             .optionBox {
                 margin: unset;
-                padding: 2rem;
                 .part1 {
                     .alertIcon_container {
                         width: 2.5rem;
