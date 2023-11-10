@@ -1,8 +1,3 @@
-:root {
-    --darkColor: #181818;
-    --lightColor: #f7f7f7;
-}
-
 *, 
 *:before, 
 *:after {
@@ -14,10 +9,8 @@ html {
     margin: 0;
     overflow-x: hidden;
     scroll-behavior: smooth;
-    color: var(--darkColor);
 }
 
 body {
     margin: 0 auto;
-    background: var(--lightColor);
 }

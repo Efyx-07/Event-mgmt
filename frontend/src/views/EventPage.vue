@@ -86,8 +86,11 @@
 <style lang="scss" scoped>
 
     @import '@/assets/sass/varMediaQueries.scss';
+    @import '@/assets/sass/variables.scss';
 
     .eventPage {
+        background: $lightColor;
+        color: $darkColor;
         display: flex;
         flex-direction: column;
         align-items: center;
