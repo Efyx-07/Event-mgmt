@@ -38,7 +38,7 @@
             justify-content: space-between;
             padding: 1rem;
             background: $ultraLightColor;
-            box-shadow: $shadow;
+            box-shadow: $containerShadow;
             .thumbnail_container {
                 width: 3rem;
                 height: 3rem;

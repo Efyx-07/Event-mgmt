@@ -143,7 +143,7 @@
     .participantsList-array_container {
       overflow-x: scroll;
       background: $ultraLightColor;
-      box-shadow: $shadow;
+      box-shadow: $containerShadow;
       border-radiuS: $containerRadius;
       padding: 1rem 2rem 2rem 2rem;
       .participantsList-array {

@@ -13,12 +13,12 @@
                         <a :href="selectedEvent.organizerWebsite" target="_blank" rel="noopener noreferrer">{{ selectedEvent.organizerName }}</a>
                     </div>    
                 </div>
-                <div class="separator"></div>
+                <ReusableSeparator class="separator"/>
                 <div class="eventDate_container">
                     <Icon icon="healthicons:calendar" class="icon"/>
                     <p class="eventDate">{{ formatDate(selectedEvent.date)}}</p>
                 </div>
-                <div class="separator"></div>
+                <ReusableSeparator class="separator"/>
                 <div class="eventPlace_container">
                     <Icon icon="mdi:place-outline" class="icon"/>
                     <a :href="selectedEvent.locationUrl" target="_blank" rel="noopener noreferrer" class="eventPlace">{{ selectedEvent.location }}</a>
@@ -35,6 +35,7 @@
     import { Icon } from '@iconify/vue';
     import ParticipateButton from '@/sub-components/ParticipateButton.vue';
     import { useGlobalDataStore } from '@/stores/GlobalDataStore';
+    import ReusableSeparator from '@/sub-components/ReusableSeparator.vue';
 
     const { hostName } = useGlobalDataStore();
 
@@ -57,7 +58,7 @@
     .eventCard {
         background: $ultraLightColor;
         border-radius: $containerRadius;
-        box-shadow: $shadow;
+        box-shadow: $containerShadow;
         width: 100%;
         .eventImage_container {
             width: 100%;
@@ -83,11 +84,6 @@
             .eventTitle {
                 margin: 0;
                 font-size: 1.3rem;
-            }
-            .separator {
-                height: 1px;
-                width: 100%;
-                background: rgba($darkColor, .25);
             }
             .eventCard-details {
                 display: flex;

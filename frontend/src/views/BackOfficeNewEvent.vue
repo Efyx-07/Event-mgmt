@@ -83,7 +83,7 @@
                 padding: 1rem 1rem 3rem 1rem;
                 .newEventOperations {
                     background: $ultraLightColor;
-                    box-shadow: $shadow;
+                    box-shadow: $containerShadow;
                     border-radiuS: $containerRadius;
                     padding: 2rem 2rem 4rem 2rem;
                     display: flex;

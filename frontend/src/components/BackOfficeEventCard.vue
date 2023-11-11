@@ -148,7 +148,7 @@
         width: 24rem;
         height: 22rem;
         background: $ultraLightColor;
-        box-shadow: $shadow;
+        box-shadow: $containerShadow;
         border-radius: $containerRadius 0 $containerRadius 0;
         position: relative;
         .eventImage_container {
