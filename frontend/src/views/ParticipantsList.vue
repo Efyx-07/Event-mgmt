@@ -196,6 +196,7 @@
           }
           .backToEventsButton {
             display: block;
+            white-space: nowrap;
           }
         }
       }

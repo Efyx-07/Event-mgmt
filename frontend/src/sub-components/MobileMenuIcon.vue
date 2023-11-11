@@ -1,6 +1,6 @@
 <template>
 
-    <Icon icon="iconamoon:menu-burger-horizontal" class="mobileMenuIcon" @click="toggleBackOfficeNavMobileVisibility"/>
+    <Icon icon="tabler:menu-deep" class="mobileMenuIcon" @click="toggleBackOfficeNavMobileVisibility"/>
 
 </template>
 

@@ -22,8 +22,7 @@
 @mixin backOfficePageStyle {
     min-height: 100vh;
     color: $darkColor;
-    background: linear-gradient(to top, $accentColorBackof3, $lightColor 60%);
-    background-attachment: fixed;
+    background: $lightColor;
 }
 
 @mixin backOfficeButtonStyle {
