@@ -19,7 +19,7 @@
 
             <div class="buttons_container">
                 <ReusableSecondaryButton  @click="closeLogoutConfirmationModal">Annuler</ReusableSecondaryButton> 
-                <ReusablePrimaryButton @click="handleSignOut">Se déconnecter</ReusablePrimaryButton>
+                <ReusablePrimaryButton @click="handleSignOut">Confirmer</ReusablePrimaryButton>
             </div>
 
             <Icon icon="ci:close-sm" class="closeIcon" @click="closeLogoutConfirmationModal"/>
