@@ -68,7 +68,7 @@
 
             <div class="input-container">
                 <label for="event-presentation">Présentation de l'évènement</label>
-                <ckeditor class="ckeditor-input" :editor="editor" v-model="editorDataPresentation" :config="editorConfig" @input="updateEventPresentation"></ckeditor>
+                <ckeditor :editor="editor" v-model="editorDataPresentation" :config="editorConfig" @input="updateEventPresentation"></ckeditor>
             </div>
 
             <div class="input-container">
