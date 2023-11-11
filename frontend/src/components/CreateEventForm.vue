@@ -310,6 +310,7 @@
                 }
                 .image-input {
                     border: none;
+                    border-radius: unset;
 
                     &::file-selector-button {
                         height: 2.5rem;
