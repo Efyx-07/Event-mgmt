@@ -2,9 +2,6 @@
 
     <div class="stickyBar_container">
         <div class="stickyBar">
-            <div class="thumbnail_container">
-                <img :src="hostName + selectedEvent.image.source" alt="" class="thumbnail">
-            </div>
             <h1 class="eventTitle">{{ selectedEvent.title }}</h1>
             <ParticipateButton class="eventCard-button"/>
         </div>
@@ -15,9 +12,6 @@
 <script setup>
 
     import ParticipateButton from '@/sub-components/ParticipateButton.vue';
-    import { useGlobalDataStore } from '@/stores/GlobalDataStore';
-
-    const { hostName } = useGlobalDataStore();
 
     // recupère la props de selectedEvents en provenance de EventPage
     const { selectedEvent } = defineProps(['selectedEvent']);
@@ -35,25 +29,11 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 1rem;
+            padding: 1rem 2rem;
             background: $ultraLightColor;
             color: $darkColor;
+            border-radius: 0 0 $containerRadiusS $containerRadiusS;
             box-shadow: $containerShadow;
-            .thumbnail_container {
-                width: 3rem;
-                height: 3rem;
-                display: inline-block;
-                position: relative;
-                overflow: hidden;
-                border-radius: $containerRadius;
-                .thumbnail {
-                    width: 100%;
-                    height: 100%;
-                    display: block;
-                    position: relative;
-                    object-fit: cover;
-                }
-            }
 
             h1 {
                 margin: 0;

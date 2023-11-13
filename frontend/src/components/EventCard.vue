@@ -142,10 +142,8 @@
 
     @media screen and (min-width: $breakpointTablet) {
         .eventCard {
-            border-radius: $containerRadiusM;
             .eventImageAndTitle_container {
                 height: 20rem;
-                border-radius: $containerRadiusM $containerRadiusM 0 0;
                 .eventTitle_container {
                     .eventTitle {
                         font-size: 1.5rem;
@@ -159,8 +157,10 @@
     @media screen and (min-width: $breakpointDesktop) {
         .eventCard {
             margin-top: 2rem;
+            border-radius: $containerRadiusM;
             .eventImageAndTitle_container {
                 height: 25rem;
+                border-radius: $containerRadiusM $containerRadiusM 0 0;
                 .eventTitle_container {
                     .eventTitle {
                         font-size: 2rem;
