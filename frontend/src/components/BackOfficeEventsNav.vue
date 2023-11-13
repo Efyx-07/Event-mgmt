@@ -13,14 +13,14 @@
             <p>Passés <span>({{ pastEventsCount }})</span></p>
             <div class="activeBar"></div>
         </div>
-        <MobileSearchIcon class="mobileSearchIcon"/>
+        <SearchIcon class="searchIcon"/>
     </div>
 
 </template>
 
 <script setup>
 
-    import MobileSearchIcon from '@/sub-components/MobileSearchIcon.vue';
+    import SearchIcon from '@/sub-components/SearchIcon.vue';
     import { useEventStore } from '@/stores/EventStore';
     import { computed, ref } from 'vue';
 
