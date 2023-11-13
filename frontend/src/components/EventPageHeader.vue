@@ -29,11 +29,14 @@
 
     .header {
         width: 100%;
-        height: 3rem;
+        height: 3.5rem;
         background: $lightColor;
         box-shadow: $shadow;
         display: flex;
         justify-content: center;
+        position: sticky;
+        top: 0;
+        z-index: 199;
         .content {
             width: 100%;
             display: flex;
@@ -47,6 +50,7 @@
 
     @media screen and (min-width: $breakpointDesktop) {
         .header {
+            position: unset;
             height: 5rem;
             .content {
                 max-width: 77rem;

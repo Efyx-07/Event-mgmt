@@ -25,7 +25,7 @@
     @import '@/assets/sass/varMediaQueries.scss';
     .organizerLogo_container {
         width: 100%;
-        height: 2.125rem;
+        height: 2.5rem;
         display: inline-block;
         position: relative;
         overflow: hidden;
