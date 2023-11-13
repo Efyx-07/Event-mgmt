@@ -21,6 +21,7 @@
 <style lang="scss" scoped>
 
     @import '@/assets/sass/variables.scss';
+    @import '@/assets/sass/varMediaQueries.scss';
     .searchBar_container {
         width: 20rem;
         height: 2.5rem;

@@ -9,11 +9,15 @@
             <header class="adminHomePageHeader">
                 <div class="adminHomePageHeader_content">
                     <h1>Vos évènements</h1>
-                    <EventsSearchBar />
+                    <EventsSearchBar class="eventsSearchBarDesktop"/>
                     <BackOfficeEventsNav class="backOfficeEventsNavDesktop"/>
                     <MobileMenuIcon class="mobileMenuIcon"/>
                 </div>
-                <BackOfficeEventsNav class="backOfficeEventsNavMobile"/>
+                <div class="mobileNav_container">
+                    <BackOfficeEventsNav class="backOfficeEventsNavMobile"/>
+                    <MobileSearchIcon class="mobileSearchIcon"/>
+                </div>
+                
             </header>
 
             <div v-if="eventsCount === 0" class="adminHomePage_empty">
@@ -34,8 +38,7 @@
 
     <RemoveEventConfirmationModal />
     <BackOfficeNavMobile />
-    
-    
+       
 </template>
 
 <script setup>
@@ -47,6 +50,7 @@
     import BackOfficeNavMobile from '@/components/BackOfficeNavMobile.vue';
     import BackOfficeEventsNav from '@/components/BackOfficeEventsNav.vue';
     import EventsSearchBar from '@/sub-components/EventsSearchBar.vue';
+    import MobileSearchIcon from '@/sub-components/MobileSearchIcon.vue';
     import { Icon } from '@iconify/vue';
     import { useEventStore } from '@/stores/EventStore';
     import { computed, onMounted } from 'vue';
@@ -91,12 +95,21 @@
                         margin: 0;
                         font-size: 1.5rem;
                     }
+                    .eventsSearchBarDesktop {
+                        display: none;
+                    }
                     .backOfficeEventsNavDesktop {
                         display: none;
                     }
                     
                 }
 
+                .mobileNav_container {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-around;
+                }
             }
             .adminHomePage_empty {
                 position: absolute;
@@ -165,11 +178,14 @@
                             grid-column: 1 / -2;
                             @include pageTitlesBasicSettings;
                         }
+                        .eventsSearchBarDesktop {
+                            display: block;
+                        }
                         .backOfficeEventsNavDesktop {
                             display: flex;
                         }
                     }
-                    .backOfficeEventsNavMobile {
+                    .mobileNav_container {
                         display: none;
                     }
 
