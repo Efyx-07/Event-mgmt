@@ -127,7 +127,7 @@
       }
   });
 
-  // écoute l'évènement personnalisé émis par BackOfficeEventNav
+  // écoute l'évènement personnalisé émis par BackOfficeEventsNav
   onMounted(() => {
     window.addEventListener('filterChanged', handleFilterChanged);
   });

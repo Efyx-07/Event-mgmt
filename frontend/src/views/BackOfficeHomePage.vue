@@ -9,6 +9,7 @@
             <header class="adminHomePageHeader">
                 <div class="adminHomePageHeader_content">
                     <h1>Vos évènements</h1>
+                    <EventsSearchBar />
                     <BackOfficeEventsNav class="backOfficeEventsNavDesktop"/>
                     <MobileMenuIcon class="mobileMenuIcon"/>
                 </div>
@@ -45,6 +46,7 @@
     import MobileMenuIcon from '@/sub-components/MobileMenuIcon.vue';
     import BackOfficeNavMobile from '@/components/BackOfficeNavMobile.vue';
     import BackOfficeEventsNav from '@/components/BackOfficeEventsNav.vue';
+    import EventsSearchBar from '@/sub-components/EventsSearchBar.vue';
     import { Icon } from '@iconify/vue';
     import { useEventStore } from '@/stores/EventStore';
     import { computed, onMounted } from 'vue';
