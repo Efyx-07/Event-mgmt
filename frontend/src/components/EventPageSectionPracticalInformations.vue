@@ -1,11 +1,11 @@
 <template>
 
-    <div class="EventPageSectionPracticalInformations">
+    <div class="eventPage-section">
         <div class="title_container">
             <h2>Informations Pratiques</h2>
-            <div class="separator"></div>
+            <ReusableSeparator class="separator"/>
         </div>
-        <div class="practicalInformations_container">
+        <div class="text_container">
             <p v-html="selectedEvent.practicalInformations"></p>
             <EventPageLocationMap :selectedEvent="selectedEvent" class="locationMap"/>
         </div>
@@ -15,6 +15,7 @@
 
 <script setup>
 
+    import ReusableSeparator from '@/sub-components/ReusableSeparator.vue';
     import EventPageLocationMap from '@/components/EventPageLocationMap.vue';
 
     // recupère la props de selectedEvents en provenance de EventPage
@@ -24,58 +25,28 @@
 
 <style lang="scss" scoped>
 
-    @import '@/assets/sass/variables.scss';
+    @import '@/assets/sass/eventPageSectionsStyle.scss';
     @import '@/assets/sass/varMediaQueries.scss';
-    .EventPageSectionPracticalInformations {
-        .title_container {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-
-            h2 {
-                margin: 0;
-                font-size: 1.2rem;
-            }
-            .separator {
-                width: 100%;
-                height: 1px;
-                background: $accentColor1;
-            }
-        }
-        .practicalInformations_container {
+    .eventPage-section {
+        .text_container {
             display: flex;
             flex-wrap: wrap;
-            margin-top: 1rem;
             padding: 0 1rem 1rem 1rem;
-            border: solid 1px rgba($darkColor, .1);
-            border-radius: 5px;
 
             p {
-                margin: 0;
-                font-size: .95rem;
                 line-height: 1.8;
             }
         }
     }
 
     @media screen and (min-width: $breakpointDesktop) {
-        .EventPageSectionPracticalInformations {
-            padding-top: 2rem;
-            .title_container {
-
-                h2 {
-                    font-size: 1.5rem;
-                }
-
-            }
-            .practicalInformations_container {
+        .eventPage-section {
+            .text_container {
                 gap: 2rem;
-                margin-top: 2rem;
                 padding: 0 1rem;
                 
                 p {
                     flex: 1;
-                    font-size: 1rem;
                 }
                 .locationMap {
                     flex: 1;

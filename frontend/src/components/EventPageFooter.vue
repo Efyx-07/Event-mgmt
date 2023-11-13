@@ -48,6 +48,7 @@
 
     .footer {
         display: none;
+        color: $darkColor;
     }
     .footer_mobile {
         width: 100%;

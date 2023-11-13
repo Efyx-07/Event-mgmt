@@ -60,6 +60,7 @@
 
     .eventCard {
         background: $ultraLightColor;
+        color: $darkColor;
         box-shadow: $containerShadow;
         width: 100%;
         .eventImageAndTitle_container {

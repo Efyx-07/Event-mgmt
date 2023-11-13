@@ -15,7 +15,6 @@
 <script setup>
 
     import ParticipateButton from '@/sub-components/ParticipateButton.vue';
-
     import { useGlobalDataStore } from '@/stores/GlobalDataStore';
 
     const { hostName } = useGlobalDataStore();
@@ -38,6 +37,7 @@
             justify-content: space-between;
             padding: 1rem;
             background: $ultraLightColor;
+            color: $darkColor;
             box-shadow: $containerShadow;
             .thumbnail_container {
                 width: 3rem;
