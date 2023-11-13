@@ -119,6 +119,9 @@
 
             &_content {
                 padding: 0 1rem;
+                .eventPage-sections_container {
+                    padding: 3rem 0rem 6rem 0rem;
+                }
             }
             .stickyBarContainer {
                 display: block;
