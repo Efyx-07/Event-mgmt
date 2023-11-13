@@ -3,7 +3,7 @@
     <div class="stickyBar_container">
         <div class="stickyBar">
             <h1 class="eventTitle">{{ selectedEvent.title }}</h1>
-            <ParticipateButton class="eventCard-button"/>
+            <ParticipateButton />
         </div>
     </div>
 
