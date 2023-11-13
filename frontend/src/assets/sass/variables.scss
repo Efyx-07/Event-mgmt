@@ -16,9 +16,13 @@ $secondaryButtonColor: #89949e;
 
 $overlayTransparencyColor: rgba($darkColor, .5);
 
-// effets
+// shadows
 $shadow: 0px 2px 4px 0px rgba($darkColor, .25);
 $containerShadow: 0px 3px 10px 0px rgba($darkColor, .2);
+
+// radius
+$containerRadiusS: 5px;
+$containerRadiusM: 10px;
 $containerRadius: 15px;
 
 // tailles

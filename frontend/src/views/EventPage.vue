@@ -100,12 +100,11 @@
             max-width: 77rem;
             display: flex;
             flex-direction: column;
-            padding: 1rem;
             .eventPage-sections_container {
                 display: flex;
                 flex-direction: column;
                 gap: 2rem;
-                padding: 3rem 0 6rem 0;
+                padding: 3rem 1rem 6rem 1rem;
             }
         }
         .stickyBarContainer {
