@@ -13,12 +13,14 @@
             <p>Passés <span>({{ pastEventsCount }})</span></p>
             <div class="activeBar"></div>
         </div>
+        <MobileSearchIcon class="mobileSearchIcon"/>
     </div>
 
 </template>
 
 <script setup>
 
+    import MobileSearchIcon from '@/sub-components/MobileSearchIcon.vue';
     import { useEventStore } from '@/stores/EventStore';
     import { computed, ref } from 'vue';
 
@@ -61,8 +63,52 @@
 <style lang="scss" scoped>
 
     @import '@/assets/sass/boHeaderNavStyle.scss';
-    .navItem {
-        text-align: center;
+    @import '@/assets/sass/varMediaQueries.scss';
+
+    .boHeaderNav {
+        width: 100%;
+        justify-content: space-around;
+        .navItem {
+            text-align: center;
+
+            p {
+                font-size: .8rem;
+            }
+
+            span {
+                display: none;
+            }
+        }
+    }
+
+    @media screen and (min-width: 302px) {
+        .boHeaderNav {
+            .navItem {
+
+                p {
+                    font-size: 1rem;
+                }
+            }
+        }
+
+    }
+
+    @media screen and (min-width: 405px) {
+        .boHeaderNav {
+            .navItem {
+
+                span {
+                    display: inline;
+                }
+            }
+        }   
+    }
+
+    @media screen and (min-width: $breakpointDesktop) {
+        .boHeaderNav {
+            width: unset;
+            justify-content: unset;
+        }
     }
 
 </style>

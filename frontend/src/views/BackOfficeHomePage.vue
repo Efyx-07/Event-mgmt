@@ -9,15 +9,12 @@
             <header class="adminHomePageHeader">
                 <div class="adminHomePageHeader_content">
                     <h1>Vos évènements</h1>
-                    <EventsSearchBar class="eventsSearchBarDesktop"/>
                     <BackOfficeEventsNav class="backOfficeEventsNavDesktop"/>
                     <MobileMenuIcon class="mobileMenuIcon"/>
                 </div>
                 <div class="mobileNav_container">
                     <BackOfficeEventsNav class="backOfficeEventsNavMobile"/>
-                    <MobileSearchIcon class="mobileSearchIcon"/>
-                </div>
-                
+                </div>   
             </header>
 
             <div v-if="eventsCount === 0" class="adminHomePage_empty">
@@ -49,8 +46,6 @@
     import MobileMenuIcon from '@/sub-components/MobileMenuIcon.vue';
     import BackOfficeNavMobile from '@/components/BackOfficeNavMobile.vue';
     import BackOfficeEventsNav from '@/components/BackOfficeEventsNav.vue';
-    import EventsSearchBar from '@/sub-components/EventsSearchBar.vue';
-    import MobileSearchIcon from '@/sub-components/MobileSearchIcon.vue';
     import { Icon } from '@iconify/vue';
     import { useEventStore } from '@/stores/EventStore';
     import { computed, onMounted } from 'vue';
@@ -95,20 +90,13 @@
                         margin: 0;
                         font-size: 1.5rem;
                     }
-                    .eventsSearchBarDesktop {
-                        display: none;
-                    }
                     .backOfficeEventsNavDesktop {
                         display: none;
                     }
                     
                 }
-
                 .mobileNav_container {
                     width: 100%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-around;
                 }
             }
             .adminHomePage_empty {
@@ -171,15 +159,12 @@
                     &_content {
                         display: flex;
                         justify-content: space-between;
-                        align-items: baseline;
+                        align-items: center;
                         max-width: $contentMaxWidth;
 
                         h1 {
                             grid-column: 1 / -2;
                             @include pageTitlesBasicSettings;
-                        }
-                        .eventsSearchBarDesktop {
-                            display: block;
                         }
                         .backOfficeEventsNavDesktop {
                             display: flex;

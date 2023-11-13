@@ -25,6 +25,7 @@
         align-items: center;
         .searchIcon {
             color: $lightColor;
+            font-size: 1.3rem;
         }
     }
 </style>
