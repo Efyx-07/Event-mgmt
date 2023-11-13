@@ -63,6 +63,8 @@
 
         <p class="requiredFields-info"><span>{{requiredFieldMention}}</span> Champs obligatoires</p>
 
+        <p class="alreadyRegistered-message" v-if="isAlreadyRegisteredMessage">Vous êtes déjà inscrit à cet évènement !</p>
+
         <button class="inscription-button" type="submit">
             <p>Je m'inscris</p>
         </button>
@@ -84,6 +86,9 @@
 
     // statut de visibilité du formulaire
     const formIsvisible = ref(true)
+
+    // statut de visibilité du message d'erreur dans le cas où le participant est déjà inscrit 
+    const isAlreadyRegisteredMessage = ref(false);
 
     // propriétés du formulaire
     const entrepriseOrganisation = ref('');
@@ -174,10 +179,18 @@
 
                     // affiche le message d'inscription réussie ici
                     const data = await response.json();
-
                     // change le statut de la visibilité du formulaire à false
                     formIsvisible.value = false;
                     
+                } else if (response.status === 400) {
+
+                    // si l'utilisateur est déjà inscrit avec la même adresse mail, affiche le message d'erreur et reinitialise le formulaire
+                    isAlreadyRegisteredMessage.value = true;
+                    setTimeout(() => {
+                        isAlreadyRegisteredMessage.value = false;
+                        resetForm();
+                    }, 3000); 
+
                 } else {
                     // affiche un message d'erreur à l'utilisateur.
                     console.error('Erreur lors de l\'inscription :', response.statusText);
@@ -191,6 +204,15 @@
             console.log('Formulaire non valide');
         }
 
+    };
+
+    // fonction pour réinitialiser le formulaire
+    const resetForm = () => {
+        entrepriseOrganisation.value = '';
+        nom.value = '';
+        prenom.value = '';
+        telephone.value = '';
+        email.value = '';
     };
 
 </script>
@@ -247,6 +269,10 @@
             span {
                 color: $accentColor1;
             }
+        }
+        .alreadyRegistered-message {
+            margin: 0;
+            color: $errorColor;
         }
         .inscription-button {
             @include buttonStyle;
