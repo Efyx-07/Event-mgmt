@@ -1,0 +1,115 @@
+@import '@/assets/sass/variables.scss';
+@import '@/assets/sass/varMediaQueries.scss';
+@import '@/assets/sass/mixins.scss';
+
+.backOfficeEventHandlingPage {
+    @include backOfficePageStyle;
+
+    .eventHandlingPage {
+
+        .eventHandlingPageHeader {
+            @include headersMobileBasicSettings;
+
+            &_content {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                    
+                h1 {
+                    margin: 0;
+                    font-size: 1.5rem;
+                }
+
+                .backToEventsButton {
+                    display: none;
+                }
+            }
+        }
+
+        .eventHandlingOperations_container {
+            width: 100%;
+            padding: 1rem 1rem 3rem 1rem;
+
+            .eventHandlingOperations {
+                background: $ultraLightColor;
+                box-shadow: $containerShadow;
+                border-radiuS: $containerRadius;
+                padding: 2rem 2rem 4rem 2rem;
+                display: flex;
+                flex-direction: column;
+                gap: 3rem;
+
+                &-section {
+                    display: flex;
+                    flex-direction: column;
+
+                    .sectionTitle_container {
+                        display: flex;
+                        align-items: baseline;
+                        gap: 1rem;
+
+                        .sectionTitle {
+                            margin: 0;
+                            font-size: 1.25rem;
+                            font-weight: 700;
+                        }
+                    }
+                    .eventHandlingForm {
+                        @include adminForm;
+                    }
+
+                }
+            }
+        }
+            
+    }
+}
+
+@media screen and (min-width: $breakpointDesktop) {
+
+    .backOfficeEventHandlingPage {
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+
+        .eventHandlingPage {
+            grid-column: 2 / -1;
+
+            .eventHandlingPageHeader {
+                @include headersBasicSettings;
+
+                &_content {
+                    display: grid;
+                    grid-template-columns: 6fr 1fr;
+                    max-width: $contentMaxWidth;
+                    
+                    h1 {
+                        grid-column: 1 / -2;
+                        @include pageTitlesBasicSettings
+                    }
+                    .backToEventsButton {
+                        display: block;
+                        white-space: nowrap;
+                    }
+                }
+            }
+
+            .eventHandlingOperations_container {
+                padding: 2rem 3rem;
+
+                .eventHandlingOperations {
+
+                    &-section {
+
+                        .sectionTitle_container {
+                            
+                            .sectionTitle {
+                                white-space: nowrap;
+                            }
+                        }
+                    }
+                }
+            }    
+        }
+    }
+}

@@ -1,24 +1,24 @@
 <template>
 
-    <div class="backOfficeEventUpdatePage">
+    <div class="backOfficeEventHandlingPage">
 
         <BackOfficeNavAside class="backOfficeNavAside"/>
 
-        <div class="eventUpdatePage">
+        <div class="eventHandlingPage">
 
-            <header class="eventUpdatePageHeader">
-                <div class="eventUpdatePageHeader_content">
+            <header class="eventHandlingPageHeader">
+                <div class="eventHandlingPageHeader_content">
                     <h1>Modifier votre évènement</h1>
                     <BackToEventsButtonVue class="backToEventsButton"/>
-                    <MobileMenuIcon class="mobileMenuIcon"/>
+                    <MobileMenuIcon />
                 </div>
             </header>
 
-            <div class="updateEventOperations_container">
+            <div class="eventHandlingOperations_container">
 
-                <div class="updateEventOperations">
+                <div class="eventHandlingOperations">
 
-                    <div class="updateEventOperations-section">
+                    <div class="eventHandlingOperations-section">
 
                         <div class="sectionTitle_container">
                             <p class="sectionTitle">Modifier les données de l'évènement</p>
@@ -26,7 +26,7 @@
                         </div>
                         <h2>{{ selectedEvent.title }}</h2>
 
-                        <UpdateEventForm class="updateEventForm" :selectedEvent="selectedEvent"/>
+                        <UpdateEventForm class="eventHandlingForm" :selectedEvent="selectedEvent"/>
 
                     </div>
 
@@ -70,121 +70,28 @@
 
 <style lang="scss" scoped>
 
+    @import '@/assets/sass/backOfficeEventHandlingPageStyle.scss';
     @import '@/assets/sass/variables.scss';
     @import '@/assets/sass/varMediaQueries.scss';
-    @import '@/assets/sass/mixins.scss';
-    .backOfficeEventUpdatePage {
-        @include backOfficePageStyle;
-        .eventUpdatePage {
-            .eventUpdatePageHeader {
-                @include headersMobileBasicSettings;
 
-                &_content {
-                    width: 100%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    
-                    h1 {
-                        margin: 0;
-                        font-size: 1.5rem;
-                    }
-                    .backToEventsButton {
-                        display: none;
-                    }
-                }
-            }
-            .updateEventOperations_container {
-                width: 100%;
-                padding: 1rem 1rem 3rem 1rem;
-                .updateEventOperations {
-                    background: $ultraLightColor;
-                    box-shadow: $containerShadow;
-                    border-radiuS: $containerRadius;
-                    padding: 2rem 2rem 4rem 2rem;
-                    display: flex;
-                    flex-direction: column;
-                    gap: 3rem;
+    h2 {
+        font-size: 1.3rem;
+        margin: 3rem 0 0 0;
+        padding: .5rem;
+        text-align: center;
+        background: $darkColorBackOf;
+        color: $lightColor;
+        border-radius: 10px;
 
-                    &-section {
-                        display: flex;
-                        flex-direction: column;
-                        .sectionTitle_container {
-                            display: flex;
-                            align-items: baseline;
-                            gap: 1rem;
-                            .sectionTitle {
-                                margin: 0;
-                                font-size: 1.25rem;
-                                font-weight: 700;
-                            }
-                        }
+        @media screen and (min-width: $breakpointDesktop) {
 
-                        h2 {
-                            font-size: 1.3rem;
-                            margin: 3rem 0 0 0;
-                            padding: .5rem;
-                            text-align: center;
-                            background: $darkColorBackOf;
-                            color: $lightColor;
-                            border-radius: 10px;
-                        }
-                        .updateEventForm {
-                            @include adminForm;
-                        }
+            font-size: 1.5rem;
+            width: 75%;
+            align-self: center;
 
-                    }
-                }
-            }
         }
+                            
     }
-
-    @media screen and (min-width: $breakpointDesktop) {
-        .backOfficeEventUpdatePage {
-            display: grid;
-            grid-template-columns: 1fr 3fr;
-            .eventUpdatePage {
-                grid-column: 2 / -1;
-                .eventUpdatePageHeader {
-                    @include headersBasicSettings;
-
-                    &_content {
-                        display: grid;
-                        grid-template-columns: 6fr 1fr;
-                        max-width: $contentMaxWidth;
-                        
-                        h1 {
-                            grid-column: 1 / -2;
-                            @include pageTitlesBasicSettings;
-                        }
-                        .backToEventsButton {
-                            display: block;
-                            white-space: nowrap;
-                        }
-                    }
-                }
-                .updateEventOperations_container {
-                    padding: 2rem 3rem;
-                    .updateEventOperations {
-
-                        &-section {
-                            .sectionTitle_container {
-                                .sectionTitle {
-                                    white-space: nowrap;
-                                }
-                            }
-
-                            h2 {
-                                font-size: 1.5rem;
-                                width: 75%;
-                                align-self: center;
-                            }
-
-                        }
-                    }
-                }
-            }
-        }
-    }
+    
     
 </style>
