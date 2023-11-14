@@ -23,7 +23,7 @@
     @import '@/assets/sass/variables.scss';
     @import '@/assets/sass/varMediaQueries.scss';
     .searchBar_container {
-        width: 20rem;
+        max-width: 25rem;
         height: 2.5rem;
         position: relative;
         .searchBar {

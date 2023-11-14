@@ -1,6 +1,7 @@
 <template>
 
     <div id="eventsNav" class="boHeaderNav" v-if="eventsCount >= 1">
+        <SearchIcon class="searchIcon"/>
         <div class="navItem" @click="displayAllEvents" :class="{ 'active-link': currentFilter === 'all' }">
             <p>Tous <span>({{ eventsCount }})</span></p>
             <div class="activeBar"></div>
@@ -13,7 +14,6 @@
             <p>Passés <span>({{ pastEventsCount }})</span></p>
             <div class="activeBar"></div>
         </div>
-        <SearchIcon class="searchIcon"/>
     </div>
 
 </template>
