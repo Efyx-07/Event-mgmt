@@ -29,15 +29,7 @@
                 <BackOfficeEventCard />
             </div>
 
-            <div class="eventsSearchBar_container" :class="{ hiddenEventsSearchBar: !isEventsSearchBarVisible }">
-                <EventsSearchBar class="eventsSearchBar"/> 
-                <Icon 
-                    icon="ei:close" 
-                    width="30" 
-                    class="closeIcon"
-                    @click="closeEventsSearchBar"
-                /> 
-            </div>
+            <BackOfficeEventsSearchBar class="eventsSearchBar"/>
 
         </div>
 
@@ -56,7 +48,7 @@
     import MobileMenuIcon from '@/sub-components/MobileMenuIcon.vue';
     import BackOfficeNavMobile from '@/components/BackOfficeNavMobile.vue';
     import BackOfficeEventsNav from '@/components/BackOfficeEventsNav.vue';
-    import EventsSearchBar from '@/sub-components/EventsSearchBar.vue';
+    import BackOfficeEventsSearchBar from '@/components/BackOfficeEventsSearchBar.vue';
     import { Icon } from '@iconify/vue';
     import { useEventStore } from '@/stores/EventStore';
     import { computed, onMounted, ref } from 'vue';
@@ -69,21 +61,6 @@
     // appel de la fonction de tri par date de creation (du plus récent au plus ancien) au moment du chargement des données
     onMounted(() => {
         useEventStore().sortEventByCreationDateNewToOld();
-    });
-
-    // statut par défaut de la visibilité de la searchbar
-    const isEventsSearchBarVisible = ref(false);
-
-    // permet la fermeture de la searchbar
-    const closeEventsSearchBar = () => {
-        isEventsSearchBarVisible.value = false;
-    }
-
-    // ecoute l'événement personnalisé (créé sur 'SearchIcon') pour réafficher la fenetre
-    onMounted(() => {
-        window.addEventListener('show-eventsSearchBar', () => {
-            isEventsSearchBarVisible.value = true;
-        });
     });
 
 </script>
@@ -172,33 +149,11 @@
                 flex-wrap: wrap;
             }
 
-            .hiddenEventsSearchBar {
-                transform: translateY(-100%);
-            }
-            .eventsSearchBar_container {
-                background: $ultraLightColor;
-                box-shadow: $shadow;
+            .eventsSearchBar {
                 width: 100%;
-                height: 20%;
                 position: fixed;
                 top: 0;
                 z-index: 99;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                transition: transform .2s ease-in-out;
-                .eventsSearchBar {
-                    width: 100%;
-                    margin: 0 1rem;
-                }
-                .closeIcon {
-                    cursor: pointer;
-                    transition: transform .15s ease-in-out;
-
-                    &:hover {
-                        transform: rotate(90deg);
-                    }
-                }
             }
         }
     }
@@ -244,7 +199,7 @@
                     padding: 2rem 3rem;
                     gap: 2rem;
                 }
-                .eventsSearchBar_container {
+                .eventsSearchBar {
                     width: 75%;
                 }
             }

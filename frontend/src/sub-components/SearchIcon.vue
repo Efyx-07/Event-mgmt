@@ -23,6 +23,7 @@
 <style lang="scss" scoped>
 
     @import '@/assets/sass/variables.scss';
+    @import '@/assets/sass/varMediaQueries.scss';
     .searchIcon_container {
         width: 2rem;
         height: 2rem;
@@ -39,6 +40,13 @@
         .searchIcon {
             color: $lightColor;
             font-size: 1.3rem;
+        }
+    }
+
+    @media screen and (min-width: $breakpointDesktop) {
+        .searchIcon_container {
+            width: 2.3rem;
+            height: 2.3rem;
         }
     }
 </style>
