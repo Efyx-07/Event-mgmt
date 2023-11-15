@@ -1,6 +1,10 @@
 <template>
 
-  <div class="backOfficeEventCard" v-for="event in filteredEvents" :key="event.title" >
+  <div class="noMatchFound_container" v-if="filteredByKeywordEventsCount === 0 && currentFilter.value === 'keyword'">
+    <p>Aucun résultat pour votre recherche...</p> 
+  </div>
+
+  <div class="backOfficeEventCard" v-for="event in filteredEvents" :key="event.title" v-else>
 
     <div class="eventImage_container" @click="navigateToEvent(event.slug)">
       <img :src="hostName + event.image.source" :alt="event.image.alt" class="eventImage">
@@ -45,10 +49,6 @@
       </div> 
     </div>
 
-  </div>
-
-  <div class="noMatchFound_container" v-if="filteredByKeywordEventsCount === 0">
-    <p>Aucun résultat pour votre recherche...</p>
   </div>
 
 </template>
@@ -118,15 +118,15 @@
   }
 
   // déclare currentFilter comme réactif avec valeur 'all' par défaut
-  const currentFilter = ref('');
+  const currentFilter = ref({ value: 'all' });
 
   // procède au filtrage des évènements 'à venir' / 'passés' / 'par mot-clé' selon la methode de eventStore et affiche tous les évènements par défaut
   const filteredEvents = computed(() => {
-      if (currentFilter.value === 'upcoming') {
+      if (currentFilter.value.value === 'upcoming') {
         return eventStore.upcomingEvents;
-      } else if (currentFilter.value === 'past') {
+      } else if (currentFilter.value.value === 'past') {
         return eventStore.pastEvents;
-      } else if (currentFilter.value === 'keyword') {
+      } else if (currentFilter.value.value === 'keyword') {
         return eventStore.filteredByKeywordEvents;
       } else {
         return events
@@ -135,8 +135,7 @@
 
   // permet de vérifier le nombre d'évènements correspondant au mot-clé
   const filteredByKeywordEventsCount = computed(() => {
-    console.log('nbre mc: ', eventStore.filteredByKeywordEvents.length)
-        return eventStore.filteredByKeywordEvents.length;
+      return eventStore.filteredByKeywordEvents.length;
   });
 
   // écoute l'évènement personnalisé émis par BackOfficeEventsNav et BackOfficeEventsSearchBar
@@ -146,7 +145,7 @@
 
   // modifie la valeur du filtre selon l'evenement emis
   const handleFilterChanged = (event) => {
-    currentFilter.value = event.detail; 
+    currentFilter.value = { value: event.detail };
   };
 
 </script>

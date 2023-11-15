@@ -1,7 +1,7 @@
 <template>
 
     <div id="eventsNav" class="boHeaderNav" v-if="eventsCount >= 1">
-        <SearchIcon class="searchIcon"/>
+        <SearchIcon class="searchIcon" @click="setClassActive" :class="{ 'active-link': currentFilter === 'keyword' }"/>
         <div class="navItem" @click="displayAllEvents" :class="{ 'active-link': currentFilter === 'all' }">
             <p>Tous <span>({{ eventsCount }})</span></p>
             <div class="activeBar"></div>
@@ -58,6 +58,11 @@
         window.dispatchEvent(new CustomEvent('filterChanged', { detail: 'past' }));
     };
 
+    // change la valeur de currentFilter pour passer la class active-link
+    const setClassActive = () => {
+        currentFilter.value = 'keyword';
+    };
+
 </script>
 
 <style lang="scss" scoped>
@@ -68,6 +73,9 @@
     .boHeaderNav {
         width: 100%;
         justify-content: space-around;
+        .searchIcon.active-link {
+            background: $accentColorBackof2;
+        }
         .navItem {
             text-align: center;
 
