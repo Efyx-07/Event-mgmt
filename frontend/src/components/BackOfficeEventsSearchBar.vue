@@ -66,7 +66,6 @@
                 background: $lightColor;
                 border-radius: $containerRadiusS;
                 border: none;
-                //border: solid 3px $darkColorBackOf;
                 outline: none;
                 padding-left: 1rem;
                 font-size: 1rem;
