@@ -1,7 +1,7 @@
 <template>
 
     <div id="eventsNav" class="boHeaderNav" v-if="eventsCount >= 1">
-        <SearchIcon class="searchIcon" @click="setClassActive" />
+        <SearchIcon class="searchIcon" />
         <div class="navItem" @click="displayAllEvents" :class="{ 'active-link': currentFilter === 'all' }">
             <p>Tous <span>({{ eventsCount }})</span></p>
             <div class="activeBar"></div>
@@ -56,11 +56,6 @@
     const displayOnlyPastEvents = () => {
         currentFilter.value = 'past';
         window.dispatchEvent(new CustomEvent('filterChanged', { detail: 'past' }));
-    };
-
-    // change la valeur de currentFilter pour passer la class active-link
-    const setClassActive = () => {
-        currentFilter.value = '';
     };
 
 </script>
