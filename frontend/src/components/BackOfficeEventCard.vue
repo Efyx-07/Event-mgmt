@@ -47,6 +47,10 @@
 
   </div>
 
+  <div class="noMatchFound_container" v-if="filteredByKeywordEventsCount === 0">
+    <p>Aucun résultat pour votre recherche...</p>
+  </div>
+
 </template>
 
 <script setup>
@@ -127,6 +131,12 @@
       } else {
         return events
       }
+  });
+
+  // permet de vérifier le nombre d'évènements correspondant au mot-clé
+  const filteredByKeywordEventsCount = computed(() => {
+    console.log('nbre mc: ', eventStore.filteredByKeywordEvents.length)
+        return eventStore.filteredByKeywordEvents.length;
   });
 
   // écoute l'évènement personnalisé émis par BackOfficeEventsNav et BackOfficeEventsSearchBar

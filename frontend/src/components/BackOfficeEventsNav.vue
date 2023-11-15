@@ -36,8 +36,8 @@
         return eventStore.upcomingEvents.length;
     });
 
-     // récupère le nombre d'évènements 'passés'
-     const pastEventsCount = computed(() => {
+    // récupère le nombre d'évènements 'passés'
+    const pastEventsCount = computed(() => {
         return eventStore.pastEvents.length;
     });
 
