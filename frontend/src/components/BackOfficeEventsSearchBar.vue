@@ -2,8 +2,15 @@
 
     <div class="searchBar_container" :class="{ hiddenEventsSearchBar: !isEventsSearchBarVisible }">
         <div class="searchBar_content">
-            <input type="search" id="searchEventByKeyword" name="searchEventByKeyword" class="searchBar" placeholder="Rechercher par mot-clé" v-model="searchEventByKeyword">
-            <div class="searchIcon_container">
+            <input 
+                type="search" 
+                id="searchEventByKeyword" 
+                name="searchEventByKeyword" 
+                class="searchBar" 
+                placeholder="Rechercher par mot-clé" 
+                v-model="keyword"
+                @keydown.enter.prevent="handleEnterKey">
+            <div class="searchIcon_container" @click="displayEventsMatchingKeyword">
                 <Icon icon="ic:sharp-search" class="searchIcon"/>
             </div>
         </div>
@@ -16,9 +23,11 @@
 <script setup>
 
     import { Icon } from '@iconify/vue';
+    import { useEventStore } from '@/stores/eventStore';
     import { ref, onMounted } from 'vue';
 
-    const searchEventByKeyword = ref('');
+    const eventStore = useEventStore();
+    const keyword = ref('');
 
     // statut par défaut de la visibilité de la searchbar
     const isEventsSearchBarVisible = ref(false);
@@ -26,7 +35,8 @@
     // permet la fermeture de la searchbar et réinitialise la valeur du champ de recherche
     const closeEventsSearchBar = () => {
         isEventsSearchBarVisible.value = false;
-        searchEventByKeyword.value = '';
+        keyword.value = '';
+        eventStore.updateSearchedKeyword(keyword.value);
     }
 
     // ecoute l'événement personnalisé (créé sur 'SearchIcon') pour réafficher la fenetre
@@ -36,6 +46,25 @@
         });
     });
 
+    // déclare currentFilter comme réactif avec valeur 'all' par défaut
+    const currentFilter = ref(''); 
+
+    const displayEventsMatchingKeyword = () => {
+        // met à jour le mot-clé et les evenements correspondants dans le store
+        eventStore.updateSearchedKeyword(keyword.value);
+        eventStore.updateFilteredEvents();
+        // emet un évènement personnalisé
+        currentFilter.value = 'keyword';
+        window.dispatchEvent(new CustomEvent('filterChanged', { detail: 'keyword' }));
+        // ferme la fenêtre
+        closeEventsSearchBar();
+    };
+
+    // gestionnaire d'événement pour la touche "Entrée"
+    const handleEnterKey = () => {
+        displayEventsMatchingKeyword();
+    };
+   
 </script>
 
 <style lang="scss" scoped>
@@ -44,7 +73,7 @@
     @import '@/assets/sass/varMediaQueries.scss';
 
     .hiddenEventsSearchBar {
-        transform: translate(100%, -100%);
+        transform: translateX(100%);
     }
     .searchBar_container {
         width: 100%;
@@ -59,12 +88,14 @@
             width: 25rem;
             height: 2.5rem;
             margin: 0 1rem;
-            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             .searchBar {
                 width: 100%;
                 height: 100%;
                 background: $lightColor;
-                border-radius: $containerRadiusS;
+                border-radius: $containerRadiusS 0 0 $containerRadiusS;
                 border: none;
                 outline: none;
                 padding-left: 1rem;
@@ -84,9 +115,6 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                position: absolute;
-                top: 0;
-                right: 0;
                 cursor: pointer;
 
                 &:hover {
@@ -114,7 +142,7 @@
                 width: 25rem;
                 height: 2.7rem;
                 .searchBar {
-                    font-size: 1.2rem;
+                    font-size: 1rem;
                 }
             }
         }

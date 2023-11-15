@@ -114,20 +114,22 @@
   }
 
   // déclare currentFilter comme réactif avec valeur 'all' par défaut
-  const currentFilter = ref('all');
+  const currentFilter = ref('');
 
-  // procède au filtrage des évènements 'à venir' / 'passés' selon la methode de eventStore et affiche tous les évènements par défaut
+  // procède au filtrage des évènements 'à venir' / 'passés' / 'par mot-clé' selon la methode de eventStore et affiche tous les évènements par défaut
   const filteredEvents = computed(() => {
       if (currentFilter.value === 'upcoming') {
         return eventStore.upcomingEvents;
       } else if (currentFilter.value === 'past') {
         return eventStore.pastEvents;
+      } else if (currentFilter.value === 'keyword') {
+        return eventStore.filteredByKeywordEvents;
       } else {
         return events
       }
   });
 
-  // écoute l'évènement personnalisé émis par BackOfficeEventsNav
+  // écoute l'évènement personnalisé émis par BackOfficeEventsNav et BackOfficeEventsSearchBar
   onMounted(() => {
     window.addEventListener('filterChanged', handleFilterChanged);
   });
@@ -136,8 +138,6 @@
   const handleFilterChanged = (event) => {
     currentFilter.value = event.detail; 
   };
-
- 
 
 </script>
 

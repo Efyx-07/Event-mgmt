@@ -5,8 +5,10 @@ export const useEventStore = defineStore('events', {
 
     state: () => ({
         events: [], // initialise events comme un tableau vide
-        upcomingEvents: [],
-        pastEvents: [],
+        upcomingEvents: [], // initialise les évènements 'à venir' comme un tableau vide
+        pastEvents: [], // initialise les évènements 'passés' comme un tableau vide
+        keyword: '', // initialise keyword (mot-clé de searchBar) comme chaine vide
+        filteredByKeywordEvents: [], // initialise les évènements filtrés par mot-clé comme un tableau vide
     }),
 
     actions: {
@@ -30,10 +32,18 @@ export const useEventStore = defineStore('events', {
               });
         },
 
+        // met à jour keyword
+        updateSearchedKeyword(newKeyword) {
+            this.keyword = newKeyword;
+        },
+
+        // méthode permettant de filtrer les évènements selon date "à venir / passés"
         updateFilteredEvents() {
             const currentDate = new Date();
             this.upcomingEvents = this.events.filter(event => new Date(event.date) > currentDate);
             this.pastEvents = this.events.filter(event => new Date(event.date) <= currentDate);
+            this.filteredByKeywordEvents = this.events.filter(event => event.title.toLowerCase().includes(this.keyword.toLowerCase()));
         },
+
     },
 });
