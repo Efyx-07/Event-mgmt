@@ -153,7 +153,9 @@
 
   // permet de réafficher tous les évènements suite à une recherche infructueuse
   const displayAllEvents = () => {
-      currentFilter.value = { value: 'all' };
+    currentFilter.value = 'all';
+    // emet un évènement personnalisé pour restaurer la class active 'all'
+    window.dispatchEvent(new CustomEvent('filterChanged', { detail: 'all' }));
   };
 
 </script>

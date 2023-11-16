@@ -56,6 +56,8 @@
         // emet un évènement personnalisé
         currentFilter.value = 'keyword';
         window.dispatchEvent(new CustomEvent('filterChanged', { detail: 'keyword' }));
+        // emet un évènement pour réintialiser les classes active de EventsNav
+        window.dispatchEvent(new CustomEvent('resetActiveTabs'));
         // ferme la fenêtre
         closeEventsSearchBar();
     };

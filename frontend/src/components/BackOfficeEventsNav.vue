@@ -22,7 +22,7 @@
 
     import SearchIcon from '@/sub-components/SearchIcon.vue';
     import { useEventStore } from '@/stores/EventStore';
-    import { computed, ref } from 'vue';
+    import { computed, ref, onMounted } from 'vue';
 
     const eventStore = useEventStore();
 
@@ -58,6 +58,22 @@
         window.dispatchEvent(new CustomEvent('filterChanged', { detail: 'past' }));
     };
 
+    // écoute l'évènement personnalisé émis par BackOfficeEventsSearchBar
+    onMounted(() => {
+        window.addEventListener('filterChanged', handleFilterChanged);
+        window.addEventListener('resetActiveTabs', resetActiveTabs);
+    });
+
+    // modifie la valeur du filtre selon l'evenement emis
+    const handleFilterChanged = (event) => {
+        currentFilter.value = event.detail;
+    };
+
+    // réinitialise les classes actives
+    const resetActiveTabs = () => {
+        currentFilter.value = '';
+    };
+
 </script>
 
 <style lang="scss" scoped>
@@ -68,6 +84,9 @@
     .boHeaderNav {
         width: 100%;
         justify-content: space-around;
+        .searchIcon.active-link {
+            background: $accentColorBackof2;
+        }
         .navItem {
             text-align: center;
 
