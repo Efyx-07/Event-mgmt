@@ -64,6 +64,7 @@
 
     // gestionnaire d'événement pour la touche "Entrée"
     const handleEnterKey = () => {
+        // adopte le même comportement que "searchIcon"
         displayEventsMatchingKeyword();
     };
    
