@@ -91,6 +91,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: .3rem;
             .searchBar {
                 width: 100%;
                 height: 100%;
@@ -111,7 +112,7 @@
                 width: 3.5rem;
                 height: 100%;
                 background: $accentColorBackof2;
-                border-radius: 0 $containerRadiusS $containerRadiusS 0;
+                border-radius: 0 $containerRadius $containerRadius 0;
                 display: flex;
                 justify-content: center;
                 align-items: center;
