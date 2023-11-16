@@ -1,7 +1,7 @@
 <template>
 
-    <div class="searchIcon_container">
-        <Icon icon="ic:sharp-search" class="searchIcon" @click="toggleEventsSearchBarVisibility"/>
+    <div class="searchIcon_container" @click="toggleEventsSearchBarVisibility">
+        <Icon icon="ic:sharp-search" class="searchIcon" />
     </div>
 
 </template>
