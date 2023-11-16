@@ -2,7 +2,7 @@
 
   <div class="noMatchFound_container" v-if="filteredByKeywordEventsCount === 0 && currentFilter.value === 'keyword'">
     <p class="noMatchFound">Aucun résultat pour votre recherche...</p> 
-    <button class="back_btn" @click="backToAllEvents">
+    <button class="back_btn" @click="displayAllEvents">
       <p>Retour aux évènements</p>
     </button>
   </div>
@@ -152,7 +152,7 @@
   };
 
   // permet de réafficher tous les évènements suite à une recherche infructueuse
-  const backToAllEvents = () => {
+  const displayAllEvents = () => {
       currentFilter.value = { value: 'all' };
   };
 
