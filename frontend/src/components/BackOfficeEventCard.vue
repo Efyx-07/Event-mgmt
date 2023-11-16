@@ -1,7 +1,10 @@
 <template>
 
   <div class="noMatchFound_container" v-if="filteredByKeywordEventsCount === 0 && currentFilter.value === 'keyword'">
-    <p>Aucun résultat pour votre recherche...</p> 
+    <p class="noMatchFound">Aucun résultat pour votre recherche...</p> 
+    <button class="back_btn" @click="backToAllEvents">
+      <p>Retour aux évènements</p>
+    </button>
   </div>
 
   <div class="backOfficeEventCard" v-for="event in filteredEvents" :key="event.title" v-else>
@@ -148,11 +151,49 @@
     currentFilter.value = { value: event.detail };
   };
 
+  // permet de réafficher tous les évènements suite à une recherche infructueuse
+  const backToAllEvents = () => {
+      currentFilter.value = { value: 'all' };
+  };
+
 </script>
 
 <style lang="scss" scoped>
 
     @import '@/assets/sass/variables.scss';
+    .noMatchFound_container {
+      height: 75vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      .noMatchFound {
+        margin: 0;
+        font-size: 1.2rem;
+      }
+      .back_btn {
+        background: transparent;
+        color: $darkColorBackOf;
+        border: 1px solid $darkColorBackOf;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        cursor: pointer;
+
+        &:hover {
+          color: $accentColorBackof2;
+          border-color: $accentColorBackof2;
+        }
+
+        p {
+          margin: 0;
+          font-size: 1rem;
+          font-weight: 700;
+          padding: .5rem;
+        }
+      }
+    }
     .backOfficeEventCard {
         width: 24rem;
         height: 22rem;

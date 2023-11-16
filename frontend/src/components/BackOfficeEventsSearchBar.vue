@@ -73,12 +73,12 @@
     @import '@/assets/sass/varMediaQueries.scss';
 
     .hiddenEventsSearchBar {
-        transform: translateX(100%);
+        transform: translateY(-100%);
     }
     .searchBar_container {
         width: 100%;
-        height: 100%;
-        background: rgba($darkColorBackOf, .97);
+        height: 11rem;
+        background: $darkColorBackOf;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -96,7 +96,7 @@
                 height: 100%;
                 background: $lightColor;
                 border-radius: $containerRadiusS 0 0 $containerRadiusS;
-                border: none;
+                border: solid 2px $lightColor;
                 outline: none;
                 padding-left: 1rem;
                 font-size: 1rem;
@@ -104,13 +104,13 @@
                 align-items: center;
 
                 &:focus {
-                    border: solid 1px $accentColorBackof2;
+                    border: solid 2px $accentColorBackof2;
                 }
             }
             .searchIcon_container {
-                width: 2.5rem;
+                width: 3.5rem;
                 height: 100%;
-                background: $secondaryButtonColor;
+                background: $accentColorBackof2;
                 border-radius: 0 $containerRadiusS $containerRadiusS 0;
                 display: flex;
                 justify-content: center;
@@ -118,7 +118,7 @@
                 cursor: pointer;
 
                 &:hover {
-                    background: rgba($secondaryButtonColor, .7);
+                    background: $accentColorBackof2Lighted;
                 }
                 .searchIcon {
                     color: $lightColor;
