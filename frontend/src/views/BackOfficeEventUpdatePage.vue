@@ -24,7 +24,12 @@
                             <p class="sectionTitle">Modifier les données de l'évènement</p>
                             <ReusableSeparator/>
                         </div>
-                        <h2>{{ selectedEvent.title }}</h2>
+                        <div class="eventImageAndTitle_container">
+                            <img :src="hostName + selectedEvent.image.source" alt="" class="eventImage">
+                            <div class="eventTitle_container">
+                                <h1 class="eventTitle">{{ selectedEvent.title }}</h1>
+                            </div>
+                        </div>
 
                         <UpdateEventForm class="eventHandlingForm" :selectedEvent="selectedEvent"/>
 
@@ -52,9 +57,11 @@
     import ReusableSeparator from '@/sub-components/ReusableSeparator.vue';
 
     import { useEventStore } from '@/stores/EventStore';
+    import { useGlobalDataStore } from '@/stores/GlobalDataStore';
     import { useRoute } from 'vue-router';
 
     const eventStore = useEventStore();
+    const { hostName } = useGlobalDataStore();
     const allEvents = eventStore.events;
 
     const route = useRoute();
@@ -74,23 +81,53 @@
     @import '@/assets/sass/variables.scss';
     @import '@/assets/sass/varMediaQueries.scss';
 
-    h2 {
-        font-size: 1.3rem;
+    .eventImageAndTitle_container {
         margin: 3rem 0 0 0;
-        padding: .5rem;
-        text-align: center;
-        background: $darkColorBackOf;
-        color: $lightColor;
-        border-radius: 10px;
-
-        @media screen and (min-width: $breakpointDesktop) {
-
-            font-size: 1.5rem;
-            width: 75%;
-            align-self: center;
-
+        align-self: center;
+        width: 100%;
+        display: inline-block;
+        position: relative;
+        overflow: hidden;
+        border-radius: $containerRadius;
+        .eventImage {
+            width: 100%;
+            height: 100%;
+            display: block;
+            position: relative;
+            object-fit: cover;
         }
-                            
+        .eventTitle_container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(to top, $darkColor, transparent);
+            .eventTitle {
+                margin: 0;
+                font-size: 1.3rem;
+                text-align: center;
+                color: $lightColor;
+                text-shadow: 1px 1px 5px $darkColor;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                padding: .5rem;
+            }
+        }
+    }
+
+    @media screen and (min-width: $breakpointDesktop) {
+        .eventImageAndTitle_container {
+            width: 75%;
+            height: 18rem;
+            .eventTitle_container {
+                .eventTitle {
+                    font-size: 2rem;
+                    padding: 1rem;
+                }
+            }
+        }
     }
     
     

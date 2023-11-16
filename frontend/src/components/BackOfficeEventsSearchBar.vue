@@ -77,7 +77,7 @@
     }
     .searchBar_container {
         width: 100%;
-        height: 11rem;
+        height: 6.8rem;
         background: $darkColorBackOf;
         display: flex;
         justify-content: center;
@@ -138,6 +138,7 @@
     @media screen and (min-width: $breakpointDesktop) {
 
         .searchBar_container {
+            height: 4.5rem;
             .searchBar_content {
                 width: 25rem;
                 height: 2.7rem;
