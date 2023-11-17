@@ -9,15 +9,18 @@
                 class="searchBar" 
                 placeholder="Rechercher par mot-clé" 
                 v-model="keyword"
-                @keydown.enter.prevent="handleEnterKey">
-            <div class="searchIcon_container" @click="displayEventsMatchingKeyword">
-                <Icon icon="ic:sharp-search" class="searchIcon"/>
+                @keydown.enter.prevent="handleEnterKey"
+            >
+            <div class="searchIcon_container icon_container" @click="displayEventsMatchingKeyword" v-if="keyword !== ''">
+                <Icon icon="ic:sharp-search" class="icon"/>
+            </div>
+            <div class="closeIcon_container icon_container" @click="closeEventsSearchBar" v-else>
+                <Icon icon="ei:close" class="icon" />
             </div>
         </div>
         <div class="closing-overlay" @click="closeEventsSearchBar"></div>
     </div>
-    
-    
+        
 </template>
 
 <script setup>
@@ -47,7 +50,7 @@
     });
 
     // déclare currentFilter comme réactif avec valeur 'all' par défaut
-    const currentFilter = ref(''); 
+    const currentFilter =ref(''); 
 
     const displayEventsMatchingKeyword = () => {
 
@@ -56,16 +59,13 @@
 
         // met à jour les évènements correspondant au mot-clé dans le store
         eventStore.updateFilteredEvents();
-    
-        if (keyword.value !== '') {
 
-            // emet un évènement personnalisé
-            currentFilter.value = 'keyword';
-            window.dispatchEvent(new CustomEvent('filterChanged', { detail: 'keyword' }));
+        // emet un évènement personnalisé
+        currentFilter.value = 'keyword';
+        window.dispatchEvent(new CustomEvent('filterChanged', { detail: 'keyword' }));
 
-            // emet un évènement pour réintialiser les classes active de EventsNav
-            window.dispatchEvent(new CustomEvent('resetActiveTabs'));
-        }
+        // emet un évènement pour réintialiser les classes active de EventsNav
+        window.dispatchEvent(new CustomEvent('resetActiveTabs'));
 
         // ferme la fenêtre
         closeEventsSearchBar();
@@ -73,8 +73,12 @@
 
     // gestionnaire d'événement pour la touche "Entrée"
     const handleEnterKey = () => {
-        // adopte le même comportement que "searchIcon"
-        displayEventsMatchingKeyword();
+        if(keyword.value !== '') {
+            // adopte le même comportement que "searchIcon"
+            displayEventsMatchingKeyword(); 
+        } else {
+            closeEventsSearchBar();
+        }        
     };
    
 </script>
@@ -120,22 +124,31 @@
                     border: solid 2px $accentColorBackof2;
                 }
             }
-            .searchIcon_container {
+            .icon_container {
                 width: 3.5rem;
                 height: 100%;
-                background: $accentColorBackof2;
                 border-radius: 0 $containerRadius $containerRadius 0;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 cursor: pointer;
+                .icon {
+                    color: $lightColor;
+                    font-size: 1.5rem;
+                }
+            }
+            .searchIcon_container {     
+                background: $accentColorBackof2;
 
                 &:hover {
                     background: $accentColorBackof2Lighted;
                 }
-                .searchIcon {
-                    color: $lightColor;
-                    font-size: 1.5rem;
+            }
+            .closeIcon_container {     
+                background: $secondaryButtonColor;
+
+                &:hover {
+                    background: $secondaryButtonColorLighted;
                 }
             }
         }
@@ -149,7 +162,6 @@
     }
 
     @media screen and (min-width: $breakpointDesktop) {
-
         .searchBar_container {
             height: 4.5rem;
             .searchBar_content {
