@@ -24,7 +24,7 @@
             <ReusableSeparator class="separator"/>
             <div class="eventPlace_container">
                 <Icon icon="mdi:place-outline" class="icon"/>
-                <a :href="selectedEvent.locationUrl" target="_blank" rel="noopener noreferrer" class="eventPlace">{{ selectedEvent.location }}</a>
+                <p class="eventPlace" @click="scrollToSection('practicalInformations')">{{ selectedEvent.location }}</p>
             </div>
             <ParticipateButton class="eventCard-button"/>
         </div>
@@ -50,6 +50,17 @@
 
     // recupère la props de selectedEvents en provenance de EventPage
     const { selectedEvent } = defineProps(['selectedEvent']);
+
+    // fonction pour lier item à la section ancrée
+    const scrollToSection = (sectionId) => {
+        const section = document.getElementById(sectionId);
+
+        if (section) {
+            section.scrollIntoView({
+                behavior: 'smooth',
+            });
+        }
+    };
 
 </script>
 
@@ -113,8 +124,11 @@
                     margin: 0;
                     font-size: .95rem;
                 }
-
-                a {
+                .eventPlace {
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
+                a, .eventPlace {
                     color: rgba($darkColor, .8);
 
                     &:hover {
