@@ -29,7 +29,7 @@
 
             const { hostName } = useGlobalDataStore();
 
-            if (selectedEvent.locationUrl) {
+            if (selectedEvent.location) {
                 const response = await fetch(`${hostName}/maps?location=${encodeURIComponent(selectedEvent.location)}`);
                 if (response.ok) {
                     const data = await response.json();
@@ -38,6 +38,7 @@
                     console.error('Erreur lors de la récupération de l\'URL sécurisée de la carte.');
                 }
             }
+            
         } catch (error) {
             console.error('Erreur lors de la récupération de l\'URL sécurisée de la carte :', error);
         }

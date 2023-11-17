@@ -56,19 +56,6 @@
             </div>
 
             <div class="input-container">
-                <label for="newEvent-locationGoogleMapsUrl">Lien Google Maps du lieu</label>
-                <input 
-                    type="url"
-                    name="newEventLocationGoogleMapsUrl"
-                    placeholder="https://www.google.fr/maps/place/..."
-                    required
-                    id="newEventLocationGoogleMapsUrl"
-                    class="input-text"
-                    v-model="newEventLocationGoogleMapsUrl"
-                >
-            </div>
-
-            <div class="input-container">
                 <label for="newEvent-presentation">Présentation de l'évènement</label>
                 <ckeditor :editor="editor" v-model="editorDataNewPresentation" :config="editorConfig" @input="updateNewEventPresentation"></ckeditor>
             </div>
@@ -174,7 +161,6 @@
     const newEventCoverImage = ref('');
     const newEventDate = ref(userSelectedDate);
     const newEventLocation = ref(selectedEvent.location);
-    const newEventLocationGoogleMapsUrl =  ref(selectedEvent.locationUrl);
     const newEventPresentation = ref(selectedEvent.presentation);
     const newEventProgramme = ref(selectedEvent.programme);
     const newEventPracticalInformations = ref(selectedEvent.practicalInformations);
@@ -244,7 +230,6 @@
         formData.append('newEventCoverImage', newEventCoverImage.value);
         formData.append('newEventDate', newEventDate.value);
         formData.append('newEventLocation', newEventLocation.value);
-        formData.append('newEventLocationGoogleMapsUrl', newEventLocationGoogleMapsUrl.value);
         formData.append('newEventPresentation', newEventPresentation.value);
         formData.append('newEventProgramme', newEventProgramme.value);
         formData.append('newEventPracticalInformations', newEventPracticalInformations.value);

@@ -37,7 +37,7 @@ const router = createRouter({
         path: '/admin_homepage',
         name: 'BackOfficeHomePage',
         component: BackOfficeHomePage,
-        beforeEnter: authGuard,
+        //beforeEnter: authGuard,
       },
       {
         path: '/admin_new-event',
@@ -61,13 +61,13 @@ const router = createRouter({
         path: '/admin_your-account',
         name: 'BackOfficeAdminYourAccount',
         component: BackOfficeAdminYourAccount,
-        beforeEnter: authGuard,
+        //beforeEnter: authGuard,
       },
       {
         path: '/admin_add-admin',
         name: 'BackOfficeAdminAddAdmin',
         component: BackOfficeAdminAddAdmin,
-        beforeEnter: authGuard,
+        //beforeEnter: authGuard,
       },
       {
         path: '/admin_delete-admin',

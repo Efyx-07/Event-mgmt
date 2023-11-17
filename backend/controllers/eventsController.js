@@ -23,7 +23,6 @@ async function createEvent(req, res) {
   const eventCoverImage = req.files['eventCoverImage'][0];
   const eventDate = req.body.eventDate;
   const eventLocation = req.body.eventLocation;
-  const eventLocationGoogleMapsUrl = req.body.eventLocationGoogleMapsUrl;
   const eventPresentation = req.body.eventPresentation;
   const eventProgramme = req.body.eventProgramme;
   const eventPracticalInformations = req.body.eventPracticalInformations;
@@ -48,13 +47,12 @@ async function createEvent(req, res) {
   try {
 
     // insert les données dans la bdd myevents table evenements
-    const insertQuery = 'INSERT INTO evenements (titre, date, lieu, lieu_googlemaps_url, image_source, image_alt, presentation, programme, infos_pratiques, nom_client, logo_client_source, logo_client_alt, site_client, slug, administrateur_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    const insertQuery = 'INSERT INTO evenements (titre, date, lieu, image_source, image_alt, presentation, programme, infos_pratiques, nom_client, logo_client_source, logo_client_alt, site_client, slug, administrateur_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
 
     const values = [
       eventTitle,
       eventDate,
       eventLocation,
-      eventLocationGoogleMapsUrl,
       eventCoverImageRelativePath,
       eventCoverImageAlt,
       eventPresentation,
@@ -158,7 +156,6 @@ async function updateEvent(req, res) {
     eventTitle: req.body.newEventTitle,
     eventDate: req.body.newEventDate,
     eventLocation: req.body.newEventLocation,
-    eventLocationGoogleMapsUrl: req.body.newEventLocationGoogleMapsUrl,
     eventPresentation: req.body.newEventPresentation,
     eventProgramme: req.body.newEventProgramme,
     eventPracticalInformations: req.body.newEventPracticalInformations,
@@ -182,13 +179,12 @@ async function updateEvent(req, res) {
   }
 
   try {
-    const updateTextDataQuery = 'UPDATE evenements SET titre=?, date=?, lieu=?, lieu_googlemaps_url=?, image_alt=?, presentation=?, programme=?, infos_pratiques=?, nom_client=?, logo_client_alt=?, site_client=?, slug=? WHERE id=?';
+    const updateTextDataQuery = 'UPDATE evenements SET titre=?, date=?, lieu=?, image_alt=?, presentation=?, programme=?, infos_pratiques=?, nom_client=?, logo_client_alt=?, site_client=?, slug=? WHERE id=?';
 
     const textDataValues = [
       updatedData.eventTitle,
       updatedData.eventDate,
       updatedData.eventLocation,
-      updatedData.eventLocationGoogleMapsUrl,
       eventCoverImageAlt,
       updatedData.eventPresentation,
       updatedData.eventProgramme,
@@ -374,7 +370,6 @@ function formatData(events) {
     title: evenement.titre,
     date: evenement.date,
     location: evenement.lieu,
-    locationUrl: evenement.lieu_googlemaps_url,
     image: {
       source: `/assets/events-covers/${path.basename(evenement.image_source)}`, 
       alt: evenement.image_alt
