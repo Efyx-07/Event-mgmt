@@ -50,14 +50,23 @@
     const currentFilter = ref(''); 
 
     const displayEventsMatchingKeyword = () => {
-        // met à jour le mot-clé et les evenements correspondants dans le store
+
+        // met à jour le mot-clé dans le store
         eventStore.updateSearchedKeyword(keyword.value);
+
+        // met à jour les évènements correspondant au mot-clé dans le store
         eventStore.updateFilteredEvents();
-        // emet un évènement personnalisé
-        currentFilter.value = 'keyword';
-        window.dispatchEvent(new CustomEvent('filterChanged', { detail: 'keyword' }));
-        // emet un évènement pour réintialiser les classes active de EventsNav
-        window.dispatchEvent(new CustomEvent('resetActiveTabs'));
+    
+        if (keyword.value !== '') {
+
+            // emet un évènement personnalisé
+            currentFilter.value = 'keyword';
+            window.dispatchEvent(new CustomEvent('filterChanged', { detail: 'keyword' }));
+
+            // emet un évènement pour réintialiser les classes active de EventsNav
+            window.dispatchEvent(new CustomEvent('resetActiveTabs'));
+        }
+
         // ferme la fenêtre
         closeEventsSearchBar();
     };
