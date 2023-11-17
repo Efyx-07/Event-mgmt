@@ -54,7 +54,7 @@
         }
     }
 
-    @media screen and (min-width: 1440px) {
+    @media screen and (min-width: $breakpointLargeDesktop) {
     .platformLogo {
         .icon {
             font-size: 2.5rem;

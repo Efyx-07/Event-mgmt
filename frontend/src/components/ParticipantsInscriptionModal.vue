@@ -114,7 +114,7 @@
                 width: 30rem;
             }
 
-            @media screen and (min-width: 1440px) {
+            @media screen and (min-width: $breakpointLargeDesktop) {
                 width: 36rem;
             }
 
@@ -165,7 +165,7 @@
                 padding: 0 2rem;
                 background: $lightColor;
 
-                @media screen and (min-width: 1440px) {
+                @media screen and (min-width: $breakpointLargeDesktop) {
                     max-width: 36rem;
                     padding: 0 3rem;
                 }

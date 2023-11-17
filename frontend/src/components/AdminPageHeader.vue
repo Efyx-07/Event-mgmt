@@ -71,7 +71,6 @@
 
         header {
             .header_content {
-                //grid-template-columns: 2fr 1fr;
                 display: flex;
                 justify-content: space-between;
                 align-items: baseline;

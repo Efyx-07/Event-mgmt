@@ -165,7 +165,7 @@
 
     }
 
-    @media screen and (min-width: 1440px) {
+    @media screen and (min-width: $breakpointLargeDesktop) {
         .backOfficeNavAside {
             .item-section {
                 gap: 1rem;

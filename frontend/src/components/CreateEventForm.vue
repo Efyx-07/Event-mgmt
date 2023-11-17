@@ -343,7 +343,7 @@
     
     }
 
-    @media screen and (min-width: 1440px) {
+    @media screen and (min-width: $breakpointLargeDesktop) {
         .createEventForm {
             width: 75%;   
         }

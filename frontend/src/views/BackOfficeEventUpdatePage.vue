@@ -130,7 +130,7 @@
         }
     }
 
-    @media screen and (min-width: 1440px) {
+    @media screen and (min-width: $breakpointLargeDesktop) {
         .eventImageAndTitle_container {
             width: 75%;
             height: 18rem;
