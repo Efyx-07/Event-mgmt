@@ -330,7 +330,7 @@
                     }
                 }
                 .input-text {
-                    padding-left: 1rem;
+                    padding: 1rem;
                 }
                 .image-input {
                     border: none;
