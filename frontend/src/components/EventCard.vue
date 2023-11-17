@@ -178,13 +178,15 @@
                 .eventTitle_container {
                     .eventTitle {
                         font-size: 2rem;
+                        padding: 1rem 2rem;
                     }
                 }
             }
             .eventCard-details {
-                gap: 1.5rem;
                 flex-direction: row;
                 justify-content: space-between;
+                gap: 1.5rem;
+                padding: 1rem 2rem;
                 .separator {
                     display: none;
                 }
