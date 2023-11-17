@@ -85,6 +85,7 @@
         margin: 3rem 0 0 0;
         align-self: center;
         width: 100%;
+        height: 12rem;
         display: inline-block;
         position: relative;
         overflow: hidden;
@@ -117,7 +118,19 @@
         }
     }
 
-    @media screen and (min-width: $breakpointDesktop) {
+    @media screen and (min-width: $breakpointTablet) {
+        .eventImageAndTitle_container {
+            height: 15rem;
+            .eventTitle_container {
+                .eventTitle {
+                    font-size: 2rem;
+                    padding: 1rem;
+                }
+            }
+        }
+    }
+
+    @media screen and (min-width: 1440px) {
         .eventImageAndTitle_container {
             width: 75%;
             height: 18rem;
