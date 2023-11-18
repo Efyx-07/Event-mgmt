@@ -26,7 +26,7 @@
             </div>
 
             <div class="eventCards_container" v-if="eventsCount >= 1">
-                <BackOfficeEventCard />
+                <BO_EventCard />
             </div>
 
             <BO_EventsSearchBar class="eventsSearchBar"/>
@@ -43,7 +43,7 @@
 <script setup>
     
     import BackOfficeNavAside from '@/components/BackOfficeNavAside.vue';
-    import BackOfficeEventCard from '@/components/BackOfficeEventCard.vue'; 
+    import BO_EventCard from '@/components/BO_EventCard.vue'; 
     import RemoveEventConfirmationModal from '@/components/RemoveEventConfirmationModal.vue';
     import MobileMenuIcon from '@/sub-components/MobileMenuIcon.vue';
     import BackOfficeNavMobile from '@/components/BackOfficeNavMobile.vue';
