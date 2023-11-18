@@ -1,14 +1,14 @@
 <template>
     <div class="backOffice">
         <PlatformLogo class="platformLogo"/>
-        <AdminLoginForm />
+        <BO_AdminForm_login />
     </div>
     
 </template>
 
 <script setup>
 
-    import AdminLoginForm from '@/components/AdminLoginForm.vue';
+    import BO_AdminForm_login from '@/components/BO_AdminForm_login.vue';
     import PlatformLogo from '@/sub-components/PlatformLogo.vue';
     
 </script>

@@ -22,7 +22,7 @@
                                 Notification: Un administrateur actuellement connecté peut créer un nouvel administrateur ici. L’administrateur nouvellement créé pourra modifier son mot de passe lors de sa future connexion et bénèficiera de tous les mêmes droits que l’administrateur actuellement connecté.
                             </p>
                         </div>
-                        <AdminRegisterForm class="adminRegisterForm"/>
+                        <BO_AdminForm_register class="adminRegisterForm"/>
                     </div>
 
                 </div>  
@@ -38,7 +38,7 @@
 <script setup>
 
     import BackOfficeNavAside from '@/components/BackOfficeNavAside.vue';
-    import AdminRegisterForm from '@/components/AdminRegisterForm.vue';
+    import BO_AdminForm_register from '@/components/BO_AdminForm_register.vue';
     import AdminPageHeader from '@/components/AdminPageHeader.vue';
     import BackOfficeNavMobile from '@/components/BackOfficeNavMobile.vue';
     import ReusableSeparator from '@/sub-components/ReusableSeparator.vue';

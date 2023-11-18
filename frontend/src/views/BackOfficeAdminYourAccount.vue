@@ -17,7 +17,7 @@
                             <p class="sectionTitle">Modifier votre mot de passe</p>
                             <ReusableSeparator/>
                         </div>
-                        <AdminUpdatePasswordForm class="adminUpdatePasswordForm"/>
+                        <BO_AdminForm_updatePassword class="adminUpdatePasswordForm"/>
                     </div>
 
                 </div>  
@@ -33,7 +33,7 @@
 <script setup>
 
     import BackOfficeNavAside from '@/components/BackOfficeNavAside.vue';
-    import AdminUpdatePasswordForm from '@/components/AdminUpdatePasswordForm.vue';
+    import BO_AdminForm_updatePassword from '@/components/BO_AdminForm_updatePassword.vue';
     import AdminPageHeader from '@/components/AdminPageHeader.vue';
     import BackOfficeNavMobile from '@/components/BackOfficeNavMobile.vue';
     import ReusableSeparator from '@/sub-components/ReusableSeparator.vue';
