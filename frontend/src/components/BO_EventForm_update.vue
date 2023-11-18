@@ -34,8 +34,8 @@
                     </div>
                     <div class="coverImagePreview_container" v-else>
                         <img :src="coverImagePreview" class="coverImagePreview">
-                        <div class="trashIcon_container" @click="deleteCoverImageFromPreview">
-                            <Icon icon="ph:trash" class="trashIcon"/>
+                        <div class="removeIcon_container" @click="removeCoverImageFromPreview">
+                            <Icon :icon="removeImageIconName" class="removeIcon"/>
                         </div>
                     </div>    
                 </div> 
@@ -111,8 +111,8 @@
                     </div>
                     <div class="organizerLogoPreview_container" v-else>
                         <img :src="organizerLogoPreview" class="organizerLogoPreview">
-                        <div class="trashIcon_container" @click="deleteOrganizerLogoFromPreview">
-                            <Icon icon="ph:trash" class="trashIcon"/>
+                        <div class="removeIcon_container" @click="removeOrganizerLogoFromPreview">
+                            <Icon :icon="removeImageIconName" class="removeIcon"/>
                         </div>
                     </div>   
                 </div>
@@ -159,6 +159,7 @@
 
     // data
     const notification = '(Sans choix de votre part, l\'image actuelle restera en place)'
+    const { removeImageIconName } = useGlobalDataStore();
 
     // convertit la date de l'API en une date locale
     const dateFromAPI = new Date(selectedEvent.date);
@@ -230,12 +231,12 @@
     };
 
     // supprime l'image de couverture en preview
-    const deleteCoverImageFromPreview = () => {
+    const removeCoverImageFromPreview = () => {
         coverImagePreview.value = '';
     };
 
     // supprime le logo de l'organisateur en preview
-    const deleteOrganizerLogoFromPreview = () => {
+    const removeOrganizerLogoFromPreview = () => {
         organizerLogoPreview.value = '';
     };
 

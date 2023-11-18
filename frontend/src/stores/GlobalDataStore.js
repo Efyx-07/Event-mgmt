@@ -9,6 +9,7 @@ export const useGlobalDataStore = defineStore('globalData', {
 
         // Icones de Iconify
         validateIconName: "ooui:success", // Icone 'validé'
+        removeImageIconName: "grommet-icons:update", // Icone 'changer image'
    
     }),
 });

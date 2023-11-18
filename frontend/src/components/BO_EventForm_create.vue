@@ -32,8 +32,8 @@
                     </div>
                     <div class="coverImagePreview_container" v-else>
                         <img :src="coverImagePreview" class="coverImagePreview">
-                        <div class="trashIcon_container" @click="deleteCoverImageFromPreview">
-                            <Icon icon="ph:trash" class="trashIcon"/>
+                        <div class="removeIcon_container" @click="removeCoverImageFromPreview">
+                            <Icon :icon="removeImageIconName" class="removeIcon"/>
                         </div>
                     </div>
                 </div>             
@@ -106,8 +106,8 @@
                     </div>
                     <div class="organizerLogoPreview_container" v-else>
                         <img :src="organizerLogoPreview" class="organizerLogoPreview">
-                        <div class="trashIcon_container" @click="deleteOrganizerLogoFromPreview">
-                            <Icon icon="ph:trash" class="trashIcon"/>
+                        <div class="removeIcon_container" @click="removeOrganizerLogoFromPreview">
+                            <Icon :icon="removeImageIconName" class="removeIcon"/>
                         </div>
                     </div>   
                 </div>
@@ -149,6 +149,9 @@
     import ReusablePrimaryButton from '@/sub-components/ReusablePrimaryButton.vue';
     import ReusableSecondaryButton from '@/sub-components/ReusableSecondaryButton.vue';
     import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
+    // data
+    const { removeImageIconName } = useGlobalDataStore();
 
     // propriétés du formulaire
     const eventTitle = ref('');
@@ -197,12 +200,12 @@
     };
 
     // supprime l'image de couverture en preview
-    const deleteCoverImageFromPreview = () => {
+    const removeCoverImageFromPreview = () => {
         coverImagePreview.value = '';
     };
 
     // supprime le logo de l'organisateur en preview
-    const deleteOrganizerLogoFromPreview = () => {
+    const removeOrganizerLogoFromPreview = () => {
         organizerLogoPreview.value = '';
     };
 
