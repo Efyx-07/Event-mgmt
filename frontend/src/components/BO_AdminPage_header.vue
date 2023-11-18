@@ -3,19 +3,19 @@
     <header>
         <div class="header_content">
             <h1>Gestion compte administrateur</h1>
-            <AdminPageNav class="desktopAdminNav"/>
-            <AdminPageNavMobile class="mobileAdminNav2"/>
+            <BO_AdminPage_nav class="desktopAdminNav"/>
+            <BO_AdminPage_navMobile class="mobileAdminNav2"/>
             <MobileMenuIcon class="mobileMenuIcon"/>
         </div>  
-        <AdminPageNavMobile class="mobileAdminNav"/>
+        <BO_AdminPage_navMobile class="mobileAdminNav"/>
     </header>
     
 </template>
 
 <script setup>
 
-    import AdminPageNav from '@/components/AdminPageNav.vue';
-    import AdminPageNavMobile from '@/components/AdminPageNavMobile.vue';
+    import BO_AdminPage_nav from '@/components/BO_AdminPage_nav.vue';
+    import BO_AdminPage_navMobile from '@/components/BO_AdminPage_navMobile.vue';
     import MobileMenuIcon from '@/sub-components/MobileMenuIcon.vue';
 
 </script>

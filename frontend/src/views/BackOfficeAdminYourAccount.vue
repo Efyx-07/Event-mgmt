@@ -6,7 +6,7 @@
 
         <div class="adminPage">
             
-            <AdminPageHeader />
+            <BO_AdminPage_header />
 
             <div class="adminOperations_container">
 
@@ -34,7 +34,7 @@
 
     import BackOfficeNavAside from '@/components/BackOfficeNavAside.vue';
     import BO_AdminForm_updatePassword from '@/components/BO_AdminForm_updatePassword.vue';
-    import AdminPageHeader from '@/components/AdminPageHeader.vue';
+    import BO_AdminPage_header from '@/components/BO_AdminPage_header.vue';
     import BackOfficeNavMobile from '@/components/BackOfficeNavMobile.vue';
     import ReusableSeparator from '@/sub-components/ReusableSeparator.vue';
 
