@@ -17,7 +17,7 @@
                             <p class="sectionTitle">Supprimer un administrateur</p>
                             <ReusableSeparator/>
                         </div>
-                        <BO_AdminForm_adminsToDelete class="adminsToDelete"/>
+                        <BO_AdminForm_delete class="adminsToDelete"/>
                     </div>
 
                 </div>  
@@ -33,7 +33,7 @@
 <script setup>
 
     import BackOfficeNavAside from '@/components/BackOfficeNavAside.vue';
-    import BO_AdminForm_adminsToDelete from '@/components/BO_AdminForm_adminsToDelete.vue';
+    import BO_AdminForm_delete from '@/components/BO_AdminForm_delete.vue';
     import BO_AdminPage_header from '@/components/BO_AdminPage_header.vue';
     import BackOfficeNavMobile from '@/components/BackOfficeNavMobile.vue';
     import ReusableSeparator from '@/sub-components/ReusableSeparator.vue';
