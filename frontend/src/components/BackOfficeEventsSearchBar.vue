@@ -107,12 +107,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: .3rem;
+            gap: .2rem;
             .searchBar {
                 width: 100%;
                 height: 100%;
                 background: $lightColor;
-                border-radius: $containerRadiusS 0 0 $containerRadiusS;
+                border-radius: $containerRadius 0 0 0;
                 border: solid 2px $lightColor;
                 outline: none;
                 padding-left: 1rem;
@@ -127,7 +127,7 @@
             .icon_container {
                 width: 3.5rem;
                 height: 100%;
-                border-radius: 0 $containerRadius $containerRadius 0;
+                border-radius: 0 0 $containerRadius 0;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -166,7 +166,7 @@
             height: 4.5rem;
             .searchBar_content {
                 width: 25rem;
-                height: 2.7rem;
+                height: 2.2rem;
                 .searchBar {
                     font-size: 1rem;
                 }
