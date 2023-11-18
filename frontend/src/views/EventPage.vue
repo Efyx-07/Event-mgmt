@@ -1,26 +1,26 @@
 <template>
 
     <div class="eventPage">
-        <EventPageHeader :selectedEvent="selectedEvent"/>
+        <EP_Header :selectedEvent="selectedEvent"/>
         <div class="eventPage_content">
             <div class="eventCard_container" ref="eventCard">
-                <EventCard :selectedEvent="selectedEvent" />
+                <EP_EventCard :selectedEvent="selectedEvent" />
             </div>
             <div class="eventPage-sections_container">
                 <div id="presentation">
-                    <EventPageSectionPresentation :selectedEvent="selectedEvent"/>
+                    <EP_Section_presentation :selectedEvent="selectedEvent"/>
                 </div>
                 <div id="programme">
-                    <EventPageSectionProgramme :selectedEvent="selectedEvent"/>
+                    <EP_Section_programme :selectedEvent="selectedEvent"/>
                 </div>
                 <div id="practicalInformations">
-                    <EventPageSectionPracticalInformations :selectedEvent="selectedEvent"/>
+                    <EP_Section_practicalInformations :selectedEvent="selectedEvent"/>
                 </div>
             </div>
         </div>
-        <EventPageFooter />
+        <EP_Footer />
         <div class="stickyBarContainer" v-show="!isEventCardVisible">
-            <EventPageStickyBar :selectedEvent="selectedEvent"/>
+            <EP_StickyBar :selectedEvent="selectedEvent"/>
         </div>
     </div>
     <ParticipantsInscriptionModal :selectedEvent="selectedEvent"/>
@@ -29,14 +29,14 @@
 
 <script setup>
 
-    import EventPageHeader from '@/components/EventPageHeader.vue';
-    import EventPageFooter from '@/components/EventPageFooter.vue'
-    import EventCard from '@/components/EventCard.vue';
-    import EventPageSectionPresentation from '@/components/EventPageSectionPresentation.vue';
-    import EventPageSectionProgramme from '@/components/EventPageSectionProgramme.vue';
-    import EventPageSectionPracticalInformations from '@/components/EventPageSectionPracticalInformations.vue';
+    import EP_Header from '@/components/EP_Header.vue';
+    import EP_Footer from '@/components/EP_Footer.vue';
+    import EP_EventCard from '@/components/EP_EventCard.vue';
+    import EP_Section_presentation from '@/components/EP_Section_presentation.vue';
+    import EP_Section_programme from '@/components/EP_Section_programme.vue';
+    import EP_Section_practicalInformations from '@/components/EP_Section_practicalInformations.vue';
     import ParticipantsInscriptionModal from '@/components/ParticipantsInscriptionModal.vue';
-    import EventPageStickyBar from '@/components/EventPageStickyBar.vue';
+    import EP_StickyBar from '@/components/EP_StickyBar.vue';
 
     import { ref, onMounted, onBeforeUnmount } from 'vue';
 
