@@ -25,7 +25,7 @@
                             <ReusableSeparator/>
                         </div>
 
-                        <BO_EventForm_create class="eventHandlingForm"/>
+                        <BO_EventForm_create class="eventForm"/>
 
                     </div>
 

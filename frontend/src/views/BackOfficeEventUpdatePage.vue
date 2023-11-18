@@ -31,7 +31,7 @@
                             </div>
                         </div>
 
-                        <BO_EventForm_update class="eventHandlingForm" :selectedEvent="selectedEvent"/>
+                        <BO_EventForm_update class="eventForm" :selectedEvent="selectedEvent"/>
 
                     </div>
 
