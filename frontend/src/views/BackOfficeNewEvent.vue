@@ -25,7 +25,7 @@
                             <ReusableSeparator/>
                         </div>
 
-                        <CreateEventForm class="eventHandlingForm"/>
+                        <BO_EventForm_create class="eventHandlingForm"/>
 
                     </div>
 
@@ -45,7 +45,7 @@
 
     import BackOfficeNavAside from '@/components/BackOfficeNavAside.vue';
     import BackToEventsButton from '@/sub-components/BackToEventsButton.vue';
-    import CreateEventForm from '@/components/CreateEventForm.vue';
+    import BO_EventForm_create from '@/components/BO_EventForm_create.vue';
     import MobileMenuIcon from '@/sub-components/MobileMenuIcon.vue';
     import BackOfficeNavMobile from '@/components/BackOfficeNavMobile.vue';
     import ReusableSeparator from '@/sub-components/ReusableSeparator.vue';

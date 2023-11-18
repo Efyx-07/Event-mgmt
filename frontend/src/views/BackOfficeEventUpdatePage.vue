@@ -31,7 +31,7 @@
                             </div>
                         </div>
 
-                        <UpdateEventForm class="eventHandlingForm" :selectedEvent="selectedEvent"/>
+                        <BO_EventForm_update class="eventHandlingForm" :selectedEvent="selectedEvent"/>
 
                     </div>
 
@@ -51,7 +51,7 @@
 
     import BackOfficeNavAside from '@/components/BackOfficeNavAside.vue';
     import BackToEventsButtonVue from '@/sub-components/BackToEventsButton.vue';
-    import UpdateEventForm from '@/components/UpdateEventForm.vue';
+    import BO_EventForm_update from '@/components/BO_EventForm_update.vue';
     import MobileMenuIcon from '@/sub-components/MobileMenuIcon.vue';
     import BackOfficeNavMobile from '@/components/BackOfficeNavMobile.vue';
     import ReusableSeparator from '@/sub-components/ReusableSeparator.vue';
