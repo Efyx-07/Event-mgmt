@@ -16,11 +16,11 @@
                 >
             </div>
 
-            <div class="coverImageInputAndPreview_container">
+            <div class="coverImageInputAndPreview_container imageInputAndPreview_container">
                 <div class="input-container" >
                     <label for="event-coverImage">Image de couverture</label>
-                        <div class="image-input_container" v-if="!coverImagePreview">
-                            <input 
+                    <div class="image-input_container" v-if="!coverImagePreview">
+                        <input 
                             type="file"
                             name="eventCoverImage"
                             required
@@ -36,11 +36,9 @@
                             <Icon icon="ph:trash" class="trashIcon"/>
                         </div>
                     </div>
-                </div> 
-                
+                </div>             
             </div>
             
-
             <div class="input-container">
                 <label for="event-date">Date de l'évènement</label>
                 <input 
@@ -92,18 +90,29 @@
                 >
             </div>
 
-            <div class="input-container">
-                <label for="event-organizerLogo">Logo de l'organisateur</label>
-                <input 
-                    type="file"
-                    name="eventOrganizerLogo"
-                    required
-                    accept="image/jpg, image/jpeg, image/png"
-                    class="image-input"
-                    id="create_eventOrganizerLogo"
-                    @change="handleOrganizerLogoFileChange"
-                >
-            </div> 
+            <div class="organizerLogoInputAndPreview_container imageInputAndPreview_container">
+                <div class="input-container">
+                    <label for="event-organizerLogo">Logo de l'organisateur</label>
+                    <div class="image-input_container" v-if="!organizerLogoPreview">
+                        <input 
+                            type="file"
+                            name="eventOrganizerLogo"
+                            required
+                            accept="image/jpg, image/jpeg, image/png"
+                            class="image-input"
+                            id="create_eventOrganizerLogo"
+                            @change="handleOrganizerLogoFileChange"
+                        >
+                    </div>
+                    <div class="organizerLogoPreview_container" v-else>
+                        <img :src="organizerLogoPreview" class="organizerLogoPreview">
+                        <div class="trashIcon_container" @click="deleteOrganizerLogoFromPreview">
+                            <Icon icon="ph:trash" class="trashIcon"/>
+                        </div>
+                    </div>   
+                </div>
+            </div>
+             
 
             <div class="input-container">
                 <label for="event-organizerWebsite">Site web de l'organisateur</label>
@@ -153,8 +162,9 @@
     const eventOrganizerLogo = ref('');
     const eventOrganizerWebsite  = ref('');
 
-    // propriété de la preview de l'image de couverture
+    // propriétés des previews de l'image de couverture et du logo organisateur
     const coverImagePreview = ref('');
+    const organizerLogoPreview = ref('');
 
     // gère le téléchargement du fichier image de couverture et stocke le fichier selectionné
     const handleCoverImageFileChange = (event) => {
@@ -171,14 +181,29 @@
         }
     };
 
+    // gère le téléchargement du fichier logo de l'organisateur et stocke le fichier selectionné
+    const handleOrganizerLogoFileChange = (event) => {
+        eventOrganizerLogo.value = event.target.files[0];
+
+        // permet la preview du logo de l'organisateur
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                organizerLogoPreview.value = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
     // supprime l'image de couverture en preview
     const deleteCoverImageFromPreview = () => {
         coverImagePreview.value = '';
     };
 
-    // gère le téléchargement du fichier logo de l'organisateur et stocke le fichier selectionné
-    const handleOrganizerLogoFileChange = (event) => {
-        eventOrganizerLogo.value = event.target.files[0];
+    // supprime le logo de l'organisateur en preview
+    const deleteOrganizerLogoFromPreview = () => {
+        organizerLogoPreview.value = '';
     };
 
     // crée une instance CKEditor
@@ -350,16 +375,23 @@
                     }
                 }  
             }
-            .coverImageInputAndPreview_container {
+            .imageInputAndPreview_container {
                 .coverImagePreview_container {
                     width: 100%;
                     height: 100%;
+                }
+                .organizerLogoPreview_container {
+                    width: 50%;
+                    height: 50%;
+                }
+                .coverImagePreview_container, .organizerLogoPreview_container {
                     display: inline-block;
                     position: relative;
                     overflow: hidden;
                     border-radius: $containerRadiusS;
                     box-shadow: $shadow;
-                    .coverImagePreview {
+                    align-self: center;
+                    .coverImagePreview, .organizerLogoPreview {
                         width: 100%;
                         height: 100%;
                         display: block;
@@ -403,17 +435,21 @@
     @media screen and (min-width: $breakpointDesktop) {
         .createEventForm {  
             .inputs_wrapper {
-                .coverImageInputAndPreview_container {
+                .imageInputAndPreview_container {
                     .coverImagePreview_container {
                         width: 60%;
                         max-height: 17rem;
-                        align-self: center;
+                    }
+                    .organizerLogoPreview_container {
+                        width: 40%;
+                        max-height: 100%;
+                    }
+                    .coverImagePreview_container, .organizerLogoPreview_container {
                         .trashIcon_container {
                             top: 1rem;
                             right: 1rem;
                         }
-                    }
-                    
+                    }                   
                 }
             }
         }
