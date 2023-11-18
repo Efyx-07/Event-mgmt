@@ -29,7 +29,7 @@
                 <BackOfficeEventCard />
             </div>
 
-            <BackOfficeEventsSearchBar class="eventsSearchBar"/>
+            <BO_EventsSearchBar class="eventsSearchBar"/>
 
         </div>
 
@@ -48,7 +48,7 @@
     import MobileMenuIcon from '@/sub-components/MobileMenuIcon.vue';
     import BackOfficeNavMobile from '@/components/BackOfficeNavMobile.vue';
     import BackOfficeEventsNav from '@/components/BackOfficeEventsNav.vue';
-    import BackOfficeEventsSearchBar from '@/components/BackOfficeEventsSearchBar.vue';
+    import BO_EventsSearchBar from '@/components/BO_EventsSearchBar.vue';
     import { Icon } from '@iconify/vue';
     import { useEventStore } from '@/stores/EventStore';
     import { computed, onMounted, ref } from 'vue';
