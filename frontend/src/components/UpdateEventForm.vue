@@ -246,16 +246,29 @@
     let editorDataNewPracticalInformations = ref(selectedEvent.practicalInformations);
     const editorConfig = {
         toolbar: {
-        items: [
-            'bold', 
-            'italic',
-            'bulletedList', 
-            'numberedList', 
-            'undo', 
-            'redo'
-        ]
+            items: [
+                'bold', 
+                'italic',
+                'link',
+                'bulletedList', 
+                'numberedList', 
+                'undo', 
+                'redo'
+            ]
         },
         language: 'fr',
+        link: {
+            decorators: {
+                addTargetToExternalLinks: {
+                    mode: 'automatic',
+                    callback: url => /^(https?:)?\/\//.test( url ),
+                    attributes: {
+                        target: '_blank',
+                        rel: 'noopener noreferrer'
+                    }
+                }
+            }
+        }
     };
 
     // lie les editorData aux propriétés du formulaire envoyées
