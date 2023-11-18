@@ -7,7 +7,7 @@
         </div>
         <div class="text_container">
             <p v-html="selectedEvent.practicalInformations"></p>
-            <EventPageLocationMap :selectedEvent="selectedEvent" class="locationMap"/>
+            <EP_LocationMap :selectedEvent="selectedEvent" class="locationMap"/>
         </div>
     </div>
     
@@ -16,7 +16,7 @@
 <script setup>
 
     import ReusableSeparator from '@/sub-components/ReusableSeparator.vue';
-    import EventPageLocationMap from '@/components/EventPageLocationMap.vue';
+    import EP_LocationMap from '@/components/EP_LocationMap.vue';
 
     // recupère la props de selectedEvents en provenance de EventPage
     const { selectedEvent } = defineProps(['selectedEvent']);

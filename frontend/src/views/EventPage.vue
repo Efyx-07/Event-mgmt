@@ -23,7 +23,7 @@
             <EP_StickyBar :selectedEvent="selectedEvent"/>
         </div>
     </div>
-    <ParticipantsInscriptionModal :selectedEvent="selectedEvent"/>
+    <EP_Modal_participantsInscription :selectedEvent="selectedEvent"/>
     
 </template>
 
@@ -35,7 +35,7 @@
     import EP_Section_presentation from '@/components/EP_Section_presentation.vue';
     import EP_Section_programme from '@/components/EP_Section_programme.vue';
     import EP_Section_practicalInformations from '@/components/EP_Section_practicalInformations.vue';
-    import ParticipantsInscriptionModal from '@/components/ParticipantsInscriptionModal.vue';
+    import EP_Modal_participantsInscription from '@/components/EP_Modal_participantsInscription.vue';
     import EP_StickyBar from '@/components/EP_StickyBar.vue';
 
     import { ref, onMounted, onBeforeUnmount } from 'vue';
