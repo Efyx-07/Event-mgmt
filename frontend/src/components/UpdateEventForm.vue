@@ -1,6 +1,6 @@
 <template>
     
-    <form class="updateEventForm" @submit.prevent="updateEvent" enctype="multipart/form-data">
+    <form class="eventForm" @submit.prevent="updateEvent" enctype="multipart/form-data">
 
         <div class="inputs_wrapper">
 
@@ -16,20 +16,31 @@
                 >
             </div>
 
-            <div class="input-container" >
-                <div class="labelAndNotif_container">
-                    <label for="newEvent-coverImage">Image de couverture</label>
-                    <p class="notification">{{ notification }}</p>
-                </div>
-                <input
-                    type="file"
-                    name="newEventCoverImage"
-                    accept="image/jpg, image/jpeg, image/png"
-                    class="image-input"
-                    id="newEventCoverImage"
-                    @change="handleNewCoverImageFileChange"
-                >
-            </div> 
+            <div class="coverImageInputAndPreview_container imageInputAndPreview_container">
+                <div class="input-container" >
+                    <div class="labelAndNotif_container">
+                        <label for="newEvent-coverImage">Image de couverture</label>
+                        <p class="notification">{{ notification }}</p>
+                    </div>
+                    <div class="image-input_container" v-if="!coverImagePreview">
+                        <input
+                            type="file"
+                            name="newEventCoverImage"
+                            accept="image/jpg, image/jpeg, image/png"
+                            class="image-input"
+                            id="newEventCoverImage"
+                            @change="handleNewCoverImageFileChange"
+                        >
+                    </div>
+                    <div class="coverImagePreview_container" v-else>
+                        <img :src="coverImagePreview" class="coverImagePreview">
+                        <div class="trashIcon_container" @click="deleteCoverImageFromPreview">
+                            <Icon icon="ph:trash" class="trashIcon"/>
+                        </div>
+                    </div>    
+                </div> 
+            </div>
+            
 
             <div class="input-container">
                 <label for="newEvent-date">Date de l'évènement</label>
@@ -82,20 +93,31 @@
                 >
             </div>
 
-            <div class="input-container">
-                <div class="labelAndNotif_container">
-                    <label for="newEvent-organizerLogo">Logo de l'organisateur</label>
-                    <p class="notification">{{ notification }}</p>
+            <div class="organizerLogoInputAndPreview_container imageInputAndPreview_container">
+                <div class="input-container">
+                    <div class="labelAndNotif_container">
+                        <label for="newEvent-organizerLogo">Logo de l'organisateur</label>
+                        <p class="notification">{{ notification }}</p>
+                    </div>
+                    <div class="image-input_container" v-if="!organizerLogoPreview">
+                        <input 
+                            type="file"
+                            name="newEventOrganizerLogo"
+                            accept="image/jpg, image/jpeg, image/png"
+                            class="image-input"
+                            id="newEventOrganizerLogo"
+                            @change="handleNewOrganizerLogoFileChange"
+                        >
+                    </div>
+                    <div class="organizerLogoPreview_container" v-else>
+                        <img :src="organizerLogoPreview" class="organizerLogoPreview">
+                        <div class="trashIcon_container" @click="deleteOrganizerLogoFromPreview">
+                            <Icon icon="ph:trash" class="trashIcon"/>
+                        </div>
+                    </div>   
                 </div>
-                <input 
-                    type="file"
-                    name="newEventOrganizerLogo"
-                    accept="image/jpg, image/jpeg, image/png"
-                    class="image-input"
-                    id="newEventOrganizerLogo"
-                    @change="handleNewOrganizerLogoFileChange"
-                >
-            </div> 
+            </div>
+             
 
             <div class="input-container">
                 <label for="newEvent-organizerWebsite">Site web de l'organisateur</label>
@@ -112,7 +134,7 @@
 
         </div>
 
-        <div class="updateEventForm-buttons_container">
+        <div class="eventForm-buttons_container">
             <ReusableSecondaryButton  @click="navigateToHomepage">Annuler</ReusableSecondaryButton> 
             <ReusablePrimaryButton type="submit">Mettre à jour</ReusablePrimaryButton>
         </div>
@@ -127,6 +149,7 @@
     import { useGlobalDataStore } from '@/stores/GlobalDataStore';
     import { useEventStore } from '@/stores/EventStore';
     import { useRouter } from 'vue-router';
+    import { Icon } from '@iconify/vue';
     import ReusablePrimaryButton from '@/sub-components/ReusablePrimaryButton.vue';
     import ReusableSecondaryButton from '@/sub-components/ReusableSecondaryButton.vue';
     import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -168,6 +191,10 @@
     const newEventOrganizerLogo = ref('');
     const newEventOrganizerWebsite  = ref(selectedEvent.organizerWebsite);
 
+    // propriétés des previews de l'image de couverture et du logo organisateur
+    const coverImagePreview = ref('');
+    const organizerLogoPreview = ref('');
+
     // récupère l'ID de l'évènement sélectionné
     const selectedEventId = ref(selectedEvent.id);
     const eventId = selectedEventId.value;
@@ -175,11 +202,41 @@
     // gère le téléchargement du fichier image de couverture et stocke le fichier selectionné
     const handleNewCoverImageFileChange = (event) => {
         newEventCoverImage.value = event.target.files[0];
+
+        // permet la preview de l'image de couverture
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                coverImagePreview.value = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
     };
 
     // gère le téléchargement du fichier logo de l'organisateur et stocke le fichier selectionné
     const handleNewOrganizerLogoFileChange = (event) => {
         newEventOrganizerLogo.value = event.target.files[0];
+
+        // permet la preview du logo de l'organisateur
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                organizerLogoPreview.value = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    // supprime l'image de couverture en preview
+    const deleteCoverImageFromPreview = () => {
+        coverImagePreview.value = '';
+    };
+
+    // supprime le logo de l'organisateur en preview
+    const deleteOrganizerLogoFromPreview = () => {
+        organizerLogoPreview.value = '';
     };
 
     // crée une instance CKEditor
@@ -285,93 +342,14 @@
 
 <style lang="scss" scoped>
 
-    @import '@/assets/sass/variables.scss';
-    @import '@/assets/sass/varMediaQueries.scss';
-    .updateEventForm {
-        width: 100%;
+    @import '@/assets/sass/backOfficeEventHandlingFormStyle.scss';
+    .labelAndNotif_container {
         display: flex;
         flex-direction: column;
-        gap: 2rem;
-        .inputs_wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            .input-container {
-                display: flex;
-                flex-direction: column;
-                gap: .5rem;
-
-                label {
-                    margin: 0;
-                    font-weight: 700;
-                    
-                }
-                .labelAndNotif_container {
-                    display: flex;
-                    flex-direction: column;
-                    .notification {
-                        margin: 0;
-                        font-size: .7rem;
-                    }
-
-                }
-
-                input {
-                    width: 100%;
-                    height: 3rem;
-                    border: solid 1px rgba($accentColorBackof3, .25);
-                    border-radius: 5px;
-                    font-size: 1rem;
-                    outline: none;
-
-                    &:focus {
-                        background: transparent;
-                        border: solid 1px $accentColorBackof2;
-                    }
-                }
-                .input-text {
-                    padding: 1rem;
-                }
-                .image-input {
-                    border: none;
-                    border-radius: unset;
-
-                    &::file-selector-button {
-                        height: 2.5rem;
-                        padding: 0 1rem;
-                        margin-right: 1rem;
-                        border: solid 1px rgba($accentColorBackof3, .25);
-                        background: transparent;
-                        color: $darkColor;
-                        cursor: pointer;
-
-                        &:hover {
-                            color: $accentColorBackof2;
-                            border: solid 1px $accentColorBackof2;
-                        }
-
-                    }
-
-                    &:focus {
-                        border: none
-                    }
-                }               
-            }
-        }
-        .updateEventForm-buttons_container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: end;
-            gap: 1rem;
-        }
-
-    }
-
-    @media screen and (min-width: $breakpointLargeDesktop) {
-        .updateEventForm {
-            width: 75%;   
+        .notification {
+            margin: 0;
+            font-size: .7rem;
         }
     }
-    
-    
+      
 </style>
