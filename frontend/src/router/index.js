@@ -18,26 +18,32 @@ import BackOfficeAdminDeleteAdmin from '@/views/BackOfficeAdminDeleteAdmin.vue';
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
+
+// routes évènement
       {
         path: '/event-page',
         name: 'EventPage',
         component: EventPage
       },
+      // création d'une route dynamique pour afficher la page de l'evenement
       {
-        path: '/event-page/:eventSlug', // création d'une route dynamique pour afficher la page de l'evenement
+        path: '/event-page/:eventSlug', 
         name: 'EventDetail',
         component: EventPage
       },
+
+// routes back-office 
       {
         path: '/',
         name: 'BackOfficeLoginPage',
         component: BackOfficeLoginPage
       },
+      // routes avec navigation-guards
       {
         path: '/admin_homepage',
         name: 'BackOfficeHomePage',
         component: BackOfficeHomePage,
-        //beforeEnter: authGuard,
+        beforeEnter: authGuard,
       },
       {
         path: '/admin_new-event',
@@ -61,13 +67,13 @@ const router = createRouter({
         path: '/admin_your-account',
         name: 'BackOfficeAdminYourAccount',
         component: BackOfficeAdminYourAccount,
-        //beforeEnter: authGuard,
+        beforeEnter: authGuard,
       },
       {
         path: '/admin_add-admin',
         name: 'BackOfficeAdminAddAdmin',
         component: BackOfficeAdminAddAdmin,
-        //beforeEnter: authGuard,
+        beforeEnter: authGuard,
       },
       {
         path: '/admin_delete-admin',
@@ -105,7 +111,7 @@ const router = createRouter({
     ]
 });
 
-//permet qu'à chaque changement de route la nouvelle page est affichée à partir du haut
+//permet à chaque changement de route d'afficher la nouvelle page à partir du haut
 router.afterEach(() => {
     window.scrollTo(0, 0);
 });
