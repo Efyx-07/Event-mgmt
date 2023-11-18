@@ -1,6 +1,6 @@
 <template>
 
-    <div class="searchIcon_container" @click="toggleEventsSearchBarVisibility">
+    <div class="searchIcon_container" @click="revealEventsSearchBar">
         <Icon icon="ic:sharp-search" class="searchIcon" />
     </div>
 
@@ -11,12 +11,12 @@
     import { Icon } from '@iconify/vue';
 
     // ouvre la fenetre 'EventsSearchbar' au clic de l'icone
-    const toggleEventsSearchBarVisibility = () => {
+    const revealEventsSearchBar = () => {
         // crée un nouvel evenement personnalisé 
         const showEventsSearchBarEvent = new Event('show-eventsSearchBar');
         // déclenche l'événement 'show-eventsSearchBar' sur l'objet window
         window.dispatchEvent(showEventsSearchBarEvent);
-    }
+    };
 
 </script>
 
