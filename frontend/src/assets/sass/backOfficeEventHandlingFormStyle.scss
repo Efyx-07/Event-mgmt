@@ -98,11 +98,13 @@
                         position: absolute;
                         top: .5rem;
                         right: .5rem;
+                        z-index: 1;
                         width: 2rem;
                         height: 2rem;
-                        background: $accentColorBackof4;
+                        background: $ultraLightColor;
+                        color: $darkColorBackOf;
                         border-radius: 100%;
-                        border: solid 2px $accentColorBackof2;
+                        box-shadow: $shadow;
                         display: flex;
                         justify-content: center;
                         align-items: center;
@@ -110,11 +112,7 @@
 
                         &:hover {
                             background: $accentColorBackof2;
-                        }
-
-                        .removeIcon {
                             color: $lightColor;
-                            font-size: 1rem;
                         }
                     }
                 }
@@ -146,15 +144,7 @@
                     .organizerLogoPreview_container {
                         width: 40%;
                         max-height: 100%;
-                    }
-
-                    .coverImagePreview_container, .organizerLogoPreview_container {
-
-                        .removeIcon_container {
-                            top: 1rem;
-                            right: 1rem;
-                        }
-                    }                   
+                    }                  
                 }
             }
         }

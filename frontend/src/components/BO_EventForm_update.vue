@@ -36,8 +36,8 @@
                         <img :src="coverImagePreview" class="coverImagePreview">
                         <div class="removeIcon_container" @click="removeCoverImageFromPreview">
                             <Icon :icon="removeImageIconName" class="removeIcon"/>
-                        </div>
-                    </div>    
+                        </div> 
+                    </div>  
                 </div> 
             </div>
             
