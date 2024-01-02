@@ -1,8 +1,9 @@
 const mysql = require('mysql2'); // appelle l'instance mysql2
+require('dotenv').config(); // charge les variables d'environnement à partir du fichier .env
 
-const hostName = 'localhost';
-const userName = 'root';
-const password = 'FXMysql2023!';
+const hostName = process.env.DB_HOSTNAME;
+const userName = process.env.DB_USERNAME;
+const password = process.env.DB_PASSWORD;
 
 // connexion à la base de données 'myevents'
 const myEventsConnection = mysql.createConnection({

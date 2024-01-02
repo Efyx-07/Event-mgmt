@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken'); // importe jwt
+require('dotenv').config(); // charge les variables d'environnement à partir du fichier .env
 
 // clé secrète pour signer et valider les jetons et durée de validité du jeton
-const secretKey = '9f11ddc6-6652-4217-9b4c-3e8d8b79a030';
+const secretKey = process.env.AUTH_SECRETKEY;
 const expiresIn = '1h';
 
 // middleware authenticateToken pour vérifier authentification
