@@ -8,8 +8,9 @@ CREATE TABLE administrateurs (
     hashed_password VARCHAR(255) NOT NULL
 );
 
+/* administrateur générique, récupère la paternité des évènements dont l'administrateur est supprimé */
 INSERT INTO administrateurs (nom, prenom, email, hashed_password)
-VALUES ('Administrateur', 'Supprimé', 'adminsupprime@example.com', 'motdepassehashé');
+VALUES ('Administrateur', 'Supprimé', 'adminsupprime@example.com', 'motdepassehashé'); 
 
 CREATE TABLE participants (
     id INT AUTO_INCREMENT PRIMARY KEY,
